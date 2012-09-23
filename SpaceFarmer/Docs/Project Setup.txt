@@ -1,0 +1,48 @@
+This file describes the directory structure and gives a basic MVC overview.
+I will try to make references to how the 1331 homeworks were set up
+
+Controller:
+    All event handling will take place here.
+
+    Example: A "MarketplaceController" Class. This Class will contain all of the listeners that should be attached to the views.
+             If a buy button is clicked, the controller will call the buy method in the TransactionManager service class, and then
+             call the updatePrice and updateQuantity methods in the view.
+
+
+
+Interfacer:
+    Classes that detect user interaction with the interface.
+    Most of these will just be implementations of Classes in the AWT Package
+
+    Example: Anything that implements ActionListener
+
+Model:
+    These are Plain Old Java Objects (POJO's)
+    They shouldn't contain much, if any logic, just a bunch of fields and getters/setters.
+
+    Example: The Player Class. It could have fields like:
+        private Ship ship;
+        private int money;
+        private Inventory inventory;
+        private List<Mercenary> mercenaries.
+
+Service:
+    These classes will deal with interactions between the Model Classes.
+    Try to keep the logic flow in the controller. Have the Controller call a service that changes information
+    and then calls another method that updates the view instead of having the service class update the view.
+    Some frameworks don't use services and instead include the functionality inside model Class methods.
+
+    Example: TransactionManager Class. This would have methods involving Buying and Selling.
+
+Util:
+    If it doesn't fit anywhere, throw it here!
+    Try to ask someone else if it should belong elsewhere first.
+
+    Example: enums and constants might go here, or in the conf[iguration] folder.
+
+View:
+    These Classes show what's going on. Most of them will extend AWT's JFrame.
+
+    Example:
+    A JFrame representing the Marketplace's Buy and Sell menu. It will have methods that change quantities and prices
+     that will be called by the controller.
