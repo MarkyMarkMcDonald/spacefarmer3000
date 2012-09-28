@@ -42,7 +42,19 @@ public class Person3 {
 	 * @return the reversed string
 	 */
 	private String calc(String input) {
-	  //Person 3 put your implementation here
+		//Person 3 put your implementation here
+		  
+		//Create a StringBuffer from the original string  
+		StringBuffer buffer = new StringBuffer(name);  
+		  
+		//Reverse the contents of the StringBuffer  
+		buffer = buffer.reverse();  
+		  
+		//Convert the StringBuffer back to a String  
+		String reverseString = buffer.toString();  
+		  
+		//Print the reverse string   
+		System.out.println(reverseString);  
 	  return null;
 	}
 }
