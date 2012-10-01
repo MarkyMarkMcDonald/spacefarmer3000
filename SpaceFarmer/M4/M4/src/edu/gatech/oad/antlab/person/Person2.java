@@ -31,16 +31,19 @@ public class Person2 {
 	 */
 	private String calc(String input) {
 	  Random rand=new Random();
+	  int length=input.length();
 	  String retString="";
 	  int j;
-	  for (int i=0;i<input.length();i++)
+	  for (int i=0;i<length;i++)
 	  {
 	    j=rand.nextInt(input.length());
 	    retString+=input.charAt(j);
 		if (j<input.length()-1)
 		  input=input.substring(0,j)+input.substring(j+1);
+		else
+		  input=input.substring(0,j);
       }
-	  return null;
+	  return retString;
 	}
 	/**
 	 * Return a string rep of this object
