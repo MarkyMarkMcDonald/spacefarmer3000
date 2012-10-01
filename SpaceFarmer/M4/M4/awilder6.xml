@@ -52,7 +52,7 @@
       </java>
    </target>
 
-   <target name="all" depends="run" />
+   <target name="all" depends="run,javadoc" />
 
    <target name="clean" depends="init">
       <delete dir="${build.dir}" />
