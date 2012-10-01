@@ -53,8 +53,7 @@ public class Person3 {
 		//Convert the StringBuffer back to a String  
 		String reverseString = buffer.toString();  
 		  
-		//Return the reverse string   
-		System.out.println(reverseString);  
+		//Return the reverse string  
 	  return reverseString;
 	}
 }
