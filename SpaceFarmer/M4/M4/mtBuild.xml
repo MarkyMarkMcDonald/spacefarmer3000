@@ -1,0 +1,90 @@
+<!-- mtBuild -->
+<project name="mtBuild" basedir="." default="main">
+	
+	<!--------- init --------->
+	<target name = "init" >
+	<property name="src.dir" value="src"/>
+	<property name="build.dir" value="build" />
+	<property name="apidoc.dir" value="api"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="jar.dir" value="jar"/>
+
+	</target >
+	
+	<!--------- prepare --------->
+	<target name="prepare" depends="init">
+      <mkdir dir="${build.dir}" />
+	  <mkdir dir="${lib.dir}"/>
+	  <mkdir dir="${scr.dir}"/>
+	  <mkdir dir="${apidoc.dir}"/>
+	  <mkdir dir="${jar.dir}"/>
+
+   </target>
+	
+	<!--------- compile --------->
+	<target name="compile" depends="prepare">
+	<javac srcdir="${src.dir}" destdir="${build.dir}"/>
+	</target>
+	
+	<!--------- javadoc --------->
+
+	<javadoc sourcepath="${src.dir}" access="public" destdir="${apidoc.dir}"packagenames="spaceDemo" depends="compile">
+		<fileset dir="${src.dir}">
+			<include name="**/*.java">
+		</fileset>
+	</javadoc>
+	
+	<!--------- jar --------->
+	<target name="jar" depends="compile">
+		<jar destfile="jar.jar" >
+			<include name="edu/gtech/cs2340/**/*.class"/>
+			<manifest>
+				<attribute name="Main-Class" value="edu.gatech.cs2340.lab2.LabMain"/>
+				<attribute name="Class-Path" value="lib/resources.jar" />
+			</manifest>
+		</jar>
+	</target>
+	
+	<!--------- run --------->
+	<target name="run" depends="jar">
+		<java jar="${jar.dir}/${ant.project.name}.jar" fork="true">
+         <classpath>
+            <pathelement path="${java.class.path}" />
+			<pathelement location="${java.lib}/resources.jar" />
+            <pathelement location="${build.dir}" />
+         </classpath>
+		</java>
+	</target>
+	
+	<!--------- all --------->
+	<target name="all" depends="init,prepare,compile,javadoc,run">
+	
+	</target>
+	
+	<!--------- clean --------->
+	<target name="clean">
+	<delete dir="${build.dir}"/>
+	</target>
+	
+	
+	<!----
+			M4
+              gte999.xml
+              jdoe3.xml
+              ssmith5.xml
+              readme.p1.txt
+              readme.p2.txt
+              readme.p3.txt
+              --src
+                 all the java files for the project in their package structure
+              --build
+                 all the class files created during compilation
+              --apidoc
+                 all the javadocs for the files
+              --lib
+                 resource.jar
+	--->
+<target name="clean-build" depends="clean,jar"/>
+<target name="main" depends="clean,run"/>
+
+</project>
