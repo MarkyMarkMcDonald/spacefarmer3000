@@ -45,7 +45,7 @@ public class Person3 {
 		//Person 3 put your implementation here
 		  
 		//Create a StringBuffer from the original string  
-		StringBuffer buffer = new StringBuffer(name);  
+		StringBuffer buffer = new StringBuffer(input);  
 		  
 		//Reverse the contents of the StringBuffer  
 		buffer = buffer.reverse();  
@@ -53,8 +53,7 @@ public class Person3 {
 		//Convert the StringBuffer back to a String  
 		String reverseString = buffer.toString();  
 		  
-		//Print the reverse string   
-		System.out.println(reverseString);  
-	  return null;
+		//Return the reverse string  
+	  return reverseString;
 	}
 }
