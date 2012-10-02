@@ -61,6 +61,7 @@
 	<target name="clean" depends="init">
 		<delete dir="${build.dir}"/>
 		<delete dir="${api.dir}" />
+		<delete file="AntLabRun.jar" />
 	</target>
 
 	<!-- run all tasks except cleanup -->
