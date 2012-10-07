@@ -1,5 +1,7 @@
 package App.model;
 
+import App.factory.ShipFactory;
+
 import java.util.List;
 
 /**
@@ -17,8 +19,7 @@ public class Player {
     private List<Mercenary> mercenaries;
 
     
-    public Player(String name, int piloting, int trading, int engineering,
-			int fighting) {
+    public Player(String name, int piloting, int trading, int engineering, int fighting) {
 		super();
 		this.name = name;
 		this.piloting = piloting;
@@ -26,10 +27,11 @@ public class Player {
 		this.engineering = engineering;
 		this.fighting = fighting;
 		this.money=1000;
-		this.ship=new Ship(ShipModel.GNAT);
-		
+		this.ship= ShipFactory.getShip(ShipModel.GNAT);
 	}
 
+
+    //--Accessors and Modifiers
 	public String getName() {
         return name;
     }
