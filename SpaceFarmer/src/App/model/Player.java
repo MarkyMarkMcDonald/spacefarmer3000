@@ -16,6 +16,14 @@ public class Player {
     private Inventory inventory;
     private List<Mercenary> mercenaries;
 
+    
+    
+    
+    
+    
+    
+    //--- Accessors and Modifiers
+    
     public String getName() {
         return name;
     }

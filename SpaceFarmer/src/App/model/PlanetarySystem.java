@@ -1,5 +1,7 @@
 package App.model;
 
+import java.util.Map;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Marky
@@ -11,7 +13,7 @@ public class PlanetarySystem {
 
     private String name;
 
-    private Map<Planet> planets;
+    private Map<String,Planet> planets;
 
 
     public String getName() {
@@ -22,11 +24,11 @@ public class PlanetarySystem {
         this.name = name;
     }
 
-    public Map<Planet> getPlanets() {
+    public Map<String,Planet> getPlanets() {
         return planets;
     }
 
-    public void setPlanets(Map<Planet> planets) {
+    public void setPlanets(Map<String, Planet> planets) {
         this.planets = planets;
     }
 }

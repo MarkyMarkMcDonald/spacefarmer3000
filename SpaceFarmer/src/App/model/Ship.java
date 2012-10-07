@@ -21,8 +21,15 @@ public class Ship {
 
     private int speed;
 
-    private Map<Equipment> equipment;
+    private Map<String, Equipment> equipment;
 
+    public Map<String, Equipment> getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(Map<String, Equipment> equipment) {
+        this.equipment = equipment;
+    }
     public int getCargoSize() {
         return cargoSize;
     }
@@ -63,11 +70,4 @@ public class Ship {
         this.speed = speed;
     }
 
-    public Map<Equipment> getEquipment() {
-        return equipment;
-    }
-
-    public void setEquipment(Map<Equipment> equipment) {
-        this.equipment = equipment;
-    }
 }
