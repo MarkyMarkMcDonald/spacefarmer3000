@@ -1,6 +1,11 @@
 package App.model;
 
+import App.model.Equipment;
+import App.model.Model;
 import java.util.Map;
+import java.util.Map;
+
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -100,11 +105,4 @@ public class Ship {
         this.speed = speed;
     }
 
-    public Map<Equipment> getEquipment() {
-        return equipment;
-    }
-
-    public void setEquipment(Map<Equipment> equipment) {
-        this.equipment = equipment;
-    }
 }
