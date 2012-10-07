@@ -5,7 +5,9 @@ import App.factory.ShipFactory;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
+ * Represents a Player.
+ * Information Holder
+ *
  * User: Marky
  * Date: 9/22/12
  * Time: 12:33 AM
@@ -16,9 +18,10 @@ public class Player {
     private Ship ship;
     private int money, piloting, trading, engineering, fighting;
     private Inventory inventory;
-    private List<Mercenary> mercenaries;
 
-    
+    public Player(){
+    }
+
     public Player(String name, int piloting, int trading, int engineering, int fighting) {
 		super();
 		this.name = name;
@@ -64,15 +67,7 @@ public class Player {
         this.inventory = inventory;
     }
 
-    public List<Mercenary> getMercenaries() {
-        return mercenaries;
-    }
-
-    public void setMercenaries(List<Mercenary> mercenaries) {
-        this.mercenaries = mercenaries;
-    }
-
-	public int getPiloting() {
+    public int getPiloting() {
 		return piloting;
 	}
 
