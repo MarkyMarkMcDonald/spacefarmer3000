@@ -9,8 +9,10 @@ import java.util.Map;
  * Time: 12:33 AM
  * To change this template use File | Settings | File Templates.
  */
-public class Ship {
 
+
+public class Ship {
+    
     private int cargoSize;
 
     private int health;
@@ -23,7 +25,44 @@ public class Ship {
 
     private Map<Equipment> equipment;
 
-    public int getCargoSize() {
+    
+    
+    public Ship(Model model)
+    {
+    	switch (model)
+    	{
+    	    case GNAT:
+    	    	cargoSize=15;
+    	    	health=100;
+    	    	power=1;
+    	    	defense=0;
+    	    	speed=14;
+    	        break;
+    	    case FIREFLY:
+    	    	cargoSize=20;
+    	    	health=100;
+    	    	power=1;
+    	    	defense=1;
+    	    	speed=17;
+    	        break;
+    	    case MOSQUITO:
+    	    	cargoSize=15;
+    	    	health=100;
+    	    	power=2;
+    	    	defense=1;
+    	    	speed=13;
+    	        break;
+    	    case BUMBLEBEE:
+    	    	cargoSize=25;
+    	    	health=100;
+    	    	power=1;
+    	    	defense=2;
+    	    	speed=15;
+    	        break;
+    	}
+    }
+
+	public int getCargoSize() {
         return cargoSize;
     }
 
