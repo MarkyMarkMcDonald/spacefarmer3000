@@ -12,19 +12,25 @@ import java.util.List;
 public class Player {
     private String name;
     private Ship ship;
-    private int money;
+    private int money, piloting, trading, engineering, fighting;
     private Inventory inventory;
     private List<Mercenary> mercenaries;
 
     
-    
-    
-    
-    
-    
-    //--- Accessors and Modifiers
-    
-    public String getName() {
+    public Player(String name, int piloting, int trading, int engineering,
+			int fighting) {
+		super();
+		this.name = name;
+		this.piloting = piloting;
+		this.trading = trading;
+		this.engineering = engineering;
+		this.fighting = fighting;
+		this.money=1000;
+		this.ship=new Ship(Model.GNAT);
+		
+	}
+
+	public String getName() {
         return name;
     }
 
@@ -63,4 +69,38 @@ public class Player {
     public void setMercenaries(List<Mercenary> mercenaries) {
         this.mercenaries = mercenaries;
     }
+
+	public int getPiloting() {
+		return piloting;
+	}
+
+	public void setPiloting(int piloting) {
+		this.piloting = piloting;
+	}
+
+	public int getTrading() {
+		return trading;
+	}
+
+	public void setTrading(int trading) {
+		this.trading = trading;
+	}
+
+	public int getEngineering() {
+		return engineering;
+	}
+
+	public void setEngineering(int engineering) {
+		this.engineering = engineering;
+	}
+
+	public int getFighting() {
+		return fighting;
+	}
+
+	public void setFighting(int fighting) {
+		this.fighting = fighting;
+	}
+    
+    
 }

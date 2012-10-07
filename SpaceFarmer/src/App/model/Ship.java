@@ -23,14 +23,44 @@ public class Ship {
 
     private Map<String, Equipment> equipment;
 
-    public Map<String, Equipment> getEquipment() {
-        return equipment;
+    
+    
+    public Ship(Model model)
+    {
+    	switch (model)
+    	{
+    	    case GNAT:
+    	    	cargoSize=15;
+    	    	health=100;
+    	    	power=1;
+    	    	defense=0;
+    	    	speed=14;
+    	        break;
+    	    case FIREFLY:
+    	    	cargoSize=20;
+    	    	health=100;
+    	    	power=1;
+    	    	defense=1;
+    	    	speed=17;
+    	        break;
+    	    case MOSQUITO:
+    	    	cargoSize=15;
+    	    	health=100;
+    	    	power=2;
+    	    	defense=1;
+    	    	speed=13;
+    	        break;
+    	    case BUMBLEBEE:
+    	    	cargoSize=25;
+    	    	health=100;
+    	    	power=1;
+    	    	defense=2;
+    	    	speed=15;
+    	        break;
+    	}
     }
 
-    public void setEquipment(Map<String, Equipment> equipment) {
-        this.equipment = equipment;
-    }
-    public int getCargoSize() {
+	public int getCargoSize() {
         return cargoSize;
     }
 
@@ -70,4 +100,11 @@ public class Ship {
         this.speed = speed;
     }
 
+    public Map<Equipment> getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(Map<Equipment> equipment) {
+        this.equipment = equipment;
+    }
 }
