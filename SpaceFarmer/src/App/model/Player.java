@@ -26,7 +26,7 @@ public class Player {
 		this.engineering = engineering;
 		this.fighting = fighting;
 		this.money=1000;
-		this.ship=new Ship(Model.GNAT);
+		this.ship=new Ship(ShipModel.GNAT);
 		
 	}
 

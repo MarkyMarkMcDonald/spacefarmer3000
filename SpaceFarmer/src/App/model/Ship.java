@@ -1,10 +1,6 @@
 package App.model;
 
-import App.model.Equipment;
-import App.model.Model;
 import java.util.Map;
-import java.util.Map;
-
 
 
 /**
@@ -30,9 +26,9 @@ public class Ship {
 
     
     
-    public Ship(Model model)
+    public Ship(ShipModel shipModel)
     {
-    	switch (model)
+    	switch (shipModel)
     	{
     	    case GNAT:
     	    	cargoSize=15;

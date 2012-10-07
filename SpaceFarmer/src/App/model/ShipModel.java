@@ -1,6 +1,6 @@
 package App.model;
 
-public enum Model
+public enum ShipModel
 {
     GNAT,
     FIREFLY,
