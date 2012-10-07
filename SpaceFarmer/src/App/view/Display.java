@@ -20,7 +20,7 @@ public class Display extends JFrame {
      */
     public void setup() {
         setTitle("Space Farmer 3000");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 600);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -205,5 +205,19 @@ public class Display extends JFrame {
         Confirm.add(btnConfirm);
     }
 
+    public JTextField getTxtEnterPlayerName() {
+        return txtEnterPlayerName;
+    }
 
+    public void setTxtEnterPlayerName(JTextField txtEnterPlayerName) {
+        this.txtEnterPlayerName = txtEnterPlayerName;
+    }
+
+    public JPanel getContentPane() {
+        return contentPane;
+    }
+
+    public void setContentPane(JPanel contentPane) {
+        this.contentPane = contentPane;
+    }
 }
