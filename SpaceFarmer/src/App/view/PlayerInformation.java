@@ -100,7 +100,7 @@ public class PlayerInformation extends JPanel {
         Difficulty.add(lblDifficulty);
 
         JComboBox comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Easy", "Medium", "Hard"}));
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Easy", "Medium", "Hard", "Impossible"}));
         Difficulty.add(comboBox);
 
         JPanel Confirm = new JPanel();

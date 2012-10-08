@@ -90,6 +90,9 @@ public class Display extends JFrame {
         JPanel pInf = new PlayerInformation();
         CenterPanel.add(pInf, "name_1349575637728092000");
         
+        JPanel tScr = new TemporaryScreen();
+        CenterPanel.add(tScr, "temp");
+        
 /*      JPanel PlayerInformation = new JPanel();
         CenterPanel.add(PlayerInformation, "name_1349575637728092000");
         PlayerInformation.setLayout(new BoxLayout(PlayerInformation, BoxLayout.Y_AXIS));
