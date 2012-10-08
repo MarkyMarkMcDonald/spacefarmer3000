@@ -3,6 +3,7 @@ package App.model;
 import App.factory.ShipFactory;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a Player.
@@ -16,7 +17,8 @@ import java.util.List;
 public class Player {
     private String name;
     private Ship ship;
-    private int money, piloting, trading, engineering, fighting;
+    private int money;
+    private Map<SkillType, Integer> skillLevels;
     private Inventory inventory;
 
     public Player(){
@@ -25,10 +27,10 @@ public class Player {
     public Player(String name, int piloting, int trading, int engineering, int fighting) {
 		super();
 		this.name = name;
-		this.piloting = piloting;
-		this.trading = trading;
-		this.engineering = engineering;
-		this.fighting = fighting;
+		skillLevels.put(SkillType.PILOTING,piloting);
+		skillLevels.put(SkillType.TRADING,trading);
+		skillLevels.put(SkillType.ENGINEERING,engineering);
+		skillLevels.put(SkillType.FIGHTING,fighting);
 		this.money=1000;
 		this.ship= ShipFactory.getShip(ShipModel.GNAT);
 	}
@@ -67,37 +69,11 @@ public class Player {
         this.inventory = inventory;
     }
 
-    public int getPiloting() {
-		return piloting;
-	}
+    public Map<SkillType, Integer> getSkillLevels() {
+        return skillLevels;
+    }
 
-	public void setPiloting(int piloting) {
-		this.piloting = piloting;
-	}
-
-	public int getTrading() {
-		return trading;
-	}
-
-	public void setTrading(int trading) {
-		this.trading = trading;
-	}
-
-	public int getEngineering() {
-		return engineering;
-	}
-
-	public void setEngineering(int engineering) {
-		this.engineering = engineering;
-	}
-
-	public int getFighting() {
-		return fighting;
-	}
-
-	public void setFighting(int fighting) {
-		this.fighting = fighting;
-	}
-    
-    
+    public void setSkillLevels(Map<SkillType, Integer> skillLevels) {
+        this.skillLevels = skillLevels;
+    }
 }
