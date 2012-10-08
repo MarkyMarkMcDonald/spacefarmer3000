@@ -92,87 +92,9 @@ public class Display extends JFrame {
         
         JPanel tScr = new TemporaryScreen();
         CenterPanel.add(tScr, "temp");
-        
-/*      JPanel PlayerInformation = new JPanel();
-        CenterPanel.add(PlayerInformation, "name_1349575637728092000");
-        PlayerInformation.setLayout(new BoxLayout(PlayerInformation, BoxLayout.Y_AXIS));
-
-        JPanel PlayerName = new JPanel();
-        FlowLayout flowLayout = (FlowLayout) PlayerName.getLayout();
-        flowLayout.setVgap(1);
-        PlayerInformation.add(PlayerName);
-
-        JLabel lblPlayerName = new JLabel("Player Name");
-        PlayerName.add(lblPlayerName);
-
-        txtEnterPlayerName = new JTextField();
-        PlayerName.add(txtEnterPlayerName);
-        txtEnterPlayerName.setColumns(10);
-
-        JPanel PilotSkill = new JPanel();
-        PlayerInformation.add(PilotSkill);
-
-        JLabel lblPilotSkill = new JLabel("Pilot Skill Points");
-        PilotSkill.add(lblPilotSkill);
-
-        JFormattedTextField frmtdtxtfldEnterPilotSkill = new JFormattedTextField();
-        frmtdtxtfldEnterPilotSkill.setColumns(2);
-        PilotSkill.add(frmtdtxtfldEnterPilotSkill);
-
-        JPanel FighterSkill = new JPanel();
-        PlayerInformation.add(FighterSkill);
-
-        JLabel lblFighterSkill = new JLabel("Fighter Skill Points");
-        FighterSkill.add(lblFighterSkill);
-
-        JFormattedTextField frmtdtxtfldEnterFighterSkill = new JFormattedTextField();
-        frmtdtxtfldEnterFighterSkill.setColumns(2);
-        FighterSkill.add(frmtdtxtfldEnterFighterSkill);
-
-        JPanel TraderSkill = new JPanel();
-        PlayerInformation.add(TraderSkill);
-
-        JLabel lblTraderSkill = new JLabel("Trader Skill Points");
-        TraderSkill.add(lblTraderSkill);
-
-        JFormattedTextField frmtdtxtfldEnterTraderSkill = new JFormattedTextField();
-        frmtdtxtfldEnterTraderSkill.setColumns(2);
-        TraderSkill.add(frmtdtxtfldEnterTraderSkill);
-
-        JPanel EngineerSkill = new JPanel();
-        PlayerInformation.add(EngineerSkill);
-
-        JLabel lblEngineerSkill = new JLabel("Engineer Skill Points");
-        EngineerSkill.add(lblEngineerSkill);
-
-        JFormattedTextField frmtdtxtfldEnterEngineerSkill = new JFormattedTextField();
-        frmtdtxtfldEnterEngineerSkill.setColumns(2);
-        EngineerSkill.add(frmtdtxtfldEnterEngineerSkill);
-
-        JPanel Difficulty = new JPanel();
-        PlayerInformation.add(Difficulty);
-
-        JLabel lblDifficulty = new JLabel("Difficulty");
-        Difficulty.add(lblDifficulty);
-
-        JComboBox comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Easy", "Medium", "Hard"}));
-        Difficulty.add(comboBox);
-
-        JPanel Confirm = new JPanel();
-        PlayerInformation.add(Confirm);
-
-        JButton btnConfirm = new JButton("Confirm");
-        Confirm.add(btnConfirm);     */
     }
 
-    public JTextField getTxtEnterPlayerName() {
-        return txtEnterPlayerName;
-    }
 
-    public void setTxtEnterPlayerName(JTextField txtEnterPlayerName) {
-        this.txtEnterPlayerName = txtEnterPlayerName;
-    }
 
     public JPanel getContentPane() {
         return contentPane;
