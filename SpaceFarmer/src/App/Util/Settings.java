@@ -1,18 +1,23 @@
+package App.Util;
+
+import java.util.Collection;
+
 /*
-*Mykal Thomas
+* this class is used to save/load the game and hold
+* the information for the game
+*
+* Mykal Thomas
 *Settings
 *10/7/2012
-*/
-/**
-*this class is used to save/load the game and hold 
-*the information for the game
+*
 **/
 public class Settings {
 	int difficulty;
 	int currentTurn;
 	int numPlayers;
 	String saveLocation;
-	/**
+
+    /**
 	*this is the constructor for the game.
 	*@param save is the string value of the location of the game file
 	*@param diff is the difficulty of the game

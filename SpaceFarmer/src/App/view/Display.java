@@ -1,5 +1,8 @@
 package App.view;
 
+import App.model.Game;
+import App.model.Player;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -11,17 +14,20 @@ import java.awt.*;
  * Time: 4:48 PM
  */
 public class Display extends JFrame {
-	public Display() {
+
+    public Display() {
 		this.setup();
 	}
 
     private JPanel contentPane;
+    private static JPanel CenterPanel;
+    private Game game;
 
     /**
      * set up the initial screen
      */
     public void setup() {
-        setTitle("Space Farmer 3000");
+        setTitle("SpaceFarmer 3000");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 600);
         contentPane = new JPanel();
@@ -29,7 +35,6 @@ public class Display extends JFrame {
         contentPane.setLayout(new BorderLayout(0, 0));
         
         setContentPane(contentPane);
-        
 
         JPanel TopPanel = new JPanel();
         TopPanel.setBackground(Color.GREEN);
@@ -79,7 +84,7 @@ public class Display extends JFrame {
         Component horizontalStrut_1 = Box.createHorizontalStrut(100);
         RightPanel.add(horizontalStrut_1);
 
-        JPanel CenterPanel = new JPanel();
+        CenterPanel = new JPanel();
         CenterPanel.setBackground(Color.ORANGE);
         contentPane.add(CenterPanel, BorderLayout.CENTER);
         CenterPanel.setLayout(new CardLayout(0, 0));
@@ -87,14 +92,30 @@ public class Display extends JFrame {
         JPanel wScr = new WelcomeScreen();
         CenterPanel.add(wScr, "name_446464616656544");
 
-        JPanel pInf = new PlayerInformation();
-        CenterPanel.add(pInf, "name_1349575637728092000");
-        
+    }
+
+    public static void moveToPlayerInfo(){
+        Player player = new Player();
+        PlayerInformation playerInformation = new PlayerInformation(player);
+        CenterPanel.add(playerInformation);
+    }
+
+    public static void moveToTemporaryScreen(){
         JPanel tScr = new TemporaryScreen();
         CenterPanel.add(tScr, "temp");
     }
 
 
+
+    //--Accessors and Modifiers
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
     public JPanel getContentPane() {
         return contentPane;
@@ -102,5 +123,13 @@ public class Display extends JFrame {
 
     public void setContentPane(JPanel contentPane) {
         this.contentPane = contentPane;
+    }
+
+    public JPanel getCenterPanel() {
+        return CenterPanel;
+    }
+
+    public void setCenterPanel(JPanel centerPanel) {
+        CenterPanel = centerPanel;
     }
 }

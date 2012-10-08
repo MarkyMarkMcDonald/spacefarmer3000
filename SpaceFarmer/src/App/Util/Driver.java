@@ -1,5 +1,6 @@
 package App.Util;
 
+import App.model.Game;
 import App.view.Display;
 
 import java.awt.BorderLayout;
@@ -33,8 +34,8 @@ public class Driver {
             public void run() {
                 try {
                     Display frame = new Display();
-                    frame.setup();
                     frame.setVisible(true);
+                    frame.setGame(new Game());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

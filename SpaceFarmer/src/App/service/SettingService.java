@@ -1,0 +1,16 @@
+package App.service;
+
+
+import App.Util.Settings;
+
+/**
+ * User: marky
+ * Date: 10/8/12
+ * Time: 1:36 PM
+ */
+public class SettingService {
+
+    public static boolean checkValid(Settings settings){
+        return true;
+    }
+}

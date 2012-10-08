@@ -1,5 +1,7 @@
 package App.view;
 
+import App.model.Player;
+
 import java.awt.FlowLayout;
 
 import javax.swing.BoxLayout;
@@ -18,7 +20,7 @@ public class PlayerInformation extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PlayerInformation() {
+	public PlayerInformation(Player player) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         Component verticalStrut = Box.createVerticalStrut(20);
