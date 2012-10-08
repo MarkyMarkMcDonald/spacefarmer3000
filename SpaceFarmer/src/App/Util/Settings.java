@@ -92,26 +92,27 @@ public class Settings {
 		return false;
 	}
 	/**
-	*loads the game based on the file at the defult save location
+	*loads the game based on the file at the default save location
 	*@return boolean based if the save is sucessfull
 	**/
 	private boolean Load(){
 		return false;
 	}
 	/**
-	*saves the game to the defult location
+	*saves the game to the default location
+	*@param Players a collection that will be iterated through
 	**/
-	private void Save(){
-		
+	private void Save(Collection Players){
 	}
 	/**
 	*saves the game to the new location
 	*@param save is the new save location.
+	*@param Players a collection that will be iterated through
 	**/
-	private void Save(String save){
+	private void Save(Collection Players,String save){
 		
 	}
 	
-//bla bla 
+
 
 }
