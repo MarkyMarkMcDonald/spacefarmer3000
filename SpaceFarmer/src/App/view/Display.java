@@ -11,9 +11,11 @@ import java.awt.*;
  * Time: 4:48 PM
  */
 public class Display extends JFrame {
+	public Display() {
+		this.setup();
+	}
 
     private JPanel contentPane;
-    private JTextField txtEnterPlayerName;
 
     /**
      * set up the initial screen
@@ -25,7 +27,9 @@ public class Display extends JFrame {
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
+        
         setContentPane(contentPane);
+        
 
         JPanel TopPanel = new JPanel();
         TopPanel.setBackground(Color.GREEN);
@@ -80,59 +84,13 @@ public class Display extends JFrame {
         contentPane.add(CenterPanel, BorderLayout.CENTER);
         CenterPanel.setLayout(new CardLayout(0, 0));
 
-        JPanel WelcomeScreen = new JPanel();
-        CenterPanel.add(WelcomeScreen, "name_446464616656544");
-        WelcomeScreen.setLayout(new BoxLayout(WelcomeScreen, BoxLayout.Y_AXIS));
+        JPanel wScr = new WelcomeScreen();
+        CenterPanel.add(wScr, "name_446464616656544");
 
-        Component TitleStrut1 = Box.createVerticalStrut(40);
-        WelcomeScreen.add(TitleStrut1);
-
-        JLabel WelcomeLabel1 = new JLabel("Space");
-        WelcomeLabel1.setAlignmentX(Component.CENTER_ALIGNMENT);
-        WelcomeLabel1.setAlignmentY(0.0f);
-        WelcomeLabel1.setFont(new Font("Tahoma", Font.BOLD, 40));
-        WelcomeScreen.add(WelcomeLabel1);
-
-        Component TitleStrut2 = Box.createVerticalStrut(40);
-        WelcomeScreen.add(TitleStrut2);
-
-        JLabel WelcomeLabel2 = new JLabel("Farmer");
-        WelcomeLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        WelcomeLabel2.setAlignmentY(0.0f);
-        WelcomeLabel2.setFont(new Font("Tahoma", Font.BOLD, 40));
-        WelcomeScreen.add(WelcomeLabel2);
-
-        Component TitleStrut3 = Box.createVerticalStrut(40);
-        WelcomeScreen.add(TitleStrut3);
-
-        JLabel WelcomeLabel3 = new JLabel("3000");
-        WelcomeLabel3.setAlignmentX(Component.CENTER_ALIGNMENT);
-        WelcomeLabel3.setAlignmentY(0.0f);
-        WelcomeLabel3.setFont(new Font("Tahoma", Font.BOLD, 40));
-        WelcomeScreen.add(WelcomeLabel3);
-
-        Component TitleStrut4 = Box.createVerticalStrut(40);
-        WelcomeScreen.add(TitleStrut4);
-
-        JPanel WelcomeButtonPanel = new JPanel();
-        WelcomeScreen.add(WelcomeButtonPanel);
-
-        JButton AboutButton = new JButton("    About    ");
-        WelcomeButtonPanel.add(AboutButton);
-
-        Component ButtonStrut1 = Box.createHorizontalStrut(50);
-        WelcomeButtonPanel.add(ButtonStrut1);
-
-        JButton NewGameButton = new JButton(" New Game");
-        WelcomeButtonPanel.add(NewGameButton);
-
-        Component ButtonStrut2 = Box.createHorizontalStrut(50);
-        WelcomeButtonPanel.add(ButtonStrut2);
-
-        JButton LoadGameButton = new JButton("Load Game");
-        WelcomeButtonPanel.add(LoadGameButton);
-
-        JPanel PlayerInformation = new JPanel();
+        JPanel pInf = new PlayerInformation();
+        CenterPanel.add(pInf, "name_1349575637728092000");
+        
+/*      JPanel PlayerInformation = new JPanel();
         CenterPanel.add(PlayerInformation, "name_1349575637728092000");
         PlayerInformation.setLayout(new BoxLayout(PlayerInformation, BoxLayout.Y_AXIS));
 
@@ -202,7 +160,7 @@ public class Display extends JFrame {
         PlayerInformation.add(Confirm);
 
         JButton btnConfirm = new JButton("Confirm");
-        Confirm.add(btnConfirm);
+        Confirm.add(btnConfirm);     */
     }
 
 
