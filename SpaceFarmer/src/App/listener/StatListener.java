@@ -1,7 +1,7 @@
-package App.model;
+package App.listener;
 
 import App.service.PointsService;
-import App.view.Display;
+import App.model.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

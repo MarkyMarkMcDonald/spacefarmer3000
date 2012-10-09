@@ -1,9 +1,9 @@
-package Listener;
+package App.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import App.Util.Settings;
+import App.util.Settings;
 import App.service.SettingService;
 import App.view.Display;
 

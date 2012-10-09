@@ -10,6 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class WelcomeScreen extends JPanel {
+	/**
+	 * Prevents "serializable" warning
+	 */
+	private static final long serialVersionUID = -4701770682971357648L;
+
 	public WelcomeScreen() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		

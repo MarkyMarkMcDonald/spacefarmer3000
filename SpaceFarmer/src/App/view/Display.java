@@ -15,7 +15,12 @@ import java.awt.*;
  */
 public class Display extends JFrame {
 
-    public Display() {
+    /**
+	 * Prevents "serializable" warning
+	 */
+	private static final long serialVersionUID = 5472341215748317058L;
+
+	public Display() {
 		this.setup();
 	}
 
@@ -28,10 +33,10 @@ public class Display extends JFrame {
      */
     public void setup() {
         setTitle("SpaceFarmer 3000");
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 600);
         contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
         contentPane.setLayout(new BorderLayout(0, 0));
         
         setContentPane(contentPane);
@@ -91,7 +96,6 @@ public class Display extends JFrame {
 
         JPanel wScr = new WelcomeScreen();
         CenterPanel.add(wScr, "name_446464616656544");
-
     }
 
     public static void moveToPlayerInfo(){

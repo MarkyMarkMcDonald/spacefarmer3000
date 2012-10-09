@@ -9,6 +9,11 @@ import java.awt.Font;
 public class TemporaryScreen extends JPanel {
 
 	/**
+	 * Prevents "serializable" warning
+	 */
+	private static final long serialVersionUID = -2641343039012994267L;
+
+	/**
 	 * Create the panel.
 	 */
 	public TemporaryScreen() {

@@ -18,6 +18,11 @@ import javax.swing.Box;
 public class PlayerInformation extends JPanel {
 
 	/**
+	 * Prevents "serializable" warning
+	 */
+	private static final long serialVersionUID = -3313579360751444648L;
+
+	/**
 	 * Create the panel.
 	 */
 	public PlayerInformation(Player player) {
@@ -101,8 +106,8 @@ public class PlayerInformation extends JPanel {
         JLabel lblDifficulty = new JLabel("Difficulty");
         Difficulty.add(lblDifficulty);
 
-        JComboBox comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Easy", "Medium", "Hard", "Impossible"}));
+        JComboBox<String> comboBox = new JComboBox<String>();
+        comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Easy", "Medium", "Hard", "Impossible"}));
         Difficulty.add(comboBox);
 
         JPanel Confirm = new JPanel();
