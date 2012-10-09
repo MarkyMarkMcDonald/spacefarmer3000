@@ -108,14 +108,14 @@ public class Settings {
 	}
 	/**
 	 * saves the game to the default location
-	 * @param Players a collection that will be iterated through
+	 * @param players a collection that will be iterated through
 	 **/
 	private void Save(Collection<Player> players) {
 	}
 	/**
 	*saves the game to the new location
 	*@param save is the new save location.
-	*@param Players a collection that will be iterated through
+	*@param players a collection that will be iterated through
 	**/
 	private void Save(Collection<Player> players, String save){
 		
