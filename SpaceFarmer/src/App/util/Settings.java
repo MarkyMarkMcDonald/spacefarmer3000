@@ -1,17 +1,17 @@
-package App.util;
+package App.Util;
 
 import java.util.Collection;
 import App.model.Player;
 
-/*
-* this class is used to save/load the game and hold
-* the information for the game
-*
-* Mykal Thomas
-*Settings
-*10/7/2012
-*
-**/
+/**
+ * This class is used to save/load the game and hold
+ * the information for the game
+ *
+ * Mykal Thomas
+ * Settings
+ * 10/7/2012
+ *
+ **/
 public class Settings {
 	int difficulty;
 	int currentTurn;
@@ -19,10 +19,10 @@ public class Settings {
 	String saveLocation;
 
     /**
-	*this is the constructor for the game.
-	*@param save is the string value of the location of the game file
-	*@param diff is the difficulty of the game
-	**/
+	 * this is the constructor for the game.
+	 * @param save is the string value of the location of the game file
+	 * @param diff is the difficulty of the game
+	 **/
 	Settings(String save, int diff) {
 		difficulty = diff;
 		currentTurn = 0;
@@ -30,17 +30,17 @@ public class Settings {
 		saveLocation = null;
 	}
 	/**
-	*getter for the game difficulty
-	*@return the games difficulty
-	**/
+	 * getter for the game difficulty
+	 * @return the games difficulty
+	 **/
 	private int getDiff() {
 		return difficulty;
 	}
 	/**
-	*setter for the game difficulty
-	*it throws a Index out of bounds error if num is outside 1-3
-	*@param num is the games new difficulty
-	**/
+	 * setter for the game difficulty
+	 * it throws a Index out of bounds error if num is outside 1-3
+	 * @param num is the games new difficulty
+	 **/
 	private void setDiff(int num) {
 		if (num>3 | num<1) {
 			throw new IndexOutOfBoundsException();
@@ -50,9 +50,9 @@ public class Settings {
 		}
 	}
 	/**
-	*gets the current Turn of the game
-	*@return the game's current turn
-	**/
+	 * gets the current Turn of the game
+	 * @return the game's current turn
+	 **/
 	private int getCurTurn() {
 		return currentTurn;
 	}
@@ -75,7 +75,7 @@ public class Settings {
 	 * @param num is the number of current players
 	 **/
 	private void setPlayers(int num) {
-		numPlayers=num;
+		numPlayers = num;
 	}
 	/**
 	 * gets the current save location of the game
@@ -89,14 +89,15 @@ public class Settings {
 	 * @param save is the new location that the game will be saved to
 	 **/
 	private void setSave(String save) {
-		saveLocation=save;
+		saveLocation = save;
 	}
 	/**
-	*loads the game based on the file at the save location
+	 *loads the game based on the file at the save location
 	 * @param save the location of the loaded file
 	 * @return boolean based if the save is successful
 	 **/
 	private boolean Load(String save) {
+		// TODO implement
 		return false;
 	}
 	/**
@@ -104,6 +105,7 @@ public class Settings {
 	 * @return boolean based if the save is successful
 	 **/
 	private boolean Load() {
+		// TODO implement
 		return false;
 	}
 	/**
@@ -111,13 +113,14 @@ public class Settings {
 	 * @param players a collection that will be iterated through
 	 **/
 	private void Save(Collection<Player> players) {
+		// TODO implement
 	}
 	/**
-	*saves the game to the new location
-	*@param save is the new save location.
-	*@param players a collection that will be iterated through
-	**/
+	 * saves the game to the new location
+	 * @param save is the new save location.
+	 * @param players a collection that will be iterated through
+	 **/
 	private void Save(Collection<Player> players, String save){
-		
+		// TODO implement
 	}
 }

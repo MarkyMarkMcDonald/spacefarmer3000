@@ -39,6 +39,7 @@ public class Display extends JFrame {
         contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
         contentPane.setLayout(new BorderLayout(0, 0));
         
+        super.getContentPane().add(contentPane);
         setContentPane(contentPane);
 
         JPanel TopPanel = new JPanel();

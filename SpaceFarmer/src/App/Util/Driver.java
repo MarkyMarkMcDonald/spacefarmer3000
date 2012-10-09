@@ -1,4 +1,4 @@
-package App.util;
+package App.Util;
 
 import App.model.Game;
 import App.view.Display;
@@ -15,7 +15,7 @@ public class Driver {
             public void run() {
                 try {
                     Display frame = new Display();
-                    frame.getContentPane().setVisible(true);
+                    frame.setVisible(true);
                     frame.setGame(new Game());
                 } catch (Exception e) {
                     e.printStackTrace();

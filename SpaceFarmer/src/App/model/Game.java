@@ -1,6 +1,6 @@
 package App.model;
 
-import App.util.Settings;
+import App.Util.Settings;
 
 import java.util.List;
 import java.util.Map;
