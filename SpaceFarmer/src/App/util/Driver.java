@@ -1,4 +1,4 @@
-package App.Util;
+package App.util;
 
 import App.model.Game;
 import App.view.Display;

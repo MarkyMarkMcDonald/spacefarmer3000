@@ -1,4 +1,4 @@
-package App.Util;
+package App.util;
 
 import java.util.Collection;
 import App.model.Player;
