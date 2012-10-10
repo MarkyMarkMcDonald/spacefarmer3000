@@ -5,7 +5,11 @@ import java.awt.event.ActionListener;
 
 //import App.Util.Settings;
 //import App.service.SettingService;
+import App.model.Player;
+import App.service.PlayerValidationService;
+import App.util.Settings;
 import App.view.Display;
+import App.view.PlayerInformation;
 
 /**
  * This class is used as an ActionListener for the confirm button on
@@ -17,19 +21,25 @@ public class ConfirmListener implements ActionListener {
 
     //private Settings settings;
     private Display gameFrame;
+    private PlayerInformation playerInformation;
 
-    public ConfirmListener(Display gameFrame/*, Settings settings*/){
-        //this.settings = settings;
+    public ConfirmListener(Display gameFrame, PlayerInformation playerInformation){
         this.gameFrame = gameFrame;
+        this.playerInformation = playerInformation;
     }
 
-    // NOTE: Does not validate inputs yet
 	public void actionPerformed(ActionEvent e)
 	{
-/*	    if(SettingService.checkValid(settings))
-        {*/
+        Player player = new Player(playerInformation.getTxtEnterPlayerNameData(),playerInformation.getEnteredPilotSkill(),
+                playerInformation.getEnteredTraderSkill(), playerInformation.getEnteredEngineerSkill(),playerInformation.getEnteredFighterSkill());
+        Settings settings = gameFrame.getGame().getSettings();
+        String message = PlayerValidationService.isValidPlayer(player, 16);
+        if (message.equals("success")){
 		    gameFrame.changeCard("TemporaryScreenCard");
-	    //}
+        }
+        else {
+            playerInformation.setErrorMessage(message);
+        }
     }
 
 }
