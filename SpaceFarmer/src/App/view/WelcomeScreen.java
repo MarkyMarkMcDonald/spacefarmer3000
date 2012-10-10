@@ -1,6 +1,6 @@
 package App.view;
 
-import App.listener.WelcomeListener;
+import App.listener.AdvanceListener;
 
 import java.awt.Component;
 import java.awt.Font;
@@ -12,6 +12,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * This class represents the panel shown to users when loading SpaceFarmer 3000.
+ * @author ?????, Andrew Wilder
+ */
 public class WelcomeScreen extends JPanel {
 	/**
 	 * Prevents "serializable" warning
@@ -66,7 +70,7 @@ public class WelcomeScreen extends JPanel {
 
         JButton NewGameButton = new JButton("New Game");
         NewGameButton.setPreferredSize(new Dimension(120, 30));
-        NewGameButton.addActionListener(new WelcomeListener(gameFrame));
+        NewGameButton.addActionListener(new AdvanceListener(gameFrame, "PlayerInformationCard"));
         WelcomeButtonPanel.add(NewGameButton);
 
         Component ButtonStrut2 = Box.createHorizontalStrut(50);

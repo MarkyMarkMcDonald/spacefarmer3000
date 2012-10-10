@@ -17,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Component;
 import javax.swing.Box;
-import javax.swing.SpringLayout;
 
 public class PlayerInformation extends JPanel {
 

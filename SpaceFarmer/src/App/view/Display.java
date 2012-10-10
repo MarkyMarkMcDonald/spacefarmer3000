@@ -1,17 +1,16 @@
 package App.view;
 
 import App.model.Game;
-import App.model.Player;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
- *
- * User: marky
- * Date: 10/7/12
- * Time: 4:48 PM
+ * This class controls the viewing pane. The different screens are controlled
+ * by components that use the instance of this Display as a parameter to link
+ * to the changeCard() method.
+ * @author Mark McDonald, Andrew Wilder
  */
 public class Display extends JFrame {
 
@@ -135,7 +134,8 @@ public class Display extends JFrame {
         return CenterPanel;
     }
 
+    /* We don't need a setter for the centerPanel, cards are swapped with changeCard()
     public void setCenterPanel(JPanel centerPanel) {
         CenterPanel = centerPanel;
-    }
+    }*/
 }

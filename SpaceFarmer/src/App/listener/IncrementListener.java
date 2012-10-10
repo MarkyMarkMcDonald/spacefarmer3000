@@ -6,6 +6,15 @@ import java.util.regex.Pattern;
 
 import javax.swing.JFormattedTextField;
 
+/**
+ * This class validates the text in the fields on the new player info screen,
+ * and allows them to be incremented or decremented. Regex is used for safely
+ * checking the content of the string before attempting to increment. Buttons
+ * that use this cannot decrement past zero, and will reset to zero if the
+ * text contains invalid characters.
+ * @author Andrew Wilder
+ */
+
 public class IncrementListener implements ActionListener {
 	
 	private JFormattedTextField theField;

@@ -7,7 +7,12 @@ import java.awt.event.ActionListener;
 //import App.service.SettingService;
 import App.view.Display;
 
-
+/**
+ * This class is used as an ActionListener for the confirm button on
+ * the create new player screen. Its purpose is to validate the stats
+ * input by the user; if they are valid, advance to the next screen.
+ * @author ?????, Andrew Wilder
+ */
 public class ConfirmListener implements ActionListener {
 
     //private Settings settings;
