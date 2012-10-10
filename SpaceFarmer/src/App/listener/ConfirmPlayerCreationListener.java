@@ -17,13 +17,13 @@ import App.view.PlayerInformation;
  * input by the user; if they are valid, advance to the next screen.
  * @author ?????, Andrew Wilder
  */
-public class ConfirmListener implements ActionListener {
+public class ConfirmPlayerCreationListener implements ActionListener {
 
     //private Settings settings;
     private Display gameFrame;
     private PlayerInformation playerInformation;
 
-    public ConfirmListener(Display gameFrame, PlayerInformation playerInformation){
+    public ConfirmPlayerCreationListener(Display gameFrame, PlayerInformation playerInformation){
         this.gameFrame = gameFrame;
         this.playerInformation = playerInformation;
     }
