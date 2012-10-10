@@ -24,7 +24,7 @@ public class Display extends JFrame {
 		this.setup();
 	}
 
-    private JPanel contentPane;
+    private JPanel mainContentPanel;
     private static JPanel CenterPanel;
     private Game game;
 
@@ -35,16 +35,15 @@ public class Display extends JFrame {
         setTitle("SpaceFarmer 3000");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 600);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-        contentPane.setLayout(new BorderLayout(0, 0));
+        mainContentPanel = new JPanel();
+        mainContentPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
+        mainContentPanel.setLayout(new BorderLayout(0, 0));
         
-        super.getContentPane().add(contentPane);
-        setContentPane(contentPane);
+        setContentPane(mainContentPanel);
 
         JPanel TopPanel = new JPanel();
         TopPanel.setBackground(Color.GREEN);
-        contentPane.add(TopPanel, BorderLayout.NORTH);
+        mainContentPanel.add(TopPanel, BorderLayout.NORTH);
         TopPanel.setLayout(new BoxLayout(TopPanel, BoxLayout.X_AXIS));
 
         JLabel lblWip = new JLabel("WIP");
@@ -55,7 +54,7 @@ public class Display extends JFrame {
 
         JPanel BottomPanel = new JPanel();
         BottomPanel.setBackground(Color.MAGENTA);
-        contentPane.add(BottomPanel, BorderLayout.SOUTH);
+        mainContentPanel.add(BottomPanel, BorderLayout.SOUTH);
         BottomPanel.setLayout(new BoxLayout(BottomPanel, BoxLayout.X_AXIS));
 
         JLabel label_1 = new JLabel("WIP");
@@ -66,7 +65,7 @@ public class Display extends JFrame {
 
         JPanel LeftPanel = new JPanel();
         LeftPanel.setBackground(Color.CYAN);
-        contentPane.add(LeftPanel, BorderLayout.WEST);
+        mainContentPanel.add(LeftPanel, BorderLayout.WEST);
         LeftPanel.setLayout(new BoxLayout(LeftPanel, BoxLayout.Y_AXIS));
 
         JLabel label = new JLabel("WIP");
@@ -79,7 +78,7 @@ public class Display extends JFrame {
 
         JPanel RightPanel = new JPanel();
         RightPanel.setBackground(Color.PINK);
-        contentPane.add(RightPanel, BorderLayout.EAST);
+        mainContentPanel.add(RightPanel, BorderLayout.EAST);
         RightPanel.setLayout(new BoxLayout(RightPanel, BoxLayout.Y_AXIS));
 
         JLabel label_2 = new JLabel("WIP");
@@ -92,7 +91,7 @@ public class Display extends JFrame {
 
         CenterPanel = new JPanel();
         CenterPanel.setBackground(Color.ORANGE);
-        contentPane.add(CenterPanel, BorderLayout.CENTER);
+        mainContentPanel.add(CenterPanel, BorderLayout.CENTER);
         CenterPanel.setLayout(new CardLayout(0, 0));
 
         JPanel wScr = new WelcomeScreen();
@@ -122,12 +121,12 @@ public class Display extends JFrame {
         this.game = game;
     }
 
-    public JPanel getContentPane() {
-        return contentPane;
+    public JPanel setMainContentPanel() {
+        return mainContentPanel;
     }
 
-    public void setContentPane(JPanel contentPane) {
-        this.contentPane = contentPane;
+    public void setMainContentPanel(JPanel newContentPanel) {
+        this.mainContentPanel = newContentPanel;
     }
 
     public JPanel getCenterPanel() {
