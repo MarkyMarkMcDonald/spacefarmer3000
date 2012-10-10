@@ -1,6 +1,8 @@
 package App.model;
 
 import App.factory.ShipFactory;
+
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -25,7 +27,8 @@ public class Player {
     public Player(String name, int piloting, int trading, int engineering, int fighting) {
 		super();
 		this.name = name;
-		skillLevels.put(SkillType.PILOTING,piloting);
+		skillLevels = new HashMap<SkillType, Integer>();
+        skillLevels.put(SkillType.PILOTING,piloting);
 		skillLevels.put(SkillType.TRADING,trading);
 		skillLevels.put(SkillType.ENGINEERING,engineering);
 		skillLevels.put(SkillType.FIGHTING,fighting);

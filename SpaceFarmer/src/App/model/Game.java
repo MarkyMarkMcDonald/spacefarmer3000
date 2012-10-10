@@ -1,7 +1,9 @@
 package App.model;
 
-import App.Util.Settings;
 
+import App.util.Settings;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +18,13 @@ public class Game {
 
     private List<Player> players;
 
-    private Settings settings;
+    private static Settings settings;
 
     private Map<String, Planet> planets;
+
+    public Game(){
+
+    }
 
     //--Accessors and Modifiers
     public List<Player> getPlayers() {

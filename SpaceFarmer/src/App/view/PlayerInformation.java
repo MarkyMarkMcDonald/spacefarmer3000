@@ -1,7 +1,6 @@
 package App.view;
 
-import App.model.Player;
-import App.listener.ConfirmListener;
+import App.listener.ConfirmPlayerCreationListener;
 import App.listener.IncrementListener;
 
 import java.awt.FlowLayout;
@@ -25,31 +24,36 @@ public class PlayerInformation extends JPanel {
 	 */
 	private static final long serialVersionUID = -3313579360751444648L;
 	private Display gameFrame;
+    private JTextField enteredPlayerName;
+    private JTextField errorMessage;
+    private JFormattedTextField enteredPilotSkill;
+    private JFormattedTextField enteredFighterSkill;
+    private JFormattedTextField enteredTraderSkill;
+    private JFormattedTextField enteredEngineerSkill;
+    private JPanel confirm;
 
-	/**
+    /**
 	 * Create the panel.
 	 */
 	public PlayerInformation(Display gameFrame) {
 		this.gameFrame = gameFrame;
-		
-		Player player = new Player();
-		
+
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         Component verticalStrut = Box.createVerticalStrut(20);
         add(verticalStrut);
 
-        JPanel PlayerName = new JPanel();
-        add(PlayerName);
-                PlayerName.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        
-                JLabel lblPlayerName = new JLabel("Player Name");
-                PlayerName.add(lblPlayerName);
-                
-                        
-                        JTextField txtEnterPlayerName = new JTextField();
-                        PlayerName.add(txtEnterPlayerName);
-                        txtEnterPlayerName.setColumns(10);
+        JPanel playerName = new JPanel();
+        add(playerName);
+        playerName.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+        JLabel lblPlayerName = new JLabel("Player Name");
+        playerName.add(lblPlayerName);
+
+
+        enteredPlayerName = new JTextField();
+        playerName.add(enteredPlayerName);
+        enteredPlayerName.setColumns(10);
 
         JPanel PilotSkill = new JPanel();
         add(PilotSkill);
@@ -57,17 +61,17 @@ public class PlayerInformation extends JPanel {
         JLabel lblPilotSkill = new JLabel("Pilot Skill Points");
         PilotSkill.add(lblPilotSkill);
 
-        JFormattedTextField frmtdtxtfldEnterPilotSkill = new JFormattedTextField();
-        frmtdtxtfldEnterPilotSkill.setText("0");
-        frmtdtxtfldEnterPilotSkill.setColumns(2);
-        PilotSkill.add(frmtdtxtfldEnterPilotSkill);
+        enteredPilotSkill = new JFormattedTextField();
+        enteredPilotSkill.setText("0");
+        enteredPilotSkill.setColumns(2);
+        PilotSkill.add(enteredPilotSkill);
         
         JButton PInc = new JButton("+");
-        PInc.addActionListener(new IncrementListener(frmtdtxtfldEnterPilotSkill, IncrementListener.INC));
+        PInc.addActionListener(new IncrementListener(enteredPilotSkill, IncrementListener.INC));
         PilotSkill.add(PInc);
         
         JButton PDec = new JButton("-");
-        PDec.addActionListener(new IncrementListener(frmtdtxtfldEnterPilotSkill, IncrementListener.DEC));
+        PDec.addActionListener(new IncrementListener(enteredPilotSkill, IncrementListener.DEC));
         PilotSkill.add(PDec);
 
         JPanel FighterSkill = new JPanel();
@@ -76,17 +80,17 @@ public class PlayerInformation extends JPanel {
         JLabel lblFighterSkill = new JLabel("Fighter Skill Points");
         FighterSkill.add(lblFighterSkill);
 
-        JFormattedTextField frmtdtxtfldEnterFighterSkill = new JFormattedTextField();
-        frmtdtxtfldEnterFighterSkill.setText("0");
-        frmtdtxtfldEnterFighterSkill.setColumns(2);
-        FighterSkill.add(frmtdtxtfldEnterFighterSkill);
+        enteredFighterSkill = new JFormattedTextField();
+        enteredFighterSkill.setText("0");
+        enteredFighterSkill.setColumns(2);
+        FighterSkill.add(enteredFighterSkill);
         
         JButton FInc = new JButton("+");
-        FInc.addActionListener(new IncrementListener(frmtdtxtfldEnterFighterSkill, IncrementListener.INC));
+        FInc.addActionListener(new IncrementListener(enteredFighterSkill, IncrementListener.INC));
         FighterSkill.add(FInc);
         
         JButton FDec = new JButton("-");
-        FDec.addActionListener(new IncrementListener(frmtdtxtfldEnterFighterSkill, IncrementListener.DEC));
+        FDec.addActionListener(new IncrementListener(enteredFighterSkill, IncrementListener.DEC));
         FighterSkill.add(FDec);
 
         JPanel TraderSkill = new JPanel();
@@ -95,17 +99,17 @@ public class PlayerInformation extends JPanel {
         JLabel lblTraderSkill = new JLabel("Trader Skill Points");
         TraderSkill.add(lblTraderSkill);
 
-        JFormattedTextField frmtdtxtfldEnterTraderSkill = new JFormattedTextField();
-        frmtdtxtfldEnterTraderSkill.setText("0");
-        frmtdtxtfldEnterTraderSkill.setColumns(2);
-        TraderSkill.add(frmtdtxtfldEnterTraderSkill);
+        enteredTraderSkill = new JFormattedTextField();
+        enteredTraderSkill.setText("0");
+        enteredTraderSkill.setColumns(2);
+        TraderSkill.add(enteredTraderSkill);
         
         JButton TInc = new JButton("+");
-        TInc.addActionListener(new IncrementListener(frmtdtxtfldEnterTraderSkill, IncrementListener.INC));
+        TInc.addActionListener(new IncrementListener(enteredTraderSkill, IncrementListener.INC));
         TraderSkill.add(TInc);
         
         JButton TDec = new JButton("-");
-        TDec.addActionListener(new IncrementListener(frmtdtxtfldEnterTraderSkill, IncrementListener.DEC));
+        TDec.addActionListener(new IncrementListener(enteredTraderSkill, IncrementListener.DEC));
         TraderSkill.add(TDec);
 
         JPanel EngineerSkill = new JPanel();
@@ -114,17 +118,17 @@ public class PlayerInformation extends JPanel {
         JLabel lblEngineerSkill = new JLabel("Engineer Skill Points");
         EngineerSkill.add(lblEngineerSkill);
 
-        JFormattedTextField frmtdtxtfldEnterEngineerSkill = new JFormattedTextField();
-        frmtdtxtfldEnterEngineerSkill.setText("0");
-        frmtdtxtfldEnterEngineerSkill.setColumns(2);
-        EngineerSkill.add(frmtdtxtfldEnterEngineerSkill);
+        enteredEngineerSkill = new JFormattedTextField();
+        enteredEngineerSkill.setText("0");
+        enteredEngineerSkill.setColumns(2);
+        EngineerSkill.add(enteredEngineerSkill);
         
         JButton EInc = new JButton("+");
-        EInc.addActionListener(new IncrementListener(frmtdtxtfldEnterEngineerSkill, IncrementListener.INC));
+        EInc.addActionListener(new IncrementListener(enteredEngineerSkill, IncrementListener.INC));
         EngineerSkill.add(EInc);
         
         JButton EDec = new JButton("-");
-        EDec.addActionListener(new IncrementListener(frmtdtxtfldEnterEngineerSkill, IncrementListener.DEC));
+        EDec.addActionListener(new IncrementListener(enteredEngineerSkill, IncrementListener.DEC));
         EngineerSkill.add(EDec);
 
         JPanel Difficulty = new JPanel();
@@ -137,12 +141,43 @@ public class PlayerInformation extends JPanel {
         comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Easy", "Medium", "Hard", "Impossible"}));
         Difficulty.add(comboBox);
 
-        JPanel Confirm = new JPanel();
-        add(Confirm);
+        confirm = new JPanel();
+        add(confirm);
 
         JButton btnConfirm = new JButton("Confirm");
         btnConfirm.setPreferredSize(new Dimension(120, 30));
-        btnConfirm.addActionListener(new ConfirmListener(gameFrame));
-        Confirm.add(btnConfirm);
+        btnConfirm.addActionListener(new ConfirmPlayerCreationListener(gameFrame,this));
+        confirm.add(btnConfirm);
+
+        errorMessage = new JTextField("");
+        confirm.add(errorMessage);
+        errorMessage.setVisible(false);
+
 	}
+
+    public void setErrorMessage(String message){
+        errorMessage.setText(message);
+        errorMessage.setSize(message.length()*10,20);
+        errorMessage.setVisible(true);
+    }
+
+    public String getTxtEnterPlayerNameData() {
+        return enteredPlayerName.getText();
+    }
+
+    public int getEnteredPilotSkill() {
+        return Integer.parseInt(enteredPilotSkill.getText());
+    }
+
+    public int getEnteredFighterSkill() {
+        return Integer.parseInt(enteredFighterSkill.getText());
+    }
+
+    public int getEnteredTraderSkill() {
+        return Integer.parseInt(enteredTraderSkill.getText());
+    }
+
+    public int getEnteredEngineerSkill() {
+        return Integer.parseInt(enteredEngineerSkill.getText());
+    }
 }
