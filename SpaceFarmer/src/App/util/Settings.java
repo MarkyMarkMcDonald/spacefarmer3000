@@ -1,6 +1,9 @@
 package App.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 import App.model.Player;
 
 /**
@@ -13,22 +16,29 @@ import App.model.Player;
  *
  **/
 public class Settings {
-	int difficulty;
-	int currentTurn;
-	int numPlayers;
-	String saveLocation;
+	private int difficulty;
+	private int currentTurn;
+	private List<Player> players;
+	private String saveLocation;
+
+
 
     /**
-	 * this is the constructor for the game.
-	 * @param save is the string value of the location of the game file
-	 * @param diff is the difficulty of the game
+	 * this is the constructor for the settings.
 	 **/
-	Settings(String save, int diff) {
-		difficulty = diff;
+	public Settings() {
 		currentTurn = 0;
-		numPlayers = 0;
-		saveLocation = null;
+		players = new ArrayList<Player>();
 	}
+
+
+
+    public void addPlayer(Player player){
+        players.add(player);
+    }
+
+    //--Accessors and Modifiers
+
 	/**
 	 * getter for the game difficulty
 	 * @return the games difficulty
@@ -63,21 +73,32 @@ public class Settings {
 	private void setCurTurn(int num) {
 		currentTurn = num;
 	}
-	/**
-	 * returns the number of players in the game
-	 * @return the number of players (human/computer)
-	 **/
-	private int getPlayers() {
-		return numPlayers;
-	}
-	/**
-	 * sets the number of players
-	 * @param num is the number of current players
-	 **/
-	private void setPlayers(int num) {
-		numPlayers = num;
-	}
-	/**
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public int getCurrentTurn() {
+        return currentTurn;
+    }
+
+    public void setCurrentTurn(int currentTurn) {
+        this.currentTurn = currentTurn;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    /**
 	 * gets the current save location of the game
 	 * @return the saveLocation of the game
 	 **/
