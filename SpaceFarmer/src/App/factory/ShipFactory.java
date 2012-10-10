@@ -3,6 +3,7 @@ package App.factory;
 import App.model.Ship;
 import App.model.ShipModel;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,7 +25,9 @@ public class ShipFactory {
      * @return the created or retrieved ship
      */
     static public Ship getShip(ShipModel shipModel){
-
+        if (ships == null){
+            ships = new HashMap<ShipModel, Ship>(4);
+        }
         // Check to see if we need to create a new ship
         if ( !ships.containsKey(shipModel) ){
             Ship ship = new Ship();
