@@ -16,7 +16,10 @@ public class Driver {
                 try {
                     Display frame = new Display();
                     frame.setVisible(true);
-                    frame.setGame(new Game());
+                    Game game = new Game();
+                    game.setSettings(new Settings());
+                    frame.setGame(game);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
