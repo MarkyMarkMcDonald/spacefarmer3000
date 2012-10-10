@@ -12,11 +12,14 @@ public class TemporaryScreen extends JPanel {
 	 * Prevents "serializable" warning
 	 */
 	private static final long serialVersionUID = -2641343039012994267L;
+	private Display gameFrame;
 
 	/**
 	 * Create the panel.
 	 */
-	public TemporaryScreen() {
+	public TemporaryScreen(Display gameFrame) {
+		this.gameFrame = gameFrame;
+		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JLabel lblYouCreatedA = new JLabel("You created a player!");

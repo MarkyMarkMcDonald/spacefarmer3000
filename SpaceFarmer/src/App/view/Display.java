@@ -94,22 +94,23 @@ public class Display extends JFrame {
         mainContentPanel.add(CenterPanel, BorderLayout.CENTER);
         CenterPanel.setLayout(new CardLayout(0, 0));
 
-        JPanel wScr = new WelcomeScreen();
-        CenterPanel.add(wScr, "name_446464616656544");
+        JPanel wScr = new WelcomeScreen(this);
+        CenterPanel.add(wScr, "WelcomeCard");
+        
+        JPanel pInf = new PlayerInformation(this);
+        CenterPanel.add(pInf, "PlayerInformationCard");
+        
+        JPanel tScr = new TemporaryScreen(this);
+        CenterPanel.add(tScr, "TemporaryScreenCard");
     }
-
-    public static void moveToPlayerInfo(){
-        Player player = new Player();
-        PlayerInformation playerInformation = new PlayerInformation(player);
-        CenterPanel.add(playerInformation);
+    
+    /**
+     * Flips to the specified card in the center panel.
+     * @param cardID The card ID of the panel to flip to.
+     */
+    public void changeCard(String cardID) {
+    	((CardLayout)CenterPanel.getLayout()).show(CenterPanel, cardID);
     }
-
-    public static void moveToTemporaryScreen(){
-        JPanel tScr = new TemporaryScreen();
-        CenterPanel.add(tScr, "temp");
-    }
-
-
 
     //--Accessors and Modifiers
 
@@ -121,13 +122,14 @@ public class Display extends JFrame {
         this.game = game;
     }
 
+    /* Why do we need getters and setters for this?
     public JPanel setMainContentPanel() {
         return mainContentPanel;
     }
 
     public void setMainContentPanel(JPanel newContentPanel) {
         this.mainContentPanel = newContentPanel;
-    }
+    }*/
 
     public JPanel getCenterPanel() {
         return CenterPanel;

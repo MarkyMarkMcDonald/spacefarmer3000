@@ -1,7 +1,10 @@
 package App.view;
 
+import App.listener.WelcomeListener;
+
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Dimension;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -14,8 +17,11 @@ public class WelcomeScreen extends JPanel {
 	 * Prevents "serializable" warning
 	 */
 	private static final long serialVersionUID = -4701770682971357648L;
+	private Display gameFrame;
 
-	public WelcomeScreen() {
+	public WelcomeScreen(Display gameFrame) {
+		this.gameFrame = gameFrame;
+		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		Component TitleStrut1 = Box.createVerticalStrut(40);
@@ -51,19 +57,23 @@ public class WelcomeScreen extends JPanel {
         JPanel WelcomeButtonPanel = new JPanel();
         add(WelcomeButtonPanel);
 
-        JButton AboutButton = new JButton("    About    ");
+        JButton AboutButton = new JButton("About");
+        AboutButton.setPreferredSize(new Dimension(120, 30));
         WelcomeButtonPanel.add(AboutButton);
 
         Component ButtonStrut1 = Box.createHorizontalStrut(50);
         WelcomeButtonPanel.add(ButtonStrut1);
 
-        JButton NewGameButton = new JButton(" New Game");
+        JButton NewGameButton = new JButton("New Game");
+        NewGameButton.setPreferredSize(new Dimension(120, 30));
+        NewGameButton.addActionListener(new WelcomeListener(gameFrame));
         WelcomeButtonPanel.add(NewGameButton);
 
         Component ButtonStrut2 = Box.createHorizontalStrut(50);
         WelcomeButtonPanel.add(ButtonStrut2);
 
         JButton LoadGameButton = new JButton("Load Game");
+        LoadGameButton.setPreferredSize(new Dimension(120, 30));
         WelcomeButtonPanel.add(LoadGameButton);
 	}
 }

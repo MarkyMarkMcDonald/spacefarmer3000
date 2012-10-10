@@ -11,7 +11,7 @@ public class StatListener implements ActionListener {
 
 	private SkillType skillType;
     private Player player;
-    private  JLabel pointsText;
+    private JLabel pointsText;
 
     public StatListener(SkillType skillType, Player player, JLabel pointsText){
         this.skillType = skillType;
