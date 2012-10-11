@@ -6,10 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * The purpose of this class is to function as a generic screen advancement listener.
+ * The purpose of this class is to function as a generic screen advancement listener. This will be used for "continue" buttons
+ * that lack complex logic
  * @author Andrew Wilder
  */
-public class AdvanceListener implements ActionListener {
+public class ContinueListener implements ActionListener {
 
 	private Display gameFrame;
 	private String cardID;
@@ -19,7 +20,7 @@ public class AdvanceListener implements ActionListener {
 	 * @param gameFrame A link to the instance of Display, used for changing its center panel.
 	 * @param cardID The ID of the card to change the center panel to.
 	 */
-	public AdvanceListener(Display gameFrame, String cardID) {
+	public ContinueListener(Display gameFrame, String cardID) {
 		this.gameFrame = gameFrame;
 		this.cardID = cardID;
 	}

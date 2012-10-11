@@ -13,8 +13,7 @@ import App.view.PlayerInformation;
 
 /**
  * This class is used as an ActionListener for the confirm button on
- * the create new player screen. Its purpose is to validate the stats
- * input by the user; if they are valid, advance to the next screen.
+ * the create new player screen. Its purpose is to update the game settings with a new player.
  * @author ?????, Andrew Wilder
  */
 public class ConfirmPlayerCreationListener implements ActionListener {
@@ -36,7 +35,6 @@ public class ConfirmPlayerCreationListener implements ActionListener {
         String message = PlayerValidationService.isValidPlayer(player, 16);
         if (message.equals("success")){
             settings.addPlayer(player);
-
             gameFrame.changeCard("TemporaryScreenCard");
         }
         else {
