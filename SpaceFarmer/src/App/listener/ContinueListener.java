@@ -1,9 +1,10 @@
 package App.listener;
 
-import App.view.Display;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import App.view.CardName;
+import App.view.Display;
 
 /**
  * The purpose of this class is to function as a generic screen advancement listener. This will be used for "continue" buttons
@@ -12,13 +13,13 @@ import java.awt.event.ActionListener;
  */
 public class ContinueListener implements ActionListener {
 
-	private String cardToMoveTo;
+	private CardName cardToMoveTo;
 	
 	/**
 	 * This is the constructor for the AdvanceListener class.
      * @param cardToMoveTo The ID of the card to change the center panel to.
      */
-	public ContinueListener(String cardToMoveTo) {
+	public ContinueListener(CardName cardToMoveTo) {
 		this.cardToMoveTo = cardToMoveTo;
 	}
 	

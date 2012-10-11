@@ -69,7 +69,7 @@ public class WelcomeScreen extends Screen {
 
         JButton NewGameButton = new JButton("New Game");
         NewGameButton.setPreferredSize(new Dimension(120, 30));
-        NewGameButton.addActionListener(new ContinueListener("PlayerInformationCard"));
+        NewGameButton.addActionListener(new ContinueListener(CardName.PLAYER_INFORMATION_CARD));
         WelcomeButtonPanel.add(NewGameButton);
 
         Component ButtonStrut2 = Box.createHorizontalStrut(50);

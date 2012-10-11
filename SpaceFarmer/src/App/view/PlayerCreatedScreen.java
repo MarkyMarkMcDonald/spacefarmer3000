@@ -40,7 +40,7 @@ public class PlayerCreatedScreen extends Screen {
 		add(lblItWillBe);
 
         JButton makeAnotherPlayer = new JButton("Add Player");
-        ContinueListener continueToPlayerCreationListener = new ContinueListener(CardName.PLAYER_INFORMATION_CARD.toString());
+        ContinueListener continueToPlayerCreationListener = new ContinueListener(CardName.PLAYER_INFORMATION_CARD);
         //todo: move back to createPlayer
 
 	}

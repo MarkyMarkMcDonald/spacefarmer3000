@@ -92,7 +92,6 @@ public class Display extends JFrame {
         mainContentPanel.add(CenterPanel, BorderLayout.CENTER);
         CenterPanel.setLayout(new CardLayout(0, 0));
 
-
         // Generate every possible card
         for (CardName name : CardName.values()){
             CenterPanel.add(name.getScreen(), name.toString());
@@ -102,10 +101,10 @@ public class Display extends JFrame {
     
     /**
      * Flips to the specified card in the center panel.
-     * @param cardID The card ID of the panel to flip to.
+     * @param name The card ID of the panel to flip to.
      */
-    public static void changeCard(String cardID) {
-    	((CardLayout)CenterPanel.getLayout()).show(CenterPanel, cardID);
+    public static void changeCard(CardName name) {
+    	((CardLayout)CenterPanel.getLayout()).show(CenterPanel, name.toString());
     }
 
     //--Accessors and Modifiers
