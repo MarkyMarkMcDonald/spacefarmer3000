@@ -6,21 +6,38 @@ import App.model.SkillType;
 import java.util.Map;
 
 /**
+ * Used to confirm the user's inputs follow the character creation rules
  * User: marky
  * Date: 10/7/12
  * Time: 8:32 PM
  */
 public class PlayerValidationService {
 
+    /**
+     * Check that the player's name is set
+     * @param player player in question
+     * @return true if name is correct
+     */
     public static boolean playerNameIsSet(Player player){
         return (player != null && player.getName()!= null && !player.getName().isEmpty());
     }
 
+    /**
+     * Check that all points (no more, no less) have been distributed
+     * @param player player in question
+     * @param numPointsToDistribute number to check against, will likely be 16
+     * @return true if points distributed correctly
+     */
     public static boolean allPointsAreDistributed(Player player, int numPointsToDistribute){
         Map<SkillType, Integer> skills = player.getSkillLevels();
         return sumOfSkillPoints(skills) == numPointsToDistribute;
     }
 
+    /**
+     * helper method for calculating the number of distributed points
+     * @param skills map of skills to calculate the sum of
+     * @return number of distributed points
+     */
     public static int sumOfSkillPoints(Map<SkillType, Integer> skills){
         int sum = 0;
         for (SkillType skillType : SkillType.values()){

@@ -10,7 +10,11 @@ import App.util.Settings;
  * Time: 1:36 PM
  */
 public class SettingService {
-
+    /**
+     * There are no settings to check at this implementation
+     * @param settings
+     * @return
+     */
     public static boolean checkValid(Settings settings){
         return true;
     }

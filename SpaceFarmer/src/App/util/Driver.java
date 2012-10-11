@@ -15,6 +15,7 @@ public class Driver {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+                    // There is a singleton Game (holds all information) and Display (Holds all the views and the layout configuration)s.
                     Display frame = new Display();
                     frame.setVisible(true);
                     Game game = new Game();
