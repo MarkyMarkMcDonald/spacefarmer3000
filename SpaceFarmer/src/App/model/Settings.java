@@ -1,10 +1,10 @@
-package App.util;
+package App.model;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import App.model.Player;
 
 /**
  * This class is used to save/load the game and hold the information for the
@@ -115,6 +115,7 @@ public class Settings {
 	 * @param save
 	 *            is the new location that the game will be saved to
 	 **/
+	//TODO create helper functions to individualy write / load
 	private void setSave(String save) {
 		saveLocation = save;
 	}
