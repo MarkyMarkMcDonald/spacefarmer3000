@@ -35,7 +35,9 @@ public class ConfirmPlayerCreationListener implements ActionListener {
         Settings settings = gameFrame.getGame().getSettings();
         String message = PlayerValidationService.isValidPlayer(player, 16);
         if (message.equals("success")){
-		    gameFrame.changeCard("TemporaryScreenCard");
+            settings.addPlayer(player);
+
+            gameFrame.changeCard("TemporaryScreenCard");
         }
         else {
             playerInformation.setErrorMessage(message);

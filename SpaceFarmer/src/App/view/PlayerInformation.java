@@ -54,6 +54,11 @@ public class PlayerInformation extends JPanel {
         playerName.add(enteredPlayerName);
         enteredPlayerName.setColumns(10);
 
+        JPanel allocatePointsInfo = new JPanel();
+        JLabel numPointsToAllocate = new JLabel("Please Allocate 16 Points");
+        allocatePointsInfo.add(numPointsToAllocate);
+        add(allocatePointsInfo);
+
         JPanel PilotSkill = new JPanel();
         add(PilotSkill);
 
