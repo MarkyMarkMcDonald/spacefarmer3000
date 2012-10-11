@@ -25,12 +25,12 @@ public class PlayerInformation extends JPanel {
 	private static final long serialVersionUID = -3313579360751444648L;
 	private Display gameFrame;
     private JTextField enteredPlayerName;
-    private JTextField errorMessage;
     private JFormattedTextField enteredPilotSkill;
     private JFormattedTextField enteredFighterSkill;
     private JFormattedTextField enteredTraderSkill;
     private JFormattedTextField enteredEngineerSkill;
-    private JPanel confirm;
+    private JPanel Confirm;
+    private JLabel ErrorLabel;
 
     /**
 	 * Create the panel.
@@ -141,24 +141,24 @@ public class PlayerInformation extends JPanel {
         comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Easy", "Medium", "Hard", "Impossible"}));
         Difficulty.add(comboBox);
 
-        confirm = new JPanel();
-        add(confirm);
+        Confirm = new JPanel();
+        add(Confirm);
 
         JButton btnConfirm = new JButton("Confirm");
         btnConfirm.setPreferredSize(new Dimension(120, 30));
         btnConfirm.addActionListener(new ConfirmPlayerCreationListener(gameFrame,this));
-        confirm.add(btnConfirm);
-
-        errorMessage = new JTextField("");
-        confirm.add(errorMessage);
-        errorMessage.setVisible(false);
+        Confirm.add(btnConfirm);
+        
+        JPanel ErrorPanel = new JPanel();
+        add(ErrorPanel);
+        
+        ErrorLabel = new JLabel("");
+        ErrorPanel.add(ErrorLabel);
 
 	}
 
     public void setErrorMessage(String message){
-        errorMessage.setText(message);
-        errorMessage.setSize(message.length()*10,20);
-        errorMessage.setVisible(true);
+    	ErrorLabel.setText(message);
     }
 
     public String getTxtEnterPlayerNameData() {
