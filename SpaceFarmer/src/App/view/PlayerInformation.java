@@ -29,7 +29,6 @@ public class PlayerInformation extends JPanel {
     private JFormattedTextField enteredFighterSkill;
     private JFormattedTextField enteredTraderSkill;
     private JFormattedTextField enteredEngineerSkill;
-    private JPanel Confirm;
     private JLabel ErrorLabel;
 
     /**
@@ -141,7 +140,7 @@ public class PlayerInformation extends JPanel {
         comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Easy", "Medium", "Hard", "Impossible"}));
         Difficulty.add(comboBox);
 
-        Confirm = new JPanel();
+        JPanel Confirm = new JPanel();
         add(Confirm);
 
         JButton btnConfirm = new JButton("Confirm");
