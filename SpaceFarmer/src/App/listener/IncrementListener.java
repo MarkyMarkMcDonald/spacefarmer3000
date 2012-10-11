@@ -11,7 +11,7 @@ import javax.swing.JFormattedTextField;
  * and allows them to be incremented or decremented. Regex is used for safely
  * checking the content of the string before attempting to increment. Buttons
  * that use this cannot decrement past zero, and will reset to zero if the
- * text contains invalid characters.
+ * text contains invalid characters. Also, fields can not be incremented past 16.
  * @author Andrew Wilder
  */
 
@@ -28,9 +28,11 @@ public class IncrementListener implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(Pattern.matches("[0-9]+", theField.getText())) {
+        if(Pattern.matches("[0-9]+", theField.getText())) {
 			int n = Integer.parseInt(theField.getText());
-			theField.setText(n + (IncType?1:(n>0?-1:0)) + "");
+            if (n < 16){
+                theField.setText(n + (IncType ? 1 :( n>0 ? -1 :0)) + "");
+            }
 		} else {
 			theField.setText("0");
 		}

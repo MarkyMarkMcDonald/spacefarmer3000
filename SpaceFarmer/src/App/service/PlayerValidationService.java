@@ -38,7 +38,7 @@ public class PlayerValidationService {
     public static String isValidPlayer(Player player, int numOfPointsToDistribute){
         String message = "success";
         if (!allPointsAreDistributed(player,numOfPointsToDistribute)){
-            message = "Please allocate all 16 of your points!";
+            message = "Please allocate exactly 16 points!";
         }
         else if (!playerNameIsSet(player)){
             message = "Please enter a name for this player!";
