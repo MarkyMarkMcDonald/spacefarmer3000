@@ -1,6 +1,6 @@
 package App.service;
 
-import App.util.Settings;
+import App.model.Settings;
 
 /**
  * User: marky
