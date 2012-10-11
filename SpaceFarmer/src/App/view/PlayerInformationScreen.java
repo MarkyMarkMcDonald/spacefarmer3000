@@ -17,13 +17,12 @@ import javax.swing.JTextField;
 import java.awt.Component;
 import javax.swing.Box;
 
-public class PlayerInformation extends JPanel {
+public class PlayerInformationScreen extends Screen{
 
 	/**
 	 * Prevents "serializable" warning
 	 */
 	private static final long serialVersionUID = -3313579360751444648L;
-	private Display gameFrame;
     private JTextField enteredPlayerName;
     private JFormattedTextField enteredPilotSkill;
     private JFormattedTextField enteredFighterSkill;
@@ -34,8 +33,8 @@ public class PlayerInformation extends JPanel {
     /**
 	 * Create the panel.
 	 */
-	public PlayerInformation(Display gameFrame) {
-		this.gameFrame = gameFrame;
+	public PlayerInformationScreen() {
+		name = CardName.PLAYER_INFORMATION_CARD;
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
@@ -150,7 +149,7 @@ public class PlayerInformation extends JPanel {
 
         JButton btnConfirm = new JButton("Confirm");
         btnConfirm.setPreferredSize(new Dimension(120, 30));
-        btnConfirm.addActionListener(new ConfirmPlayerCreationListener(gameFrame,this));
+        btnConfirm.addActionListener(new ConfirmPlayerCreationListener(this));
         Confirm.add(btnConfirm);
         
         JPanel ErrorPanel = new JPanel();

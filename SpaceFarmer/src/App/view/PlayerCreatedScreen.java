@@ -1,26 +1,25 @@
 package App.view;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.BoxLayout;
+import App.listener.ContinueListener;
+
+import javax.swing.*;
 import java.awt.Component;
 import java.awt.Font;
 
-public class TemporaryScreen extends JPanel {
+public class PlayerCreatedScreen extends Screen {
 
 	/**
 	 * Prevents "serializable" warning
 	 */
 	private static final long serialVersionUID = -2641343039012994267L;
-	private Display gameFrame;
 
 	/**
 	 * Create the panel.
-	 */
-	public TemporaryScreen(Display gameFrame) {
-		this.gameFrame = gameFrame;
-		
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+     */
+	public PlayerCreatedScreen() {
+		name = CardName.PLAYER_CREATED_CARD;
+
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JLabel lblYouCreatedA = new JLabel("You created a player!");
 		lblYouCreatedA.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -39,6 +38,10 @@ public class TemporaryScreen extends JPanel {
 		lblItWillBe.setAlignmentY(0.0f);
 		lblItWillBe.setAlignmentX(0.5f);
 		add(lblItWillBe);
+
+        JButton makeAnotherPlayer = new JButton("Add Player");
+        ContinueListener continueToPlayerCreationListener = new ContinueListener(CardName.PLAYER_INFORMATION_CARD.toString());
+        //todo: move back to createPlayer
 
 	}
 

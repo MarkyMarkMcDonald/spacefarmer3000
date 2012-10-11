@@ -23,9 +23,8 @@ public class Display extends JFrame {
 		this.setup();
 	}
 
-    private JPanel mainContentPanel;
     private static JPanel CenterPanel;
-    private Game game;
+    private static Game game;
 
     /**
      * set up the initial screen
@@ -34,7 +33,7 @@ public class Display extends JFrame {
         setTitle("SpaceFarmer 3000");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 600);
-        mainContentPanel = new JPanel();
+        JPanel mainContentPanel = new JPanel();
         mainContentPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
         mainContentPanel.setLayout(new BorderLayout(0, 0));
         
@@ -93,49 +92,34 @@ public class Display extends JFrame {
         mainContentPanel.add(CenterPanel, BorderLayout.CENTER);
         CenterPanel.setLayout(new CardLayout(0, 0));
 
-        JPanel wScr = new WelcomeScreen(this);
-        CenterPanel.add(wScr, "WelcomeCard");
-        
-        JPanel pInf = new PlayerInformation(this);
-        CenterPanel.add(pInf, "PlayerInformationCard");
-        
-        JPanel tScr = new TemporaryScreen(this);
-        CenterPanel.add(tScr, "TemporaryScreenCard");
+
+        // Generate every possible card
+        for (CardName name : CardName.values()){
+            CenterPanel.add(name.getScreen(), name.toString());
+        }
+
     }
     
     /**
      * Flips to the specified card in the center panel.
      * @param cardID The card ID of the panel to flip to.
      */
-    public void changeCard(String cardID) {
+    public static void changeCard(String cardID) {
     	((CardLayout)CenterPanel.getLayout()).show(CenterPanel, cardID);
     }
 
     //--Accessors and Modifiers
 
-    public Game getGame() {
+    public static Game getGame() {
         return game;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public static void setGame(Game game) {
+        Display.game = game;
     }
 
-    /* Why do we need getters and setters for this?
-    public JPanel setMainContentPanel() {
-        return mainContentPanel;
-    }
-
-    public void setMainContentPanel(JPanel newContentPanel) {
-        this.mainContentPanel = newContentPanel;
-    }*/
-
-    public JPanel getCenterPanel() {
+    public static JPanel getCenterPanel() {
         return CenterPanel;
     }
 
-    /* We don't need a setter for the centerPanel, cards are swapped with changeCard()
-    public void setCenterPanel(JPanel centerPanel) {
-        CenterPanel = centerPanel;
-    }*/
 }

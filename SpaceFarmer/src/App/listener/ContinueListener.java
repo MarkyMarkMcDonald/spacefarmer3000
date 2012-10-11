@@ -12,17 +12,14 @@ import java.awt.event.ActionListener;
  */
 public class ContinueListener implements ActionListener {
 
-	private Display gameFrame;
-	private String cardID;
+	private String cardToMoveTo;
 	
 	/**
 	 * This is the constructor for the AdvanceListener class.
-	 * @param gameFrame A link to the instance of Display, used for changing its center panel.
-	 * @param cardID The ID of the card to change the center panel to.
-	 */
-	public ContinueListener(Display gameFrame, String cardID) {
-		this.gameFrame = gameFrame;
-		this.cardID = cardID;
+     * @param cardToMoveTo The ID of the card to change the center panel to.
+     */
+	public ContinueListener(String cardToMoveTo) {
+		this.cardToMoveTo = cardToMoveTo;
 	}
 	
 	/**
@@ -31,6 +28,6 @@ public class ContinueListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		gameFrame.changeCard(cardID);
+		Display.changeCard(cardToMoveTo);
 	}
 }

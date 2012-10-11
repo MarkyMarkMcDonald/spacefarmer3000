@@ -8,8 +8,9 @@ import java.awt.event.ActionListener;
 import App.model.Player;
 import App.service.PlayerValidationService;
 import App.util.Settings;
+import App.view.CardName;
 import App.view.Display;
-import App.view.PlayerInformation;
+import App.view.PlayerInformationScreen;
 
 /**
  * This class is used as an ActionListener for the confirm button on
@@ -19,26 +20,24 @@ import App.view.PlayerInformation;
 public class ConfirmPlayerCreationListener implements ActionListener {
 
     //private Settings settings;
-    private Display gameFrame;
-    private PlayerInformation playerInformation;
+    private PlayerInformationScreen playerInformationScreen;
 
-    public ConfirmPlayerCreationListener(Display gameFrame, PlayerInformation playerInformation){
-        this.gameFrame = gameFrame;
-        this.playerInformation = playerInformation;
+    public ConfirmPlayerCreationListener(PlayerInformationScreen playerInformationScreen){
+        this.playerInformationScreen = playerInformationScreen;
     }
 
 	public void actionPerformed(ActionEvent e)
 	{
-        Player player = new Player(playerInformation.getTxtEnterPlayerNameData(),playerInformation.getEnteredPilotSkill(),
-                playerInformation.getEnteredTraderSkill(), playerInformation.getEnteredEngineerSkill(),playerInformation.getEnteredFighterSkill());
-        Settings settings = gameFrame.getGame().getSettings();
+        Player player = new Player(playerInformationScreen.getTxtEnterPlayerNameData(), playerInformationScreen.getEnteredPilotSkill(),
+                playerInformationScreen.getEnteredTraderSkill(), playerInformationScreen.getEnteredEngineerSkill(), playerInformationScreen.getEnteredFighterSkill());
+        Settings settings = Display.getGame().getSettings();
         String message = PlayerValidationService.isValidPlayer(player, 16);
         if (message.equals("success")){
             settings.addPlayer(player);
-            gameFrame.changeCard("TemporaryScreenCard");
+            Display.changeCard(CardName.PLAYER_CREATED_CARD.toString());
         }
         else {
-            playerInformation.setErrorMessage(message);
+            playerInformationScreen.setErrorMessage(message);
         }
     }
 
