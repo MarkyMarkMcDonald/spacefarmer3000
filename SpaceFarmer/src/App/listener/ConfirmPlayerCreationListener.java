@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 //import App.service.SettingService;
 import App.model.Player;
 import App.service.PlayerValidationService;
-import App.Util.Settings;
+import App.util.Settings;
 import App.view.Display;
 import App.view.PlayerInformation;
 

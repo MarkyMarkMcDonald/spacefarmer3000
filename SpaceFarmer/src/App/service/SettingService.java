@@ -2,7 +2,7 @@ package App.service;
 
 
 import App.model.Player;
-import App.Util.Settings;
+import App.util.Settings;
 
 /**
  * User: marky
