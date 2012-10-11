@@ -1,8 +1,9 @@
-package App.Util;
+package App.util;
 
 import App.model.Game;
 import App.view.Display;
 import java.awt.EventQueue;
+import App.util.Settings;
 
 public class Driver {
 

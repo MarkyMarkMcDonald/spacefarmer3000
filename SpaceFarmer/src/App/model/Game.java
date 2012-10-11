@@ -1,7 +1,7 @@
 package App.model;
 
 
-import App.Util.Settings;
+import App.util.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
