@@ -7,17 +7,28 @@ package App.model;
  * Time: 12:33 AM
  * To change this template use File | Settings | File Templates.
  */
-public class TechnologyLevel {
+public enum TechnologyLevel 
+{
+    PRE_AGRICULTURE ("Pre-Agricultur"),
+    AGRICULTURE ("Agriculture"),
+    MEDIEVAL ("Medieval"),
+    RENAISSANCE ("Renaissance"),
+    EARLY_INDUSTRIAL ("Early Industrial"),
+    INDUSTRIAL ("Industrial"),
+    POST_INDUSTRIAL ("Post Industrial"),
+    HI_TECH ("Hi-Tech");
+    
     private String name;
+
+	private TechnologyLevel(String name) {
+		this.name = name;
+	}
 
 	public String getName() {
 		return name;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-    
-    
-
+	
 }
+    
+    
+    
