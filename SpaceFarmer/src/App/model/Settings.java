@@ -18,6 +18,8 @@ public class Settings {
 	private int currentTurn;
 	private List<Player> players;
 	private String saveLocation;
+	private int xDimension;
+	private int yDimension;
 
 	/**
 	 * this is the constructor for the settings.
@@ -98,6 +100,22 @@ public class Settings {
 
 	public void setPlayers(List<Player> players) {
 		this.players = players;
+	}
+
+	public int getxDimension() {
+		return xDimension;
+	}
+
+	public void setxDimension(int xDimension) {
+		this.xDimension = xDimension;
+	}
+
+	public int getyDimension() {
+		return yDimension;
+	}
+
+	public void setyDimension(int yDimension) {
+		this.yDimension = yDimension;
 	}
 
 	/**

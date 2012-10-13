@@ -4,16 +4,16 @@ package App.model;
 
 public enum ResourceType {
 	
-	NOSPECIALRESOURCES ("No Special Resources"),
-	MINERALRICH ("Mineral Rich"),
+	NO_SPECIAL_RESOURCES ("No Special Resources"),
+	MINERAL_RICH ("Mineral Rich"),
 	DESERT ("Desert"),
-	LOTSOFWATER ("Lots of Water"),
-	RICHSOIL ("Rich Soil"),
-	POORSOIL ("Poor Soil"),
-	RICHFAUNA ("Rich Fauna"),
+	LOTS_OF_WATER ("Lots of Water"),
+	RICH_SOIL ("Rich Soil"),
+	POOR_SOIL ("Poor Soil"),
+	RICH_FAUNA ("Rich Fauna"),
 	LIFELESS ("Lifeless"),
-	WEIRDMUSHROOMS ("Weird Mushrooms"),
-	LOTSOFHERBS ("Lots of Herbs"),
+	WEIRD_MUSHROOMS ("Weird Mushrooms"),
+	LOTS_OF_HERBS ("Lots of Herbs"),
 	ARTISTIC ("Artistic"),
 	WARLIKE ("Warlike");
 	
