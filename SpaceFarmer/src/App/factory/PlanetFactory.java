@@ -24,7 +24,6 @@ public class PlanetFactory {
 	 */
 	public static List<Planet> getPlanet(List<String> names,int xDim,int yDim)
 	{
-		// Don't want to make a new Planet in the for loop, reuse emptyPlanet
 		int length=names.size();
 		
 		List<Planet> planets=new ArrayList<Planet>();
@@ -34,7 +33,7 @@ public class PlanetFactory {
 		
 		for (int i=0;i<length;i++)
 		{
-			planetName=names.get(Randomizer.nextInt(length));
+			planetName=names.get(Randomizer.nextInt(names.size()));
 			names.remove(planetName);
 			planet.setName(planetName);
 			planet.setX(coordinateList.get(i)[0]);
