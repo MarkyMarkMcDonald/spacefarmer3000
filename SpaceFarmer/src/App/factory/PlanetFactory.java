@@ -39,9 +39,9 @@ public class PlanetFactory {
 			planet.setName(planetName);
 			planet.setX(coordinateList.get(i)[0]);
 			planet.setY(coordinateList.get(i)[1]);
-			planet.setTechnologyLevel((TechnologyLevel) Randomizer.randEnum((TechnologyLevel.AGRICULTURE.getClass())));
-			planet.setResourceType((ResourceType) Randomizer.randEnum((ResourceType.MINERAL_RICH.getClass())));
-			planet.setPoliticalSystem((PoliticalSystem) Randomizer.randEnum((PoliticalSystem.DEMOCRACY.getClass())));
+			planet.setTechnologyLevel((TechnologyLevel) Randomizer.randEnum((TechnologyLevel.class)));
+			planet.setResourceType((ResourceType) Randomizer.randEnum((ResourceType.class)));
+			planet.setPoliticalSystem((PoliticalSystem) Randomizer.randEnum((PoliticalSystem.class)));
             planets.add(planet);			
 		}
 		return planets;
