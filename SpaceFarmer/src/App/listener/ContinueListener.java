@@ -11,18 +11,10 @@ import App.view.Display;
  * that lack complex logic
  * @author Andrew Wilder
  */
-public class ContinueListener implements ActionListener {
+abstract public class ContinueListener implements ActionListener {
 
-	private CardName cardToMoveTo;
-	
-	/**
-	 * This is the constructor for the AdvanceListener class.
-     * @param cardToMoveTo The ID of the card to change the center panel to.
-     */
-	public ContinueListener(CardName cardToMoveTo) {
-		this.cardToMoveTo = cardToMoveTo;
-	}
-	
+	protected CardName cardToMoveTo;
+
 	/**
 	 * Advance the center panel to a different card.
 	 * @param e The instance of Event containing the invocation details.
@@ -31,4 +23,9 @@ public class ContinueListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Display.changeCard(cardToMoveTo);
 	}
+
+    public void progressDisplay(){
+        Display.changeCard(cardToMoveTo);
+    }
+
 }
