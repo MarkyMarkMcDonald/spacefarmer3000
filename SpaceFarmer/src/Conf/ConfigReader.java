@@ -1,7 +1,8 @@
-package App.job;
+package Conf;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.*;
 
 /**
@@ -10,20 +11,25 @@ import java.util.*;
  */
 
 public class ConfigReader {
+
+
+
 	/**
 	 * Parse a file as a Collection of Strings, delimited by newlines.
-	 * @param filePath The path to the file to parse.
+	 * @param confFile The path to the file to parse.
 	 * @return A Collection of Strings read from the file.
 	 *         If the file does not exist, return null.
 	 */
-	public static List<String> parseFileToStrings(String filePath) {
+	public static List<String> parseFileToStrings(String confFile) {
 		// Create the List to which the Strings will be added
 		List<String> lines = new ArrayList<String>();
 		Scanner sc;
-		
+
 		// Wrap file creation in a try-catch block to prevent uncaught IO exception
 		try {
-			sc = new Scanner(new File(filePath));
+	        URL location = ConfigReader.class.getProtectionDomain().getCodeSource().getLocation();
+
+            sc = new Scanner(new File(location.getPath() + "Conf/" + confFile));
 		} catch(FileNotFoundException e) {
 		    System.out.println("File not found!");
 		    return null;
@@ -39,11 +45,18 @@ public class ConfigReader {
 		return lines;
 	}
 
-    public static Map<String, Integer> parseFileToMap(String filePath){
+    /**
+     * parse a file that determines game configuration variables into a map based on the name of the value and the integer value.
+     * Variables should be in the form of 'foo: 1'
+     * @param confFile the name of the file in the Conf folder to parse
+     * @return a map to use for settings game variables
+     */
+    public static Map<String, Integer> parseFileToMap(String confFile){
         Map<String, Integer> variables = new HashMap<String, Integer>();
         Scanner scanner;
         try {
-            scanner = new Scanner(new File(filePath));
+            URL location = ConfigReader.class.getProtectionDomain().getCodeSource().getLocation();
+            scanner = new Scanner(new File(location.getPath() + "Conf/" + confFile));
         } catch (FileNotFoundException e){
             System.out.println("File not found!");
             return null;
@@ -53,7 +66,7 @@ public class ConfigReader {
         String line;
         while (scanner.hasNext()){
             line = scanner.nextLine();
-            String[] variableAndValue = line.split(": ");
+            String[] variableAndValue = line.split("");
             variables.put(variableAndValue[0],Integer.parseInt(variableAndValue[1]));
         }
 

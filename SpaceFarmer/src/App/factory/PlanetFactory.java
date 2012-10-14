@@ -35,9 +35,7 @@ public class PlanetFactory {
         List<Integer[]> coordinateList=Randomizer.generateDimensions(numPlanets, maxXDim, maxYDim);
 
         int index = 0;
-        for (String name : names){
-            planet.setName(name);
-
+        while (index < numPlanets && !names.isEmpty()){
             String planetName=names.get(Randomizer.nextInt(names.size()));
             names.remove(planetName);
             planet.setName(planetName);

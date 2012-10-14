@@ -30,7 +30,7 @@ public class Game {
 
     //--Accessors and Modifiers
 
-    public Player getCurrentPlayer() {
+    public static Player getCurrentPlayer() {
         return currentPlayer;
     }
 
@@ -38,7 +38,7 @@ public class Game {
         Game.currentPlayer = currentPlayer;
     }
 
-    public int getNumberOfTurns() {
+    public static int getNumberOfTurns() {
         return numberOfTurns;
     }
 
@@ -46,7 +46,7 @@ public class Game {
         Game.numberOfTurns = numberOfTurns;
     }
 
-    public List<Player> getPlayers() {
+    public static List<Player> getPlayers() {
         return players;
     }
 
@@ -54,7 +54,7 @@ public class Game {
         Game.players = players;
     }
 
-    public Settings getSettings() {
+    public static Settings getSettings() {
         return settings;
     }
 
@@ -62,7 +62,7 @@ public class Game {
         Game.settings = settings;
     }
 
-    public Map<String, Planet> getPlanets() {
+    public static Map<String, Planet> getPlanets() {
         return planets;
     }
 

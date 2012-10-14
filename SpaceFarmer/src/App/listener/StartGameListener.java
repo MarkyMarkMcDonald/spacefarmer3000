@@ -1,8 +1,12 @@
 package App.listener;
 
 import App.factory.PlanetFactory;
-import App.job.ConfigReader;
+import App.model.Game;
+import App.model.Player;
+import Conf.ConfigReader;
 import App.view.CardName;
+import Conf.GameVariables;
+import Conf.PlanetNames;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,14 +26,15 @@ public class StartGameListener extends ContinueListener implements ActionListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        List<String> planetNames = ConfigReader.parseFileToStrings("src/Conf/planetNames.txt");
-        Map<String,Integer> gameVariables = ConfigReader.parseFileToMap("src/Conf/gameVariables.txt");
+
+        List<String> planetNames = PlanetNames.getPlanetNamesAsList();
+
         // Create all the planets
-        PlanetFactory.createPlanets(planetNames, gameVariables.get("xDimension"), gameVariables.get("xDimension"), gameVariables.get("numberPlanets") );
+        PlanetFactory.createPlanets(planetNames, GameVariables.xDimension, GameVariables.yDimension, GameVariables.yDimension);
 
         // Make player1 have the first turn
-
-
+        Player player1 = Game.getPlayers().get(0);
+        Game.setCurrentPlayer(player1);
 
         this.progressDisplay();
     }

@@ -1,3 +1,0 @@
-xDimension: 150
-yDimension: 200
-numberPlanets: 30
