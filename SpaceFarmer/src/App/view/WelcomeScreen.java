@@ -1,6 +1,6 @@
 package App.view;
 
-import App.listener.ContinueListener;
+import App.listener.BasicContinueListener;
 
 import java.awt.Component;
 import java.awt.Font;
@@ -69,7 +69,7 @@ public class WelcomeScreen extends Screen {
 
         JButton NewGameButton = new JButton("New Game");
         NewGameButton.setPreferredSize(new Dimension(120, 30));
-        NewGameButton.addActionListener(new ContinueListener(CardName.PLAYER_INFORMATION_CARD));
+        NewGameButton.addActionListener(new BasicContinueListener(CardName.PLAYER_INFORMATION_CARD));
         WelcomeButtonPanel.add(NewGameButton);
 
         Component ButtonStrut2 = Box.createHorizontalStrut(50);

@@ -14,38 +14,59 @@ import java.util.Map;
  */
 public class Game {
 
-    private List<Player> players;
+    private static List<Player> players;
 
     private static Settings settings;
 
-    private Map<String, Planet> planets;
+    private static Map<String, Planet> planets;
+
+    private static int numberOfTurns;
+
+    private static Player currentPlayer;
 
     public Game(){
-
+        numberOfTurns = 0;
     }
 
     //--Accessors and Modifiers
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public static void setCurrentPlayer(Player currentPlayer) {
+        Game.currentPlayer = currentPlayer;
+    }
+
+    public int getNumberOfTurns() {
+        return numberOfTurns;
+    }
+
+    public static void setNumberOfTurns(int numberOfTurns) {
+        Game.numberOfTurns = numberOfTurns;
+    }
+
     public List<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
+    public static void setPlayers(List<Player> players) {
+        Game.players = players;
     }
 
     public Settings getSettings() {
         return settings;
     }
 
-    public void setSettings(Settings settings) {
-        this.settings = settings;
+    public static void setSettings(Settings settings) {
+        Game.settings = settings;
     }
 
     public Map<String, Planet> getPlanets() {
         return planets;
     }
 
-    public void setPlanets(Map<String, Planet> planets) {
-        this.planets = planets;
+    public static void setPlanets(Map<String, Planet> planets) {
+        Game.planets = planets;
     }
 }

@@ -1,7 +1,9 @@
 package App.factory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import App.model.Planet;
 import App.model.PoliticalSystem;
@@ -10,41 +12,44 @@ import App.model.TechnologyLevel;
 import App.service.Randomizer;
 
 public class PlanetFactory {
-	
-	private static Planet planet=new Planet();
-	/*
-	 * Takes in and returns ArrayLists to effectively randomize
-	 * x and y of the planets. Also needs xDimension and yDimension
-	 * from Settings to accomplish this.
-	 * Planets will have unique coordinates.
-	 * @param names List of the Planet's names
-	 * @param xDim Length of the game's x-axis
-	 * @param yDim Length of the game's y-axis
-	 * @return List of Planets corresponding to the names.
-	 */
-	public static List<Planet> getPlanet(List<String> names,int xDim,int yDim)
+
+    private static Map<String, Planet> planets;
+
+	public static Planet getPlanet(String name)
 	{
-		int length=names.size();
-		
-		List<Planet> planets=new ArrayList<Planet>();
-		List<Integer[]> coordinateList=Randomizer.generatePoints(length,xDim,yDim);
-		
-		String planetName;
-		
-		for (int i=0;i<length;i++)
-		{
-			planetName=names.get(Randomizer.nextInt(names.size()));
-			names.remove(planetName);
-			planet.setName(planetName);
-			planet.setX(coordinateList.get(i)[0]);
-			planet.setY(coordinateList.get(i)[1]);
-			planet.setTechnologyLevel((TechnologyLevel) Randomizer.randEnum((TechnologyLevel.class)));
-			planet.setResourceType((ResourceType) Randomizer.randEnum((ResourceType.class)));
-			planet.setPoliticalSystem((PoliticalSystem) Randomizer.randEnum((PoliticalSystem.class)));
-            planets.add(planet);			
-		}
-		return planets;
-		
+        return planets.get(name);
 	}
+
+    /**
+     * Fills the factory with planets.
+     *
+     * @param names List of the Planet's possible names
+     * @param maxXDim Length of the game's x-axis
+     * @param maxYDim Length of the game's y-axis
+     * @param numPlanets how many planets for this game
+     */
+    public static void createPlanets(List<String> names, int maxXDim, int maxYDim, int numPlanets){
+        Planet planet = new Planet();
+        planets = new HashMap<String, Planet>();
+
+        List<Integer[]> coordinateList=Randomizer.generateDimensions(numPlanets, maxXDim, maxYDim);
+
+        int index = 0;
+        for (String name : names){
+            planet.setName(name);
+
+            String planetName=names.get(Randomizer.nextInt(names.size()));
+            names.remove(planetName);
+            planet.setName(planetName);
+            planet.setX(coordinateList.get(index)[0]);
+            planet.setY(coordinateList.get(index)[1]);
+            planet.setTechnologyLevel((TechnologyLevel) Randomizer.randEnum((TechnologyLevel.class)));
+            planet.setResourceType((ResourceType) Randomizer.randEnum((ResourceType.class)));
+            planet.setPoliticalSystem((PoliticalSystem) Randomizer.randEnum((PoliticalSystem.class)));
+            planets.put(planet.getName(), planet);
+            index++;
+        }
+
+    }
 
 }

@@ -15,6 +15,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class Player {
+    private PlayerType playerType;
     private String name;
     private Ship ship;
     private int money;

@@ -1,6 +1,7 @@
 package App.view;
 
-import App.listener.ContinueListener;
+import App.listener.BasicContinueListener;
+import App.listener.StartGameListener;
 
 import javax.swing.*;
 import java.awt.Component;
@@ -26,23 +27,16 @@ public class PlayerCreatedScreen extends Screen {
 		lblYouCreatedA.setAlignmentY(Component.TOP_ALIGNMENT);
 		lblYouCreatedA.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(lblYouCreatedA);
-		
-		JLabel lblThisIsA = new JLabel("This is a temporary screen.");
-		lblThisIsA.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblThisIsA.setAlignmentY(0.0f);
-		lblThisIsA.setAlignmentX(0.5f);
-		add(lblThisIsA);
-		
-		JLabel lblItWillBe = new JLabel("It will be removed after M5.");
-		lblItWillBe.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblItWillBe.setAlignmentY(0.0f);
-		lblItWillBe.setAlignmentX(0.5f);
-		add(lblItWillBe);
 
-        JButton makeAnotherPlayer = new JButton("Add Player");
-        ContinueListener continueToPlayerCreationListener = new ContinueListener(CardName.PLAYER_INFORMATION_CARD);
-        //todo: move back to createPlayer
+        JButton makeAnotherPlayer = new JButton("Add Another Player");
+        BasicContinueListener continueToPlayerCreationListener = new BasicContinueListener(CardName.PLAYER_INFORMATION_CARD);
+        makeAnotherPlayer.addActionListener(continueToPlayerCreationListener);
+        add(makeAnotherPlayer);
 
+        JButton startGame = new JButton("Start Game");
+        StartGameListener startGameListener = new StartGameListener();
+        startGame.addActionListener(startGameListener);
+        add(startGame);
 	}
 
 }

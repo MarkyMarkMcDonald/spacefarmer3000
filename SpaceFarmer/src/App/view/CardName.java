@@ -21,6 +21,11 @@ public enum CardName {
         public Screen getScreen(){
             return new PlayerCreatedScreen();
         }
+    },
+    TEMPORARY_SCREEN_CARD("TemporaryCard"){
+        public Screen getScreen(){
+            return new TemporaryScreen();
+        }
     };
 
     private final String name;

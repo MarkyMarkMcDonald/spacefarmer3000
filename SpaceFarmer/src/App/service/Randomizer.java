@@ -25,7 +25,7 @@ public class Randomizer {
 	 * @param xDim Upperbound value for the x-coordinate
 	 * @param yDim Upperbound value for the y-coordinate
 	 */
-	public static List<Integer[]> generatePoints(int number,int xDim,int yDim)
+	public static List<Integer[]> generateDimensions(int number, int xDim, int yDim)
 	{
 		List<Integer[]> pointList=new ArrayList<Integer[]>();
 		Integer points[]=new Integer[2];

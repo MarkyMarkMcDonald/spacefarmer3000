@@ -15,7 +15,7 @@ import java.util.List;
  **/
 public class Settings {
 	private int difficulty;
-	private int currentTurn;
+
 	private List<Player> players;
 	private String saveLocation;
 	private int xDimension;
@@ -25,7 +25,6 @@ public class Settings {
 	 * this is the constructor for the settings.
 	 **/
 	public Settings() {
-		currentTurn = 0;
 		players = new ArrayList<Player>();
 	}
 
@@ -59,24 +58,7 @@ public class Settings {
 		}
 	}
 
-	/**
-	 * gets the current Turn of the game
-	 * 
-	 * @return the game's current turn
-	 **/
-	private int getCurTurn() {
-		return currentTurn;
-	}
 
-	/**
-	 * sets the current turn to num
-	 * 
-	 * @param num
-	 *            is the new turn number
-	 **/
-	private void setCurTurn(int num) {
-		currentTurn = num;
-	}
 
 	public int getDifficulty() {
 		return difficulty;
@@ -86,13 +68,7 @@ public class Settings {
 		this.difficulty = difficulty;
 	}
 
-	public int getCurrentTurn() {
-		return currentTurn;
-	}
 
-	public void setCurrentTurn(int currentTurn) {
-		this.currentTurn = currentTurn;
-	}
 
 	public List<Player> getPlayers() {
 		return players;
