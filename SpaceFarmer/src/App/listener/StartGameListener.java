@@ -30,7 +30,7 @@ public class StartGameListener extends ContinueListener implements ActionListene
         List<String> planetNames = PlanetNames.getPlanetNamesAsList();
 
         // Create all the planets
-        PlanetFactory.createPlanets(planetNames, GameVariables.xDimension, GameVariables.yDimension, GameVariables.yDimension);
+        PlanetFactory.createPlanets(planetNames, GameVariables.xDimension, GameVariables.yDimension, GameVariables.numPlanets);
 
         // Make player1 have the first turn
         Player player1 = Game.getPlayers().get(0);

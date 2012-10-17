@@ -27,21 +27,40 @@ public class Randomizer {
 	 */
 	public static List<Integer[]> generateDimensions(int number, int xDim, int yDim)
 	{
-		List<Integer[]> pointList=new ArrayList<Integer[]>();
-		Integer points[]=new Integer[2];
-		points[0]=rand.nextInt(xDim);
-		points[1]=rand.nextInt(yDim);
-		for (int i=0;i<number;i++)
+		List<Integer[]> dimensionList=new ArrayList<Integer[]>();
+        boolean isUniqueDimension;
+
+        for (int i=0;i<number;i++)
 		{
-			while(pointList.contains(points))
+            Integer[] dimension=new Integer[2];
+            dimension[0]=rand.nextInt(xDim);
+            dimension[1]=rand.nextInt(yDim);
+
+            // We don't know if the dimension is unique, so treat as might not be unique
+            isUniqueDimension = false;
+
+			while(!isUniqueDimension)
 			{
-				points[0]=rand.nextInt(xDim);
-				points[1]=rand.nextInt(yDim);
+                if (!isUniqueDimension(dimensionList, dimension)){
+                    dimension[0]=rand.nextInt(xDim);
+                    dimension[1]=rand.nextInt(yDim);
+                }
+                isUniqueDimension = isUniqueDimension(dimensionList,dimension);
+
 			}
-			pointList.add(points);
+			dimensionList.add(dimension);
 		}
-		return pointList;
+		return dimensionList;
 	}
+
+    public static boolean isUniqueDimension(List<Integer[]> dimensionList, Integer[] dimension){
+        for (int i = 0; i < dimensionList.size(); i++){
+            if (dimensionList.get(i)[0].equals(dimension[0]) && dimensionList.get(i)[1].equals(dimension[1])){
+                return false;
+            }
+        }
+        return true;
+    }
 	
 	/*
 	 * Serves only to mimic Random.nextInt() when necessary
