@@ -2,6 +2,7 @@ package App.model;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ public class Game {
 
     public Game(){
         numberOfTurns = 0;
+        players = new ArrayList<Player>();
     }
 
     //--Accessors and Modifiers
@@ -68,5 +70,9 @@ public class Game {
 
     public static void setPlanets(Map<String, Planet> planets) {
         Game.planets = planets;
+    }
+
+    public void addPlayer(Player player) {
+        players.add(player);
     }
 }
