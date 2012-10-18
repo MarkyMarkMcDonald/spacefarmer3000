@@ -1,6 +1,7 @@
 package App.listener;
 
 import App.factory.PlanetFactory;
+import App.logging.Logger;
 import App.model.Game;
 import App.model.Player;
 import Conf.ConfigReader;
@@ -32,10 +33,12 @@ public class StartGameListener extends ContinueListener implements ActionListene
         // Create all the planets
         PlanetFactory.createPlanets(planetNames, GameVariables.xDimension, GameVariables.yDimension, GameVariables.numPlanets);
 
+
         // Make player1 have the first turn
         Player player1 = Game.getPlayers().get(0);
         Game.setCurrentPlayer(player1);
 
         this.progressDisplay();
+        Logger.printGameToConsole();
     }
 }
