@@ -11,7 +11,7 @@ import java.util.Map;
 public class GameVariables {
     public static final int xDimension = 150;
     public static final int yDimension = 200;
-    public static final int numPlanets = 5;
+    public static final int numPlanets = 30;
 
 
 }
