@@ -19,6 +19,9 @@ public class PlanetFactory {
 	{
         return planets.get(name);
 	}
+    public static Map<String, Planet> getPlanets(){
+        return planets;
+    }
 
     /**
      * Fills the factory with planets.
@@ -31,13 +34,14 @@ public class PlanetFactory {
     public static void createPlanets(List<String> names, int maxXDim, int maxYDim, int numPlanets){
         Planet planet = new Planet();
         planets = new HashMap<String, Planet>();
-
+        List<String> namesHolder = new ArrayList<String>(names);
         List<Integer[]> coordinateList=Randomizer.generateDimensions(numPlanets, maxXDim, maxYDim);
 
         int index = 0;
-        while (index < numPlanets && !names.isEmpty()){
-            String planetName=names.get(Randomizer.nextInt(names.size()));
-            names.remove(planetName);
+        while (index < numPlanets && !namesHolder.isEmpty()){
+            int planetNameIndex = Randomizer.nextInt(namesHolder.size());
+            String planetName=namesHolder.get(planetNameIndex);
+            namesHolder.remove(planetNameIndex);
             planet.setName(planetName);
             planet.setX(coordinateList.get(index)[0]);
             planet.setY(coordinateList.get(index)[1]);
