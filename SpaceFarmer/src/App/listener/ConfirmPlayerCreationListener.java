@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 //import App.Util.Settings;
 //import App.service.SettingService;
+import App.model.Game;
 import App.model.Player;
 import App.model.Settings;
 import App.service.PlayerValidationService;
@@ -30,10 +31,11 @@ public class ConfirmPlayerCreationListener implements ActionListener {
 	{
         Player player = new Player(playerInformationScreen.getTxtEnterPlayerNameData(), playerInformationScreen.getEnteredPilotSkill(),
                 playerInformationScreen.getEnteredTraderSkill(), playerInformationScreen.getEnteredEngineerSkill(), playerInformationScreen.getEnteredFighterSkill());
-        Settings settings = Display.getGame().getSettings();
+        Game game = Display.getGame();
         String message = PlayerValidationService.isValidPlayer(player, 16);
         if (message.equals("success")){
-            settings.addPlayer(player);
+            game.addPlayer(player);
+            Display.setGame(game);
             Display.changeCard(CardName.PLAYER_CREATED_CARD);
         }
         else {
