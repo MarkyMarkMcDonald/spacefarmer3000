@@ -76,5 +76,8 @@ public class Logger {
 
     public static void printPlanetInfo(Planet planet){
         System.out.println("Name: " + planet.getName() + "; xDimension: " + planet.getX() + "; yDimension: " + planet.getY());
+        System.out.println("Tech level: " + planet.getTechnologyLevel());
+        System.out.println("Resource level: " + planet.getTechnologyLevel());
+        System.out.println("Tech level: " + planet.getTechnologyLevel());
     }
 }

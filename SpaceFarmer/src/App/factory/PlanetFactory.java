@@ -32,13 +32,14 @@ public class PlanetFactory {
      * @param numPlanets how many planets for this game
      */
     public static void createPlanets(List<String> names, int maxXDim, int maxYDim, int numPlanets){
-        Planet planet = new Planet();
+
         planets = new HashMap<String, Planet>();
         List<String> namesHolder = new ArrayList<String>(names);
         List<Integer[]> coordinateList=Randomizer.generateDimensions(numPlanets, maxXDim, maxYDim);
 
         int index = 0;
         while (index < numPlanets && !namesHolder.isEmpty()){
+            Planet planet = new Planet();
             int planetNameIndex = Randomizer.nextInt(namesHolder.size());
             String planetName=namesHolder.get(planetNameIndex);
             namesHolder.remove(planetNameIndex);
