@@ -31,7 +31,7 @@ public class MiniGamePanel extends JPanel implements KeyListener, ActionListener
 	private static final double SPEED = 5.5,
 			                    TURN_AMOUNT = 0.05,
 			                    TOLERANCE = 7,
-			                    ASTEROID_SPEED = 0.9,
+			                    ASTEROID_SPEED = 1.1,
 	                            ASTEROID_ROTATION = 0.015;
 	private ArrayList<Asteroid> asteroids;
 	private double shipX, shipY, shipAngle; // degrees
@@ -100,14 +100,11 @@ public class MiniGamePanel extends JPanel implements KeyListener, ActionListener
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D screen = (Graphics2D)g;
-		screen.setColor(Color.BLACK);
-		//screen.fillRect(0, 0, getWidth(), getHeight());
 		screen.drawImage(bgGFX, 0, 0, null);
 		screen.setColor(Color.WHITE);
 		
 		// Draw asteroids
 		for(Asteroid a : asteroids) {
-			//screen.fillOval((int)(a.x - ASTEROID_SIZE / 2), (int)(a.y - ASTEROID_SIZE / 2), ASTEROID_SIZE, ASTEROID_SIZE);
 			AffineTransform orig = screen.getTransform();
 			screen.rotate(a.r, (int)a.x, (int)a.y);
 			screen.drawImage(asteroidGFX, (int)(a.x - ASTEROID_SIZE / 2), (int)(a.y - ASTEROID_SIZE / 2), null);
@@ -115,8 +112,6 @@ public class MiniGamePanel extends JPanel implements KeyListener, ActionListener
 		}
 		
 		// Draw ship
-		screen.setColor(Color.BLUE);
-		//screen.fillOval((int)(shipX - SHIP_SIZE / 2), (int)(shipY - SHIP_SIZE / 2), SHIP_SIZE, SHIP_SIZE);
 		AffineTransform orig = screen.getTransform();
 		screen.rotate(shipAngle, shipX, shipY);
 		screen.drawImage(shipGFX, (int)(shipX - SHIP_SIZE / 2), (int)(shipY - SHIP_SIZE / 2), null);
