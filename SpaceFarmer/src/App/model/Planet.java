@@ -10,59 +10,70 @@ package App.model;
 public class Planet {
     private String name;
 
-	private TechnologyLevel techLevel;
+	private TechnologyLevel technologyLevel;
 
-	private PoliticalSystem polSystem;
+	private PoliticalSystem politicalSystem;
 
-    private ResourceType resType;
+    private ResourceType resourceType;
 
     private int x,y;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	private MarketPlace market;
 
 	public Planet(){
 
     }
 
-	public Planet(String name,TechnologyLevel techLevel, PoliticalSystem polSystem,
-			ResourceType resType, int x, int y) {
+	public Planet(String name,TechnologyLevel technologyLevel, PoliticalSystem politicalSystem,
+			ResourceType resourceType, int x, int y) {
 		super();
 		this.name=name;
-		this.techLevel = techLevel;
-		this.polSystem = polSystem;
-		this.resType = resType;
+		this.technologyLevel = technologyLevel;
+		this.politicalSystem = politicalSystem;
+		this.resourceType = resourceType;
 		this.x = x;
 		this.y = y;
 	}
 
+    //--- Accessors and Modifiers
+
+    public MarketPlace getMarket() {
+        return market;
+    }
+
+    public void setMarket(MarketPlace market) {
+        this.market = market;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
     public String getName() {
         return name;
     }
 
 	public TechnologyLevel getTechnologyLevel() {
-		return techLevel;
+		return technologyLevel;
 	}
 
 	public void setTechnologyLevel(TechnologyLevel techLevel) {
-		this.techLevel = techLevel;
+		this.technologyLevel = techLevel;
 	}
 
 	public PoliticalSystem getPoliticalSystem() {
-		return polSystem;
+		return politicalSystem;
 	}
 
 	public void setPoliticalSystem(PoliticalSystem polSystem) {
-		this.polSystem = polSystem;
+		this.politicalSystem = polSystem;
 	}
 
 	public ResourceType getResourceType() {
-		return resType;
+		return resourceType;
 	}
 
 	public void setResourceType(ResourceType resType) {
-		this.resType = resType;
+		this.resourceType = resType;
 	}
 
 	public int getX() {
