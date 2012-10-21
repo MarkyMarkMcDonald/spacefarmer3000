@@ -24,17 +24,17 @@ public class MiniGamePanel extends JPanel implements KeyListener, ActionListener
 	private static final long serialVersionUID = -8514340587959703646L;
 	private static final int SHIP_SIZE = 64,
 			                 ASTEROID_SIZE = 42,
-			                 ASTEROID_COUNT = 30,
-			                 SAFETY_DIST = 225,
+			                 ASTEROID_COUNT = 25,
+			                 SAFETY_DIST = 200,
 							 SHIP_GFX_SIZE = 64,
 							 ASTEROID_GFX_SIZE = 42;
-	private static final double SPEED = 5.5,
-			                    TURN_AMOUNT = 0.05,
-			                    TOLERANCE = 7,
-			                    ASTEROID_SPEED = 1.1,
+	private static final double SPEED_CAP = 5.5,
+			                    TURN_AMOUNT = 0.055,
+			                    TOLERANCE = 7.5,
+			                    ASTEROID_SPEED = 1.35,
 	                            ASTEROID_ROTATION = 0.015;
 	private ArrayList<Asteroid> asteroids;
-	private double shipX, shipY, shipAngle; // degrees
+	private double shipX, shipY, shipAngle, shipSpeed;
 	private Timer timer;
 	private boolean holdingLeft, holdingRight;
 	private MiniGameFrame frame;
@@ -47,7 +47,10 @@ public class MiniGamePanel extends JPanel implements KeyListener, ActionListener
 		addKeyListener(this);
 		
 		// Create graphics for drawing to screen
-		File shipFile = new File("img\\Ship.png"), asteroidFile = new File("img\\Asteroid.png"), bgFile = new File("img\\BG.jpg");
+		System.out.println(System.getProperty("user.dir"));
+		File shipFile = new File(System.getProperty("user.dir") + "\\img\\Ship.png"),
+			 asteroidFile = new File(System.getProperty("user.dir") + "\\img\\Asteroid.png"),
+			 bgFile = new File(System.getProperty("user.dir") + "\\img\\BG.jpg");
 		try {
 			BufferedImage in1 = ImageIO.read(shipFile), in2 = ImageIO.read(asteroidFile), in3 = ImageIO.read(bgFile);
 			shipGFX = new BufferedImage(in1.getWidth(), in1.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -68,9 +71,10 @@ public class MiniGamePanel extends JPanel implements KeyListener, ActionListener
 	}
 	
 	public void setup() {
-		shipX = SHIP_SIZE / 2 + ASTEROID_SIZE;
+		shipX = SHIP_SIZE / 2;
 		shipY = getHeight() / 2;
 		shipAngle = 0;
+		shipSpeed = 0;
 		asteroids = new ArrayList<Asteroid>();
 		holdingLeft = false;
 		holdingRight = false;
@@ -134,12 +138,14 @@ public class MiniGamePanel extends JPanel implements KeyListener, ActionListener
 			shipAngle += 2 * Math.PI;
 		}
 		
-		// Update ship position
-		shipX += Math.cos(shipAngle) * SPEED;
-		shipY += Math.sin(shipAngle) * SPEED;
+		// Update ship speed
+		if(shipSpeed < SPEED_CAP) {
+			shipSpeed += 0.1;
+		}
 		
-		// Used to remove asteroids that leave off the left side of the screen
-		ArrayList<Asteroid> removeList = new ArrayList<Asteroid>();
+		// Update ship position
+		shipX += Math.cos(shipAngle) * shipSpeed;
+		shipY += Math.sin(shipAngle) * shipSpeed;
 		
 		// Detect collision with asteroids and update their position
 		for(Asteroid a : asteroids) {
@@ -147,14 +153,25 @@ public class MiniGamePanel extends JPanel implements KeyListener, ActionListener
 				endGame(false);
 			} else {
 				a.x += Math.cos(a.a) * ASTEROID_SPEED;
-				// Leaving off the left removes the asteroid
-				if(a.x < 0) {
-					removeList.add(a);
+				
+				// Leaving off the sides puts it in the middle, top or bottom
+				if(a.x + ASTEROID_SIZE / 2 < 0 || a.x - ASTEROID_SIZE / 2 > getWidth()) {
+
+					a.x = getWidth() / 2;
+					if(a.a < Math.PI) {
+						a.y = ASTEROID_SIZE / 2 + getHeight();
+					} else {
+						a.y = -ASTEROID_SIZE / 2;
+					}
 				}
-				// Leaving off the right wraps the asteroid
-				a.x %= getWidth();
+				a.y += Math.sin(a.a) * ASTEROID_SPEED;
+				
 				// Leaving off the top or bottom wraps the asteroid
-				a.y = (a.y + Math.sin(a.a) * ASTEROID_SPEED + getHeight()) % getHeight();
+				if(a.y + ASTEROID_SIZE / 2 < 0) {
+					a.y += ASTEROID_SIZE + getHeight();
+				} else if(a.y - ASTEROID_SIZE / 2 > getHeight()) {
+					a.y -= ASTEROID_SIZE + getHeight();
+				}
 				
 				// Rotate the asteroid
 				if(a.direction) {
@@ -169,11 +186,6 @@ public class MiniGamePanel extends JPanel implements KeyListener, ActionListener
 					}
 				}
 			}
-		}
-		
-		// Remove asteroids that leave off the left side of the screen so they don't pop up on the right side and kill the player
-		for(Asteroid a : removeList) {
-			asteroids.remove(a);
 		}
 		
 		// Detect flying out of bounds
