@@ -61,6 +61,14 @@ public class Randomizer {
         }
         return true;
     }
+    
+    public static boolean determineSuccess(double probability)
+    {
+    	if  (rand.nextDouble()>probability)
+    		return false;
+    	else
+    		return true;
+    }
 	
 	/*
 	 * Serves only to mimic Random.nextInt() when necessary

@@ -1,5 +1,7 @@
 package App.model;
 
+import App.service.Randomizer;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Marky
@@ -8,12 +10,16 @@ package App.model;
  * To change this template use File | Settings | File Templates.
  */
 public class Planet {
+	
+	private static final double eventProbability=.1;
     private String name;
 
 	private TechnologyLevel technologyLevel;
 
 	private PoliticalSystem politicalSystem;
 
+	private Event event;
+	
     private ResourceType resourceType;
 
     private int x,y;
@@ -41,7 +47,15 @@ public class Planet {
         return market;
     }
 
-    public void setMarket(MarketPlace market) {
+    public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+
+	public void setMarket(MarketPlace market) {
         this.market = market;
     }
 
@@ -92,6 +106,12 @@ public class Planet {
 		this.y = y;
 	}
 	
-	
+	public void determineEvent()
+	{
+		if (Randomizer.determineSuccess(eventProbability))
+			event=(Event) Randomizer.randEnum(Event.class);
+		else
+			event=Event.NO_EVENT;
+	}
 	
 }

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import App.model.Event;
+import App.model.MarketPlace;
 import App.model.Planet;
 import App.model.PoliticalSystem;
 import App.model.ResourceType;
@@ -44,11 +46,13 @@ public class PlanetFactory {
             String planetName=namesHolder.get(planetNameIndex);
             namesHolder.remove(planetNameIndex);
             planet.setName(planetName);
+            planet.setEvent(Event.NO_EVENT);
             planet.setX(coordinateList.get(index)[0]);
             planet.setY(coordinateList.get(index)[1]);
             planet.setTechnologyLevel((TechnologyLevel) Randomizer.randEnum((TechnologyLevel.class)));
             planet.setResourceType((ResourceType) Randomizer.randEnum((ResourceType.class)));
             planet.setPoliticalSystem((PoliticalSystem) Randomizer.randEnum((PoliticalSystem.class)));
+            planet.setMarket(new MarketPlace(planet));
             planets.put(planet.getName(), planet);
             index++;
         }

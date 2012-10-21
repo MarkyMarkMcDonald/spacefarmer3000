@@ -7,5 +7,5 @@ package App.model;
  * Time: 12:31 AM
  * To change this template use File | Settings | File Templates.
  */
-public class IndustrialGood extends TradeGood {
+public class IndustrialGood{
 }
