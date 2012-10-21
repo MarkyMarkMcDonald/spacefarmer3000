@@ -7,6 +7,11 @@ package App.model;
  * Time: 12:31 AM
  * To change this template use File | Settings | File Templates.
  */
-public class IndustrialGood extends  TradeGood implements Tradeable{
+public interface Tradeable {
 
+    public boolean equals(Tradeable tradeable);
+
+    public int getBasePrice();
+
+    public String getName();
 }
