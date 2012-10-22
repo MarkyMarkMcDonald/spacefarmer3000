@@ -5,6 +5,8 @@ import App.model.Game;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * This class controls the viewing pane. The different screens are controlled
@@ -70,6 +72,19 @@ public class Display extends JFrame {
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         label.setAlignmentY(0.0f);
         LeftPanel.add(label);
+        
+        JButton btnNewButton = new JButton("Marketplace");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        	}
+        });
+        LeftPanel.add(btnNewButton);
+        
+        JButton btnShip = new JButton("Ship");
+        LeftPanel.add(btnShip);
+        
+        JButton btnTravel = new JButton("Travel");
+        LeftPanel.add(btnTravel);
 
         Component horizontalStrut = Box.createHorizontalStrut(100);
         LeftPanel.add(horizontalStrut);
