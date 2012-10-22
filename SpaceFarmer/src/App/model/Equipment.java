@@ -8,5 +8,6 @@ package App.model;
  * Time: 12:32 AM
  * To change this template use File | Settings | File Templates.
  */
-public class Equipment extends TradeGood{
+public class Equipment extends TradeGood implements Tradeable {
+
 }

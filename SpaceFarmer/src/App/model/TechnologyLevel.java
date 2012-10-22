@@ -9,7 +9,7 @@ package App.model;
  */
 public enum TechnologyLevel 
 {
-    PRE_AGRICULTURE ("Pre-Agricultur"),
+    PRE_AGRICULTURE ("Pre-Agriculture"),
     AGRICULTURE ("Agriculture"),
     MEDIEVAL ("Medieval"),
     RENAISSANCE ("Renaissance"),

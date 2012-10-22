@@ -1,11 +1,25 @@
 package App.model;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Marky
- * Date: 9/22/12
- * Time: 12:31 AM
- * To change this template use File | Settings | File Templates.
+ * User: marky
+ * Date: 10/21/12
+ * Time: 5:58 PM
  */
 abstract public class TradeGood {
+
+    protected String name;
+    protected TradeGoodType tradeGoodType;
+    protected int basePrice;
+
+    public boolean equals(Tradeable tradeable){
+        return tradeable.getName().equals(name);
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public int getBasePrice(){
+        return basePrice;
+    }
 }
