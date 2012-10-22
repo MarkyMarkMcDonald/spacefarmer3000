@@ -46,7 +46,8 @@ public class MarketPlace {
 	}
 	
 	/*
-	 * Varies each of the TradeGoodTypes prices.
+	 * Varies each of the TradeGoodTypes prices based on the Planet
+	 * the MarketPlace is on.
 	 */
 	public void updatePrices(Planet planet)
 	{

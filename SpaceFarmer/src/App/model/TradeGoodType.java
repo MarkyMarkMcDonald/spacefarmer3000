@@ -40,7 +40,7 @@ public enum TradeGoodType {
 	
 	private static final double REDUCED_QUANTITY=.5;
 	private static final double INCREASED_QUANTITY=1.5;
-	private static final int AVERAGE_QUANTITY=100;
+	private static final int MAXIMUM_QUANTITY=100;
 	private static final int MINIMUM_QUANTITY=20;
 	private static final double TECH_LEVEL_INCREASE=1.5;
 	
@@ -125,15 +125,15 @@ public enum TradeGoodType {
 		int quantity;
 		if (lowCondition.ordinal()==resource.ordinal())
 		{
-			quantity= (int) (REDUCED_QUANTITY*(Randomizer.nextInt(AVERAGE_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY));
+			quantity= (int) (REDUCED_QUANTITY*(Randomizer.nextInt(MAXIMUM_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY));
 		}
 		else if (highCondition.ordinal()==resource.ordinal())
 		{
-			quantity= (int) (INCREASED_QUANTITY*(Randomizer.nextInt(AVERAGE_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY));
+			quantity= (int) (INCREASED_QUANTITY*(Randomizer.nextInt(MAXIMUM_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY));
 		}
 		else
 		{
-			quantity = (int) (Randomizer.nextInt(AVERAGE_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY);
+			quantity = (int) (Randomizer.nextInt(MAXIMUM_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY);
 		}
 		
 		if (techLevel.ordinal() == mostProduced.ordinal())
