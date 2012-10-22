@@ -13,7 +13,6 @@ public class MarketPlace {
 	
 	private Map<TradeGoodType,Integer> priceMap;
 	private Map<TradeGoodType,Integer> quantityMap;
-	private Planet planet; 
 	
 	public MarketPlace(Planet planet)
 	{
@@ -28,19 +27,28 @@ public class MarketPlace {
 			priceMap.put(t, t.calculatePrice(planet));
 				
 		}
-		this.planet=planet;
 	}
+	
+	/*
+	 * Sets a TradeGoodType to a given quantity.
+	 */
 	public void setQuantity(TradeGoodType goodType, int quantity)
 	{
 		quantityMap.put(goodType,quantity);
 	}
 	
+	/*
+	 * Alters the quantity of a TradeGoodType by a particular amount.
+	 */
 	public void changeQuantity(TradeGoodType goodType, int amount)
 	{
 		quantityMap.put(goodType, quantityMap.get(goodType)+amount);
 	}
 	
-	public void updatePrices()
+	/*
+	 * Varies each of the TradeGoodTypes prices.
+	 */
+	public void updatePrices(Planet planet)
 	{
 		for (TradeGoodType t: TradeGoodType.values())
 		{
