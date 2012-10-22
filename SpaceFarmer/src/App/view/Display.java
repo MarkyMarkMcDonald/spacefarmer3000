@@ -121,6 +121,7 @@ public class Display extends JFrame {
     public static void playMiniGame() {
     	MiniGameView.startGame();
     	((CardLayout)mainContentPanel.getLayout()).show(mainContentPanel, "MiniGame");
+    	MiniGameView.requestFocus();
     }
     
     /**

@@ -17,8 +17,17 @@ import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import Resources.MiniGameGFX;
+
+/**
+ * This class drives the minigame sequence when travelling between planets.
+ * @author Andrew Wilder
+ */
 public class MiniGameScreen extends JPanel implements KeyListener, ActionListener {
 	
+	// Prevents serializable warning
+	private static final long serialVersionUID = -3027504169648377464L;
+
 	// Provides interaction between the KeyListener and ActionListener functionalities of this class
 	private boolean holdingLeft, holdingRight;
 	
@@ -45,18 +54,41 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 	private Timer timer;
 	
 	// Instances of the graphics used by the minigame
-	private BufferedImage shipGFX, asteroidGFX, bgGFX;
+	private BufferedImage shipGFX, asteroidGFX, BG_GFX;
 	
 	/**
 	 * Construct this minigame screen with the appropriate variables.
 	 * @param frame A link to the instance of Display that this minigame with make interactions with.
 	 */
 	public MiniGameScreen() {
+		
+		// Set up listeners
 		timer = new Timer(30, this);
 		setFocusable(true);
 		addKeyListener(this);
 		
-		// TODO set up the BufferedImage graphics
+		// Set up BufferedImage graphics
+		asteroidGFX = new BufferedImage(ASTEROID_GFX_SIZE, ASTEROID_GFX_SIZE, BufferedImage.TYPE_INT_ARGB);
+		asteroidGFX.setRGB(0, 0, asteroidGFX.getWidth(), asteroidGFX.getHeight(), MiniGameGFX.AsteroidGFX, 0, asteroidGFX.getWidth());
+		shipGFX = new BufferedImage(SHIP_GFX_SIZE, SHIP_GFX_SIZE, BufferedImage.TYPE_INT_ARGB);
+		shipGFX.setRGB(0, 0, shipGFX.getWidth(), shipGFX.getHeight(), MiniGameGFX.ShipGFX, 0, shipGFX.getWidth());
+		
+		// Background graphics are procedurally-generated
+		BG_GFX = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D bg = BG_GFX.createGraphics();
+		for(int i = BG_GFX.getHeight() / 4; i < BG_GFX.getHeight(); ++i) {
+			bg.setColor(new Color(0, (int)((double)(i - BG_GFX.getHeight() * 0.25) / (BG_GFX.getHeight() * 0.75) * 0x5F), (int)((double)(i - BG_GFX.getHeight() * 0.25) / (BG_GFX.getHeight() * 0.75) * 0xBF)));
+			bg.drawLine(0, i, BG_GFX.getWidth() - 1, i);
+		}
+		for(int i = 0; i < BG_GFX.getHeight() / 4; ++i) {
+			bg.setColor(new Color((int)((double)(BG_GFX.getHeight() / 4 - i) / (BG_GFX.getHeight() / 4) * 0x5F), 0, (int)((double)(BG_GFX.getHeight() / 4 - i) / (BG_GFX.getHeight() / 4) * 0x1F)));
+			bg.drawLine(0, i, BG_GFX.getWidth() - 1, i);
+		}
+		Random rand = new Random();
+		for(int i = 0; i < 1000; ++i) {
+			int x = rand.nextInt(BG_GFX.getWidth()), y = rand.nextInt(BG_GFX.getHeight());
+			BG_GFX.setRGB(x, y, Color.white.getRGB());
+		}
 	}
 
 	/**
@@ -152,13 +184,7 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 		
 		// Draw the background graphics
 		Graphics2D screen = (Graphics2D)g;
-		screen.drawImage(bgGFX, 0, 0, null);
-		screen.setColor(Color.WHITE);
-		
-		/* !!!!! TEMPORARY !!!!! */
-		screen.setColor(Color.BLACK);
-		screen.fillRect(0, 0, getWidth(), getHeight());
-		/* !!!!! TEMPORARY !!!!! */
+		screen.drawImage(BG_GFX, 0, 0, null);
 		
 		// Draw asteroids
 		for(Asteroid a : asteroids) {
@@ -166,11 +192,6 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 			screen.rotate(a.r, (int)a.x, (int)a.y);
 			screen.drawImage(asteroidGFX, (int)(a.x - ASTEROID_SIZE / 2), (int)(a.y - ASTEROID_SIZE / 2), null);
 			screen.setTransform(orig);
-			
-			/* !!!!! TEMPORARY !!!!! */
-			screen.setColor(Color.WHITE);
-			screen.fillOval((int)(a.x - ASTEROID_SIZE / 2), (int)(a.y - ASTEROID_SIZE / 2), ASTEROID_SIZE, ASTEROID_SIZE);
-			/* !!!!! TEMPORARY !!!!! */
 		}
 		
 		// Draw ship
@@ -178,11 +199,6 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 		screen.rotate(shipAngle, shipX, shipY);
 		screen.drawImage(shipGFX, (int)(shipX - SHIP_SIZE / 2), (int)(shipY - SHIP_SIZE / 2), null);
 		screen.setTransform(orig);
-		
-		/* !!!!! TEMPORARY !!!!! */
-		screen.setColor(Color.BLUE);
-		screen.fillOval((int)(shipX - SHIP_SIZE / 2), (int)(shipY - SHIP_SIZE / 2), SHIP_SIZE, SHIP_SIZE);
-		/* !!!!! TEMPORARY !!!!! */
 	}
 	
 	/**
@@ -212,7 +228,6 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 		
 		// Start the simulation and focus the keyboard input on this panel
 		timer.start();
-		requestFocus();
 	}
 	
 	/**
