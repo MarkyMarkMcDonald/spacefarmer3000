@@ -30,7 +30,7 @@ public class Inventory {
             inventory.put(item,quantity);
         }
         else {
-            inventory.get(TradeGood)
+            //inventory.get(TradeGood)
         }
     }
 

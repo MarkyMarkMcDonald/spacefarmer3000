@@ -24,7 +24,7 @@ public class TransactionService {
             message = "You need $" + Math.abs(player.getMoney() - transactionCost) + " more!";
         }
         else {
-            inventory
+            //inventory
         }
 
 

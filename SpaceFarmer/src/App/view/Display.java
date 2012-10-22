@@ -23,8 +23,9 @@ public class Display extends JFrame {
 		this.setup();
 	}
 
-    private static JPanel CenterPanel;
+    private static JPanel CenterPanel, mainContentPanel;
     private static Game game;
+    private static MiniGameScreen MiniGameView;
 
     /**
      * set up the initial screen
@@ -33,26 +34,30 @@ public class Display extends JFrame {
         setTitle("SpaceFarmer 3000");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 600);
-        JPanel mainContentPanel = new JPanel();
+        mainContentPanel = new JPanel();
         mainContentPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
-        mainContentPanel.setLayout(new BorderLayout(0, 0));
         
         setContentPane(mainContentPanel);
-
-        JPanel TopPanel = new JPanel();
-        TopPanel.setBackground(Color.GREEN);
-        mainContentPanel.add(TopPanel, BorderLayout.NORTH);
-        TopPanel.setLayout(new BoxLayout(TopPanel, BoxLayout.X_AXIS));
-
-        JLabel lblWip = new JLabel("WIP");
-        TopPanel.add(lblWip);
-
-        Component verticalStrut = Box.createVerticalStrut(80);
-        TopPanel.add(verticalStrut);
+        mainContentPanel.setLayout(new CardLayout(0, 0));
+        
+        JPanel StandardView = new JPanel();
+        mainContentPanel.add(StandardView, "Standard");
+        StandardView.setLayout(new BorderLayout(0, 0));
+        
+                JPanel TopPanel = new JPanel();
+                StandardView.add(TopPanel, BorderLayout.NORTH);
+                TopPanel.setBackground(Color.GREEN);
+                TopPanel.setLayout(new BoxLayout(TopPanel, BoxLayout.X_AXIS));
+                
+                        JLabel lblWip = new JLabel("WIP");
+                        TopPanel.add(lblWip);
+                        
+                                Component verticalStrut = Box.createVerticalStrut(80);
+                                TopPanel.add(verticalStrut);
 
         JPanel BottomPanel = new JPanel();
+        StandardView.add(BottomPanel, BorderLayout.SOUTH);
         BottomPanel.setBackground(Color.MAGENTA);
-        mainContentPanel.add(BottomPanel, BorderLayout.SOUTH);
         BottomPanel.setLayout(new BoxLayout(BottomPanel, BoxLayout.X_AXIS));
 
         JLabel label_1 = new JLabel("WIP");
@@ -62,8 +67,8 @@ public class Display extends JFrame {
         BottomPanel.add(verticalStrut_1);
 
         JPanel LeftPanel = new JPanel();
+        StandardView.add(LeftPanel, BorderLayout.WEST);
         LeftPanel.setBackground(Color.CYAN);
-        mainContentPanel.add(LeftPanel, BorderLayout.WEST);
         LeftPanel.setLayout(new BoxLayout(LeftPanel, BoxLayout.Y_AXIS));
 
         JLabel label = new JLabel("WIP");
@@ -75,8 +80,8 @@ public class Display extends JFrame {
         LeftPanel.add(horizontalStrut);
 
         JPanel RightPanel = new JPanel();
+        StandardView.add(RightPanel, BorderLayout.EAST);
         RightPanel.setBackground(Color.PINK);
-        mainContentPanel.add(RightPanel, BorderLayout.EAST);
         RightPanel.setLayout(new BoxLayout(RightPanel, BoxLayout.Y_AXIS));
 
         JLabel label_2 = new JLabel("WIP");
@@ -88,9 +93,12 @@ public class Display extends JFrame {
         RightPanel.add(horizontalStrut_1);
 
         CenterPanel = new JPanel();
+        StandardView.add(CenterPanel, BorderLayout.CENTER);
         CenterPanel.setBackground(Color.ORANGE);
-        mainContentPanel.add(CenterPanel, BorderLayout.CENTER);
         CenterPanel.setLayout(new CardLayout(0, 0));
+        
+        MiniGameView = new MiniGameScreen();
+        mainContentPanel.add(MiniGameView, "MiniGame");
 
         // Generate every possible card
         for (CardName name : CardName.values()){
@@ -105,6 +113,26 @@ public class Display extends JFrame {
      */
     public static void changeCard(CardName name) {
     	((CardLayout)CenterPanel.getLayout()).show(CenterPanel, name.toString());
+    }
+    
+    /**
+     * Initiate the minigame
+     */
+    public static void playMiniGame() {
+    	MiniGameView.startGame();
+    	((CardLayout)mainContentPanel.getLayout()).show(mainContentPanel, "MiniGame");
+    }
+    
+    /**
+     * Return from minigame
+     */
+    public static void exitGame(boolean won) {
+    	((CardLayout)mainContentPanel.getLayout()).show(mainContentPanel, "Standard");
+    	if(won) {
+    		// TODO code for winning
+    	} else {
+    		// TODO code for losing
+    	}
     }
 
     //--Accessors and Modifiers

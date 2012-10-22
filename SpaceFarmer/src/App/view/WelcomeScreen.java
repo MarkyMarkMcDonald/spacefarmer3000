@@ -5,6 +5,8 @@ import App.listener.BasicContinueListener;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -14,7 +16,7 @@ import javax.swing.JPanel;
 
 /**
  * This class represents the panel shown to users when loading SpaceFarmer 3000.
- * @author ?????, Andrew Wilder
+ * @author Mark McDaniel, Andrew Wilder
  */
 public class WelcomeScreen extends Screen {
 	/**
@@ -77,6 +79,14 @@ public class WelcomeScreen extends Screen {
 
         JButton LoadGameButton = new JButton("Load Game");
         LoadGameButton.setPreferredSize(new Dimension(120, 30));
+        LoadGameButton.addActionListener(new TEMP_LISTENER());
         WelcomeButtonPanel.add(LoadGameButton);
+	}
+	
+	private class TEMP_LISTENER implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Display.playMiniGame();
+		}
 	}
 }
