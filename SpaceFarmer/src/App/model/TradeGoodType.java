@@ -28,9 +28,11 @@ import static App.model.TechnologyLevel.MEDIEVAL;
 import static App.model.TechnologyLevel.POST_INDUSTRIAL;
 import static App.model.TechnologyLevel.PRE_AGRICULTURE;
 import static App.model.TechnologyLevel.RENAISSANCE;
+import static App.model.Category.*;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.Locale.Category;
 
+import App.factory.TradeGoodFactory;
 import App.service.Randomizer;
 /**
  * Created with IntelliJ IDEA.
@@ -42,33 +44,33 @@ import App.service.Randomizer;
 
 public enum TradeGoodType {
 	
-    //        NAME                   MTLP            MTLU                 TTP BASE  IPL VAR            IE             CR         ER  MTL  MTH   CLASS
+    //        NAME                   MTLP            MTLU                 TTP BASE  IPL VAR            IE             CR         ER  MTL  MTH   CATEGORY
 	
-	WATER(    "Water",    PRE_AGRICULTURE,  PRE_AGRICULTURE,       MEDIEVAL,  30,   3,  4,      DROUGHT,  LOTS_OF_WATER,      DESERT,  30,  50,NaturalResource.class),
-																																										
-	FURS(     "Furs",     PRE_AGRICULTURE,  PRE_AGRICULTURE,PRE_AGRICULTURE, 250,  10, 10,         COLD,     RICH_FAUNA,    LIFELESS, 230, 280,NaturalResource.class),
+	WATER(    "Water",    PRE_AGRICULTURE,  PRE_AGRICULTURE,       MEDIEVAL,  30,   3,  4,      DROUGHT,  LOTS_OF_WATER,      DESERT,  30,  50,NATURALRESOURCE),
+	
+	FURS(     "Furs",     PRE_AGRICULTURE,  PRE_AGRICULTURE,PRE_AGRICULTURE, 250,  10, 10,         COLD,     RICH_FAUNA,    LIFELESS, 230, 280,NATURALRESOURCE),
 																																						
-	BANANAS(  "Bananas",      AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 50,   4,  4,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  40, 80,Food.class),
+	BANANAS(  "Bananas",      AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 50,   4,  4,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  40, 80,FOOD),
 			
-	APPLES(   "Apples",       AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 100,   5,  5,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  90, 160,Food.class),
+	APPLES(   "Apples",       AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 100,   5,  5,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  90, 160,FOOD),
 		
-	POTATOES( "Potatoes",     AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 150,   7,  7,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  130, 200,Food.class),
+	POTATOES( "Potatoes",     AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 150,   7,  7,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  130, 200,FOOD),
 		
-	CORN(     "Corn",         AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 200,   10,  10,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  180, 250,Food.class),
+	CORN(     "Corn",         AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 200,   10,  10,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  180, 250,FOOD),
 																													
-	ORE(      "Ore",             MEDIEVAL,         MEDIEVAL,    RENAISSANCE, 350,  20, 10,          WAR,   MINERAL_RICH,MINERAL_POOR, 350, 420,NaturalResource.class),
+	ORE(      "Ore",             MEDIEVAL,         MEDIEVAL,    RENAISSANCE, 350,  20, 10,          WAR,   MINERAL_RICH,MINERAL_POOR, 350, 420,NATURALRESOURCE),
 		
-	GAMES(    "Games",        RENAISSANCE,      AGRICULTURE,POST_INDUSTRIAL, 250, -10,  5,      BOREDOM,       ARTISTIC,        NONE, 160, 270,IndustrialGood.class),
+	GAMES(    "Games",        RENAISSANCE,      AGRICULTURE,POST_INDUSTRIAL, 250, -10,  5,      BOREDOM,       ARTISTIC,        NONE, 160, 270,INDUSTRIALGOOD),
 		
-	FIREARMS( "Firearms",     RENAISSANCE,      AGRICULTURE,     INDUSTRIAL,1250, -75,100,          WAR,        WARLIKE,        NONE, 600,1100,IndustrialGood.class),
+	FIREARMS( "Firearms",     RENAISSANCE,      AGRICULTURE,     INDUSTRIAL,1250, -75,100,          WAR,        WARLIKE,        NONE, 600,1100,INDUSTRIALGOOD),
 		
-	MEDICINE( "Medicine",EARLY_INDUSTRIAL,      AGRICULTURE,POST_INDUSTRIAL, 650, -20, 10,       PLAGUE,  LOTS_OF_HERBS,        NONE, 400, 700,IndustrialGood.class),
+	MEDICINE( "Medicine",EARLY_INDUSTRIAL,      AGRICULTURE,POST_INDUSTRIAL, 650, -20, 10,       PLAGUE,  LOTS_OF_HERBS,        NONE, 400, 700,INDUSTRIALGOOD),
 		
-	MACHINES( "Machines",EARLY_INDUSTRIAL,      RENAISSANCE,     INDUSTRIAL, 900, -30,  5,LACKOFWORKERS,           NONE,        NONE, 600, 800,IndustrialGood.class),
+	MACHINES( "Machines",EARLY_INDUSTRIAL,      RENAISSANCE,     INDUSTRIAL, 900, -30,  5,LACKOFWORKERS,           NONE,        NONE, 600, 800,INDUSTRIALGOOD),
 		
-	NARCOTICS("Narcotics",     INDUSTRIAL,  PRE_AGRICULTURE,     INDUSTRIAL,3500,-125,150,      BOREDOM,WEIRD_MUSHROOMS,        NONE,2000,3000,IndustrialGood.class),
+	NARCOTICS("Narcotics",     INDUSTRIAL,  PRE_AGRICULTURE,     INDUSTRIAL,3500,-125,150,      BOREDOM,WEIRD_MUSHROOMS,        NONE,2000,3000,INDUSTRIALGOOD),
 		
-	ROBOTS(   "Robots",    POST_INDUSTRIAL,EARLY_INDUSTRIAL,        HI_TECH,5000,-150,100,LACKOFWORKERS,           NONE,        NONE,3500,5000,IndustrialGood.class);
+	ROBOTS(   "Robots",    POST_INDUSTRIAL,EARLY_INDUSTRIAL,        HI_TECH,5000,-150,100,LACKOFWORKERS,           NONE,        NONE,3500,5000,INDUSTRIALGOOD);
 		
 	private static final double INCREASE_AMOUNT=1.5;
 	
@@ -95,7 +97,7 @@ public enum TradeGoodType {
 	private int minTrader;
 	private int maxTrader;
 	
-	private Class<? extends TradeGood> tradeClass;
+	private Category category;
 	
 	
 
@@ -103,17 +105,23 @@ public enum TradeGoodType {
 		return name;
 	}
 	
-	public Class<? extends TradeGood> getTradeClass() {
-		return tradeClass;
+	public Category getCategory() {
+		return category;
 	}
 
 
+	
+	
+
+    
+
+
 	private TradeGoodType(String name, TechnologyLevel minToProduce,
-                          TechnologyLevel minToSell, TechnologyLevel mostProduced,
-                          int basePrice, int increasePerLevel, int variance,
-                          Event priceIncrease, ResourceType lowCondition,
-                          ResourceType highCondition, int minTrader, int maxTrader,
-                          Class<? extends TradeGood> tradeClass) {
+			TechnologyLevel minToSell, TechnologyLevel mostProduced,
+			int basePrice, int increasePerLevel, int variance,
+			Event priceIncrease, ResourceType lowCondition,
+			ResourceType highCondition, int minTrader, int maxTrader,
+			Category category) {
 		this.name = name;
 		this.minToProduce = minToProduce;
 		this.minToSell = minToSell;
@@ -126,11 +134,9 @@ public enum TradeGoodType {
 		this.highCondition = highCondition;
 		this.minTrader = minTrader;
 		this.maxTrader = maxTrader;
+		this.category = category;
 	}
 	
-
-    
-
 
 	// TODO: Move this into another class
 	/*
@@ -218,9 +224,9 @@ public enum TradeGoodType {
 			return false;
 	}
 	
-	public TradeGood generateInstance() throws InstantiationException, NoSuchMethodException,IllegalAccessException,InvocationTargetException
+	public TradeGood generateInstance()
 	{
-		return tradeClass.getConstructor(TradeGoodType.class).newInstance(this);
+		return TradeGoodFactory.getTradeGood(this);
 	}
 	
 }
