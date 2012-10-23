@@ -7,6 +7,10 @@ package App.model;
  * Time: 12:32 AM
  * To change this template use File | Settings | File Templates.
  */
-public class NaturalResource extends TradeGood implements Tradeable {
+public class NaturalResource extends TradeGood{
+	public NaturalResource(TradeGoodType tradeGoodType)
+	{
+		super(tradeGoodType);
+	}
 
 }
