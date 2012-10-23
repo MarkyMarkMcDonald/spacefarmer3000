@@ -15,7 +15,6 @@ public class MarketPlace {
 	private Map<TradeGoodType,Integer> priceMap;
 	private Map<TradeGoodType,Integer> quantityMap;
 	
-	//Current Implementation a
 	public MarketPlace(Planet planet)
 	{
 		priceMap=new HashMap<TradeGoodType,Integer>(TradeGoodType.values().length);
@@ -23,7 +22,6 @@ public class MarketPlace {
 		for (TradeGoodType t: TradeGoodType.values())
 		{
 			if (t.buyable(planet))
-				//This is tricky and weird. Very willing to consider redesign.
 				quantityMap.put(t, t.determineQuantity(planet));
 			else
 				quantityMap.put(t, 0);
