@@ -9,28 +9,17 @@ abstract public class TradeGood {
 
     protected String name;
     protected TradeGoodType tradeGoodType;
+    protected Enum tradeGoodSubname;
 
-    public boolean equals(TradeGood tradeGood){
-        return tradeGood.getName().equals(name);
-    }
-    
-    public TradeGood(TradeGoodType tradeGoodType)
-    {
-    	name=tradeGoodType.getName();
-    	this.tradeGoodType=tradeGoodType;
+    public boolean equals(Tradeable tradeable){
+        return tradeable.getName().equals(name);
     }
 
     public String getName(){
         return name;
     }
 
-    public int calculatePrice(Planet planet)
-    {
-    	return tradeGoodType.calculatePrice(planet);
-    }
-    
-    public int determineQuantity(Planet planet)
-    {
-    	return tradeGoodType.determineQuantity(planet);
+    public int getBasePrice(){
+        return basePrice;
     }
 }

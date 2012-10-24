@@ -25,14 +25,22 @@ public class Inventory {
         return sum;
     }
 
-    public void addItem(Tradeable item, int quantity){
+    /**
+     * Increase or Decrease the quantity of an item the player has. Use a negative quantityToAdd param to reduce the amount
+     * @param item
+     * @param quantityToAdd
+     */
+    public void increaseItemQuantity(Tradeable item, int quantityToAdd){
         if (!inventory.containsKey(item)){
-            inventory.put(item,quantity);
+            inventory.put(item,quantityToAdd);
         }
         else {
-            //inventory.get(TradeGood)
+            int currentQuantity = inventory.get(item);
+            inventory.put(item,currentQuantity + quantityToAdd);
         }
     }
+
+
 
 
 }

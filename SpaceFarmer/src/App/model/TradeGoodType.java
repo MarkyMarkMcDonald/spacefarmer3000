@@ -1,39 +1,9 @@
 package App.model;
 
-import static App.model.Event.BOREDOM;
-import static App.model.Event.COLD;
-import static App.model.Event.CROPFAIL;
-import static App.model.Event.DROUGHT;
-import static App.model.Event.LACKOFWORKERS;
-import static App.model.Event.PLAGUE;
-import static App.model.Event.WAR;
-import static App.model.ResourceType.ARTISTIC;
-import static App.model.ResourceType.DESERT;
-import static App.model.ResourceType.LIFELESS;
-import static App.model.ResourceType.LOTS_OF_HERBS;
-import static App.model.ResourceType.LOTS_OF_WATER;
-import static App.model.ResourceType.MINERAL_POOR;
-import static App.model.ResourceType.MINERAL_RICH;
-import static App.model.ResourceType.NONE;
-import static App.model.ResourceType.POOR_SOIL;
-import static App.model.ResourceType.RICH_FAUNA;
-import static App.model.ResourceType.RICH_SOIL;
-import static App.model.ResourceType.WARLIKE;
-import static App.model.ResourceType.WEIRD_MUSHROOMS;
-import static App.model.TechnologyLevel.AGRICULTURE;
-import static App.model.TechnologyLevel.EARLY_INDUSTRIAL;
-import static App.model.TechnologyLevel.HI_TECH;
-import static App.model.TechnologyLevel.INDUSTRIAL;
-import static App.model.TechnologyLevel.MEDIEVAL;
-import static App.model.TechnologyLevel.POST_INDUSTRIAL;
-import static App.model.TechnologyLevel.PRE_AGRICULTURE;
-import static App.model.TechnologyLevel.RENAISSANCE;
-import static App.model.Category.*;
-
-import java.util.Locale.Category;
-
-import App.factory.TradeGoodFactory;
 import App.service.Randomizer;
+import static App.model.TechnologyLevel.*;
+import static App.model.ResourceType.*;
+import static App.model.Event.*;
 /**
  * Created with IntelliJ IDEA.
  * User: Marky
@@ -44,44 +14,38 @@ import App.service.Randomizer;
 
 public enum TradeGoodType {
 	
-    //        NAME                   MTLP            MTLU                 TTP BASE  IPL VAR            IE             CR         ER  MTL  MTH   CATEGORY
+    //        NAME                   MTLP            MTLU                 TTP BASE  IPL VAR            IE             CR         ER  MTL  MTH
 	
-	WATER(    "Water",    PRE_AGRICULTURE,  PRE_AGRICULTURE,       MEDIEVAL,  30,   3,  4,      DROUGHT,  LOTS_OF_WATER,      DESERT,  30,  50,NATURALRESOURCE),
+	WATER(    "Water",   PRE_AGRICULTURE,  PRE_AGRICULTURE,       MEDIEVAL,  30,   3,  4,      DROUGHT,  LOTS_OF_WATER,      DESERT,  30,  50),
 	
-	FURS(     "Furs",     PRE_AGRICULTURE,  PRE_AGRICULTURE,PRE_AGRICULTURE, 250,  10, 10,         COLD,     RICH_FAUNA,    LIFELESS, 230, 280,NATURALRESOURCE),
-																																						
-	BANANAS(  "Bananas",      AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 50,   4,  4,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  40, 80,FOOD),
-			
-	APPLES(   "Apples",       AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 100,   5,  5,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  90, 160,FOOD),
-		
-	POTATOES( "Potatoes",     AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 150,   7,  7,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  130, 200,FOOD),
-		
-	CORN(     "Corn",         AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 200,   10,  10,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  180, 250,FOOD),
-																													
-	ORE(      "Ore",             MEDIEVAL,         MEDIEVAL,    RENAISSANCE, 350,  20, 10,          WAR,   MINERAL_RICH,MINERAL_POOR, 350, 420,NATURALRESOURCE),
-		
-	GAMES(    "Games",        RENAISSANCE,      AGRICULTURE,POST_INDUSTRIAL, 250, -10,  5,      BOREDOM,       ARTISTIC,        NONE, 160, 270,INDUSTRIALGOOD),
-		
-	FIREARMS( "Firearms",     RENAISSANCE,      AGRICULTURE,     INDUSTRIAL,1250, -75,100,          WAR,        WARLIKE,        NONE, 600,1100,INDUSTRIALGOOD),
-		
-	MEDICINE( "Medicine",EARLY_INDUSTRIAL,      AGRICULTURE,POST_INDUSTRIAL, 650, -20, 10,       PLAGUE,  LOTS_OF_HERBS,        NONE, 400, 700,INDUSTRIALGOOD),
-		
-	MACHINES( "Machines",EARLY_INDUSTRIAL,      RENAISSANCE,     INDUSTRIAL, 900, -30,  5,LACKOFWORKERS,           NONE,        NONE, 600, 800,INDUSTRIALGOOD),
-		
-	NARCOTICS("Narcotics",     INDUSTRIAL,  PRE_AGRICULTURE,     INDUSTRIAL,3500,-125,150,      BOREDOM,WEIRD_MUSHROOMS,        NONE,2000,3000,INDUSTRIALGOOD),
-		
-	ROBOTS(   "Robots",    POST_INDUSTRIAL,EARLY_INDUSTRIAL,        HI_TECH,5000,-150,100,LACKOFWORKERS,           NONE,        NONE,3500,5000,INDUSTRIALGOOD);
-		
+	FURS(     "Furs",     PRE_AGRICULTURE,  PRE_AGRICULTURE,PRE_AGRICULTURE, 250,  10, 10,         COLD,     RICH_FAUNA,    LIFELESS, 230, 280),
+	
+	FOOD(     "Food",         AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 100,   5,  5,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  90, 160),
+	
+	ORE(      "Ore",             MEDIEVAL,         MEDIEVAL,    RENAISSANCE, 350,  20, 10,          WAR,   MINERAL_RICH,MINERAL_POOR, 350, 420),
+	
+	GAMES(    "Games",        RENAISSANCE,      AGRICULTURE,POST_INDUSTRIAL, 250, -10,  5,      BOREDOM,       ARTISTIC,        NONE, 160, 270),
+	
+	FIREARMS( "Firearms",     RENAISSANCE,      AGRICULTURE,     INDUSTRIAL,1250, -75,100,          WAR,        WARLIKE,        NONE, 600,1100),
+	
+	MEDICINE( "Medicine",EARLY_INDUSTRIAL,      AGRICULTURE,POST_INDUSTRIAL, 650, -20, 10,       PLAGUE,  LOTS_OF_HERBS,        NONE, 400, 700),
+	
+	MACHINES( "Machines",EARLY_INDUSTRIAL,      RENAISSANCE,     INDUSTRIAL, 900, -30,  5,LACKOFWORKERS,           NONE,        NONE, 600, 800),
+	
+	NARCOTICS("Narcotics",     INDUSTRIAL,  PRE_AGRICULTURE,     INDUSTRIAL,3500,-125,150,      BOREDOM,WEIRD_MUSHROOMS,        NONE,2000,3000),
+	
+	ROBOTS(   "Robots",    POST_INDUSTRIAL,EARLY_INDUSTRIAL,        HI_TECH,5000,-150,100,LACKOFWORKERS,           NONE,        NONE,3500,5000);
+	
 	private static final double INCREASE_AMOUNT=1.5;
 	
 	private static final double REDUCED_QUANTITY=.5;
 	private static final double INCREASED_QUANTITY=1.5;
-	private static final int MAXIMUM_QUANTITY=100;
+	private static final int AVERAGE_QUANTITY=100;
 	private static final int MINIMUM_QUANTITY=20;
 	private static final double TECH_LEVEL_INCREASE=1.5;
 	
 	private String name;
-	
+
 	private TechnologyLevel minToProduce;
 	private TechnologyLevel minToSell;
 	private TechnologyLevel mostProduced;
@@ -93,35 +57,20 @@ public enum TradeGoodType {
 	private Event priceIncrease;
 	private ResourceType lowCondition;
 	private ResourceType highCondition;
-	
+
 	private int minTrader;
 	private int maxTrader;
-	
-	private Category category;
-	
-	
 
 	public String getName() {
 		return name;
 	}
-	
-	public Category getCategory() {
-		return category;
-	}
-
-
-	
-	
-
-    
 
 
 	private TradeGoodType(String name, TechnologyLevel minToProduce,
-			TechnologyLevel minToSell, TechnologyLevel mostProduced,
-			int basePrice, int increasePerLevel, int variance,
-			Event priceIncrease, ResourceType lowCondition,
-			ResourceType highCondition, int minTrader, int maxTrader,
-			Category category) {
+                          TechnologyLevel minToSell, TechnologyLevel mostProduced,
+                          int basePrice, int increasePerLevel, int variance,
+                          Event priceIncrease, ResourceType lowCondition,
+                          ResourceType highCondition, int minTrader, int maxTrader) {
 		this.name = name;
 		this.minToProduce = minToProduce;
 		this.minToSell = minToSell;
@@ -134,11 +83,9 @@ public enum TradeGoodType {
 		this.highCondition = highCondition;
 		this.minTrader = minTrader;
 		this.maxTrader = maxTrader;
-		this.category = category;
 	}
-	
 
-	// TODO: Move this into another class
+    // TODO: Move this into another class
 	/*
      * Calculates the price of the TradeGood using information
      * about the Planet it is on.
@@ -176,15 +123,15 @@ public enum TradeGoodType {
 		int quantity;
 		if (lowCondition.ordinal()==resource.ordinal())
 		{
-			quantity= (int) (REDUCED_QUANTITY*(Randomizer.nextInt(MAXIMUM_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY));
+			quantity= (int) (REDUCED_QUANTITY*(Randomizer.nextInt(AVERAGE_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY));
 		}
 		else if (highCondition.ordinal()==resource.ordinal())
 		{
-			quantity= (int) (INCREASED_QUANTITY*(Randomizer.nextInt(MAXIMUM_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY));
+			quantity= (int) (INCREASED_QUANTITY*(Randomizer.nextInt(AVERAGE_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY));
 		}
 		else
 		{
-			quantity = (int) (Randomizer.nextInt(MAXIMUM_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY);
+			quantity = (int) (Randomizer.nextInt(AVERAGE_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY);
 		}
 		
 		if (techLevel.ordinal() == mostProduced.ordinal())
@@ -201,10 +148,7 @@ public enum TradeGoodType {
 	 */
 	public boolean buyable(Planet planet)
 	{
-		if (planet.getTechnologyLevel().ordinal() >= minToProduce.ordinal())
-			return true;
-		else
-			return false;
+        return planet.getTechnologyLevel().ordinal() >= minToProduce.ordinal();
 	}
 	
 	/*
@@ -216,17 +160,8 @@ public enum TradeGoodType {
 	 */
 	public boolean sellable(Planet planet)
 	{
-		if (planet.getTechnologyLevel().ordinal() >= minToSell.ordinal())
-		{
-			return true;
-		}	
-		else
-			return false;
+        return planet.getTechnologyLevel().ordinal() >= minToSell.ordinal();
 	}
-	
-	public TradeGood generateInstance()
-	{
-		return TradeGoodFactory.getTradeGood(this);
-	}
-	
+
+
 }

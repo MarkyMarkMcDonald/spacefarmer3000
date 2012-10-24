@@ -17,6 +17,7 @@ import java.util.Map;
 public class Player {
     private PlayerType playerType;
     private String name;
+
     private Ship ship;
     private int money;
     private Map<SkillType, Integer> skillLevels;
