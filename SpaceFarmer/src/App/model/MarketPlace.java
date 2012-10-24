@@ -1,10 +1,9 @@
 package App.model;
 
-import App.service.Randomizer;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+
+import App.service.Randomizer;
 /**
  * Created with IntelliJ IDEA.
  * User: Marky
@@ -25,10 +24,12 @@ public class MarketPlace {
             for (Enum subName : tradeGoodType.getSubNames()){
                 if (Randomizer.determineSuccess(.5)){
                     BasicGood good = new BasicGood(tradeGoodType, subName);
-                    int quantity = tradeGoodType.calculatePrice(planet);
-                    int baseCost = tradeGoodType.calculatePrice(planet);
-                    int finalCost = baseCost + Randomizer.nextInt((int) (baseCost * .05));
-                    priceMap.put(good,finalCost);
+                    
+                    int quantity = tradeGoodType.determineQuantity(planet);
+                    int cost = tradeGoodType.calculatePrice(planet);
+                    //Note: prices are already varied in calculatePrice
+                    //int finalCost = baseCost + Randomizer.nextInt((int) (baseCost * .05));
+                    priceMap.put(good,cost);
                     quantityMap.put(good,quantity);
                 }
             }
@@ -57,6 +58,9 @@ public class MarketPlace {
 	 */
 	public void updatePrices(Planet planet)
 	{
+		for (Tradeable t: priceMap.keySet().toArray(new Tradeable[0]))
+			priceMap.put(t, t.calculatePrice(planet));
+		//Required calculatePrice in Tradeable inferface.
 		//TODO: This! (this is bad practice btw, don't make these like this)
 	}
 

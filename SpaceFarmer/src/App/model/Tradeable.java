@@ -10,6 +10,8 @@ package App.model;
 public interface Tradeable {
 
     public boolean equals(Tradeable tradeable);
+    
+    public int calculatePrice(Planet planet);
 
     public String getName();
 }
