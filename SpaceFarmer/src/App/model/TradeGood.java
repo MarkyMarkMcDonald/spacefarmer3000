@@ -9,14 +9,15 @@ abstract public class TradeGood {
 
     protected String name;
     protected TradeGoodType tradeGoodType;
-    protected Enum tradeGoodSubname;
+    protected Enum tradeGoodSubName;
 
     public boolean equals(Tradeable tradeable){
         return tradeable.getName().equals(name);
     }
 
-    public TradeGood(TradeGoodType tradeGoodType){
+    public TradeGood(TradeGoodType tradeGoodType, Enum tradeGoodSubName){
         this.tradeGoodType = tradeGoodType;
+        this.tradeGoodSubName = tradeGoodSubName;
     }
 
     public String getName(){

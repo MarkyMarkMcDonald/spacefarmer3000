@@ -67,6 +67,10 @@ public enum TradeGoodType {
 		return name;
 	}
 
+    public Enum[] getSubNames(){
+        return subNames;
+    }
+
 
 	private TradeGoodType(String name, Enum[] subNames, TechnologyLevel minToProduce,
                           TechnologyLevel minToSell, TechnologyLevel mostProduced,
