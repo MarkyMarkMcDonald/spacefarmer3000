@@ -1,6 +1,8 @@
 package App.model;
 
 import App.service.Randomizer;
+import Conf.TradeGoodNames.*;
+
 import static App.model.TechnologyLevel.*;
 import static App.model.ResourceType.*;
 import static App.model.Event.*;
@@ -14,27 +16,27 @@ import static App.model.Event.*;
 
 public enum TradeGoodType {
 	
-    //        NAME                   MTLP            MTLU                 TTP BASE  IPL VAR            IE             CR         ER  MTL  MTH
+    //        NAME      Possible SubNames               MTLP            MTLU                 TTP BASE  IPL VAR            IE             CR         ER  MTL  MTH
 	
-	WATER(    "Water",   PRE_AGRICULTURE,  PRE_AGRICULTURE,       MEDIEVAL,  30,   3,  4,      DROUGHT,  LOTS_OF_WATER,      DESERT,  30,  50),
+	WATER(    "Water",      Water.values(),     PRE_AGRICULTURE,  PRE_AGRICULTURE,       MEDIEVAL,  30,   3,  4,      DROUGHT,  LOTS_OF_WATER,      DESERT,  30,  50),
 	
-	FURS(     "Furs",     PRE_AGRICULTURE,  PRE_AGRICULTURE,PRE_AGRICULTURE, 250,  10, 10,         COLD,     RICH_FAUNA,    LIFELESS, 230, 280),
+	FURS(     "Furs",       Furs.values(),      PRE_AGRICULTURE,  PRE_AGRICULTURE,PRE_AGRICULTURE, 250,  10, 10,         COLD,     RICH_FAUNA,    LIFELESS, 230, 280),
 	
-	FOOD(     "Food",         AGRICULTURE,  PRE_AGRICULTURE,    AGRICULTURE, 100,   5,  5,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  90, 160),
+	FOOD(     "Food",       Food.values(),      AGRICULTURE,        PRE_AGRICULTURE,    AGRICULTURE, 100,   5,  5,     CROPFAIL,      RICH_SOIL,   POOR_SOIL,  90, 160),
 	
-	ORE(      "Ore",             MEDIEVAL,         MEDIEVAL,    RENAISSANCE, 350,  20, 10,          WAR,   MINERAL_RICH,MINERAL_POOR, 350, 420),
+	ORE(      "Ore",        Ore.values(),       MEDIEVAL,         MEDIEVAL,    RENAISSANCE, 350,  20, 10,          WAR,   MINERAL_RICH,MINERAL_POOR, 350, 420),
 	
-	GAMES(    "Games",        RENAISSANCE,      AGRICULTURE,POST_INDUSTRIAL, 250, -10,  5,      BOREDOM,       ARTISTIC,        NONE, 160, 270),
+	GAMES(    "Games",      Games.values(),     RENAISSANCE,      AGRICULTURE,POST_INDUSTRIAL, 250, -10,  5,      BOREDOM,       ARTISTIC,        NONE, 160, 270),
 	
-	FIREARMS( "Firearms",     RENAISSANCE,      AGRICULTURE,     INDUSTRIAL,1250, -75,100,          WAR,        WARLIKE,        NONE, 600,1100),
+	FIREARMS( "Firearms",    Firearms.values(), RENAISSANCE,      AGRICULTURE,     INDUSTRIAL,1250, -75,100,          WAR,        WARLIKE,        NONE, 600,1100),
 	
-	MEDICINE( "Medicine",EARLY_INDUSTRIAL,      AGRICULTURE,POST_INDUSTRIAL, 650, -20, 10,       PLAGUE,  LOTS_OF_HERBS,        NONE, 400, 700),
+	MEDICINE( "Medicine",   Medicine.values(),  EARLY_INDUSTRIAL,  AGRICULTURE,POST_INDUSTRIAL, 650, -20, 10,       PLAGUE,  LOTS_OF_HERBS,        NONE, 400, 700),
 	
-	MACHINES( "Machines",EARLY_INDUSTRIAL,      RENAISSANCE,     INDUSTRIAL, 900, -30,  5,LACKOFWORKERS,           NONE,        NONE, 600, 800),
+	MACHINES( "Machines",   Machines.values(),  EARLY_INDUSTRIAL,   RENAISSANCE,     INDUSTRIAL, 900, -30,  5,LACKOFWORKERS,           NONE,        NONE, 600, 800),
 	
-	NARCOTICS("Narcotics",     INDUSTRIAL,  PRE_AGRICULTURE,     INDUSTRIAL,3500,-125,150,      BOREDOM,WEIRD_MUSHROOMS,        NONE,2000,3000),
+	NARCOTICS("Narcotics",  Narcotics.values(), INDUSTRIAL,      PRE_AGRICULTURE,     INDUSTRIAL,3500,-125,150,      BOREDOM,WEIRD_MUSHROOMS,        NONE,2000,3000),
 	
-	ROBOTS(   "Robots",    POST_INDUSTRIAL,EARLY_INDUSTRIAL,        HI_TECH,5000,-150,100,LACKOFWORKERS,           NONE,        NONE,3500,5000);
+	ROBOTS(   "Robots",     Robots.values(),    POST_INDUSTRIAL,   EARLY_INDUSTRIAL,        HI_TECH,5000,-150,100,LACKOFWORKERS,           NONE,        NONE,3500,5000);
 	
 	private static final double INCREASE_AMOUNT=1.5;
 	
@@ -43,11 +45,11 @@ public enum TradeGoodType {
 	private static final int AVERAGE_QUANTITY=100;
 	private static final int MINIMUM_QUANTITY=20;
 	private static final double TECH_LEVEL_INCREASE=1.5;
-	
-	private String name;
+    private String name;
+    private Enum[] subNames;
 
-	private TechnologyLevel minToProduce;
-	private TechnologyLevel minToSell;
+    private TechnologyLevel minToProduce;
+    private TechnologyLevel minToSell;
 	private TechnologyLevel mostProduced;
 	
 	private int basePrice;
@@ -66,7 +68,7 @@ public enum TradeGoodType {
 	}
 
 
-	private TradeGoodType(String name, TechnologyLevel minToProduce,
+	private TradeGoodType(String name, Enum[] subNames, TechnologyLevel minToProduce,
                           TechnologyLevel minToSell, TechnologyLevel mostProduced,
                           int basePrice, int increasePerLevel, int variance,
                           Event priceIncrease, ResourceType lowCondition,
@@ -83,6 +85,7 @@ public enum TradeGoodType {
 		this.highCondition = highCondition;
 		this.minTrader = minTrader;
 		this.maxTrader = maxTrader;
+        this.subNames = subNames;
 	}
 
     // TODO: Move this into another class

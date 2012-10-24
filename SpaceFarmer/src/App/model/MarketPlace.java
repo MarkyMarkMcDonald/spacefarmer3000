@@ -12,38 +12,28 @@ import java.util.Map;
  */
 public class MarketPlace {
 	
-	private Map<TradeGoodType,Integer> priceMap;
-	private Map<TradeGoodType,Integer> quantityMap;
+	private Map<Tradeable,Integer> priceMap;
+	private Map<Tradeable,Integer> quantityMap;
 	
 	public MarketPlace(Planet planet)
 	{
-		priceMap=new HashMap<TradeGoodType,Integer>(TradeGoodType.values().length);
-		quantityMap=new HashMap<TradeGoodType,Integer>(TradeGoodType.values().length);
-		for (TradeGoodType t: TradeGoodType.values())
-		{
-			if (t.buyable(planet))
-				quantityMap.put(t, t.determineQuantity(planet));
-			else
-				quantityMap.put(t, 0);
-			priceMap.put(t, t.calculatePrice(planet));
-				
-		}
+
 	}
 	
 	/*
 	 * Sets a TradeGoodType to a given quantity.
 	 */
-	public void setQuantity(TradeGoodType goodType, int quantity)
+	public void setQuantity(Tradeable tradeable, int quantity)
 	{
-		quantityMap.put(goodType,quantity);
+		quantityMap.put(tradeable,quantity);
 	}
 	
 	/*
 	 * Alters the quantity of a TradeGoodType by a particular amount.
 	 */
-	public void changeQuantity(TradeGoodType goodType, int amount)
+	public void changeQuantity(Tradeable tradeable, int amount)
 	{
-		quantityMap.put(goodType, quantityMap.get(goodType)+amount);
+		quantityMap.put(tradeable, quantityMap.get(tradeable)+amount);
 	}
 	
 	/*
@@ -52,9 +42,6 @@ public class MarketPlace {
 	 */
 	public void updatePrices(Planet planet)
 	{
-		for (TradeGoodType t: TradeGoodType.values())
-		{
-			priceMap.put(t, t.calculatePrice(planet));
-		}
+		//TODO: This! (this is bad practice btw, don't make thse like this)
 	}
 }
