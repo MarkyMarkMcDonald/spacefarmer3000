@@ -15,6 +15,10 @@ abstract public class TradeGood {
         return tradeable.getName().equals(name);
     }
 
+    public TradeGood(TradeGoodType tradeGoodType){
+        this.tradeGoodType = tradeGoodType;
+    }
+
     public String getName(){
         return name;
     }

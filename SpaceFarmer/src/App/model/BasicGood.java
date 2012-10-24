@@ -6,5 +6,7 @@ package App.model;
  * Time: 3:15 PM
  */
 public class BasicGood extends  TradeGood{
-
+    public BasicGood(TradeGoodType tradeGoodType){
+        super(tradeGoodType);
+    }
 }

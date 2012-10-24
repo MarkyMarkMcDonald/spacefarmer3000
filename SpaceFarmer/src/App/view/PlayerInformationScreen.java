@@ -140,8 +140,8 @@ public class PlayerInformationScreen extends Screen{
         JLabel lblDifficulty = new JLabel("Difficulty");
         Difficulty.add(lblDifficulty);
 
-        JComboBox<String> comboBox = new JComboBox<String>();
-        comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Easy", "Medium", "Hard", "Impossible"}));
+        JComboBox comboBox = new JComboBox();
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Easy", "Medium", "Hard", "Impossible"}));
         Difficulty.add(comboBox);
 
         JPanel Confirm = new JPanel();
