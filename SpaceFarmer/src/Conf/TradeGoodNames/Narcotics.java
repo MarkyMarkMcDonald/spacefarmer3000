@@ -20,4 +20,8 @@ public enum Narcotics {
     private Narcotics(String name){
         this.name = name;
     }
+
+    public String toString(){
+        return name;
+    }
 }

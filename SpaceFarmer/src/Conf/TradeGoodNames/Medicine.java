@@ -20,4 +20,8 @@ public enum Medicine {
     private Medicine(String name){
         this.name = name;
     }
+
+    public String toString(){
+        return name;
+    }
 }

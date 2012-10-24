@@ -21,4 +21,8 @@ public enum Water {
         this.name = name;
     }
 
+    public String toString(){
+        return name;
+    }
+
 }

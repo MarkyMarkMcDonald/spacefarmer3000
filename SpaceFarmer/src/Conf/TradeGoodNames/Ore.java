@@ -20,4 +20,8 @@ public enum Ore {
     private Ore(String name){
         this.name = name;
     }
+
+    public String toString(){
+        return name;
+    }
 }

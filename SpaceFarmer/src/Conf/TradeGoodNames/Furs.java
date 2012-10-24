@@ -21,4 +21,8 @@ public enum Furs {
     private Furs(String name){
         this.name = name;
     }
+
+    public String toString(){
+        return name;
+    }
 }

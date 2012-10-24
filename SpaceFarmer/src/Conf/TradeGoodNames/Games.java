@@ -20,4 +20,8 @@ public enum Games {
     private Games(String name){
         this.name = name;
     }
+
+    public String toString(){
+        return name;
+    }
 }
