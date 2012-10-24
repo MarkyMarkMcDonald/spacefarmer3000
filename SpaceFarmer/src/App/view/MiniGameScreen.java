@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -66,6 +67,7 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 		timer = new Timer(30, this);
 		setFocusable(true);
 		addKeyListener(this);
+		setDoubleBuffered(true);
 		
 		// Set up BufferedImage graphics
 		asteroidGFX = new BufferedImage(ASTEROID_GFX_SIZE, ASTEROID_GFX_SIZE, BufferedImage.TYPE_INT_ARGB);
@@ -199,6 +201,10 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 		screen.rotate(shipAngle, shipX, shipY);
 		screen.drawImage(shipGFX, (int)(shipX - SHIP_SIZE / 2), (int)(shipY - SHIP_SIZE / 2), null);
 		screen.setTransform(orig);
+		
+		// Clean up
+		Toolkit.getDefaultToolkit().sync();
+		screen.dispose();
 	}
 	
 	/**
