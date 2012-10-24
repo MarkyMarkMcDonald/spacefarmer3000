@@ -19,7 +19,4 @@ abstract public class TradeGood {
         return name;
     }
 
-    public int getBasePrice(){
-        return basePrice;
-    }
 }
