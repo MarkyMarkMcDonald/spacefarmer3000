@@ -1,7 +1,9 @@
 package App.model;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,9 +14,11 @@ import java.util.Map;
  */
 public class Inventory {
 
-    private Map<Tradeable, Integer> inventory;
+    private Map<Tradable, Integer> inventory;
 
-
+    public Inventory(){
+        inventory = new HashMap<Tradable, Integer>();
+    }
 
     public int getSpaceUsed(){
         int sum = 0;
@@ -25,22 +29,22 @@ public class Inventory {
         return sum;
     }
 
-    /**
-     * Increase or Decrease the quantity of an item the player has. Use a negative quantityToAdd param to reduce the amount
-     * @param item
-     * @param quantityToAdd
-     */
-    public void increaseItemQuantity(Tradeable item, int quantityToAdd){
+    public void addItem(Tradable item, int quantity){
         if (!inventory.containsKey(item)){
-            inventory.put(item,quantityToAdd);
+            inventory.put(item,quantity);
         }
         else {
-            int currentQuantity = inventory.get(item);
-            inventory.put(item,currentQuantity + quantityToAdd);
+            //inventory.get(TradeGood)
         }
     }
 
+    public Set<Map.Entry<Tradable,Integer>> getInventoryEntries(){
+        return inventory.entrySet();
+    }
 
+    public Set<Tradable> getTradablesHeld(){
+        return inventory.keySet();
+    }
 
 
 }

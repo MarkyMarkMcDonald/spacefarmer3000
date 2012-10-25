@@ -165,4 +165,8 @@ public class Display extends JFrame {
         return CenterPanel;
     }
 
+    public static JPanel getMainContentPanel(){
+        return mainContentPanel;
+    }
+
 }

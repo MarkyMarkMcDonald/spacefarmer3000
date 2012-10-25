@@ -1,18 +1,17 @@
 package App.listener;
 
-import App.factory.PlanetFactory;
 import App.logging.Logger;
 import App.model.Game;
 import App.model.Player;
-import Conf.ConfigReader;
+import App.service.Randomizer;
 import App.view.CardName;
-import Conf.GameVariables;
-import Conf.PlanetNames;
+import App.view.Display;
+import App.view.MarketScreen;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: marky
@@ -22,21 +21,27 @@ import java.util.Map;
 public class StartGameListener extends ContinueListener implements ActionListener {
 
     public StartGameListener(){
-        cardToMoveTo = CardName.TEMPORARY_SCREEN_CARD;
+        cardToMoveTo = CardName.MARKETPLACE_CARD;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        List<String> planetNames = PlanetNames.getPlanetNamesAsList();
-
-        // Create all the planets
-        PlanetFactory.createPlanets(planetNames, GameVariables.xDimension, GameVariables.yDimension, GameVariables.numPlanets);
-
-
         // Make player1 have the first turn
-        Player player1 = Game.getPlayers().get(0);
+        List<Player> players = Game.getPlayers();
+        Player player1 = players.get(0);
         Game.setCurrentPlayer(player1);
+
+        // Make each player start on a random Planet
+        for (Player player : players){
+            player.setCurrentPlanet(Randomizer.getRandomPlanet());
+        }
+        Game.setPlayers(players);
+
+
+        MarketScreen marketScreen = new MarketScreen(player1.getCurrentPlanet().getMarket());
+        JPanel contentPanel = Display.getCenterPanel();
+        contentPanel.add(marketScreen,"MarketplaceCard");
 
         this.progressDisplay();
         Logger.printGameToConsole();

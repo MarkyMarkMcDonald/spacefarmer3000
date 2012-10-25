@@ -1,9 +1,9 @@
 package App.model;
 
+import App.service.Randomizer;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import App.service.Randomizer;
 /**
  * Created with IntelliJ IDEA.
  * User: Marky
@@ -13,13 +13,13 @@ import App.service.Randomizer;
  */
 public class MarketPlace {
 	
-	private Map<Tradeable,Integer> priceMap;
-	private Map<Tradeable,Integer> quantityMap;
+	private Map<Tradable,Integer> priceMap;
+	private Map<Tradable,Integer> quantityMap;
 
 	public MarketPlace(Planet planet)
 	{
-        priceMap = new HashMap<Tradeable, Integer>();
-        quantityMap = new HashMap<Tradeable, Integer>();
+        priceMap = new HashMap<Tradable, Integer>();
+        quantityMap = new HashMap<Tradable, Integer>();
         for (TradeGoodType tradeGoodType : TradeGoodType.values()){
             for (Enum subName : tradeGoodType.getSubNames()){
                 if (Randomizer.determineSuccess(.5)){
@@ -39,36 +39,36 @@ public class MarketPlace {
 	/*
 	 * Sets a TradeGoodType to a given quantity.
 	 */
-	public void setQuantity(Tradeable tradeable, int quantity)
+	public void setQuantity(Tradable Tradable, int quantity)
 	{
-		quantityMap.put(tradeable,quantity);
+		quantityMap.put(Tradable,quantity);
 	}
 	
 	/*
 	 * Alters the quantity of a TradeGoodType by a particular amount.
 	 */
-	public void changeQuantity(Tradeable tradeable, int amount)
+	public void changeQuantity(Tradable Tradable, int amount)
 	{
-		quantityMap.put(tradeable, quantityMap.get(tradeable)+amount);
+		quantityMap.put(Tradable, quantityMap.get(Tradable)+amount);
 	}
 	
 	/*
 	 * Varies each of the TradeGoodTypes prices based on the Planet
 	 * the MarketPlace is on.
 	 */
-	public void updatePrices(Planet planet)
-	{
-		for (Tradeable t: priceMap.keySet().toArray(new Tradeable[0]))
-			priceMap.put(t, t.calculatePrice(planet));
-		//Required calculatePrice in Tradeable inferface.
+	public void updatePrices(Planet planet){
+//	{
+//		for (Tradable t: priceMap.keySet().toArray(new Tradable[0]))
+//			priceMap.put(t, t.calculatePrice(planet));
+		//Required calculatePrice in Tradable inferface.
 		//TODO: This! (this is bad practice btw, don't make these like this)
 	}
 
-    public Map<Tradeable, Integer> getPriceMap(){
+    public Map<Tradable, Integer> getPriceMap(){
         return priceMap;
     }
 
-    public Map<Tradeable, Integer> getQuantityMap() {
+    public Map<Tradable, Integer> getQuantityMap() {
         return quantityMap;
     }
 }

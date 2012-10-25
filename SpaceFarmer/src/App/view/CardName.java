@@ -26,6 +26,16 @@ public enum CardName {
         public Screen getScreen(){
             return new TemporaryScreen();
         }
+    },
+    PLANET_INFORMATION_CARD("PlanetInformationCard"){
+        public Screen getScreen(){
+            return new PlanetInformationScreen();
+        }
+    },
+    MARKETPLACE_CARD("MarketplaceCard"){
+        public Screen getScreen(){
+            return new MarketScreen();
+        }
     };
 
     private final String name;

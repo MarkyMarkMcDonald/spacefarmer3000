@@ -22,6 +22,7 @@ public class Player {
     private int money;
     private Map<SkillType, Integer> skillLevels;
     private Inventory inventory;
+    private Planet currentPlanet;
 
     public Player(){
     }
@@ -38,8 +39,16 @@ public class Player {
 		this.ship= ShipFactory.getShip(ShipModel.GNAT);
 	}
 
-
     //--Accessors and Modifiers
+
+    public Planet getCurrentPlanet() {
+        return currentPlanet;
+    }
+
+    public void setCurrentPlanet(Planet currentPlanet) {
+        this.currentPlanet = currentPlanet;
+    }
+
 	public String getName() {
         return name;
     }

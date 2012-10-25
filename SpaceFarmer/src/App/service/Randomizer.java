@@ -1,12 +1,13 @@
 package App.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import App.factory.PlanetFactory;
+import App.model.Planet;
+
+import java.util.*;
 
 public class Randomizer {
 	private static Random rand=new Random();
-	
+
 	/*
 	 * Generates a random element from the enum class given.
 	 * @param enumClass Enumerated class to generate from
@@ -78,4 +79,13 @@ public class Randomizer {
 	{
 		return rand.nextInt(upperBound);
 	}
+
+    public static Planet getRandomPlanet(){
+        Collection<Planet> planetCollection = PlanetFactory.getPlanets().values();
+        List<Planet> planets = new ArrayList<Planet>(planetCollection);
+        int numberOfPlanets = PlanetFactory.getNumberOfPlanets();
+        int chosenPlanetNumber = Randomizer.nextInt(numberOfPlanets);
+        return planets.get(chosenPlanetNumber);
+    }
+
 }

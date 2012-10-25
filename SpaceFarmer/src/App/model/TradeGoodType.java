@@ -71,6 +71,10 @@ public enum TradeGoodType {
         return subNames;
     }
 
+    public int getBasePrice(){
+        return basePrice;
+    }
+
 
 	private TradeGoodType(String name, Enum[] subNames, TechnologyLevel minToProduce,
                           TechnologyLevel minToSell, TechnologyLevel mostProduced,

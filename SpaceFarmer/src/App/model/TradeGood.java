@@ -11,13 +11,17 @@ abstract public class TradeGood {
     protected TradeGoodType tradeGoodType;
     protected Enum tradeGoodSubName;
 
-    public boolean equals(Tradeable tradeable){
-        return tradeable.getName().equals(name);
+    public boolean equals(Tradable Tradable){
+        return Tradable.getName().equals(name);
     }
 
     public TradeGood(TradeGoodType tradeGoodType, Enum tradeGoodSubName){
         this.tradeGoodType = tradeGoodType;
         this.tradeGoodSubName = tradeGoodSubName;
+    }
+
+    public int getBasePrice(){
+        return tradeGoodType.getBasePrice();
     }
 
     public String getName(){

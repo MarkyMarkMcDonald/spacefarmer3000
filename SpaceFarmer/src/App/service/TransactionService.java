@@ -2,6 +2,9 @@ package App.service;
 
 import App.model.*;
 
+import java.util.Iterator;
+import java.util.Set;
+
 /**
  * User: marky
  * Date: 10/18/12
@@ -9,7 +12,36 @@ import App.model.*;
  */
 public class TransactionService {
 
-    public static String sellToMarket(Player player, MarketPlace marketPlace, int price, int quantity, String tradeGoodName){
+    public static String buyFromMarket(Player player, MarketPlace marketPlace, int price, int quantity, Tradable tradeGood){
+        String message = "success";
+        Inventory inventory = player.getInventory();
+        Set<Tradable> inventoryItems = inventory.getTradablesHeld();
+        Ship ship = player.getShip();
+        int cargoSize = ship.getCargoSize();
+        int transactionCost = price * quantity;
+        Iterator<Tradable> iterator = inventoryItems.iterator();
+        while (iterator.hasNext()){
+            Tradable inventoryItem = iterator.next();
+            if (inventoryItem.equals(tradeGood)){
+
+            }
+
+
+
+        }
+        // Make sure player has enough quantity to sell
+//        if (){
+//            message = "Not enough Inventory Space";
+//        }
+//        else {
+//            // decrease the amount in the inventory
+//        }
+
+
+        return message;
+    }
+
+    public static String sellToMarket(Player player, MarketPlace marketPlace, int price, int quantity, Tradable tradeGood){
         String message = "success";
         Inventory inventory = player.getInventory();
         Ship ship = player.getShip();
@@ -24,7 +56,7 @@ public class TransactionService {
             message = "You need $" + Math.abs(player.getMoney() - transactionCost) + " more!";
         }
         else {
-            //inventory
+            // decrease the amount in the inventory
         }
 
 

@@ -59,4 +59,8 @@ public class PlanetFactory {
 
     }
 
+    public static int getNumberOfPlanets(){
+        return planets.size();
+    }
+
 }

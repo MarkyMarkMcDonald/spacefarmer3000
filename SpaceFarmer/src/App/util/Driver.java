@@ -1,8 +1,12 @@
 package App.util;
 
+import App.factory.PlanetFactory;
 import App.model.Game;
 import App.model.Settings;
 import App.view.Display;
+import Conf.GameVariables;
+import Conf.PlanetNames;
+
 import java.awt.EventQueue;
 
 public class Driver {
@@ -21,7 +25,7 @@ public class Driver {
                     Game game = new Game();
                     game.setSettings(new Settings());
                     Display.setGame(game);
-
+                    PlanetFactory.createPlanets(PlanetNames.getPlanetNamesAsList(), GameVariables.xDimension, GameVariables.yDimension, GameVariables.numPlanets);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
