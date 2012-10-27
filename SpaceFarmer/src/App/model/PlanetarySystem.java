@@ -15,8 +15,29 @@ public class PlanetarySystem {
 
     private Map<String,Planet> planets;
 
+    // Thinking this should replace String->Planet Map.
+    private Map<Integer[], Planet> slots;
 
-    public String getName() {
+    private int x;
+    
+    private int y;
+    public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public String getName() {
         return name;
     }
 
@@ -31,4 +52,14 @@ public class PlanetarySystem {
     public void setPlanets(Map<String, Planet> planets) {
         this.planets = planets;
     }
+
+	public Map<Integer[], Planet> getSlots() {
+		return slots;
+	}
+
+	public void setSlots(Map<Integer[], Planet> slots) {
+		this.slots = slots;
+	}
+    
+    
 }

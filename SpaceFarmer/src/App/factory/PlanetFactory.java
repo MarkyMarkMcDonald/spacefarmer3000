@@ -33,11 +33,12 @@ public class PlanetFactory {
      * @param maxYDim Length of the game's y-axis
      * @param numPlanets how many planets for this game
      */
-    public static void createPlanets(List<String> names, int maxXDim, int maxYDim, int numPlanets){
+    
+    
+    public static void createPlanets(List<String> names, int numPlanets){
 
         planets = new HashMap<String, Planet>();
         List<String> namesHolder = new ArrayList<String>(names);
-        List<Integer[]> coordinateList=Randomizer.generateDimensions(numPlanets, maxXDim, maxYDim);
 
         int index = 0;
         while (index < numPlanets && !namesHolder.isEmpty()){
@@ -47,8 +48,6 @@ public class PlanetFactory {
             namesHolder.remove(planetNameIndex);
             planet.setName(planetName);
             planet.setEvent(Event.NO_EVENT);
-            planet.setX(coordinateList.get(index)[0]);
-            planet.setY(coordinateList.get(index)[1]);
             planet.setTechnologyLevel((TechnologyLevel) Randomizer.randEnum((TechnologyLevel.class)));
             planet.setResourceType((ResourceType) Randomizer.randEnum((ResourceType.class)));
             planet.setPoliticalSystem((PoliticalSystem) Randomizer.randEnum((PoliticalSystem.class)));

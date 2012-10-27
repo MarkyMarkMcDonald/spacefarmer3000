@@ -1,9 +1,9 @@
 package App.model;
 
-import App.service.Randomizer;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import App.service.Randomizer;
 /**
  * Created with IntelliJ IDEA.
  * User: Marky
@@ -12,7 +12,8 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class MarketPlace {
-	
+	private static final int MINIMUM_SUBGOODS=2;
+	private static final int MAXIMUM_SUBGOODS=3;
 	private Map<Tradable,Integer> priceMap;
 	private Map<Tradable,Integer> quantityMap;
 
@@ -21,17 +22,14 @@ public class MarketPlace {
         priceMap = new HashMap<Tradable, Integer>();
         quantityMap = new HashMap<Tradable, Integer>();
         for (TradeGoodType tradeGoodType : TradeGoodType.values()){
-            for (Enum subName : tradeGoodType.getSubNames()){
-                if (Randomizer.determineSuccess(.5)){
-                    BasicGood good = new BasicGood(tradeGoodType, subName);
-                    
+            for (Object subName : Randomizer.randElements(tradeGoodType.getSubNames(),MINIMUM_SUBGOODS+Randomizer.nextInt(MAXIMUM_SUBGOODS-MINIMUM_SUBGOODS+1))){
+                    BasicGood good = new BasicGood(tradeGoodType, (Enum<?>) subName);
                     int quantity = tradeGoodType.determineQuantity(planet);
                     int cost = tradeGoodType.calculatePrice(planet);
                     //Note: prices are already varied in calculatePrice
                     //int finalCost = baseCost + Randomizer.nextInt((int) (baseCost * .05));
                     priceMap.put(good,cost);
                     quantityMap.put(good,quantity);
-                }
             }
         }
 	}

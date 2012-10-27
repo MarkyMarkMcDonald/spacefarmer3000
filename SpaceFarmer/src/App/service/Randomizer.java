@@ -1,9 +1,12 @@
 package App.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
+
 import App.factory.PlanetFactory;
 import App.model.Planet;
-
-import java.util.*;
 
 public class Randomizer {
 	private static Random rand=new Random();
@@ -17,6 +20,54 @@ public class Randomizer {
 		Enum<?> enums[]=enumClass.getEnumConstants();
 		int length=enums.length;
 		return enums[rand.nextInt(length)];
+	}
+	
+	/*
+	 * Returns an array of unique integers.
+	 * @param lowerBound lowest value possible.
+	 * @param upperBound highest value possible +1
+	 */
+	public static Integer[] uniqueRandomInts(int lowerBound, int upperBound,int numberOfInts)
+	{
+		ArrayList<Integer> returnInts=new ArrayList<Integer>(numberOfInts);
+		if (numberOfInts>=upperBound-lowerBound)
+		{
+			for (int i=lowerBound;i<upperBound;i++)
+			{
+				returnInts.add(i);
+			}
+			return returnInts.toArray(new Integer[0]);
+		}
+		returnInts.add(lowerBound+rand.nextInt(upperBound-lowerBound));
+		int randInt=lowerBound+rand.nextInt(upperBound-lowerBound);
+		int index=1;
+		while (index<numberOfInts)
+		{
+			if (returnInts.contains(randInt))
+				randInt=lowerBound+rand.nextInt(upperBound-lowerBound);
+			else
+			{
+				index++;
+				returnInts.add(randInt);
+				randInt=lowerBound+rand.nextInt(upperBound-lowerBound);
+			}
+		}
+		return returnInts.toArray(new Integer[0]);
+	}
+	
+	/*
+	 * Gives a random number of unique elements from an array.
+	 * @param Total number to return.
+	 */
+	public static Object[] randElements(Object[] objects,int total)
+	{
+		Object[] returnObjects=new Object[total];
+		Integer[] indexes=uniqueRandomInts(0,objects.length,total);
+		for (int i=0;i<total;i++)
+		{
+			returnObjects[i]=objects[indexes[i]];
+		}
+		return returnObjects;
 	}
 	
 	/*
@@ -86,6 +137,30 @@ public class Randomizer {
         int numberOfPlanets = PlanetFactory.getNumberOfPlanets();
         int chosenPlanetNumber = Randomizer.nextInt(numberOfPlanets);
         return planets.get(chosenPlanetNumber);
+    }
+    
+    /*
+     * Distributes a number into parts as an array as evenly as possible
+     * while randomizing any leftover parts.
+     * Ex: distributeNumber(5,32) may yield {6,6,7,6,7}
+     * @param numSlots The number of parts to divide the number into.
+     * @param number The number being divided.
+     * @return An int array with numSlots indices, each containing a subdivision of the number.
+     */
+    public static int[] distributeNumber(int numSlots, int number)
+    {
+    	int[] returnDistribution=new int[numSlots];
+    	int minimum=numSlots/number;
+    	Integer[] augmentedIndices=uniqueRandomInts(0,numSlots,numSlots%number);
+    	for (int i=0;i<numSlots;i++)
+    	{
+    		returnDistribution[i]=minimum;
+    	}
+    	for (int i=0;i<numSlots%number;i++)
+    	{
+    		returnDistribution[augmentedIndices[i]]++;
+    	}
+    	return returnDistribution;
     }
 
 }
