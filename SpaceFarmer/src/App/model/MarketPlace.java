@@ -22,7 +22,7 @@ public class MarketPlace {
         priceMap = new HashMap<Tradable, Integer>();
         quantityMap = new HashMap<Tradable, Integer>();
         for (TradeGoodType tradeGoodType : TradeGoodType.values()){
-            for (Object subName : Randomizer.randElements(tradeGoodType.getSubNames(),MINIMUM_SUBGOODS+Randomizer.nextInt(MAXIMUM_SUBGOODS-MINIMUM_SUBGOODS+1))){
+            for (Object subName : Randomizer.randElements(tradeGoodType.getSubNames(),MINIMUM_SUBGOODS+Randomizer.nextInt(MAXIMUM_SUBGOODS-MINIMUM_SUBGOODS))){
                     BasicGood good = new BasicGood(tradeGoodType, (Enum<?>) subName);
                     int quantity = tradeGoodType.determineQuantity(planet);
                     int cost = tradeGoodType.calculatePrice(planet);
