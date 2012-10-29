@@ -150,16 +150,17 @@ public class Randomizer {
     public static int[] distributeNumber(int numSlots, int number)
     {
     	int[] returnDistribution=new int[numSlots];
-    	int minimum=numSlots/number;
-    	Integer[] augmentedIndices=uniqueRandomInts(0,numSlots,numSlots%number);
+    	int minimum=number/numSlots;
+    	Integer[] augmentedIndices=uniqueRandomInts(0,numSlots,number%numSlots);
     	for (int i=0;i<numSlots;i++)
     	{
     		returnDistribution[i]=minimum;
     	}
-    	for (int i=0;i<numSlots%number;i++)
+    	for (int i=0;i<number%numSlots;i++)
     	{
     		returnDistribution[augmentedIndices[i]]++;
     	}
+    	
     	return returnDistribution;
     }
 
