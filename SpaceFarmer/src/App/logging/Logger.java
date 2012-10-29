@@ -20,6 +20,7 @@ public class Logger {
     public static void printGameToConsole(){
         List<Player> players = Game.getPlayers();
         Collection<Planet> planets = PlanetFactory.getPlanets().values();
+        Collection<PlanetarySystem> systems = PlanetFactory.getPlanetarySystems().values();
 
         System.out.println("########################################");
         System.out.println("########################################");
@@ -46,6 +47,13 @@ public class Logger {
         for (Object planet : planets){
            printPlanetInfo((Planet) planet);
         }
+        
+        System.out.println("## PlanetarySystems ##");
+        System.out.println("Number of Planetary Systems: " + systems.size());
+        for (Object system: systems){
+        	printSystemInfo((PlanetarySystem) system);
+        }
+        
     }
 
     /*
@@ -79,5 +87,11 @@ public class Logger {
         System.out.println("Tech level: " + planet.getTechnologyLevel());
         System.out.println("Resource level: " + planet.getResourceType());
         System.out.println("Political level: " + planet.getPoliticalSystem());
+        System.out.println("Planetary System: " + planet.getPlanetarySystem().getName());
+        System.out.println();
+    }
+    
+    public static void printSystemInfo(PlanetarySystem system){
+    	System.out.println("Name: "+ system.getName() +"; xDimension: " +system.getX()+ "; yDimension: " + system.getY());
     }
 }

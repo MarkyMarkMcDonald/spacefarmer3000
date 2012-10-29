@@ -20,6 +20,10 @@ public class PlanetFactory {
     
     private static Map<String, PlanetarySystem> systems;
 
+    public static PlanetarySystem getSystem(String name)
+    {
+    	return systems.get(name);
+    }
 	public static Planet getPlanet(String name)
 	{
         return planets.get(name);
@@ -27,6 +31,11 @@ public class PlanetFactory {
     public static Map<String, Planet> getPlanets(){
         return planets;
     }
+    public static Map<String, PlanetarySystem> getPlanetarySystems(){
+        return systems;
+    }
+    
+    
 
     /**
      * Fills the factory with planets.
@@ -38,7 +47,7 @@ public class PlanetFactory {
      */
     
     
-    public static void createPlanets(List<String> planetNames,List<String> planetarySystemNames, int numPlanets,int numSystems,int systemRows, int systemCols, int uniRows, int uniCols,int quadrantXDimension,int quadrantYDimension){
+    public static void createUniverse(List<String> planetNames,List<String> planetarySystemNames, int numPlanets,int numSystems,int systemRows, int systemCols, int uniRows, int uniCols,int quadrantXDimension,int quadrantYDimension){
 
         planets = new HashMap<String, Planet>();
         systems= new HashMap<String,PlanetarySystem>();
@@ -59,26 +68,27 @@ public class PlanetFactory {
         	systemDimensions.put(i,Randomizer.generateDimensions(systemDistribution[i],quadrantXDimension,quadrantYDimension));
         }
         int quadrantIndex=0;
-        int superIndex=0;
-        int subIndex=0;
+        int systemIndex=0;
+        int planetIndex=0;
+        int systemCount=0;
         while (quadrantIndex < uniRows*uniCols && !systemNamesHolder.isEmpty() && !planetNamesHolder.isEmpty()){
-        	superIndex=0;
-        	while (superIndex < systemDistribution[quadrantIndex] && !systemNamesHolder.isEmpty() && !planetNamesHolder.isEmpty()){
-        		subIndex=0;
+        	systemIndex=0;
+        	while (systemIndex < systemDistribution[quadrantIndex] && !systemNamesHolder.isEmpty() && !planetNamesHolder.isEmpty()){
+        		planetIndex=0;
         		system=new PlanetarySystem();
-        		planetPositions=Randomizer.generateDimensions(planetDistribution[superIndex], systemRows, systemCols);
+        		planetPositions=Randomizer.generateDimensions(planetDistribution[systemCount], systemRows, systemCols);
         		systemNameIndex=Randomizer.nextInt(systemNamesHolder.size());
     			systemName=systemNamesHolder.get(systemNameIndex);
     			systemNamesHolder.remove(systemNameIndex);
-        		while (subIndex < planetDistribution[superIndex] && !planetNamesHolder.isEmpty()){
+        		while (planetIndex < planetDistribution[systemCount] && !planetNamesHolder.isEmpty()){
         			planet = new Planet();
         			planetNameIndex = Randomizer.nextInt(planetNamesHolder.size());
         			planetName=planetNamesHolder.get(planetNameIndex);
         			planetNamesHolder.remove(planetNameIndex);
         			planet.setPlanetarySystem(system);
         			planet.setName(planetName);
-        			planet.setX(planetPositions.get(subIndex)[0]);
-        			planet.setY(planetPositions.get(subIndex)[1]);
+        			planet.setX(planetPositions.get(planetIndex)[0]);
+        			planet.setY(planetPositions.get(planetIndex)[1]);
         			planet.setEvent(Event.NO_EVENT);
         			planet.setTechnologyLevel((TechnologyLevel) Randomizer.randEnum((TechnologyLevel.class)));
         			planet.setResourceType((ResourceType) Randomizer.randEnum((ResourceType.class)));
@@ -86,14 +96,15 @@ public class PlanetFactory {
         			planet.setMarket(new MarketPlace(planet));
         			planets.put(planet.getName(), planet);
         			systemPlanets.put(planet.getName(),planet);
-        			subIndex++;
+        			planetIndex++;
         		}
-        		system.setX(systemDimensions.get(quadrantIndex).get(superIndex)[0]+quadrantXDimension*(quadrantIndex%uniRows));
-        		system.setY(systemDimensions.get(quadrantIndex).get(superIndex)[1]+quadrantYDimension*(quadrantIndex/uniRows));
+        		system.setX(systemDimensions.get(quadrantIndex).get(systemIndex)[0]+quadrantXDimension*(quadrantIndex%uniRows));
+        		system.setY(systemDimensions.get(quadrantIndex).get(systemIndex)[1]+quadrantYDimension*(quadrantIndex/uniRows));
         		system.setName(systemName);
         		system.setPlanets(systemPlanets);
         		systems.put(system.getName(),system);
-        		superIndex++;
+        		systemCount++;
+        		systemIndex++;
         	}
         	quadrantIndex++;
         	
@@ -103,6 +114,10 @@ public class PlanetFactory {
 
     public static int getNumberOfPlanets(){
         return planets.size();
+    }
+    
+    public static int getNumberOfSystem(){
+    	return systems.size();
     }
 
 }

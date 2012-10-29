@@ -26,7 +26,7 @@ public class Driver {
                     Game game = new Game();
                     game.setSettings(new Settings());
                     Display.setGame(game);
-                    PlanetFactory.createPlanets(PlanetNames.getPlanetNamesAsList(),SystemNames.getSystemNamesAsList(),GameVariables.numPlanets,GameVariables.numPlanetarySystems, GameVariables.systemRows, GameVariables.systemColumns, GameVariables.universeRows, GameVariables.universeColumns, GameVariables.quadrantXDimension, GameVariables.quadrantYDimension);
+                    PlanetFactory.createUniverse(PlanetNames.getPlanetNamesAsList(),SystemNames.getSystemNamesAsList(),GameVariables.numPlanets,GameVariables.numPlanetarySystems, GameVariables.systemRows, GameVariables.systemColumns, GameVariables.universeRows, GameVariables.universeColumns, GameVariables.quadrantXDimension, GameVariables.quadrantYDimension);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
