@@ -1,5 +1,11 @@
 package App.view;
 
+import App.model.Planet;
+import App.model.PoliticalSystem;
+import App.model.ResourceType;
+
+import javax.swing.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: mark.mcdonald
@@ -10,8 +16,17 @@ package App.view;
 public class PlanetInformationScreen extends Screen{
     public PlanetInformationScreen(){
         name = CardName.PLANET_INFORMATION_CARD;
+    }
 
-        // Shows information about a planet
+    public PlanetInformationScreen(Planet planet){
+        name = CardName.PLANET_INFORMATION_CARD;
 
+        String name = planet.getName();
+        ResourceType resourceLevel = planet.getResourceType();
+        PoliticalSystem politicalLevel = planet.getPoliticalSystem();
+
+        JLabel nameLabel = new JLabel(name);
+
+        JLabel resourceLabel = new JLabel("Resource Level: " + resourceLevel.getName());
     }
 }
