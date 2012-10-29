@@ -25,6 +25,8 @@ public class Planet {
     private int x,y;
 
 	private MarketPlace market;
+	
+	private PlanetarySystem planetarySystem;
 
 	public Planet(){
 
@@ -106,6 +108,16 @@ public class Planet {
 		this.y = y;
 	}
 	
+	
+	
+	public PlanetarySystem getPlanetarySystem() {
+		return planetarySystem;
+	}
+
+	public void setPlanetarySystem(PlanetarySystem planetarySystem) {
+		this.planetarySystem = planetarySystem;
+	}
+
 	public void determineEvent()
 	{
 		if (Randomizer.determineSuccess(eventProbability))

@@ -22,7 +22,6 @@ public class Ship {
 
     private int speed;
 
-    private Map<String, Equipment> equipment;
 
     private ShipModel name;
 
@@ -75,12 +74,5 @@ public class Ship {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-
-    public Map<String, Equipment> getEquipment() {
-        return equipment;
-    }
-
-    public void setEquipment(Map<String, Equipment> equipment) {
-        this.equipment = equipment;
-    }
+//
 }
