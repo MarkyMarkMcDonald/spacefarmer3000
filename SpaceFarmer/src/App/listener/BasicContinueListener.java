@@ -11,8 +11,6 @@ import App.view.CardName;
  * @author Andrew Wilder
  */
 public class BasicContinueListener extends ContinueListener implements ActionListener {
-
-	
 	/**
 	 * This is the constructor for the AdvanceListener class.
      * @param cardToMoveTo The ID of the card to change the center panel to.

@@ -5,8 +5,8 @@ import App.model.Game;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class controls the viewing pane. The different screens are controlled
@@ -28,6 +28,8 @@ public class Display extends JFrame {
     private static JPanel CenterPanel, mainContentPanel;
     private static Game game;
     private static MiniGameScreen MiniGameView;
+    // We need this to be able to update cards instead of creating new ones every time
+    private static Map<String, Screen> cardMap;
 
     /**
      * set up the initial screen
@@ -46,16 +48,16 @@ public class Display extends JFrame {
         mainContentPanel.add(StandardView, "Standard");
         StandardView.setLayout(new BorderLayout(0, 0));
         
-                JPanel TopPanel = new JPanel();
-                StandardView.add(TopPanel, BorderLayout.NORTH);
-                TopPanel.setBackground(Color.GREEN);
-                TopPanel.setLayout(new BoxLayout(TopPanel, BoxLayout.X_AXIS));
-                
-                        JLabel lblWip = new JLabel("WIP");
-                        TopPanel.add(lblWip);
-                        
-                                Component verticalStrut = Box.createVerticalStrut(80);
-                                TopPanel.add(verticalStrut);
+        JPanel TopPanel = new JPanel();
+        StandardView.add(TopPanel, BorderLayout.NORTH);
+        TopPanel.setBackground(Color.GREEN);
+        TopPanel.setLayout(new BoxLayout(TopPanel, BoxLayout.X_AXIS));
+
+        JLabel lblWip = new JLabel("WIP");
+        TopPanel.add(lblWip);
+
+        Component verticalStrut = Box.createVerticalStrut(80);
+        TopPanel.add(verticalStrut);
 
         JPanel BottomPanel = new JPanel();
         StandardView.add(BottomPanel, BorderLayout.SOUTH);
@@ -68,28 +70,9 @@ public class Display extends JFrame {
         Component verticalStrut_1 = Box.createVerticalStrut(80);
         BottomPanel.add(verticalStrut_1);
 
-        JPanel LeftPanel = new JPanel();
+        JPanel LeftPanel = new NavigationSidePanel();
         StandardView.add(LeftPanel, BorderLayout.WEST);
         LeftPanel.setBackground(Color.CYAN);
-        LeftPanel.setLayout(new BoxLayout(LeftPanel, BoxLayout.Y_AXIS));
-
-        JLabel label = new JLabel("WIP");
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        label.setAlignmentY(0.0f);
-        LeftPanel.add(label);
-        
-        JButton btnNewButton = new JButton("Marketplace");
-        btnNewButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        	}
-        });
-        LeftPanel.add(btnNewButton);
-        
-        JButton btnShip = new JButton("Ship");
-        LeftPanel.add(btnShip);
-        
-        JButton btnTravel = new JButton("Travel");
-        LeftPanel.add(btnTravel);
 
         Component horizontalStrut = Box.createHorizontalStrut(100);
         LeftPanel.add(horizontalStrut);
@@ -115,11 +98,12 @@ public class Display extends JFrame {
         MiniGameView = new MiniGameScreen();
         mainContentPanel.add(MiniGameView, "MiniGame");
 
+        cardMap = new HashMap<String, Screen>();
         // Generate every possible card
         for (CardName name : CardName.values()){
-            CenterPanel.add(name.getScreen(), name.toString());
+            cardMap.put(name.toString(),name.getScreen());
+            CenterPanel.add(name.toString(),cardMap.get(name.toString()));
         }
-
     }
     
     /**
@@ -152,6 +136,10 @@ public class Display extends JFrame {
     }
 
     //--Accessors and Modifiers
+
+    public static Screen getCard(String cardName){
+        return cardMap.get(cardName);
+    }
 
     public static Game getGame() {
         return game;

@@ -6,9 +6,8 @@ import App.model.Player;
 import App.service.Randomizer;
 import App.view.CardName;
 import App.view.Display;
-import App.view.MarketScreen;
+import App.view.StartOfTurnScreen;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
 public class StartGameListener extends ContinueListener implements ActionListener {
 
     public StartGameListener(){
-        cardToMoveTo = CardName.MARKETPLACE_CARD;
+        cardToMoveTo = CardName.START_OF_TURN_CARD;
     }
 
     @Override
@@ -36,12 +35,13 @@ public class StartGameListener extends ContinueListener implements ActionListene
         for (Player player : players){
             player.setCurrentPlanet(Randomizer.getRandomPlanet());
         }
-        Game.setPlayers(players);
 
+        // We'll start on turn 1 of round 1
+        Game.setNumberOfTurns(1);
 
-        MarketScreen marketScreen = new MarketScreen(player1.getCurrentPlanet().getMarket());
-        JPanel contentPanel = Display.getCenterPanel();
-        contentPanel.add(marketScreen,"MarketplaceCard");
+        // update the turn Screen
+        StartOfTurnScreen startOfTurnScreen = (StartOfTurnScreen) Display.getCard(CardName.START_OF_TURN_CARD.toString());
+        startOfTurnScreen.updateTurn();
 
         this.progressDisplay();
         Logger.printGameToConsole();

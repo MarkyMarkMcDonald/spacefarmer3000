@@ -25,6 +25,7 @@ public class Game {
 
     private static Player currentPlayer;
 
+
     public Game(){
         numberOfTurns = 0;
         players = new ArrayList<Player>();
@@ -74,5 +75,14 @@ public class Game {
 
     public void addPlayer(Player player) {
         players.add(player);
+    }
+
+
+    public static Planet getCurrentPlanet() {
+        return currentPlayer.getCurrentPlanet();
+    }
+
+    public static MarketPlace getCurrentMarketPlace() {
+        return getCurrentPlanet().getMarket();
     }
 }

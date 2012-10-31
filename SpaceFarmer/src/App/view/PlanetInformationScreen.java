@@ -1,8 +1,6 @@
 package App.view;
 
 import App.model.Planet;
-import App.model.PoliticalSystem;
-import App.model.ResourceType;
 
 import javax.swing.*;
 
@@ -22,8 +20,8 @@ public class PlanetInformationScreen extends Screen{
 
         nameLabel = new JLabel();
         resourceLabel = new JLabel();
-
-
+        add(nameLabel);
+        add(resourceLabel);
     }
 
     public void update(Planet planet){

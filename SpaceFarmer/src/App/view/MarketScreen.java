@@ -51,7 +51,7 @@ public class MarketScreen extends Screen {
 		JLabel lblMarketPlace = new JLabel("Market Place");
 		panel.add(lblMarketPlace);
 
-        setMarketPlace(marketPlace);
+        updateMarketPlace(marketPlace);
 
 	}
 
@@ -59,7 +59,7 @@ public class MarketScreen extends Screen {
         return marketPlace;
     }
 
-    public void setMarketPlace(MarketPlace marketPlace) {
+    public void updateMarketPlace(MarketPlace marketPlace) {
         this.marketPlace = marketPlace;
 
         buyingPanel = new BuyingPanel(errorMessage);
