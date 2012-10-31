@@ -19,6 +19,7 @@ import javax.swing.JPanel;
  * @author Mark McDaniel, Andrew Wilder
  */
 public class WelcomeScreen extends Screen {
+	
 	/**
 	 * Prevents "serializable" warning
 	 */

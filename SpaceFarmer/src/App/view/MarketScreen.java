@@ -1,16 +1,15 @@
 package App.view;
 
-/**
- * Created with Eclipse.
- *
- */
-
 import App.model.Game;
 import App.model.MarketPlace;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This screen represents a marketplace with multiple buying/selling venues. (WIP)
+ * @author Ivory Assan, Mark McDonald
+ */
 public class MarketScreen extends Screen {
 
     private MarketPlace marketPlace;

@@ -10,8 +10,11 @@ import Conf.SystemNames;
 
 import java.awt.*;
 
+/**
+ * This class starts the SpaceFarmer game; it has the program's main method.
+ * @author Mark McDonald, Andrew Wilder
+ */
 public class Driver {
-
 
     /**
      * Launch the application.

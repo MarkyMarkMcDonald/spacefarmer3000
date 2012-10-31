@@ -46,16 +46,16 @@ public class Display extends JFrame {
         mainContentPanel.add(StandardView, "Standard");
         StandardView.setLayout(new BorderLayout(0, 0));
         
-                JPanel TopPanel = new JPanel();
-                StandardView.add(TopPanel, BorderLayout.NORTH);
-                TopPanel.setBackground(Color.GREEN);
-                TopPanel.setLayout(new BoxLayout(TopPanel, BoxLayout.X_AXIS));
-                
-                        JLabel lblWip = new JLabel("WIP");
-                        TopPanel.add(lblWip);
-                        
-                                Component verticalStrut = Box.createVerticalStrut(80);
-                                TopPanel.add(verticalStrut);
+        JPanel TopPanel = new JPanel();
+        StandardView.add(TopPanel, BorderLayout.NORTH);
+        TopPanel.setBackground(Color.GREEN);
+        TopPanel.setLayout(new BoxLayout(TopPanel, BoxLayout.X_AXIS));
+
+        JLabel lblWip = new JLabel("WIP");
+        TopPanel.add(lblWip);
+
+        Component verticalStrut = Box.createVerticalStrut(80);
+        TopPanel.add(verticalStrut);
 
         JPanel BottomPanel = new JPanel();
         StandardView.add(BottomPanel, BorderLayout.SOUTH);
@@ -81,6 +81,7 @@ public class Display extends JFrame {
         JButton btnNewButton = new JButton("Marketplace");
         btnNewButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
+        		// TODO what is this?
         	}
         });
         LeftPanel.add(btnNewButton);

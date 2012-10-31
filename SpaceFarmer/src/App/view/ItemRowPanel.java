@@ -4,6 +4,10 @@ import App.listener.TransactionListener;
 
 import javax.swing.*;
 
+/**
+ * This inner JPanel holds the item rows used in the BuyingPanel.
+ * @author Mark McDonald
+ */
 public class ItemRowPanel extends JPanel {
 	private JTextField txtToBuy;
 
@@ -30,7 +34,5 @@ public class ItemRowPanel extends JPanel {
         transactionListener.setQuantity(txtToBuy);
         btnBuy.addActionListener(transactionListener);
 		add(btnBuy);
-
 	}
-
 }

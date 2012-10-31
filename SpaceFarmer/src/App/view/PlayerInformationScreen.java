@@ -17,6 +17,10 @@ import javax.swing.JTextField;
 import java.awt.Component;
 import javax.swing.Box;
 
+/**
+ * This screen shows the Player his information. (WIP)
+ * @author Mark McDonald
+ */
 public class PlayerInformationScreen extends Screen{
 
 	/**
