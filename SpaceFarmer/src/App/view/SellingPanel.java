@@ -58,6 +58,7 @@ public class SellingPanel extends JPanel {
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
         headings.add(horizontalStrut_3);
 
+        add(headings);
         items = new JPanel();
         add(items);
 

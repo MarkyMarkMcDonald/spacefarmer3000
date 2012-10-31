@@ -4,7 +4,6 @@ import App.model.Game;
 import App.model.MarketPlace;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * This screen represents a marketplace with multiple buying/selling venues. (WIP)
@@ -21,37 +20,28 @@ public class MarketScreen extends Screen {
         name = CardName.MARKETPLACE_CARD;
         errorMessage = new JLabel();
         errorMessage.setVisible(false);
-        setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        JPanel panel = new JPanel();
-        add(panel);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel lblMarketPlace = new JLabel("Market Place");
-        panel.add(lblMarketPlace);
+        add(lblMarketPlace);
+
+        buyingPanel = new BuyingPanel(errorMessage);
+        sellingPanel = new SellingPanel(errorMessage);
+
+        JPanel transactionPanel = new JPanel();
+        transactionPanel.setLayout(new BoxLayout(transactionPanel, BoxLayout.X_AXIS));
+        transactionPanel.add(buyingPanel);
+        transactionPanel.add(sellingPanel);
+        add(transactionPanel);
     }
 
 	/**
 	 * Create the panel.
 	 */
 	public MarketScreen(MarketPlace marketPlace) {
-        name = CardName.MARKETPLACE_CARD;
-
-        errorMessage = new JLabel();
-        add(errorMessage);
-        errorMessage.setVisible(false);
-
-        setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-		JPanel panel = new JPanel();
-		add(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-		JLabel lblMarketPlace = new JLabel("Market Place");
-		panel.add(lblMarketPlace);
-
+        this();
         updateMarketPlace(marketPlace);
-
 	}
 
     public MarketPlace getMarketPlace() {
@@ -61,19 +51,10 @@ public class MarketScreen extends Screen {
     public void updateMarketPlace(MarketPlace marketPlace) {
         this.marketPlace = marketPlace;
 
-        buyingPanel = new BuyingPanel(errorMessage);
-        sellingPanel = new SellingPanel(errorMessage);
         buyingPanel.setSellingPanel(sellingPanel);
         sellingPanel.setBuyingPanel(buyingPanel);
         buyingPanel.setMarket(marketPlace);
         sellingPanel.setMarketPlaceAndInventory(marketPlace,Game.getCurrentPlayer().getInventory());
-
-        add(Box.createVerticalStrut(20));
-        add("buy",buyingPanel);
-
-        add(Box.createVerticalStrut(20));
-        add("sell",sellingPanel);
-
     }
 
 }
