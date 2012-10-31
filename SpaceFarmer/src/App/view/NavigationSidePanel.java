@@ -4,7 +4,6 @@ import App.listener.ContinueListener;
 import App.model.Game;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -18,10 +17,6 @@ public class NavigationSidePanel extends SidePanel {
 
     public NavigationSidePanel(){
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        JLabel label = new JLabel("WIP");
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        label.setAlignmentY(0.0f);
-        add(label);
 
         JButton planetInfoBtn = new JButton("Current Planet");
         ContinueListener goToPlanetInfoListener = new ContinueListener() {

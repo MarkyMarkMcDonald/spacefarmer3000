@@ -44,9 +44,7 @@ public class StartGameListener extends ContinueListener implements ActionListene
         StartOfTurnScreen startOfTurnScreen = (StartOfTurnScreen) Display.getCard(CardName.START_OF_TURN_CARD.toString());
         startOfTurnScreen.updateTurn();
 
-        // enable the navigation panel
-        JPanel navPanel = Display.getSidePanel("Left");
-        navPanel.setVisible(true);
+
 
         this.progressDisplay();
         Logger.printGameToConsole();

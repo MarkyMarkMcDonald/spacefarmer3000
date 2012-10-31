@@ -3,6 +3,7 @@ package App.view;
 import App.model.Planet;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,15 +19,23 @@ public class PlanetInformationScreen extends Screen{
     public PlanetInformationScreen(){
         name = CardName.PLANET_INFORMATION_CARD;
 
+        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+
         nameLabel = new JLabel();
+        nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         resourceLabel = new JLabel();
+        resourceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
+
         add(nameLabel);
         add(resourceLabel);
     }
 
     public void update(Planet planet){
-        nameLabel.setText("Planet: " + planet.getName());
-        resourceLabel.setText("Resource Level: " + planet.getResourceType().getName());
+        nameLabel.setText("Planet " + planet.getName());
+        resourceLabel.setText("Resources: " + planet.getResourceType().getName());
     }
 
 }

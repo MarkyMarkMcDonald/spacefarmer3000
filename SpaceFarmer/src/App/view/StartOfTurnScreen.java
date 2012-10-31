@@ -46,6 +46,10 @@ public class StartOfTurnScreen extends Screen{
                 planetInformationScreen.update(currentPlanet);
 
                 progressDisplay();
+
+                // enable the navigation panel
+                JPanel navPanel = Display.getSidePanel("Left");
+                navPanel.setVisible(true);
             }
 
 
