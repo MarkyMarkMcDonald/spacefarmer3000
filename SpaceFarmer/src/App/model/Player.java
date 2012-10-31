@@ -35,7 +35,7 @@ public class Player {
 		skillLevels.put(SkillType.TRADING,trading);
 		skillLevels.put(SkillType.ENGINEERING,engineering);
 		skillLevels.put(SkillType.FIGHTING,fighting);
-		this.money=1000;
+		this.money=1000000;
 		this.ship= ShipFactory.getShip(ShipModel.GNAT);
 	}
 

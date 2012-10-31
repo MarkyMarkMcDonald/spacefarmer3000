@@ -72,6 +72,8 @@ public class TransactionService {
             inventory.addItem(tradeGood,-quantity);
 
             marketPlace.changeQuantity(tradeGood,quantity);
+            
+            player.changeMoney(transactionCost);
         }
         else {
             message = "You need " + (quantity - amountInInventory) + " more to sell that amount";
