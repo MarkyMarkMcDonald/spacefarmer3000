@@ -79,15 +79,8 @@ public class Display extends JFrame {
          * Bot Panel
          */
 
-        JPanel BottomPanel = new JPanel();
+        JPanel BottomPanel = new PlayersInformationSidePanel(null);
         BottomPanel.setBackground(Color.MAGENTA);
-        BottomPanel.setLayout(new BoxLayout(BottomPanel, BoxLayout.X_AXIS));
-
-        JLabel label_1 = new JLabel("WIP");
-        BottomPanel.add(label_1);
-
-        Component verticalStrut_1 = Box.createVerticalStrut(80);
-        BottomPanel.add(verticalStrut_1);
 
         /**
          * Left Panel

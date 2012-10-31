@@ -1,6 +1,7 @@
 package App.model;
 
 import App.factory.ShipFactory;
+import Conf.GameVariables;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class Player {
 		skillLevels.put(SkillType.TRADING,trading);
 		skillLevels.put(SkillType.ENGINEERING,engineering);
 		skillLevels.put(SkillType.FIGHTING,fighting);
-		this.money=1000000;
+		this.money= GameVariables.playerStartingMoney;
 		this.ship= ShipFactory.getShip(ShipModel.GNAT);
 	}
 

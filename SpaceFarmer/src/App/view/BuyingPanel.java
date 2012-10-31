@@ -18,8 +18,6 @@ public class BuyingPanel extends JPanel {
     private JLabel errorMessage;
     private SellingPanel sellingPanel;
 
-
-
     /**
 	 * Create the panel.
 	 */
@@ -80,8 +78,6 @@ public class BuyingPanel extends JPanel {
             items.add(rowPanel);
         }
         items.setBorder(new LineBorder(Color.black));
-
-        add("items", items);
     }
 
     public void setErrorMessage(JLabel errorMessage) {

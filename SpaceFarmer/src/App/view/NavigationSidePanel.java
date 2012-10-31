@@ -49,7 +49,6 @@ public class NavigationSidePanel extends SidePanel {
         marketplaceBtn.addActionListener(goToMarketPlaceListener);
         add(marketplaceBtn);
 
-
         JButton btnShip = new JButton("Ship");
         add(btnShip);
 

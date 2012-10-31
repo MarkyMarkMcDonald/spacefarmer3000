@@ -5,6 +5,8 @@ import App.model.MarketPlace;
 import App.model.Tradable;
 import App.service.TransactionService;
 import App.view.BuyingPanel;
+import App.view.Display;
+import App.view.PlayersInformationSidePanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -38,8 +40,9 @@ public class SellToMarketListener extends TransactionListener {
             shownQuantity.setText(newQuantity);
 
             buyingPanel.setMarket(marketPlace);
+
+            PlayersInformationSidePanel playersInformationSidePanel = (PlayersInformationSidePanel) Display.getSidePanel("Bot");
+            playersInformationSidePanel.updateBasedOnAllPlayers();
         }
-
     }
-
 }

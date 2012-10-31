@@ -50,6 +50,10 @@ public class StartOfTurnScreen extends Screen{
                 // enable the navigation panel
                 JPanel navPanel = Display.getSidePanel("Left");
                 navPanel.setVisible(true);
+
+                PlayersInformationSidePanel playersInfoPanel = (PlayersInformationSidePanel) Display.getSidePanel("Bot");
+                playersInfoPanel.updateBasedOnAllPlayers();
+                playersInfoPanel.setVisible(true);
             }
 
 
