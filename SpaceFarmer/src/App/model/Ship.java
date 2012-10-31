@@ -10,6 +10,8 @@ package App.model;
  */
 public class Ship {
 
+    private ShipModel type;
+
     private int cargoSize;
 
     private int health;
@@ -20,10 +22,18 @@ public class Ship {
 
     private int speed;
 
-
-    private ShipModel type;
+    private int maxFuel;
 
     //--Accessors and Modifiers
+
+    public int getMaxFuel() {
+        return maxFuel;
+    }
+
+    public void setMaxFuel(int maxFuel) {
+        this.maxFuel = maxFuel;
+    }
+
 
     public ShipModel getType() {
         return type;
