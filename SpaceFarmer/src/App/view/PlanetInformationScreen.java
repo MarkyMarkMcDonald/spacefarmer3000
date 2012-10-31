@@ -14,19 +14,21 @@ import javax.swing.*;
  * To change this template use File | Settings | File Templates.
  */
 public class PlanetInformationScreen extends Screen{
+    private JLabel nameLabel;
+    private JLabel resourceLabel;
+
     public PlanetInformationScreen(){
         name = CardName.PLANET_INFORMATION_CARD;
+
+        nameLabel = new JLabel();
+        resourceLabel = new JLabel();
+
+
     }
 
-    public PlanetInformationScreen(Planet planet){
-        name = CardName.PLANET_INFORMATION_CARD;
-
-        String name = planet.getName();
-        ResourceType resourceLevel = planet.getResourceType();
-        PoliticalSystem politicalLevel = planet.getPoliticalSystem();
-
-        JLabel nameLabel = new JLabel(name);
-
-        JLabel resourceLabel = new JLabel("Resource Level: " + resourceLevel.getName());
+    public void update(Planet planet){
+        nameLabel.setText("Planet: " + planet.getName());
+        resourceLabel.setText("Resource Level: " + planet.getResourceType().getName());
     }
+
 }
