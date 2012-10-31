@@ -4,7 +4,8 @@ import App.model.Game;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.*import java.util.HashMap;
+import java.awt.*;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
