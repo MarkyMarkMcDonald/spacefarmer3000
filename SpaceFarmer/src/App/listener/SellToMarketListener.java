@@ -4,6 +4,7 @@ import App.model.Game;
 import App.model.MarketPlace;
 import App.model.Tradable;
 import App.service.TransactionService;
+import App.view.BuyingPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,9 +17,11 @@ import java.awt.event.ActionEvent;
  * To change this template use File | Settings | File Templates.
  */
 public class SellToMarketListener extends TransactionListener {
+    private BuyingPanel buyingPanel;
 
-    public SellToMarketListener(MarketPlace marketPlace, int price, Tradable good, JLabel errorMessage) {
+    public SellToMarketListener(MarketPlace marketPlace, int price, Tradable good, JLabel errorMessage, BuyingPanel buyingPanel) {
         super(marketPlace, price, good, errorMessage);
+        this.buyingPanel = buyingPanel;
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
@@ -26,6 +29,17 @@ public class SellToMarketListener extends TransactionListener {
         String message = TransactionService.sellToMarket(Game.getCurrentPlayer(), marketPlace, price, quantityAsInt, good);
         errorMessage.setText(message);
         errorMessage.setVisible(true);
+
+        // update view if there are no errors
+        if (!message.contains("You need")){
+            int previousQuantity = Integer.parseInt(shownQuantity.getText());
+            int changedQuantity = Integer.parseInt(message.split(" ")[2]);
+            String newQuantity = Integer.toString(previousQuantity - changedQuantity);
+            shownQuantity.setText(newQuantity);
+
+            buyingPanel.setMarket(marketPlace);
+        }
+
     }
 
 }

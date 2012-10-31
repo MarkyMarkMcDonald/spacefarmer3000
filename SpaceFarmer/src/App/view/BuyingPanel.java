@@ -16,39 +16,49 @@ import java.util.Map;
 public class BuyingPanel extends JPanel {
     private JPanel items;
     private JLabel errorMessage;
-	/**
+    private SellingPanel sellingPanel;
+
+
+
+    /**
 	 * Create the panel.
 	 */
-	public BuyingPanel(MarketPlace marketPlace, JLabel errorMessage) {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+	public BuyingPanel(JLabel errorMessage) {
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.errorMessage = errorMessage;
 
-		JLabel lblItem = new JLabel("Item");
-		add(lblItem);
+        JPanel headings = new JPanel();
+        headings.setLayout(new BoxLayout(headings, BoxLayout.X_AXIS));
+
+        JLabel lblItem = new JLabel("Item");
+		headings.add(lblItem);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
-		add(horizontalStrut);
+        headings.add(horizontalStrut);
 		
 		JLabel lblBuyingPrice = new JLabel("# Available");
-		add(lblBuyingPrice);
+        headings.add(lblBuyingPrice);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-		add(horizontalStrut_1);
+        headings.add(horizontalStrut_1);
 		
 		JLabel lblAvailable = new JLabel("Buying Price");
-		add(lblAvailable);
+        headings.add(lblAvailable);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		add(horizontalStrut_2);
+        headings.add(horizontalStrut_2);
 		
 		JLabel lblToBuy = new JLabel("# to Buy");
-		add(lblToBuy);
+        headings.add(lblToBuy);
 		
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
-		add(horizontalStrut_3);
+        headings.add(horizontalStrut_3);
 
-        setMarket(marketPlace);
+        add(headings);
+
+        items = new JPanel();
+        add(items);
 	}
 
     /**
@@ -56,7 +66,7 @@ public class BuyingPanel extends JPanel {
      * @param marketPlace to be used to determine item quantities and prices
      */
     public void setMarket(MarketPlace marketPlace){
-        items = new JPanel();
+        items.removeAll();
         items.setLayout(new BoxLayout(items,BoxLayout.Y_AXIS));
 
         for (Map.Entry<Tradable, Integer> item : marketPlace.getQuantityMap().entrySet()){
@@ -65,11 +75,20 @@ public class BuyingPanel extends JPanel {
             int quantityAvailable = item.getValue();
             String itemName = itemInfo.getName();
             int itemPrice = itemInfo.getBasePrice();
-            ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Buy!",new BuyFromMarketListener(marketPlace,itemPrice,itemInfo,errorMessage));
+            ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Buy!", new BuyFromMarketListener(marketPlace,itemPrice,itemInfo,errorMessage, sellingPanel));
             rowPanel.add(row);
             items.add(rowPanel);
         }
         items.setBorder(new LineBorder(Color.black));
-        add(items);
+
+        add("items", items);
+    }
+
+    public void setErrorMessage(JLabel errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public void setSellingPanel(SellingPanel sellingPanel) {
+        this.sellingPanel = sellingPanel;
     }
 }

@@ -2,7 +2,6 @@ package App.service;
 
 import App.model.*;
 
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -36,7 +35,7 @@ public class TransactionService {
         }
         // Make sure player has enough money
         else if (transactionCost > player.getMoney()){
-            message = "You need $" + (transactionCost - player.getMoney() + "more!");
+            message = "You need $" + (transactionCost - player.getMoney() + " more!");
         }
         else {
             // Default success message
@@ -44,13 +43,7 @@ public class TransactionService {
 
             player.changeMoney(-transactionCost);
 
-            Iterator<Tradable> iterator = inventoryItems.iterator();
-            while (iterator.hasNext()){
-                Tradable inventoryItem = iterator.next();
-                if (inventoryItem.equals(tradeGood)){
-
-                }
-            }
+            inventory.addItem(tradeGood,quantity);
         }
         return message;
     }
@@ -67,20 +60,22 @@ public class TransactionService {
     public static String sellToMarket(Player player, MarketPlace marketPlace, int price, int quantity, Tradable tradeGood){
         String message;
         Inventory inventory = player.getInventory();
+        int amountInInventory = inventory.getQuantity(tradeGood);
         Ship ship = player.getShip();
         int cargoSize = ship.getCargoSize();
         int transactionCost = price * quantity;
 
         // make sure player has enough
+        if (amountInInventory >= quantity){
+            message = "You Sold " + quantity + " " + tradeGood.getName() + "'s for " + transactionCost;
 
-        message = "You Sold" + quantity + " " + tradeGood.getName() + "'s for " + transactionCost;
+            inventory.addItem(tradeGood,-quantity);
 
-        // decrease the amount in the inventory
-
-        // increase the amount in the marketplace
-
-        // update the price of that good in the marketplace
-
+            marketPlace.changeQuantity(tradeGood,quantity);
+        }
+        else {
+            message = "You need " + (quantity - amountInInventory) + " more to sell that amount";
+        }
         return message;
     }
 

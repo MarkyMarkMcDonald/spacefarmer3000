@@ -21,6 +21,7 @@ abstract public class TransactionListener implements ActionListener{
     protected JTextField quantity;
     protected JLabel errorMessage;
     protected int quantityAsInt;
+    protected JLabel shownQuantity;
 
     protected TransactionListener(MarketPlace marketPlace, int price, Tradable good, JLabel errorMessage) {
         this.marketPlace = marketPlace;
@@ -31,6 +32,10 @@ abstract public class TransactionListener implements ActionListener{
 
     public void setQuantity(JTextField quantity) {
         this.quantity = quantity;
+    }
+
+    public void setShownQuantity(JLabel shownQuantity) {
+        this.shownQuantity = shownQuantity;
     }
 
     @Override

@@ -32,6 +32,7 @@ public class ItemRowPanel extends JPanel {
 		
 		JButton btnBuy = new JButton(actionText);
         transactionListener.setQuantity(txtToBuy);
+        transactionListener.setShownQuantity(lblAvailable);
         btnBuy.addActionListener(transactionListener);
 		add(btnBuy);
 	}
