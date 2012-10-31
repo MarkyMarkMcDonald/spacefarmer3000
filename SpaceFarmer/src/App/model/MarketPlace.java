@@ -1,9 +1,9 @@
 package App.model;
 
+import App.service.Randomizer;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import App.service.Randomizer;
 /**
  * Created with IntelliJ IDEA.
  * User: Marky
@@ -12,8 +12,8 @@ import App.service.Randomizer;
  * To change this template use File | Settings | File Templates.
  */
 public class MarketPlace {
-	private static final int MINIMUM_SUBGOODS=2;
-	private static final int MAXIMUM_SUBGOODS=3;
+	private static final int MINIMUM_SUBGOODS=1;
+	private static final int MAXIMUM_SUBGOODS=2;
 	private Map<Tradable,Integer> priceMap;
 	private Map<Tradable,Integer> quantityMap;
 

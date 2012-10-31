@@ -1,7 +1,5 @@
 package App.model;
 
-import java.util.Map;
-
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,16 +21,16 @@ public class Ship {
     private int speed;
 
 
-    private ShipModel name;
+    private ShipModel type;
 
     //--Accessors and Modifiers
 
-    public ShipModel getName() {
-        return name;
+    public ShipModel getType() {
+        return type;
     }
 
-    public void setName(ShipModel name) {
-        this.name = name;
+    public void setType(ShipModel type) {
+        this.type = type;
     }
 
     public int getCargoSize() {

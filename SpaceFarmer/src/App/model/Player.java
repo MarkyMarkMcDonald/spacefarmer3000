@@ -39,8 +39,11 @@ public class Player {
 		this.ship= ShipFactory.getShip(ShipModel.GNAT);
 	}
 
-    //--Accessors and Modifiers
+    public void changeMoney(int amount){
+        money += amount;
+    }
 
+    //--Accessors and Modifiers
     public Planet getCurrentPlanet() {
         return currentPlanet;
     }

@@ -1,20 +1,14 @@
 package App.factory;
 
+import App.model.*;
+import App.service.Randomizer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import App.model.Event;
-import App.model.MarketPlace;
-import App.model.Planet;
-import App.model.PlanetarySystem;
-import App.model.PoliticalSystem;
-import App.model.ResourceType;
-import App.model.TechnologyLevel;
-import App.service.Randomizer;
-
-public class PlanetFactory {
+public class UniverseFactory {
 
     private static Map<String, Planet> planets;
     
@@ -24,13 +18,16 @@ public class PlanetFactory {
     {
     	return systems.get(name);
     }
+
 	public static Planet getPlanet(String name)
 	{
         return planets.get(name);
 	}
+
     public static Map<String, Planet> getPlanets(){
         return planets;
     }
+
     public static Map<String, PlanetarySystem> getPlanetarySystems(){
         return systems;
     }
@@ -45,8 +42,6 @@ public class PlanetFactory {
      * @param maxYDim Length of the game's y-axis
      * @param numPlanets how many planets for this game
      */
-    
-    
     public static void createUniverse(List<String> planetNames,List<String> planetarySystemNames, int numPlanets,int numSystems,int systemRows, int systemCols, int uniRows, int uniCols,int quadrantXDimension,int quadrantYDimension){
 
         planets = new HashMap<String, Planet>();

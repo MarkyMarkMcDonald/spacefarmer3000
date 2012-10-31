@@ -16,10 +16,12 @@ public class MarketScreen extends Screen {
     private MarketPlace marketPlace;
     private BuyingPanel buyingPanel;
     private SellingPanel sellingPanel;
+    private JLabel errorMessage;
 
     public MarketScreen(){
         name = CardName.MARKETPLACE_CARD;
-
+        errorMessage = new JLabel();
+        errorMessage.setVisible(false);
         setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         JPanel panel = new JPanel();
@@ -36,20 +38,27 @@ public class MarketScreen extends Screen {
 	public MarketScreen(MarketPlace marketPlace) {
         name = CardName.MARKETPLACE_CARD;
 
-		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+        errorMessage = new JLabel();
+        add(errorMessage);
+        errorMessage.setVisible(false);
+
+        setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
 		JPanel panel = new JPanel();
 		add(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
 		JLabel lblMarketPlace = new JLabel("Market Place");
 		panel.add(lblMarketPlace);
-		
-		buyingPanel = new BuyingPanel(marketPlace);
-		add(buyingPanel);
-		
-		sellingPanel = new SellingPanel(Game.getCurrentPlayer().getInventory(),marketPlace);
-		add(sellingPanel);
+
+        Box.createVerticalStrut(20);
+		buyingPanel = new BuyingPanel(marketPlace, errorMessage);
+		add("buy",buyingPanel);
+        add(Box.createVerticalStrut(20));
+
+		sellingPanel = new SellingPanel(Game.getCurrentPlayer().getInventory(),marketPlace, errorMessage);
+		add("sell",sellingPanel);
+
 	}
 
     public MarketPlace getMarketPlace() {
@@ -59,11 +68,15 @@ public class MarketScreen extends Screen {
     public void setMarketPlace(MarketPlace marketPlace) {
         this.marketPlace = marketPlace;
 
-        buyingPanel = new BuyingPanel(marketPlace);
-        add(buyingPanel);
+        add(Box.createVerticalStrut(20));
+        buyingPanel = new BuyingPanel(marketPlace, errorMessage);
+        add("buy",buyingPanel);
 
-        sellingPanel = new SellingPanel(Game.getCurrentPlayer().getInventory(),marketPlace);
-        add(sellingPanel);
+
+        add(Box.createVerticalStrut(20));
+        sellingPanel = new SellingPanel(Game.getCurrentPlayer().getInventory(),marketPlace, errorMessage);
+        add("sell",sellingPanel);
+
     }
 
 }

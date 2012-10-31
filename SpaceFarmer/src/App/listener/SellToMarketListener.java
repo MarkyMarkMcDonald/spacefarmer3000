@@ -5,8 +5,8 @@ import App.model.MarketPlace;
 import App.model.Tradable;
 import App.service.TransactionService;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,22 +15,17 @@ import java.awt.event.ActionListener;
  * Time: 5:36 PM
  * To change this template use File | Settings | File Templates.
  */
-public class SellToMarketListener implements ActionListener {
+public class SellToMarketListener extends TransactionListener {
 
-    private MarketPlace marketPlace;
-    private int price;
-    private Tradable good;
-    private int quantity;
-
-    public SellToMarketListener(MarketPlace marketPlace, int price, Tradable good, int quantity) {
-        this.marketPlace = marketPlace;
-        this.price = price;
-        this.good = good;
-        this.quantity = quantity;
+    public SellToMarketListener(MarketPlace marketPlace, int price, Tradable good, JLabel errorMessage) {
+        super(marketPlace, price, good, errorMessage);
     }
 
-    @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        String message = TransactionService.sellToMarket(Game.getCurrentPlayer(),marketPlace,price, quantity,good);
+        super.actionPerformed(actionEvent);
+        String message = TransactionService.sellToMarket(Game.getCurrentPlayer(), marketPlace, price, quantityAsInt, good);
+        errorMessage.setText(message);
+        errorMessage.setVisible(true);
     }
+
 }

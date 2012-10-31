@@ -36,7 +36,7 @@ public class ShipFactory {
             switch (shipModel)
             {
                 case GNAT:
-                    ship.setName(ShipModel.GNAT);
+                    ship.setType(ShipModel.GNAT);
                     ship.setCargoSize(15);
                     ship.setHealth(100);
                     ship.setPower(1);
@@ -44,7 +44,7 @@ public class ShipFactory {
                     ship.setSpeed(14);
                     break;
                 case FIREFLY:
-                    ship.setName(ShipModel.FIREFLY);
+                    ship.setType(ShipModel.FIREFLY);
                     ship.setCargoSize(20);
                     ship.setHealth(100);
                     ship.setPower(1);
@@ -52,7 +52,7 @@ public class ShipFactory {
                     ship.setSpeed(17);
                     break;
                 case MOSQUITO:
-                    ship.setName(ShipModel.MOSQUITO);
+                    ship.setType(ShipModel.MOSQUITO);
                     ship.setCargoSize(15);
                     ship.setHealth(100);
                     ship.setPower(2);
@@ -60,7 +60,7 @@ public class ShipFactory {
                     ship.setSpeed(13);
                     break;
                 case BUMBLEBEE:
-                    ship.setName(ShipModel.BUMBLEBEE);
+                    ship.setType(ShipModel.BUMBLEBEE);
                     ship.setCargoSize(25);
                     ship.setHealth(100);
                     ship.setPower(1);
@@ -68,7 +68,7 @@ public class ShipFactory {
                     ship.setSpeed(15);
                     break;
             }
-            ships.put(ship.getName(),ship);
+            ships.put(ship.getType(),ship);
             return ship;
         }
         else {

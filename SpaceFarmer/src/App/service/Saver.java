@@ -33,7 +33,6 @@ public class Saver {
 
 	/**
 	 * saves the players (npc's included) and all their stuff to a file
-	 * @param loctaions the array of save locations
 	 * @param players a collection of players in the game
 	 */
 	private void savePlayer(String location,Collection <Player> players){	
@@ -53,8 +52,7 @@ public class Saver {
 				writer.write("\n"+player.getMoney());
 				writer.write("\n"+player.getSkillLevels().toString());
 				writer.write("\n"+player.getInventory().toString());
-				writer.write("\n"+player.getShip().getName().toString());
-				writer.write("\n"+player.getShip().getEquipment().toString());
+				writer.write("\n"+player.getShip().getType().toString());
 
 			} catch (IOException e) {
 				e.printStackTrace();

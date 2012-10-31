@@ -1,7 +1,12 @@
 package App.listener;
 
+import App.model.Game;
+import App.model.MarketPlace;
+import App.model.Tradable;
+import App.service.TransactionService;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,10 +15,16 @@ import java.awt.event.ActionListener;
  * Time: 5:36 PM
  * To change this template use File | Settings | File Templates.
  */
-public class BuyFromMarketListener implements ActionListener {
+public class BuyFromMarketListener extends TransactionListener{
 
-    @Override
+    public BuyFromMarketListener(MarketPlace marketPlace, int price, Tradable good, JLabel errorMessage) {
+        super(marketPlace, price, good, errorMessage);
+    }
+
     public void actionPerformed(ActionEvent actionEvent) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        super.actionPerformed(actionEvent);
+        String message = TransactionService.buyFromMarket(Game.getCurrentPlayer(), marketPlace, price, quantityAsInt, good);
+        errorMessage.setText(message);
+        errorMessage.setVisible(true);
     }
 }

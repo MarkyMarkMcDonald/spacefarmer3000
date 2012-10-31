@@ -1,10 +1,8 @@
 package App.view;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import App.listener.TransactionListener;
+
+import javax.swing.*;
 
 public class ItemRowPanel extends JPanel {
 	private JTextField txtToBuy;
@@ -12,7 +10,7 @@ public class ItemRowPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ItemRowPanel(String name, int numAvail, int price, String actionText, ActionListener actionTextListener) {
+	public ItemRowPanel(String name, int numAvail, int price, String actionText, TransactionListener transactionListener) {
 		
 		JLabel lblName = new JLabel(name);
 		add(lblName);
@@ -26,10 +24,11 @@ public class ItemRowPanel extends JPanel {
 		txtToBuy = new JTextField();
 		txtToBuy.setText("0");
 		add(txtToBuy);
-		txtToBuy.setColumns(10);
+		txtToBuy.setColumns(7);
 		
 		JButton btnBuy = new JButton(actionText);
-        btnBuy.addActionListener(actionTextListener);
+        transactionListener.setQuantity(txtToBuy);
+        btnBuy.addActionListener(transactionListener);
 		add(btnBuy);
 
 	}

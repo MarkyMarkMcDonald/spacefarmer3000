@@ -22,6 +22,7 @@ public class Planet {
 	
     private ResourceType resourceType;
 
+    // Position within the solar system
     private int x,y;
 
 	private MarketPlace market;

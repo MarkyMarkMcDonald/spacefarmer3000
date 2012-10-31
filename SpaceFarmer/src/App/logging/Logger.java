@@ -1,6 +1,6 @@
 package App.logging;
 
-import App.factory.PlanetFactory;
+import App.factory.UniverseFactory;
 import App.model.*;
 
 import java.util.Collection;
@@ -19,8 +19,8 @@ public class Logger {
      */
     public static void printGameToConsole(){
         List<Player> players = Game.getPlayers();
-        Collection<Planet> planets = PlanetFactory.getPlanets().values();
-        Collection<PlanetarySystem> systems = PlanetFactory.getPlanetarySystems().values();
+        Collection<Planet> planets = UniverseFactory.getPlanets().values();
+        Collection<PlanetarySystem> systems = UniverseFactory.getPlanetarySystems().values();
 
         System.out.println("########################################");
         System.out.println("########################################");
@@ -75,7 +75,7 @@ public class Logger {
     }
 
     public static void printShipInfo(Ship ship){
-        System.out.println("Ship: " + ship.getName().toString());
+        System.out.println("Ship: " + ship.getType().toString());
     }
 
     public static void printSettingsInfo(){

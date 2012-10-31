@@ -12,26 +12,30 @@ import java.util.Map;
 public class SellingPanel extends JPanel {
 
     private MarketPlace marketPlace;
-    private JList items;
-	/**
+    private JScrollPane items;
+    private JLabel errorMessage;
+
+    /**
 	 * Create the panel.
 	 */
-	public SellingPanel(Inventory inventory, MarketPlace marketPlace) {
+	public SellingPanel(Inventory inventory, MarketPlace marketPlace, JLabel errorMessage) {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		
+
+        this.errorMessage = errorMessage;
+
 		JLabel lblItem = new JLabel("Item");
 		add(lblItem);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		add(horizontalStrut);
 		
-		JLabel lblBuyingPrice = new JLabel("Buying Price");
+		JLabel lblBuyingPrice = new JLabel("# Available");
 		add(lblBuyingPrice);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		add(horizontalStrut_1);
 		
-		JLabel lblAvailable = new JLabel("# Available");
+		JLabel lblAvailable = new JLabel("Buying Price");
 		add(lblAvailable);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
@@ -47,16 +51,19 @@ public class SellingPanel extends JPanel {
 	}
 
     public void setMarketPlaceAndInventory(MarketPlace marketPlace, Inventory inventory){
-        items = new JList();
+        items = new JScrollPane();
+        items.setVerticalScrollBar(new JScrollBar());
+        items.setMinimumSize(new Dimension(20,20));
         for (Map.Entry<Tradable, Integer> item : inventory.getInventoryEntries()){
             Tradable itemInfo = item.getKey();
             int quantityAvailable = item.getValue();
             String itemName = itemInfo.getName();
             int itemPrice = itemInfo.getBasePrice();
-            ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Sell!",new SellToMarketListener(marketPlace,itemPrice,itemInfo,quantityAvailable));
+            ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Sell!",new SellToMarketListener(marketPlace,itemPrice,itemInfo, errorMessage));
             items.add(row);
+            items.add(Box.createVerticalStrut(100));
         }
-        add(items);
+        add("items",items);
     }
 
 }

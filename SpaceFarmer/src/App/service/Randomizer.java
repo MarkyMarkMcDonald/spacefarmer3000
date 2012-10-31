@@ -1,12 +1,12 @@
 package App.service;
 
+import App.factory.UniverseFactory;
+import App.model.Planet;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
-
-import App.factory.PlanetFactory;
-import App.model.Planet;
 
 public class Randomizer {
 	private static Random rand=new Random();
@@ -132,9 +132,9 @@ public class Randomizer {
 	}
 
     public static Planet getRandomPlanet(){
-        Collection<Planet> planetCollection = PlanetFactory.getPlanets().values();
+        Collection<Planet> planetCollection = UniverseFactory.getPlanets().values();
         List<Planet> planets = new ArrayList<Planet>(planetCollection);
-        int numberOfPlanets = PlanetFactory.getNumberOfPlanets();
+        int numberOfPlanets = UniverseFactory.getNumberOfPlanets();
         int chosenPlanetNumber = Randomizer.nextInt(numberOfPlanets);
         return planets.get(chosenPlanetNumber);
     }
