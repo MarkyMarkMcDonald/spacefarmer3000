@@ -6,64 +6,86 @@ import App.model.MarketPlace;
 import App.model.Tradable;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Map;
 
 public class SellingPanel extends JPanel {
 
     private MarketPlace marketPlace;
-    private JScrollPane items;
+    private JPanel items;
     private JLabel errorMessage;
+    private BuyingPanel buyingPanel;
+
+
 
     /**
 	 * Create the panel.
 	 */
-	public SellingPanel(Inventory inventory, MarketPlace marketPlace, JLabel errorMessage) {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+	public SellingPanel(JLabel errorMessage) {
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.errorMessage = errorMessage;
 
+        JPanel headings = new JPanel();
+        headings.setLayout(new BoxLayout(headings, BoxLayout.X_AXIS));
+
 		JLabel lblItem = new JLabel("Item");
-		add(lblItem);
+        headings.add(lblItem);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
-		add(horizontalStrut);
+        headings.add(horizontalStrut);
 		
 		JLabel lblBuyingPrice = new JLabel("# Available");
-		add(lblBuyingPrice);
+        headings.add(lblBuyingPrice);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-		add(horizontalStrut_1);
+        headings.add(horizontalStrut_1);
 		
-		JLabel lblAvailable = new JLabel("Buying Price");
-		add(lblAvailable);
+		JLabel lblAvailable = new JLabel("Selling Price");
+        headings.add(lblAvailable);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		add(horizontalStrut_2);
+        headings.add(horizontalStrut_2);
 		
 		JLabel lblToBuy = new JLabel("# to Buy");
-		add(lblToBuy);
+        headings.add(lblToBuy);
 		
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
-		add(horizontalStrut_3);
+        headings.add(horizontalStrut_3);
 
-        setMarketPlaceAndInventory(marketPlace,inventory);
+        items = new JPanel();
+        add(items);
+
 	}
 
+
+
     public void setMarketPlaceAndInventory(MarketPlace marketPlace, Inventory inventory){
-        items = new JScrollPane();
-        items.setVerticalScrollBar(new JScrollBar());
-        items.setMinimumSize(new Dimension(20,20));
+        items.removeAll();
+        items.setLayout(new BoxLayout(items, BoxLayout.Y_AXIS));
+
         for (Map.Entry<Tradable, Integer> item : inventory.getInventoryEntries()){
+            JPanel rowPanel = new JPanel();
             Tradable itemInfo = item.getKey();
             int quantityAvailable = item.getValue();
             String itemName = itemInfo.getName();
-            int itemPrice = itemInfo.getBasePrice();
-            ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Sell!",new SellToMarketListener(marketPlace,itemPrice,itemInfo, errorMessage));
-            items.add(row);
-            items.add(Box.createVerticalStrut(100));
+            // can only sell items at 95% market prices
+            int itemPrice = (int) Math.floor(itemInfo.getBasePrice() * .95);
+            ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Sell!",new SellToMarketListener(marketPlace,itemPrice,itemInfo, errorMessage, buyingPanel));
+            rowPanel.add(row);
+            items.add(rowPanel);
         }
-        add("items",items);
+        items.setBorder(new LineBorder(Color.black));
+        add("items", items);
+    }
+
+    public void setErrorMessage(JLabel errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public void setBuyingPanel(BuyingPanel buyingPanel) {
+        this.buyingPanel = buyingPanel;
     }
 
 }

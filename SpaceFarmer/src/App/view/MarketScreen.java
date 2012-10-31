@@ -51,13 +51,7 @@ public class MarketScreen extends Screen {
 		JLabel lblMarketPlace = new JLabel("Market Place");
 		panel.add(lblMarketPlace);
 
-        Box.createVerticalStrut(20);
-		buyingPanel = new BuyingPanel(marketPlace, errorMessage);
-		add("buy",buyingPanel);
-        add(Box.createVerticalStrut(20));
-
-		sellingPanel = new SellingPanel(Game.getCurrentPlayer().getInventory(),marketPlace, errorMessage);
-		add("sell",sellingPanel);
+        setMarketPlace(marketPlace);
 
 	}
 
@@ -68,13 +62,17 @@ public class MarketScreen extends Screen {
     public void setMarketPlace(MarketPlace marketPlace) {
         this.marketPlace = marketPlace;
 
+        buyingPanel = new BuyingPanel(errorMessage);
+        sellingPanel = new SellingPanel(errorMessage);
+        buyingPanel.setSellingPanel(sellingPanel);
+        sellingPanel.setBuyingPanel(buyingPanel);
+        buyingPanel.setMarket(marketPlace);
+        sellingPanel.setMarketPlaceAndInventory(marketPlace,Game.getCurrentPlayer().getInventory());
+
         add(Box.createVerticalStrut(20));
-        buyingPanel = new BuyingPanel(marketPlace, errorMessage);
         add("buy",buyingPanel);
 
-
         add(Box.createVerticalStrut(20));
-        sellingPanel = new SellingPanel(Game.getCurrentPlayer().getInventory(),marketPlace, errorMessage);
         add("sell",sellingPanel);
 
     }

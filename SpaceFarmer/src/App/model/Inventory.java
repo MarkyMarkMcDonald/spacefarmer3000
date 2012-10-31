@@ -34,8 +34,13 @@ public class Inventory {
             inventory.put(item,quantity);
         }
         else {
-            //inventory.get(TradeGood)
+            Integer currentQuantity = inventory.get(item);
+            inventory.put(item,currentQuantity + quantity);
         }
+    }
+
+    public int getQuantity(Tradable item){
+        return inventory.get(item);
     }
 
     public Set<Map.Entry<Tradable,Integer>> getInventoryEntries(){
