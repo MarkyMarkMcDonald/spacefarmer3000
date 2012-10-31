@@ -11,6 +11,15 @@ import java.util.Set;
  */
 public class TransactionService {
 
+	/**
+	 * Buy something from a market.
+	 * @param player The Player performing the transaction.
+	 * @param marketPlace The current marketplace where the purchase is taking place.
+	 * @param price The price of the good the Player is trying to buy.
+	 * @param quantity The quantity in which the Player is purchasing the goods.
+	 * @param tradeGood The goods that the Player is trying to buy.
+	 * @return A String message telling the outcome of the attempted purchase.
+	 */
     public static String buyFromMarket(Player player, MarketPlace marketPlace, int price, int quantity, Tradable tradeGood){
         String message;
 
@@ -41,6 +50,15 @@ public class TransactionService {
         return message;
     }
 
+    /**
+     * Sell a good to the market.
+     * @param player The Player performing the transaction.
+     * @param marketPlace The marketplace with which this Player is interacting.
+     * @param price The price at which the market is buying the good.
+     * @param quantity The quantity in which the marketplace is buying goods from the Player.
+     * @param tradeGood The good which the Player is trying to sell.
+     * @return A string explaining the outcome of the transaction.
+     */
     public static String sellToMarket(Player player, MarketPlace marketPlace, int price, int quantity, Tradable tradeGood){
         String message;
         Inventory inventory = player.getInventory();
@@ -56,6 +74,8 @@ public class TransactionService {
             inventory.addItem(tradeGood,-quantity);
 
             marketPlace.changeQuantity(tradeGood,quantity);
+            
+            player.changeMoney(transactionCost);
         }
         else {
             message = "You need " + (quantity - amountInInventory) + " more to sell that amount";
@@ -63,6 +83,10 @@ public class TransactionService {
         return message;
     }
 
+    /**
+     * What does this method do?
+     * @return ???
+     */
     public static String buyFromMarket(){
         String message = "success";
 

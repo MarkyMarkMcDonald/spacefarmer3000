@@ -7,6 +7,10 @@ import App.model.Planet;
 import App.model.Player;
 import App.model.Settings;
 
+/**
+ * This class handles saving the current game.
+ * @author Mykal Thomas, Mark McDonald
+ */
 public class Saver {
 	String saveLocations[];
 	FileWriter fWriter;
@@ -59,9 +63,14 @@ public class Saver {
 			}
 		}
 	}
+	
+	/**
+	 * Save the Player information to a Save file object.
+	 */
 	private void savePlayer(){
 		savePlayer(saveLocations[0],players);
 	}
+	
 	/**
 	 * saves the planets in the
 	 * @param location the array of save locations
@@ -91,11 +100,16 @@ public class Saver {
 			}
 		}
 	}
+	
+	/**
+	 * Save Planet information to a Save file object.
+	 */
 	private void savePlanet(){
 		savePlanet(saveLocations[0],planets);
 	}
+	
 	/**
-	 * 
+	 * Save Settings information to a Save file object.
 	 * @param location the array of save locations
 	 * @param gameSettigns
 	 */
@@ -121,12 +135,11 @@ public class Saver {
 			}
 		
 	}
+	
+	/**
+	 * Why are there two saveSettings methods?
+	 */
 	private void saveSettings(){
 		saveSettings(saveLocations[0],gameSettings);
-
 	}
-
-	
-	
-
 }

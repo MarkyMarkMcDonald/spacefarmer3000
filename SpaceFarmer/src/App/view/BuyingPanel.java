@@ -9,6 +9,10 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Map;
 
+/**
+ * This Panel represents the purchasing view when on a planet.
+ * @author Mark McDonald
+ */
 public class BuyingPanel extends JPanel {
     private JPanel items;
     private JLabel errorMessage;
@@ -76,6 +80,7 @@ public class BuyingPanel extends JPanel {
             items.add(rowPanel);
         }
         items.setBorder(new LineBorder(Color.black));
+
         add("items", items);
     }
 

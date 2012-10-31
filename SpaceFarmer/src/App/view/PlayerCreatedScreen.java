@@ -7,6 +7,10 @@ import javax.swing.*;
 import java.awt.Component;
 import java.awt.Font;
 
+/**
+ * This screen confirms the creation of a player.
+ * @author Mark McDonald, Andrew Wilder
+ */
 public class PlayerCreatedScreen extends Screen {
 
 	/**

@@ -10,6 +10,10 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Map;
 
+/**
+ * This screen represents the area in which goods are sold.
+ * @author Mark McDonald
+ */
 public class SellingPanel extends JPanel {
 
     private MarketPlace marketPlace;
@@ -59,8 +63,11 @@ public class SellingPanel extends JPanel {
 
 	}
 
-
-
+	/**
+	 * Set up the marketplace for viewing.
+	 * @param marketPlace The marketPlace object for this Planet representing statistics influencing the prices.
+	 * @param inventory The Player's inventory that will interact with the market.
+	 */
     public void setMarketPlaceAndInventory(MarketPlace marketPlace, Inventory inventory){
         items.removeAll();
         items.setLayout(new BoxLayout(items, BoxLayout.Y_AXIS));
