@@ -14,6 +14,7 @@ public class MarketScreen extends Screen {
     private MarketPlace marketPlace;
     private BuyingPanel buyingPanel;
     private SellingPanel sellingPanel;
+    private JPanel transactionPanel;
     private JLabel errorMessage;
 
     public MarketScreen(){
@@ -29,7 +30,7 @@ public class MarketScreen extends Screen {
         buyingPanel = new BuyingPanel(errorMessage);
         sellingPanel = new SellingPanel(errorMessage);
 
-        JPanel transactionPanel = new JPanel();
+        transactionPanel = new JPanel();
         transactionPanel.setLayout(new BoxLayout(transactionPanel, BoxLayout.X_AXIS));
         transactionPanel.add(buyingPanel);
         transactionPanel.add(sellingPanel);
@@ -44,9 +45,6 @@ public class MarketScreen extends Screen {
         updateMarketPlace(marketPlace);
 	}
 
-    public MarketPlace getMarketPlace() {
-        return marketPlace;
-    }
 
     public void updateMarketPlace(MarketPlace marketPlace) {
         this.marketPlace = marketPlace;
@@ -55,6 +53,7 @@ public class MarketScreen extends Screen {
         sellingPanel.setBuyingPanel(buyingPanel);
         buyingPanel.setMarket(marketPlace);
         sellingPanel.setMarketPlaceAndInventory(marketPlace,Game.getCurrentPlayer().getInventory());
+
     }
 
 }

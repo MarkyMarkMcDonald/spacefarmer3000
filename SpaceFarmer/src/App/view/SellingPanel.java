@@ -16,12 +16,9 @@ import java.util.Map;
  */
 public class SellingPanel extends JPanel {
 
-    private MarketPlace marketPlace;
     private JPanel items;
     private JLabel errorMessage;
     private BuyingPanel buyingPanel;
-
-
 
     /**
 	 * Create the panel.
@@ -59,6 +56,7 @@ public class SellingPanel extends JPanel {
         headings.add(horizontalStrut_3);
 
         add(headings);
+
         items = new JPanel();
         add(items);
 
@@ -70,6 +68,7 @@ public class SellingPanel extends JPanel {
 	 * @param inventory The Player's inventory that will interact with the market.
 	 */
     public void setMarketPlaceAndInventory(MarketPlace marketPlace, Inventory inventory){
+
         items.removeAll();
         items.setLayout(new BoxLayout(items, BoxLayout.Y_AXIS));
 
@@ -85,7 +84,6 @@ public class SellingPanel extends JPanel {
             items.add(rowPanel);
         }
         items.setBorder(new LineBorder(Color.black));
-        add("items", items);
     }
 
     public void setErrorMessage(JLabel errorMessage) {

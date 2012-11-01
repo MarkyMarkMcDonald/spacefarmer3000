@@ -1,6 +1,7 @@
 package App.model;
 
 import App.factory.ShipFactory;
+import Conf.GameVariables;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,7 @@ import java.util.Map;
  * Represents a Player.
  * Information Holder
  *
- * User: Marky
+ * User: Mark McDaniel, Andrew Wilder
  * Date: 9/22/12
  * Time: 12:33 AM
  * To change this template use File | Settings | File Templates.
@@ -19,7 +20,7 @@ public class Player {
     private String name;
 
     private Ship ship;
-    private int money;
+    private int money, fuel;
     private Map<SkillType, Integer> skillLevels;
     private Inventory inventory;
     private Planet currentPlanet;
@@ -35,8 +36,9 @@ public class Player {
 		skillLevels.put(SkillType.TRADING,trading);
 		skillLevels.put(SkillType.ENGINEERING,engineering);
 		skillLevels.put(SkillType.FIGHTING,fighting);
-		this.money=1000000;
+		this.money= GameVariables.playerStartingMoney;
 		this.ship= ShipFactory.getShip(ShipModel.GNAT);
+        this.fuel = ship.getMaxFuel();
 	}
 
     public void changeMoney(int amount){
@@ -90,5 +92,13 @@ public class Player {
 
     public void setSkillLevels(Map<SkillType, Integer> skillLevels) {
         this.skillLevels = skillLevels;
+    }
+    
+    public int getFuel() {
+    	return fuel;
+    }
+    
+    public void setFuel(int fuel) {
+    	this.fuel = fuel;
     }
 }
