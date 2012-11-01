@@ -9,7 +9,7 @@ import java.util.Map;
  * Represents a Player.
  * Information Holder
  *
- * User: Marky
+ * User: Mark McDaniel, Andrew Wilder
  * Date: 9/22/12
  * Time: 12:33 AM
  * To change this template use File | Settings | File Templates.
@@ -19,7 +19,7 @@ public class Player {
     private String name;
 
     private Ship ship;
-    private int money;
+    private int money, fuel;
     private Map<SkillType, Integer> skillLevels;
     private Inventory inventory;
     private Planet currentPlanet;
@@ -90,5 +90,13 @@ public class Player {
 
     public void setSkillLevels(Map<SkillType, Integer> skillLevels) {
         this.skillLevels = skillLevels;
+    }
+    
+    public int getFuel() {
+    	return fuel;
+    }
+    
+    public void setFuel(int fuel) {
+    	this.fuel = fuel;
     }
 }
