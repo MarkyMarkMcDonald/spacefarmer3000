@@ -15,17 +15,22 @@ import javax.swing.*;
  */
 public class PlayerInformationPanel extends JPanel{
     public PlayerInformationPanel(Player player){
+        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         Ship ship = player.getShip();
         ShipModel shipType = ship.getType();
         int money = player.getMoney();
 
         JLabel nameLabel = new JLabel(player.getName());
         JLabel shipLabel = new JLabel(shipType.toString());
-        JLabel moneyLabel = new JLabel(Integer.toString(money));
+        JLabel moneyLabel = new JLabel("$" + Integer.toString(money));
+        JLabel cargoLabel = new JLabel("Cargo: " + player.getInventory().getSpaceUsed() +"/" + player.getShip().getCargoSize());
+        JLabel planetLabel = new JLabel("On " + player.getCurrentPlanet().getName());
 
         add(nameLabel);
         add(shipLabel);
         add(moneyLabel);
+        add(cargoLabel);
+        add(planetLabel);
     }
 
 }

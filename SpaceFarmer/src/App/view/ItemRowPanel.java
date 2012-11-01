@@ -17,7 +17,10 @@ public class ItemRowPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ItemRowPanel(String name, int numAvail, int price, String actionText, TransactionListener transactionListener) {
-		JLabel lblName = new JLabel(name);
+        setLayout(new GridLayout(1,4));
+
+
+        JLabel lblName = new JLabel(name);
         lblName.setMinimumSize(new Dimension(50, 10));
         lblName.setMaximumSize(new Dimension(50, 10));
         lblName.setHorizontalAlignment(JLabel.LEFT);
