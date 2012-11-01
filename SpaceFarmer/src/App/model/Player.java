@@ -38,6 +38,7 @@ public class Player {
 		skillLevels.put(SkillType.FIGHTING,fighting);
 		this.money= GameVariables.playerStartingMoney;
 		this.ship= ShipFactory.getShip(ShipModel.GNAT);
+        this.fuel = ship.getMaxFuel();
 	}
 
     public void changeMoney(int amount){
