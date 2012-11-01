@@ -11,7 +11,7 @@ import App.model.Settings;
  * This class handles saving the current game.
  * @author Mykal Thomas, Mark McDonald
  */
-public class Saver {
+public class Saver_txt {
 	String saveLocations[];
 	FileWriter fWriter;
 	BufferedWriter writer;
@@ -26,7 +26,7 @@ public class Saver {
 	 * @param universe a collection of planets in the game
 	 * @param settings the settings for the game.
 	 */
-	Saver(String loctaions[], Collection <Player>people, Collection <Planet>universe, Settings settings){
+	Saver_txt(String loctaions[], Collection <Player>people, Collection <Planet>universe, Settings settings){
 		saveLocations= loctaions;
 		players= people;
 		fWriter = null;
