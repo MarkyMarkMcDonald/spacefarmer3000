@@ -74,7 +74,7 @@ public class BuyingPanel extends JPanel {
             Tradable itemInfo = item.getKey();
             int quantityAvailable = item.getValue();
             String itemName = itemInfo.getName();
-            int itemPrice = itemInfo.getBasePrice();
+            int itemPrice = marketPlace.getPriceMap().get(itemInfo);
             ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Buy!", new BuyFromMarketListener(marketPlace,itemPrice,itemInfo,errorMessage, sellingPanel));
             rowPanel.add(row);
             items.add(rowPanel);

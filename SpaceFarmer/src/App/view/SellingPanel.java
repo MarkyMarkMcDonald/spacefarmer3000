@@ -79,7 +79,7 @@ public class SellingPanel extends JPanel {
             int quantityAvailable = item.getValue();
             String itemName = itemInfo.getName();
             // can only sell items at 95% market prices
-            int itemPrice = (int) Math.floor(itemInfo.getBasePrice() * .95);
+            int itemPrice = (int) Math.floor(marketPlace.getPriceMap().get(itemInfo) * .95);
             ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Sell!",new SellToMarketListener(marketPlace,itemPrice,itemInfo, errorMessage, buyingPanel));
             rowPanel.add(row);
             items.add(rowPanel);
