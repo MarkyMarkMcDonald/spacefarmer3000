@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class MarketPlace {
 	private static final int MINIMUM_SUBGOODS=1;
-	private static final int MAXIMUM_SUBGOODS=2;
+	private static final int MAXIMUM_SUBGOODS=1;
 	private Map<Tradable,Integer> priceMap;
 	private Map<Tradable,Integer> quantityMap;
 
@@ -22,7 +22,7 @@ public class MarketPlace {
         priceMap = new HashMap<Tradable, Integer>();
         quantityMap = new HashMap<Tradable, Integer>();
         for (TradeGoodType tradeGoodType : TradeGoodType.values()){
-            for (Object subName : Randomizer.randElements(tradeGoodType.getSubNames(),MINIMUM_SUBGOODS+Randomizer.nextInt(MAXIMUM_SUBGOODS-MINIMUM_SUBGOODS))){
+            for (Object subName : Randomizer.randElements(tradeGoodType.getSubNames(),MINIMUM_SUBGOODS+Randomizer.nextInt(MAXIMUM_SUBGOODS-MINIMUM_SUBGOODS+1))){
                     BasicGood good = new BasicGood(tradeGoodType, (Enum<?>) subName);
                     int quantity = tradeGoodType.determineQuantity(planet);
                     int cost = tradeGoodType.calculatePrice(planet);
