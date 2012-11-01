@@ -37,6 +37,11 @@ public enum CardName {
         public Screen getScreen(){
             return new MarketScreen();
         }
+    },
+    START_OF_TURN_CARD("StartOfTurnCard"){
+        public Screen getScreen(){
+            return new StartOfTurnScreen();
+        }
     };
 
     private final String name;

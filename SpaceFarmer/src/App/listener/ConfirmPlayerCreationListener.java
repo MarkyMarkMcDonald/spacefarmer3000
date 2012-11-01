@@ -37,7 +37,6 @@ public class ConfirmPlayerCreationListener implements ActionListener {
         String message = PlayerValidationService.isValidPlayer(player, 16);
         if (message.equals("success")){
             game.addPlayer(player);
-            Display.setGame(game);
             Display.changeCard(CardName.PLAYER_CREATED_CARD);
         }
         else {

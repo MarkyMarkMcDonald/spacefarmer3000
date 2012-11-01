@@ -43,6 +43,8 @@ public class TransactionService {
 
             player.changeMoney(-transactionCost);
 
+            marketPlace.changeQuantity(tradeGood,-quantity);
+
             inventory.addItem(tradeGood,quantity);
         }
         return message;

@@ -25,6 +25,7 @@ public class Game {
 
     private static Player currentPlayer;
 
+
     public Game(){
         numberOfTurns = 0;
         players = new ArrayList<Player>();
@@ -91,5 +92,13 @@ public class Game {
     	{
     		currentPlayer=players.get(playerIndex);
     	}
+    }
+    
+    public static Planet getCurrentPlanet() {
+        return currentPlayer.getCurrentPlanet();
+    }
+
+    public static MarketPlace getCurrentMarketPlace() {
+        return getCurrentPlanet().getMarket();
     }
 }

@@ -37,17 +37,22 @@ public class MarketPlace {
 	/*
 	 * Sets a TradeGoodType to a given quantity.
 	 */
-	public void setQuantity(Tradable Tradable, int quantity)
+	public void setQuantity(Tradable tradable, int quantity)
 	{
-		quantityMap.put(Tradable,quantity);
+		quantityMap.put(tradable,quantity);
 	}
 	
 	/*
 	 * Alters the quantity of a TradeGoodType by a particular amount.
 	 */
-	public void changeQuantity(Tradable Tradable, int amount)
+	public void changeQuantity(Tradable tradable, int amount)
 	{
-		quantityMap.put(Tradable, quantityMap.get(Tradable)+amount);
+		if (quantityMap.containsKey(tradable)){
+            quantityMap.put(tradable, quantityMap.get(tradable)+amount);
+        }
+        else {
+            quantityMap.put(tradable, amount);
+        }
 	}
 	
 	/*

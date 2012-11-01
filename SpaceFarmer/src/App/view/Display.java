@@ -5,8 +5,8 @@ import App.model.Game;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class controls the viewing pane. The different screens are controlled
@@ -28,11 +28,20 @@ public class Display extends JFrame {
     private static JPanel CenterPanel, mainContentPanel;
     private static Game game;
     private static MiniGameScreen MiniGameView;
+    // We need this to be able to update cards instead of creating new ones every time
+    private static Map<String, Screen> cardMap;
+    private static Map<String, JPanel> sidePanelMap;
 
     /**
      * set up the initial screen
      */
     public void setup() {
+        sidePanelMap = new HashMap<String, JPanel>();
+
+        /**
+         * Set up the frame
+         */
+
         setTitle("SpaceFarmer 3000");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 600);
@@ -45,9 +54,16 @@ public class Display extends JFrame {
         JPanel StandardView = new JPanel();
         mainContentPanel.add(StandardView, "Standard");
         StandardView.setLayout(new BorderLayout(0, 0));
-        
+
+        /**
+         * Create all the Frame's Panels
+         */
+
+        /**
+         * Top Panel
+         */
+
         JPanel TopPanel = new JPanel();
-        StandardView.add(TopPanel, BorderLayout.NORTH);
         TopPanel.setBackground(Color.GREEN);
         TopPanel.setLayout(new BoxLayout(TopPanel, BoxLayout.X_AXIS));
 
@@ -57,8 +73,13 @@ public class Display extends JFrame {
         Component verticalStrut = Box.createVerticalStrut(80);
         TopPanel.add(verticalStrut);
 
+
+
+        /**
+         * Bot Panel
+         */
+
         JPanel BottomPanel = new JPanel();
-        StandardView.add(BottomPanel, BorderLayout.SOUTH);
         BottomPanel.setBackground(Color.MAGENTA);
         BottomPanel.setLayout(new BoxLayout(BottomPanel, BoxLayout.X_AXIS));
 
@@ -68,35 +89,21 @@ public class Display extends JFrame {
         Component verticalStrut_1 = Box.createVerticalStrut(80);
         BottomPanel.add(verticalStrut_1);
 
-        JPanel LeftPanel = new JPanel();
-        StandardView.add(LeftPanel, BorderLayout.WEST);
-        LeftPanel.setBackground(Color.CYAN);
-        LeftPanel.setLayout(new BoxLayout(LeftPanel, BoxLayout.Y_AXIS));
+        /**
+         * Left Panel
+         */
 
-        JLabel label = new JLabel("WIP");
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        label.setAlignmentY(0.0f);
-        LeftPanel.add(label);
-        
-        JButton btnNewButton = new JButton("Marketplace");
-        btnNewButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		// TODO what is this?
-        	}
-        });
-        LeftPanel.add(btnNewButton);
-        
-        JButton btnShip = new JButton("Ship");
-        LeftPanel.add(btnShip);
-        
-        JButton btnTravel = new JButton("Travel");
-        LeftPanel.add(btnTravel);
+        JPanel LeftPanel = new NavigationSidePanel();
+        LeftPanel.setBackground(Color.CYAN);
 
         Component horizontalStrut = Box.createHorizontalStrut(100);
         LeftPanel.add(horizontalStrut);
 
+        /**
+         * Right Panel
+         */
+
         JPanel RightPanel = new JPanel();
-        StandardView.add(RightPanel, BorderLayout.EAST);
         RightPanel.setBackground(Color.PINK);
         RightPanel.setLayout(new BoxLayout(RightPanel, BoxLayout.Y_AXIS));
 
@@ -108,6 +115,10 @@ public class Display extends JFrame {
         Component horizontalStrut_1 = Box.createHorizontalStrut(100);
         RightPanel.add(horizontalStrut_1);
 
+        /**
+         * Center Panel
+         */
+
         CenterPanel = new JPanel();
         StandardView.add(CenterPanel, BorderLayout.CENTER);
         CenterPanel.setBackground(Color.ORANGE);
@@ -116,13 +127,38 @@ public class Display extends JFrame {
         MiniGameView = new MiniGameScreen();
         mainContentPanel.add(MiniGameView, "MiniGame");
 
+        cardMap = new HashMap<String, Screen>();
         // Generate every possible card
         for (CardName name : CardName.values()){
-            CenterPanel.add(name.getScreen(), name.toString());
+            cardMap.put(name.toString(),name.getScreen());
+            CenterPanel.add(name.toString(),cardMap.get(name.toString()));
         }
 
+        /**
+         * Add all the side Panels
+         */
+
+        sidePanelMap.put("Top", TopPanel);
+        sidePanelMap.put("Bot",BottomPanel);
+        sidePanelMap.put("Left",LeftPanel);
+        sidePanelMap.put("Right",RightPanel);
+
+        // listeners involved with changing the display will need to make the side panels visible or not visible
+        turnOffSidePanels();
+
+        StandardView.add(sidePanelMap.get("Top"), BorderLayout.NORTH);
+        StandardView.add(sidePanelMap.get("Bot"), BorderLayout.SOUTH);
+        StandardView.add(sidePanelMap.get("Left"), BorderLayout.WEST);
+        StandardView.add(sidePanelMap.get("Right"), BorderLayout.EAST);
+
     }
-    
+
+    public static void turnOffSidePanels(){
+        for (JPanel sidePanel : sidePanelMap.values()){
+            sidePanel.setVisible(false);
+        }
+    }
+
     /**
      * Flips to the specified card in the center panel.
      * @param name The card ID of the panel to flip to.
@@ -153,6 +189,14 @@ public class Display extends JFrame {
     }
 
     //--Accessors and Modifiers
+
+    public static Screen getCard(String cardName){
+        return cardMap.get(cardName);
+    }
+
+    public static JPanel getSidePanel(String direction){
+        return sidePanelMap.get(direction);
+    }
 
     public static Game getGame() {
         return game;
