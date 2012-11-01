@@ -76,8 +76,24 @@ public class Game {
     public void addPlayer(Player player) {
         players.add(player);
     }
-
-
+    
+    public void endTurn()
+    {
+        int	playerIndex=players.indexOf(currentPlayer)+1;
+    	if (playerIndex >= players.size())
+    	{
+    		currentPlayer=players.get(0);
+    		for (int planetIndex=0;planetIndex<planets.size();planetIndex++);
+    		{
+    			planets.get(0).determineEvent();
+    		}
+    	}
+    	else
+    	{
+    		currentPlayer=players.get(playerIndex);
+    	}
+    }
+    
     public static Planet getCurrentPlanet() {
         return currentPlayer.getCurrentPlanet();
     }
