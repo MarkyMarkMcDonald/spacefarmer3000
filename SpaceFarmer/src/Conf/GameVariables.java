@@ -17,4 +17,5 @@ public class GameVariables {
     public static final int plantearySystemRows=3;
     public static final int planetarySystemColomns=3;
     public static final int playerStartingMoney = 100000;
+    public static final int minimumSystemDistance=5;
 }
