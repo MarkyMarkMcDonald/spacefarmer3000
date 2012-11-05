@@ -70,7 +70,7 @@ public class SellingPanel extends JPanel {
     public void setMarketPlaceAndInventory(MarketPlace marketPlace, Inventory inventory){
 
         items.removeAll();
-        items.setLayout(new BoxLayout(items, BoxLayout.Y_AXIS));
+        items.setLayout(new GridLayout(1,1));
 
         for (Map.Entry<Tradable, Integer> item : inventory.getInventoryEntries()){
             JPanel rowPanel = new JPanel();

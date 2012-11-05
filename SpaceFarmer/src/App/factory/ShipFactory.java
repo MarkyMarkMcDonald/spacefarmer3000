@@ -2,6 +2,7 @@ package App.factory;
 
 import App.model.Ship;
 import App.model.ShipModel;
+import Conf.GameVariables;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +43,7 @@ public class ShipFactory {
                     ship.setPower(1);
                     ship.setDefense(0);
                     ship.setSpeed(14);
+                    ship.setMaxFuel((int) (GameVariables.largestFuelTank * .4));
                     break;
                 case FIREFLY:
                     ship.setType(ShipModel.FIREFLY);
@@ -50,6 +52,7 @@ public class ShipFactory {
                     ship.setPower(1);
                     ship.setDefense(1);
                     ship.setSpeed(17);
+                    ship.setMaxFuel((int) (GameVariables.largestFuelTank * .55));
                     break;
                 case MOSQUITO:
                     ship.setType(ShipModel.MOSQUITO);
@@ -58,6 +61,7 @@ public class ShipFactory {
                     ship.setPower(2);
                     ship.setDefense(1);
                     ship.setSpeed(13);
+                    ship.setMaxFuel((int) (GameVariables.largestFuelTank * .7));
                     break;
                 case BUMBLEBEE:
                     ship.setType(ShipModel.BUMBLEBEE);
@@ -66,6 +70,7 @@ public class ShipFactory {
                     ship.setPower(1);
                     ship.setDefense(2);
                     ship.setSpeed(15);
+                    ship.setMaxFuel(GameVariables.largestFuelTank);
                     break;
             }
             ships.put(ship.getType(),ship);

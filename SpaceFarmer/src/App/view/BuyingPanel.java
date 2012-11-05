@@ -65,7 +65,8 @@ public class BuyingPanel extends JPanel {
      */
     public void setMarket(MarketPlace marketPlace){
         items.removeAll();
-        items.setLayout(new BoxLayout(items,BoxLayout.Y_AXIS));
+        items.setLayout(new GridLayout(marketPlace.getQuantityMap().entrySet().size(),1));
+
 
         for (Map.Entry<Tradable, Integer> item : marketPlace.getQuantityMap().entrySet()){
             JPanel rowPanel = new JPanel();
