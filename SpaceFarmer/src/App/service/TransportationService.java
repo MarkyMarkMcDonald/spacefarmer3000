@@ -18,7 +18,7 @@ public class TransportationService {
 	 * Travel to a Planet.
 	 * @param p The Planet to travel to.
 	 */
-	public static void goToPlanet(Planet p) {
+	public static String goToPlanet(Planet p) {
 
 		// Get data required to make the decision to travel
 		Player currentPlayer = Game.getCurrentPlayer();
@@ -45,10 +45,13 @@ public class TransportationService {
 				// Play asteroid dodge minigame
 				Display.playMiniGame(); // Results from the minigame are handled in Display.exitGame()
 			} else {
-				// Travel unsuccessful
-				
-				// TODO: Give a message to the user that you couldn't travel
+
+				// Return a failure message
+				return "You need " + ((int)distance - currentPlayer.getFuel()) + " more fuel to travel to Planet " + p.getName() + ".";
 			}
 		}
+		
+		// Return a success message
+		return "You traveled to Planet " + p.getName() + "!";
 	}
 }
