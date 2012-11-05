@@ -124,7 +124,7 @@ public class Randomizer {
 				outOfRange=true;
 				for (Integer[] p: dimensionList)
 				{
-					if(!(Point2D.distance(p[0], p[1], point[0], point[1])<range))
+					if(Point2D.distance(p[0], p[1], point[0], point[1])<range)
 					{
 						outOfRange=false;
 						point[0]=rand.nextInt(xDim);
