@@ -12,6 +12,8 @@ public class GameVariables {
     public static final int systemColumns=3;
     public static final int quadrantXDimension=50;
     public static final int quadrantYDimension=50;
+    public static final int maxDistance = (int) Math.sqrt(Math.pow(quadrantXDimension,2) + Math.pow(quadrantYDimension,2));
+    public static final int largestFuelTank = maxDistance;
     public static final int numPlanets = 30;
     public static final int numPlanetarySystems=12;
     public static final int plantearySystemRows=3;

@@ -14,7 +14,7 @@ import java.util.Map;
 public class MarketPlace {
 	private static final int MINIMUM_SUBGOODS=1;
 	private static final int MAXIMUM_SUBGOODS=1;
-	private Map<Tradable,Integer> priceMap;
+    private Map<Tradable,Integer> priceMap;
 	private Map<Tradable,Integer> quantityMap;
 
 	public MarketPlace(Planet planet)

@@ -44,7 +44,7 @@ public class Display extends JFrame {
 
         setTitle("SpaceFarmer 3000");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 800, 600);
+        setBounds(100, 100, 1600, 900);
         mainContentPanel = new JPanel();
         mainContentPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
         
