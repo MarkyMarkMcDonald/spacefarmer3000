@@ -10,6 +10,7 @@ package App.model;
 public interface Tradable {
 
     public boolean equals(Tradable tradable);
+    
 
     public int getBasePrice();
 

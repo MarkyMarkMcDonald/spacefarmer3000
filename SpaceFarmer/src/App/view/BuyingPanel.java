@@ -1,13 +1,19 @@
 package App.view;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.util.Map;
+import java.util.Set;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+
 import App.listener.BuyFromMarketListener;
 import App.model.MarketPlace;
 import App.model.Tradable;
-
-import javax.swing.*;
-import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.util.Map;
 
 /**
  * This Panel represents the purchasing view when on a planet.
@@ -73,7 +79,7 @@ public class BuyingPanel extends JPanel {
             Tradable itemInfo = item.getKey();
             int quantityAvailable = item.getValue();
             String itemName = itemInfo.getName();
-            int itemPrice = marketPlace.getPriceMap().get(itemInfo);
+            int itemPrice = marketPlace.getPriceMap().get(itemInfo);      
             ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Buy!", new BuyFromMarketListener(marketPlace,itemPrice,itemInfo,errorMessage, sellingPanel));
             rowPanel.add(row);
             items.add(rowPanel);

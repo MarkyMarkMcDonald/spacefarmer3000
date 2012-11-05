@@ -9,13 +9,25 @@ abstract public class TradeGood {
 
     protected String name;
     protected TradeGoodType tradeGoodType;
-    protected Enum tradeGoodSubName;
+    protected Enum<?> tradeGoodSubName;
 
-    public boolean equals(Tradable Tradable){
-        return Tradable.getName().equals(name);
+    public boolean equals(Tradable tradable){
+        return tradable.getName().equals(name);
+    }
+    
+    //In all my days, I never knew about this. Apparently, this needs
+    //to be overridden for maps with this object to work properly.
+    public int hashCode()
+    {
+    	return name.hashCode();
+    }
+    
+    public boolean equals (Object object)
+    {
+    	return equals( (Tradable) object);
     }
 
-    public TradeGood(TradeGoodType tradeGoodType, Enum tradeGoodSubName){
+    public TradeGood(TradeGoodType tradeGoodType, Enum<?> tradeGoodSubName){
         this.tradeGoodType = tradeGoodType;
         this.tradeGoodSubName = tradeGoodSubName;
     }

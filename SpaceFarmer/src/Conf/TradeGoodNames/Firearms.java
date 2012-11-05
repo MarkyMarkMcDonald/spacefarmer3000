@@ -24,5 +24,6 @@ public enum Firearms {
     public String toString(){
         return name;
     }
+    
 
 }

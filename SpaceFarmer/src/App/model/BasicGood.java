@@ -6,8 +6,11 @@ package App.model;
  * Time: 3:15 PM
  */
 public class BasicGood extends  TradeGood implements Tradable {
-    public BasicGood(TradeGoodType tradeGoodType, Enum tradeGoodSubName){
+    public BasicGood(TradeGoodType tradeGoodType, Enum<?> tradeGoodSubName){
         super(tradeGoodType, tradeGoodSubName);
         this.name = tradeGoodSubName.toString();
+    }
+    public boolean equals(Object object){
+        return super.equals(object);
     }
 }
