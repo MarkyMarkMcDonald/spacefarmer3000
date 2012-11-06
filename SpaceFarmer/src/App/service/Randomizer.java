@@ -74,6 +74,10 @@ public class Randomizer {
 		}
 		return returnObjects;
 	}
+	public static Object randElement(Object[] objects)
+	{
+		return objects[rand.nextInt(objects.length)];
+	}
 	
 	/**
 	 * Generates a number of randomly assigned Integer[2] arrays
