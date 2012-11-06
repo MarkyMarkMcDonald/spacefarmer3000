@@ -7,8 +7,8 @@ package Conf.TradeGoodNames;
  */
 public enum Machines {
 
-    RUMBA("RUMBA"),
-    ZAMBONI("ZAMBONI");
+    RUMBA("Rumba"),
+    ZAMBONI("Zamboni");
 
 
     private String name;
