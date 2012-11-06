@@ -29,7 +29,7 @@ public class Driver {
                     Game game = new Game();
                     game.setSettings(new Settings());
                     Display.setGame(game);
-                    UniverseFactory.createUniverse(PlanetNames.getPlanetNamesAsList(), SystemNames.getSystemNamesAsList(), GameVariables.numPlanets, GameVariables.numPlanetarySystems, GameVariables.systemRows, GameVariables.systemColumns, GameVariables.universeRows, GameVariables.universeColumns, GameVariables.quadrantXDimension, GameVariables.quadrantYDimension);
+                    UniverseFactory.createUniverse(PlanetNames.getPlanetNamesAsList(), SystemNames.getSystemNamesAsList(), GameVariables.numPlanets, GameVariables.numPlanetarySystems, GameVariables.systemRows, GameVariables.systemColumns, GameVariables.universeRows, GameVariables.universeColumns, GameVariables.quadrantXDimension, GameVariables.quadrantYDimension,GameVariables.minimumSystemDistance);
 
                 } catch (Exception e) {
                     e.printStackTrace();

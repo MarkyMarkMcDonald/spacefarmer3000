@@ -42,7 +42,7 @@ public class UniverseFactory {
      * @param maxYDim Length of the game's y-axis
      * @param numPlanets how many planets for this game
      */
-    public static void createUniverse(List<String> planetNames,List<String> planetarySystemNames, int numPlanets,int numSystems,int systemRows, int systemCols, int uniRows, int uniCols,int quadrantXDimension,int quadrantYDimension){
+    public static void createUniverse(List<String> planetNames,List<String> planetarySystemNames, int numPlanets,int numSystems,int systemRows, int systemCols, int uniRows, int uniCols,int quadrantXDimension,int quadrantYDimension,int minDistance){
 
         planets = new HashMap<String, Planet>();
         systems= new HashMap<String,PlanetarySystem>();
@@ -60,7 +60,7 @@ public class UniverseFactory {
         Map<Integer,List<Integer[]>> systemDimensions=new HashMap<Integer,List<Integer[]>>(numSystems);
         for (int i=0;i<uniRows*uniCols;i++)
         {
-        	systemDimensions.put(i,Randomizer.generateDimensions(systemDistribution[i],quadrantXDimension,quadrantYDimension));
+        	systemDimensions.put(i,Randomizer.generateDimensionsRange(systemDistribution[i],quadrantXDimension,quadrantYDimension, minDistance));
         }
         int quadrantIndex=0;
         int systemIndex=0;
