@@ -213,7 +213,7 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 		
 		// Randomize the initial locations of the Asteroids
 		Random rand = new Random();
-		for(int i = 0; i < ASTEROID_COUNT * getWidth() * getHeight() / (4800); ++i) {
+		for(int i = 0; i < ASTEROID_COUNT * getWidth() * getHeight() / 480000; ++i) {
 			Point p = new Point(rand.nextInt(getWidth()), rand.nextInt(getHeight()));
 			if(Point2D.distance(shipX, shipY, p.x, p.y) < SAFETY_DIST) {
 				--i;
@@ -223,7 +223,7 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 		}
 		
 		// Generate stars
-		for(int i = 0; i < getWidth() * getHeight() * 5 / 24; ++i) {
+		for(int i = 0; i < getWidth() * getHeight() / 480; ++i) {
 			stars.add(new Point(rand.nextInt(getWidth()), rand.nextInt(getHeight())));
 		}
 		
