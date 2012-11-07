@@ -1,7 +1,7 @@
 package App.view;
 
 import App.factory.UniverseFactory;
-import App.listener.TransportationListener;
+import App.listener.ViewPlanetListener;
 import App.model.PlanetarySystem;
 
 import javax.swing.*;
@@ -29,8 +29,8 @@ public class TravelSidePanel extends SidePanel {
             JComboBox planets = new JComboBox();
             planets.setModel(new DefaultComboBoxModel(system.getPlanets().keySet().toArray()));
 
-            JButton goButton = new JButton("Travel Here");
-            goButton.addActionListener(new TransportationListener(planets));
+            JButton goButton = new JButton("View Planet");
+            goButton.addActionListener(new ViewPlanetListener(planets));
 
             add(systemName);
 

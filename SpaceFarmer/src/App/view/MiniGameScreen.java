@@ -25,7 +25,9 @@ import Resources.MiniGameGFX;
  * @author Andrew Wilder
  */
 public class MiniGameScreen extends JPanel implements KeyListener, ActionListener {
-	
+
+    private static boolean success;
+
 	// Prevents serializable warning
 	private static final long serialVersionUID = -3027504169648377464L;
 
@@ -77,7 +79,9 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 		shipGFX.setRGB(0, 0, shipGFX.getWidth(), shipGFX.getHeight(), MiniGameGFX.ShipGFX, 0, shipGFX.getWidth());
 	}
 
-	/**
+
+
+    /**
 	 * Simulate the gameplay for one frame.
 	 * @param e The instance of ActionEvent associated with this event trigger. Unused.
 	 */
@@ -237,7 +241,8 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 	 */
 	private void endGame(boolean success) {
 		timer.stop();
-		Display.exitGame(success);
+		MiniGameScreen.success = success;
+        Display.exitGame(success);
 	}
 
 	/**
@@ -308,4 +313,8 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 			this.direction = direction;
 		}
 	}
+
+    public static boolean isSuccess() {
+        return success;
+    }
 }

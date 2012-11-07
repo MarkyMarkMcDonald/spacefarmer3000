@@ -12,7 +12,6 @@ import javax.swing.*;
  */
 public class MarketScreen extends Screen {
 
-    private MarketPlace marketPlace;
     private BuyingPanel buyingPanel;
     private SellingPanel sellingPanel;
     private JTabbedPane transactionPanel;
@@ -49,8 +48,6 @@ public class MarketScreen extends Screen {
 
 
     public void updateMarketPlace(MarketPlace marketPlace) {
-        this.marketPlace = marketPlace;
-
         buyingPanel.setSellingPanel(sellingPanel);
         sellingPanel.setBuyingPanel(buyingPanel);
         buyingPanel.setMarket(marketPlace);

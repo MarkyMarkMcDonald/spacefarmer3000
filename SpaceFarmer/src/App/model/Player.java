@@ -97,8 +97,11 @@ public class Player {
     public int getFuel() {
     	return fuel;
     }
-    
+
     public void setFuel(int fuel) {
-    	this.fuel = fuel;
+    	if (fuel < 0){
+            this.fuel = 0;
+        }
+        this.fuel = fuel;
     }
 }

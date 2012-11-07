@@ -4,6 +4,7 @@ import App.model.Game;
 import App.model.Player;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class PlayersInformationSidePanel extends JPanel{
 
     public PlayersInformationSidePanel(List<Player> players){
         items = new JPanel();
+        items.setLayout(new FlowLayout(FlowLayout.LEFT,20,5));
         if (players != null) {
             for (Player player : players){
                 PlayerInformationPanel playerInformationPanel = new PlayerInformationPanel(player);

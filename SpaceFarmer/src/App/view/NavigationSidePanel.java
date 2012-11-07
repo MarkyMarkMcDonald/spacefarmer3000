@@ -31,6 +31,10 @@ public class NavigationSidePanel extends SidePanel {
                 PlanetInformationScreen planetScreen = (PlanetInformationScreen) Display.getCard(CardName.PLANET_INFORMATION_CARD.toString());
                 planetScreen.update(Game.getCurrentPlanet());
 
+                // Hide the Planet Travel Pane
+                TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
+                travelPanel.setVisible(false);
+
                 progressDisplay();
             }
         };
@@ -48,6 +52,10 @@ public class NavigationSidePanel extends SidePanel {
 
                 MarketScreen marketScreen = (MarketScreen) Display.getCard(CardName.MARKETPLACE_CARD.toString());
                 marketScreen.updateMarketPlace(Game.getCurrentMarketPlace());
+
+                // Hide the Planet Travel Pane
+                TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
+                travelPanel.setVisible(false);
 
                 progressDisplay();
             }

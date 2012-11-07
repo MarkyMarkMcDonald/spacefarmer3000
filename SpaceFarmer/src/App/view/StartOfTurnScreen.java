@@ -6,6 +6,7 @@ import App.model.Planet;
 import App.model.Player;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -27,13 +28,23 @@ public class StartOfTurnScreen extends Screen{
 
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
+        Component glue1 = Box.createVerticalGlue();
+        Component glue2 = Box.createVerticalGlue();
         title = new JLabel();
         turnInfo = new JLabel();
 
+        title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        title.setAlignmentY(JLabel.CENTER_ALIGNMENT);
+        turnInfo.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        turnInfo.setAlignmentY(JLabel.CENTER_ALIGNMENT);
+
+        add(glue1);
         add(title);
         add(turnInfo);
 
         JButton start = new JButton("Start");
+        start.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        start.setAlignmentY(JButton.CENTER_ALIGNMENT);
         ContinueListener continueListener = new ContinueListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +71,8 @@ public class StartOfTurnScreen extends Screen{
         };
         start.addActionListener(continueListener);
         add(start);
+
+        add(glue2);
     }
 
     public void updateTurn(){
