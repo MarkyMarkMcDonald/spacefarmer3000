@@ -5,7 +5,9 @@
     <property name="src" location="src"/>
     <property name="build" location="build"/>
     <property name="apidoc" location="apidoc"/>
-    <property name="Main-Class" value="App\util\Driver"/>
+    <property name="lib" value="lib\*"/>
+    <property name="lib" value="images"/>
+    <property name="Main-Class" value="App/util/Driver"/>
     <tstamp/>
   </target>
 
@@ -17,17 +19,24 @@
   <target name="compile" depends="prepare">
     
     <javac srcdir="${src}" destdir="${build}">
+    <classpath>
+      <pathelement location="${lib}" />
+    </classpath>
 	</javac>
   </target>
 
   <target name="javadoc" depends="compile">
     <javadoc sourcepath="${src}" destdir="${apidoc}">
+    <classpath>
+      <pathelement location="${lib}" />
+    </classpath>
 	</javadoc>
   </target>
 
   <target name="jar" depends="compile">
     <jar destfile="SpaceFarmer.jar" basedir="${build}">
       <manifest>
+        <attribute name="Class-Path" value="${lib}" />
         <attribute name="Main-Class" value="${Main-Class}" />
       </manifest>
 	</jar>
@@ -37,6 +46,7 @@
     <java fork="true" jar="SpaceFarmer.jar">
 	  <classpath>
 	    <pathelement location="${Main-Class}"/>
+            <pathelement location="${lib}" />
       </classpath>
 	</java>
   </target>
