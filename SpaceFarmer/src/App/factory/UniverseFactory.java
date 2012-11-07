@@ -37,9 +37,6 @@ public class UniverseFactory {
     /**
      * Fills the factory with planets.
      *
-     * @param names List of the Planet's possible names
-     * @param maxXDim Length of the game's x-axis
-     * @param maxYDim Length of the game's y-axis
      * @param numPlanets how many planets for this game
      */
     public static void createUniverse(List<String> planetNames,List<String> planetarySystemNames, int numPlanets,int numSystems,int systemRows, int systemCols, int uniRows, int uniCols,int quadrantXDimension,int quadrantYDimension,int minDistance){
@@ -50,10 +47,12 @@ public class UniverseFactory {
         
         Planet planet;
         PlanetarySystem system;
+
         int planetNameIndex,systemNameIndex;
         String planetName,systemName;
         List<String> planetNamesHolder = new ArrayList<String>(planetNames);
         List<String> systemNamesHolder = new ArrayList<String>(planetarySystemNames);
+
         int systemDistribution[]=Randomizer.distributeNumber(uniRows*uniCols,numSystems);
         int planetDistribution[]=Randomizer.distributeNumber(numSystems, numPlanets);
         List<Integer[]> planetPositions;

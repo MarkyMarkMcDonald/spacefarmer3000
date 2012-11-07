@@ -1,22 +1,23 @@
 package App.listener;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import App.factory.UniverseFactory;
 import App.model.Planet;
 import App.service.TransportationService;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TransportationListener implements ActionListener {
 
 	// The Planet to which this ActionListener is tied
-	private Planet thePlanet;
+	private JComboBox planetChoice;
 	
 	/**
-	 * This constructor associates a Planet with the ActionListener.
-	 * @param p The Planet to travel to.
+	 * This constructor associates the listener with the combo .
 	 */
-	public TransportationListener(Planet p) {
-		thePlanet = p;
+	public TransportationListener(JComboBox planetChoice) {
+		this.planetChoice = planetChoice;
 	}
 	
 	/**
@@ -25,6 +26,8 @@ public class TransportationListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		TransportationService.goToPlanet(thePlanet);
+		String planetName = (String) planetChoice.getSelectedItem();
+        Planet planet = UniverseFactory.getPlanet(planetName);
+        TransportationService.goToPlanet(planet);
 	}
 }

@@ -96,17 +96,8 @@ public class Display extends JFrame {
          * Right Panel
          */
 
-        JPanel RightPanel = new JPanel();
+        TravelSidePanel RightPanel = new TravelSidePanel();
         RightPanel.setBackground(Color.PINK);
-        RightPanel.setLayout(new BoxLayout(RightPanel, BoxLayout.Y_AXIS));
-
-        JLabel label_2 = new JLabel("WIP");
-        label_2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        label_2.setAlignmentY(0.0f);
-        RightPanel.add(label_2);
-
-        Component horizontalStrut_1 = Box.createHorizontalStrut(100);
-        RightPanel.add(horizontalStrut_1);
 
         /**
          * Center Panel
