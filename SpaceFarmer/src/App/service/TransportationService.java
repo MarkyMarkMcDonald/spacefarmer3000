@@ -5,6 +5,7 @@ import App.model.Planet;
 import App.model.PlanetarySystem;
 import App.model.Player;
 import App.view.Display;
+import App.view.MiniGameScreen;
 
 import java.awt.geom.Point2D;
 
@@ -50,8 +51,16 @@ public class TransportationService {
 				return "You need " + ((int)distance - currentPlayer.getFuel()) + " more fuel to travel to Planet " + p.getName() + ".";
 			}
 		}
-		
-		// Return a success message
-		return "You traveled to Planet " + p.getName() + "!";
+
+        // Return a success message
+        if (MiniGameScreen.isSuccess()){
+            return "You traveled to Planet " + p.getName() + "!";
+        }
+        else {
+            int fuelSpent = Math.min(currentPlayer.getFuel(),20);
+            currentPlayer.setFuel(currentPlayer.getFuel() - fuelSpent);
+            return "You traveled to Planet " + p.getName() + "!\n Unfortunately, You spent " + fuelSpent + " fuel after hitting an asteroid";
+        }
+
 	}
 }

@@ -3,9 +3,11 @@ package App.view;
 import App.listener.TransportationListener;
 import App.model.Game;
 import App.model.Planet;
+import App.model.PlanetarySystem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,9 +22,13 @@ public class PlanetInformationScreen extends Screen{
     private JLabel technologylabel;
     private JLabel politicalLabel;
     private JLabel currentEventLabel;
+    private JPanel travelPanel;
     private JButton travelButton;
+    private JLabel requiredFuelLabel;
 
     private JLabel message;
+
+    private TransportationListener transportationListener;
 
     public PlanetInformationScreen(){
         name = CardName.PLANET_INFORMATION_CARD;
@@ -35,8 +41,16 @@ public class PlanetInformationScreen extends Screen{
         nameLabel = new JLabel();
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        travelPanel = new JPanel();
+        travelPanel.setVisible(false);
+
         travelButton = new JButton("Travel Here");
-        travelButton.setVisible(false);
+        transportationListener = new TransportationListener(message);
+
+        requiredFuelLabel = new JLabel();
+
+        travelPanel.add(travelButton);
+        travelPanel.add(requiredFuelLabel);
 
         resourceLabel = new JLabel();
         resourceLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -60,8 +74,14 @@ public class PlanetInformationScreen extends Screen{
         informationHolder.add(currentEventLabel);
 
         add(nameLabel);
-        add(travelButton);
+        add(travelPanel);
+
         add(informationHolder);
+        Component glue1 = Box.createVerticalGlue();
+        Component glue2 = Box.createVerticalGlue();
+        add(glue1);
+        add(message);
+        add(glue2);
     }
 
     public void update(Planet planet){
@@ -70,14 +90,17 @@ public class PlanetInformationScreen extends Screen{
         technologylabel.setText("Technology: " + planet.getTechnologyLevel().getName());
         politicalLabel.setText("Political System: " + planet.getPoliticalSystem().getName());
         currentEventLabel.setText("Current Event: " + planet.getEvent().getName());
-
-        // If the player isn't on this planet, create the components for traveling there
+        transportationListener.setPlanet(planet);
+        // If the player isn't on this planet, create and reveal the components for traveling there
         if (!Game.getCurrentPlanet().equals(planet)){
-            travelButton.addActionListener(new TransportationListener(planet, message));
-            travelButton.setVisible(true);
+            // Add the amount of fuel required to travel
+            PlanetarySystem currentPlanetarySystem = Game.getCurrentPlanet().getPlanetarySystem();
+            PlanetarySystem destinationPlanetarySystem = planet.getPlanetarySystem();
+            requiredFuelLabel.setText((int) Point2D.distance(currentPlanetarySystem.getX(), currentPlanetarySystem.getX(), destinationPlanetarySystem.getX(), destinationPlanetarySystem.getY()) + " Fuel Required");
+            travelPanel.setVisible(true);
         }
         else {
-            travelButton.setVisible(false);
+            travelPanel.setVisible(false);
         }
         message.setVisible(false);
 

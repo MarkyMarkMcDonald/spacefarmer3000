@@ -14,8 +14,12 @@ public class TransportationListener extends ContinueListener{
 
     // message describing result of the travel
     private JLabel message;
-	
-	/**
+
+    public TransportationListener(JLabel message) {
+        this.message = message;
+    }
+
+    /**
 	 * This constructor associates the listener with the combo .
 	 */
 	public TransportationListener(Planet planet, JLabel message) {
@@ -42,10 +46,15 @@ public class TransportationListener extends ContinueListener{
             // Update what planet the player is now on
             PlanetInformationScreen planetInfo = (PlanetInformationScreen) Display.getCard(cardToMoveTo.toString());
             planetInfo.update(planet);
-            PlayersInformationSidePanel playersInfo =  (PlayersInformationSidePanel) Display.getSidePanel("Bottom");
+            message.setVisible(true);
+            PlayersInformationSidePanel playersInfo =  (PlayersInformationSidePanel) Display.getSidePanel("Bot");
             playersInfo.updateBasedOnAllPlayers();
 
             progressDisplay();
         }
 	}
+
+    public void setPlanet(Planet planet) {
+        this.planet = planet;
+    }
 }
