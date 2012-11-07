@@ -83,7 +83,7 @@ public class Game {
     	if (playerIndex >= players.size())
     	{
     		currentPlayer=players.get(0);
-    		for (int planetIndex=0;planetIndex<planets.size();planetIndex++);
+    		for (int planetIndex=0;planetIndex<planets.size();planetIndex++)
     		{
     			planets.get(0).determineEvent();
     		}
