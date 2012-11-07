@@ -5,6 +5,7 @@ import App.model.MarketPlace;
 
 import javax.swing.*;
 
+
 /**
  * This screen represents a marketplace with multiple buying/selling venues. (WIP)
  * @author Ivory Assan, Mark McDonald
@@ -14,7 +15,7 @@ public class MarketScreen extends Screen {
     private MarketPlace marketPlace;
     private BuyingPanel buyingPanel;
     private SellingPanel sellingPanel;
-    private JPanel transactionPanel;
+    private JTabbedPane transactionPanel;
     private JLabel errorMessage;
 
     public MarketScreen(){
@@ -30,10 +31,11 @@ public class MarketScreen extends Screen {
         buyingPanel = new BuyingPanel(errorMessage);
         sellingPanel = new SellingPanel(errorMessage);
 
-        transactionPanel = new JPanel();
+        transactionPanel = new JTabbedPane();
         transactionPanel.setLayout(new BoxLayout(transactionPanel, BoxLayout.X_AXIS));
-        transactionPanel.add(buyingPanel);
-        transactionPanel.add(sellingPanel);
+        transactionPanel.addTab("Buy",buyingPanel);
+
+        transactionPanel.addTab("Sell",sellingPanel);
         add(transactionPanel);
     }
 
