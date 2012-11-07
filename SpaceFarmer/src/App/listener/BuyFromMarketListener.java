@@ -10,6 +10,7 @@ import App.view.SellingPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,21 +30,28 @@ public class BuyFromMarketListener extends TransactionListener{
 
     public void actionPerformed(ActionEvent actionEvent) {
         super.actionPerformed(actionEvent);
-        String message = TransactionService.buyFromMarket(Game.getCurrentPlayer(), marketPlace, price, quantityAsInt, good);
-        errorMessage.setText(message);
-        errorMessage.setVisible(true);
-
-        // update views if there weren't errors
-        if (!message.contains("You need")){
-            int previousQuantity = Integer.parseInt(shownQuantity.getText());
-            int changedQuantity = Integer.parseInt(message.split(" ")[2]);
-            String newQuantity = Integer.toString(previousQuantity - changedQuantity);
-            shownQuantity.setText(newQuantity);
-
-            sellingPanel.setMarketPlaceAndInventory(marketPlace,Game.getCurrentPlayer().getInventory());
-
-            PlayersInformationSidePanel playersInformationSidePanel = (PlayersInformationSidePanel) Display.getSidePanel("Bot");
-            playersInformationSidePanel.updateBasedOnAllPlayers();
+        
+        // Do not buy something if there's a format mismatch
+        if(quantityAsInt >= 0) {
+	        String message = TransactionService.buyFromMarket(Game.getCurrentPlayer(), marketPlace, price, quantityAsInt, good);
+	        errorMessage.setText(message);
+	        errorMessage.setVisible(true);
+	        
+	        // update views if there weren't errors
+	        if (!message.contains("You need")){
+	            int previousQuantity = Integer.parseInt(shownQuantity.getText());
+	            int changedQuantity = Integer.parseInt(message.split(" ")[2]);
+	            String newQuantity = Integer.toString(previousQuantity - changedQuantity);
+	            shownQuantity.setText(newQuantity);
+	
+	            sellingPanel.setMarketPlaceAndInventory(marketPlace,Game.getCurrentPlayer().getInventory());
+	
+	            PlayersInformationSidePanel playersInformationSidePanel = (PlayersInformationSidePanel) Display.getSidePanel("Bot");
+	            playersInformationSidePanel.updateBasedOnAllPlayers();
+	        }
+        } else {
+            errorMessage.setText("Quantity must be a number.");
+            errorMessage.setVisible(true);
         }
     }
 }
