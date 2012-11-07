@@ -2,8 +2,13 @@ package App.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.*;
 
@@ -17,15 +22,14 @@ import Conf.GameVariables;
  * This class acts as the screen handling travel between planets and systems. (WIP)
  * @author Andrew Wilder
  */
-public class IntersystemTravelScreen extends Screen {
+public class IntersystemTravelScreen extends Screen implements MouseListener {
 
 	/**
 	 * Create the panel.
 	 */
 	public IntersystemTravelScreen() {
 		name = CardName.INTERSYSTEM_TRAVEL_CARD;
-//      JLabel tempLabel = new JLabel("A random picture of planets should be here");
-//      add(tempLabel);
+		addMouseListener(this);
 	}
 
 	/**
@@ -33,6 +37,7 @@ public class IntersystemTravelScreen extends Screen {
 	 */
 	private static final int PLANET_SIZE = 30;
 	private static final Color[] planetColors = {Color.BLUE,Color.GRAY,Color.GREEN,Color.ORANGE,Color.RED,Color.CYAN,Color.DARK_GRAY,Color.LIGHT_GRAY};
+	private static Map<Point, Planet> planetLocations;
 	public void paintComponent(Graphics g) {
 		
 		// Draw black over the background
@@ -50,6 +55,7 @@ public class IntersystemTravelScreen extends Screen {
 		
 		// Draw the planetary systems
 		ArrayList[][] systemList = new ArrayList[GameVariables.universeRows][GameVariables.universeColumns];
+		planetLocations = new HashMap<Point, Planet>();
 		for(int i = 0; i < GameVariables.universeRows; ++i) {
 			for(int j = 0; j < GameVariables.universeColumns; ++j) {
 				systemList[i][j] = new ArrayList<PlanetarySystem>();
@@ -81,6 +87,9 @@ public class IntersystemTravelScreen extends Screen {
 						g.setColor(Color.WHITE);
 						g.drawString(p.getName(), planX + PLANET_SIZE / 2 + 5, planY);
 						thetaS += Math.PI * 2 / ps.getPlanets().values().size();
+						
+						// Add planet location to ArrayList for capturing mouse clicks on it
+						planetLocations.put(new Point(planX, planY), p);
 						
 						// If this is the planet the ship is on, draw the ship
 						if(Game.getCurrentPlanet().equals(p)) {
@@ -122,6 +131,9 @@ public class IntersystemTravelScreen extends Screen {
 							g.drawString(p.getName(), planX + PLANET_SIZE / 2 + 5, planY);
 							thetaS += Math.PI * 2 / ps.getPlanets().values().size();
 							
+							// Add planet location to ArrayList for capturing mouse clicks on it
+							planetLocations.put(new Point(planX, planY), p);
+							
 							// If this is the planet the ship is on, draw the ship
 							if(Game.getCurrentPlanet().equals(p)) {
 								int[] polyX = {planX, planX + 10, planX, planX - 10}, polyY = {planY - 10, planY + 10, planY, planY + 10};
@@ -137,4 +149,25 @@ public class IntersystemTravelScreen extends Screen {
 			}
 		}
 	}
+
+	/**
+	 * Captures mouse clicks to determine if a planet has been clicked.
+	 * @param e The data associated with this mouse click.
+	 */
+	public void mousePressed(MouseEvent e) {
+		
+		// Iterate over each point 
+		for(Point p : planetLocations.keySet()) {
+			if(p.distance(e.getX(), e.getY()) < PLANET_SIZE / 2) {
+				
+				// Player clicked on a planet
+				System.out.println(planetLocations.get(p).getName());
+			}
+		}
+	}
+	
+	public void mouseClicked(MouseEvent arg0) {}
+	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) {}
 }
