@@ -53,6 +53,7 @@ public class NavigationSidePanel extends SidePanel {
                 MarketScreen marketScreen = (MarketScreen) Display.getCard(CardName.MARKETPLACE_CARD.toString());
                 marketScreen.updateMarketPlace(Game.getCurrentMarketPlace());
 
+
                 // Hide the Planet Travel Pane
                 TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
                 travelPanel.setVisible(false);

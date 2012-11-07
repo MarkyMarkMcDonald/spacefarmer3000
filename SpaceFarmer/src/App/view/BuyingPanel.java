@@ -45,7 +45,22 @@ public class BuyingPanel extends JPanel {
             int quantityAvailable = item.getValue();
             String itemName = itemInfo.getName();
             int itemPrice = marketPlace.getPriceMap().get(itemInfo);      
+
             ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Buy!", new BuyFromMarketListener(marketPlace,itemPrice,itemInfo,errorMessage, sellingPanel));
+
+            // Set item's background color based on comparison of market price and base price
+            int ratio =  itemPrice / itemInfo.getBasePrice() * 100;
+            if (ratio < 50){
+                row.setBackground(Color.green);
+            }
+            else if (ratio >= 50 && ratio <= 150){
+                row.setBackground(Color.yellow);
+            }
+            else {
+                row.setBackground(Color.red);
+            }
+
+
             row.setAlignmentX(Component.RIGHT_ALIGNMENT);
             row.setAlignmentY(Component.TOP_ALIGNMENT);
 

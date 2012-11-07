@@ -17,17 +17,18 @@ public class MarketScreen extends Screen {
     private BuyingPanel buyingPanel;
     private SellingPanel sellingPanel;
     private ToggleBuyingAndSellingListener toggleBuyingAndSellingListener;
-
+    private JLabel errorMessage;
 
     public MarketScreen(){
         name = CardName.MARKETPLACE_CARD;
-        JLabel errorMessage = new JLabel();
+        errorMessage = new JLabel();
         errorMessage.setVisible(false);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel lblMarketPlace = new JLabel("Market Place");
         add(lblMarketPlace);
+        add(errorMessage);
 
         buyingPanel = new BuyingPanel(errorMessage);
         sellingPanel = new SellingPanel(errorMessage);
@@ -59,14 +60,16 @@ public class MarketScreen extends Screen {
         buyingPanel.setSellingPanel(sellingPanel);
         sellingPanel.setBuyingPanel(buyingPanel);
 
-        Inventory currentPlayersInventoary = Game.getCurrentPlayer().getInventory();
+        Inventory currentPlayersInventory = Game.getCurrentPlayer().getInventory();
 
         buyingPanel.setMarket(marketPlace);
-        sellingPanel.setMarketPlaceAndInventory(marketPlace, currentPlayersInventoary);
+        sellingPanel.setMarketPlaceAndInventory(marketPlace, currentPlayersInventory);
 
         toggleBuyingAndSellingListener.setMarketPlace(marketPlace);
-        toggleBuyingAndSellingListener.setInventory(currentPlayersInventoary);
-
+        toggleBuyingAndSellingListener.setInventory(currentPlayersInventory);
+        if (errorMessage != null) {
+            errorMessage.setVisible(false);
+        }
     }
 
 }
