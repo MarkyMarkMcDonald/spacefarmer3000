@@ -1,23 +1,22 @@
 package App.listener;
 
-import App.factory.UniverseFactory;
 import App.model.Planet;
 import App.service.TransportationService;
+import App.view.*;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class TransportationListener implements ActionListener {
+public class TransportationListener extends ContinueListener{
 
 	// The Planet to which this ActionListener is tied
-	private JComboBox planetChoice;
+	private Planet planet;
 	
 	/**
 	 * This constructor associates the listener with the combo .
 	 */
-	public TransportationListener(JComboBox planetChoice) {
-		this.planetChoice = planetChoice;
+	public TransportationListener(Planet planet) {
+		this.planet = planet;
+        cardToMoveTo = CardName.PLANET_INFORMATION_CARD;
 	}
 	
 	/**
@@ -26,8 +25,19 @@ public class TransportationListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String planetName = (String) planetChoice.getSelectedItem();
-        Planet planet = UniverseFactory.getPlanet(planetName);
-        TransportationService.goToPlanet(planet);
+        String message = TransportationService.goToPlanet(planet);
+        if (message.contains("You traveled to")){
+            // Hide the Planet Travel Pane
+            TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
+            travelPanel.setVisible(false);
+
+            // Update what planet the player is now on
+            PlanetInformationScreen planetInfo = (PlanetInformationScreen) Display.getCard(cardToMoveTo.toString());
+            planetInfo.update(planet);
+            PlayersInformationSidePanel playersInfo =  (PlayersInformationSidePanel) Display.getSidePanel("Bottom");
+            playersInfo.updateBasedOnAllPlayers();
+
+            progressDisplay();
+        }
 	}
 }

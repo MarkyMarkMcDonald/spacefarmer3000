@@ -1,12 +1,12 @@
 package App.service;
 
-import java.awt.geom.Point2D;
-
 import App.model.Game;
 import App.model.Planet;
 import App.model.PlanetarySystem;
 import App.model.Player;
 import App.view.Display;
+
+import java.awt.geom.Point2D;
 
 /**
  * This class handles moving between planets.
@@ -26,25 +26,25 @@ public class TransportationService {
 		PlanetarySystem currSystem = currentPlayer.getCurrentPlanet().getPlanetarySystem();
 		double distance = Point2D.distance(currSystem.getX(), currSystem.getY(), newSystem.getX(), newSystem.getY());
 		
-		// If the planet is in the same system
+		// The planet is in the same system
 		if(newSystem != currSystem) {
-			
-			// Travel to the planet
 			currentPlayer.setCurrentPlanet(p);
-		} else { // If the planet is in a different system
+		}
+        // The planet is in a different system
+        else {
 			
-			// Check for enough fuel to make the journey
+			// Check if player has enough fuel
 			if(currentPlayer.getFuel() >= distance) {
 				
-				// Travel to the planet
 				currentPlayer.setCurrentPlanet(p);
 				
 				// Decrease fuel level
 				currentPlayer.setFuel(currentPlayer.getFuel() - (int)distance);
 				
 				// Play asteroid dodge minigame
-				Display.playMiniGame(); // Results from the minigame are handled in Display.exitGame()
-			} else {
+				Display.playMiniGame(); // Results from the minigame are saved in MiniGameScreen
+			}
+            else {
 
 				// Return a failure message
 				return "You need " + ((int)distance - currentPlayer.getFuel()) + " more fuel to travel to Planet " + p.getName() + ".";
