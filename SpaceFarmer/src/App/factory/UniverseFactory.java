@@ -46,7 +46,7 @@ public class UniverseFactory {
 
         planets = new HashMap<String, Planet>();
         systems= new HashMap<String,PlanetarySystem>();
-        Map<String,Planet> systemPlanets=new HashMap<String,Planet>();
+        Map<String,Planet> systemPlanets;
         
         Planet planet;
         PlanetarySystem system;
@@ -71,6 +71,7 @@ public class UniverseFactory {
         	while (systemIndex < systemDistribution[quadrantIndex] && !systemNamesHolder.isEmpty() && !planetNamesHolder.isEmpty()){
         		planetIndex=0;
         		system=new PlanetarySystem();
+        		systemPlanets=new HashMap<String,Planet>();
         		planetPositions=Randomizer.generateDimensions(planetDistribution[systemCount], systemRows, systemCols);
         		systemNameIndex=Randomizer.nextInt(systemNamesHolder.size());
     			systemName=systemNamesHolder.get(systemNameIndex);
