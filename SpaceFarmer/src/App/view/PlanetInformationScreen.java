@@ -22,6 +22,8 @@ public class PlanetInformationScreen extends Screen{
     private JLabel currentEventLabel;
     private JButton travelButton;
 
+    private JLabel message;
+
     public PlanetInformationScreen(){
         name = CardName.PLANET_INFORMATION_CARD;
 
@@ -48,6 +50,9 @@ public class PlanetInformationScreen extends Screen{
         currentEventLabel = new JLabel();
         currentEventLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        message = new JLabel();
+        message.setVisible(false);
+        message.setForeground(Color.red);
 
         informationHolder.add(resourceLabel);
         informationHolder.add(technologylabel);
@@ -68,12 +73,14 @@ public class PlanetInformationScreen extends Screen{
 
         // If the player isn't on this planet, create the components for traveling there
         if (!Game.getCurrentPlanet().equals(planet)){
-            travelButton.addActionListener(new TransportationListener(planet));
+            travelButton.addActionListener(new TransportationListener(planet, message));
             travelButton.setVisible(true);
         }
         else {
             travelButton.setVisible(false);
         }
+        message.setVisible(false);
+
     }
 
 }

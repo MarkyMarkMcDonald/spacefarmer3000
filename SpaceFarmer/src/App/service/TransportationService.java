@@ -27,7 +27,7 @@ public class TransportationService {
 		double distance = Point2D.distance(currSystem.getX(), currSystem.getY(), newSystem.getX(), newSystem.getY());
 		
 		// The planet is in the same system
-		if(newSystem != currSystem) {
+		if(newSystem == currSystem) {
 			currentPlayer.setCurrentPlanet(p);
 		}
         // The planet is in a different system
