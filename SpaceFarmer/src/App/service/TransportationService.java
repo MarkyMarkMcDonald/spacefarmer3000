@@ -44,6 +44,17 @@ public class TransportationService {
 				
 				// Play asteroid dodge minigame
 				Display.playMiniGame(); // Results from the minigame are saved in MiniGameScreen
+
+                // Return a success message based on game result
+                if (MiniGameScreen.isSuccess()){
+                    return "You traveled to Planet " + p.getName() + "!";
+                }
+                else {
+                    int fuelSpent = Math.min(currentPlayer.getFuel(),20);
+                    currentPlayer.setFuel(currentPlayer.getFuel() - fuelSpent);
+                    return "You traveled to Planet " + p.getName() + "!\n Unfortunately, You lost " + fuelSpent + " fuel after hitting an asteroid";
+                }
+
 			}
             else {
 
@@ -51,16 +62,10 @@ public class TransportationService {
 				return "You need " + ((int)distance - currentPlayer.getFuel()) + " more fuel to travel to Planet " + p.getName() + ".";
 			}
 		}
+        // return standard travel message
+        return "You traveled to Planet " + p.getName() + "!";
 
-        // Return a success message
-        if (MiniGameScreen.isSuccess()){
-            return "You traveled to Planet " + p.getName() + "!";
-        }
-        else {
-            int fuelSpent = Math.min(currentPlayer.getFuel(),20);
-            currentPlayer.setFuel(currentPlayer.getFuel() - fuelSpent);
-            return "You traveled to Planet " + p.getName() + "!\n Unfortunately, You spent " + fuelSpent + " fuel after hitting an asteroid";
-        }
+
 
 	}
 }

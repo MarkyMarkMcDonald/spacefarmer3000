@@ -16,6 +16,8 @@ public class TransportationListener extends ContinueListener{
     private JLabel message;
 
     public TransportationListener(JLabel message) {
+        cardToMoveTo = CardName.PLANET_INFORMATION_CARD;
+
         this.message = message;
     }
 

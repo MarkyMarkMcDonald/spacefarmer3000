@@ -41,11 +41,16 @@ public class PlanetInformationScreen extends Screen{
         nameLabel = new JLabel();
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        message = new JLabel();
+        message.setVisible(false);
+        message.setForeground(Color.red);
+
         travelPanel = new JPanel();
         travelPanel.setVisible(false);
 
         travelButton = new JButton("Travel Here");
         transportationListener = new TransportationListener(message);
+        travelButton.addActionListener(transportationListener);
 
         requiredFuelLabel = new JLabel();
 
@@ -64,9 +69,7 @@ public class PlanetInformationScreen extends Screen{
         currentEventLabel = new JLabel();
         currentEventLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        message = new JLabel();
-        message.setVisible(false);
-        message.setForeground(Color.red);
+
 
         informationHolder.add(resourceLabel);
         informationHolder.add(technologylabel);
@@ -96,7 +99,12 @@ public class PlanetInformationScreen extends Screen{
             // Add the amount of fuel required to travel
             PlanetarySystem currentPlanetarySystem = Game.getCurrentPlanet().getPlanetarySystem();
             PlanetarySystem destinationPlanetarySystem = planet.getPlanetarySystem();
-            requiredFuelLabel.setText((int) Point2D.distance(currentPlanetarySystem.getX(), currentPlanetarySystem.getX(), destinationPlanetarySystem.getX(), destinationPlanetarySystem.getY()) + " Fuel Required");
+            if (currentPlanetarySystem.equals(destinationPlanetarySystem)){
+                requiredFuelLabel.setText("No Fuel Required For Inter-System Travel");
+            }
+            else {
+                requiredFuelLabel.setText((int) Point2D.distance(currentPlanetarySystem.getX(), currentPlanetarySystem.getY(), destinationPlanetarySystem.getX(), destinationPlanetarySystem.getY()) + " Fuel Required");
+            }
             travelPanel.setVisible(true);
         }
         else {
