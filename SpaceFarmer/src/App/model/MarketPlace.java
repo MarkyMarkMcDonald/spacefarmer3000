@@ -14,7 +14,7 @@ import java.util.Map;
 public class MarketPlace {
 	private static final int MINIMUM_SUBGOODS=1;
 	private static final int MAXIMUM_SUBGOODS=1;
-	private Map<Tradable,Integer> priceMap;
+    private Map<Tradable,Integer> priceMap;
 	private Map<Tradable,Integer> quantityMap;
 
 	public MarketPlace(Planet planet)
@@ -25,12 +25,15 @@ public class MarketPlace {
             for (Object subName : Randomizer.randElements(tradeGoodType.getSubNames(),MINIMUM_SUBGOODS+Randomizer.nextInt(MAXIMUM_SUBGOODS-MINIMUM_SUBGOODS+1))){
                     BasicGood good = new BasicGood(tradeGoodType, (Enum<?>) subName);
                     int quantity = tradeGoodType.determineQuantity(planet);
-                    int cost = tradeGoodType.calculatePrice(planet);
-                    //Note: prices are already varied in calculatePrice
-                    //int finalCost = baseCost + Randomizer.nextInt((int) (baseCost * .05));
-                    priceMap.put(good,cost);
                     quantityMap.put(good,quantity);
             }
+        }
+        // Two for loops, because market will not have every good, but knows the price of all goods.
+        for (TradeGoodType tradeGoodType : TradeGoodType.values()){
+        	for (Object subName : tradeGoodType.getSubNames()){
+        		BasicGood good = new BasicGood(tradeGoodType, (Enum<?>) subName);
+        		priceMap.put(good, tradeGoodType.calculatePrice(planet));
+        	}
         }
 	}
 	

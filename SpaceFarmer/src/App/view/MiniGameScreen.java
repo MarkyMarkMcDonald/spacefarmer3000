@@ -25,7 +25,9 @@ import Resources.MiniGameGFX;
  * @author Andrew Wilder
  */
 public class MiniGameScreen extends JPanel implements KeyListener, ActionListener {
-	
+
+    private static boolean success;
+
 	// Prevents serializable warning
 	private static final long serialVersionUID = -3027504169648377464L;
 
@@ -47,6 +49,7 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 	
 	// An ArrayList to hold the Asteroid objects
 	private ArrayList<Asteroid> asteroids;
+	private ArrayList<Point> stars;
 	
 	// Variables that control the player's ship
 	private double shipX, shipY, shipAngle, shipSpeed;
@@ -55,7 +58,7 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 	private Timer timer;
 	
 	// Instances of the graphics used by the minigame
-	private BufferedImage shipGFX, asteroidGFX, BG_GFX;
+	private BufferedImage shipGFX, asteroidGFX;
 	
 	/**
 	 * Construct this minigame screen with the appropriate variables.
@@ -74,26 +77,11 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 		asteroidGFX.setRGB(0, 0, asteroidGFX.getWidth(), asteroidGFX.getHeight(), MiniGameGFX.AsteroidGFX, 0, asteroidGFX.getWidth());
 		shipGFX = new BufferedImage(SHIP_GFX_SIZE, SHIP_GFX_SIZE, BufferedImage.TYPE_INT_ARGB);
 		shipGFX.setRGB(0, 0, shipGFX.getWidth(), shipGFX.getHeight(), MiniGameGFX.ShipGFX, 0, shipGFX.getWidth());
-		
-		// Background graphics are procedurally-generated
-		BG_GFX = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D bg = BG_GFX.createGraphics();
-		for(int i = BG_GFX.getHeight() / 4; i < BG_GFX.getHeight(); ++i) {
-			bg.setColor(new Color(0, (int)((double)(i - BG_GFX.getHeight() * 0.25) / (BG_GFX.getHeight() * 0.75) * 0x5F), (int)((double)(i - BG_GFX.getHeight() * 0.25) / (BG_GFX.getHeight() * 0.75) * 0xBF)));
-			bg.drawLine(0, i, BG_GFX.getWidth() - 1, i);
-		}
-		for(int i = 0; i < BG_GFX.getHeight() / 4; ++i) {
-			bg.setColor(new Color((int)((double)(BG_GFX.getHeight() / 4 - i) / (BG_GFX.getHeight() / 4) * 0x5F), 0, (int)((double)(BG_GFX.getHeight() / 4 - i) / (BG_GFX.getHeight() / 4) * 0x1F)));
-			bg.drawLine(0, i, BG_GFX.getWidth() - 1, i);
-		}
-		Random rand = new Random();
-		for(int i = 0; i < 1000; ++i) {
-			int x = rand.nextInt(BG_GFX.getWidth()), y = rand.nextInt(BG_GFX.getHeight());
-			BG_GFX.setRGB(x, y, Color.white.getRGB());
-		}
 	}
 
-	/**
+
+
+    /**
 	 * Simulate the gameplay for one frame.
 	 * @param e The instance of ActionEvent associated with this event trigger. Unused.
 	 */
@@ -186,7 +174,12 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 		
 		// Draw the background graphics
 		Graphics2D screen = (Graphics2D)g;
-		screen.drawImage(BG_GFX, 0, 0, null);
+		screen.setColor(Color.BLACK);
+		screen.fillRect(0,  0, getWidth(), getHeight());
+		screen.setColor(Color.WHITE);
+		for(Point p : stars) {
+			screen.drawRect(p.x, p.y, 0, 0);
+		}
 		
 		// Draw asteroids
 		for(Asteroid a : asteroids) {
@@ -218,18 +211,24 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 		shipAngle = 0;
 		shipSpeed = 0;
 		asteroids = new ArrayList<Asteroid>();
+		stars = new ArrayList<Point>();
 		holdingLeft = false;
 		holdingRight = false;
 		
 		// Randomize the initial locations of the Asteroids
 		Random rand = new Random();
-		for(int i = 0; i < ASTEROID_COUNT; ++i) {
+		for(int i = 0; i < ASTEROID_COUNT * getWidth() * getHeight() / 480000; ++i) {
 			Point p = new Point(rand.nextInt(getWidth()), rand.nextInt(getHeight()));
 			if(Point2D.distance(shipX, shipY, p.x, p.y) < SAFETY_DIST) {
 				--i;
 			} else {
 				asteroids.add(new Asteroid(p.x, p.y, rand.nextDouble() * 2 * Math.PI, rand.nextDouble() * 2 * Math.PI, rand.nextBoolean()));
 			}
+		}
+		
+		// Generate stars
+		for(int i = 0; i < getWidth() * getHeight() / 480; ++i) {
+			stars.add(new Point(rand.nextInt(getWidth()), rand.nextInt(getHeight())));
 		}
 		
 		// Start the simulation and focus the keyboard input on this panel
@@ -242,7 +241,8 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 	 */
 	private void endGame(boolean success) {
 		timer.stop();
-		Display.exitGame(success);
+		MiniGameScreen.success = success;
+        Display.exitGame(success);
 	}
 
 	/**
@@ -313,4 +313,8 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 			this.direction = direction;
 		}
 	}
+
+    public static boolean isSuccess() {
+        return success;
+    }
 }

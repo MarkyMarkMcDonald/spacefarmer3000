@@ -3,6 +3,7 @@ package App.service;
 import App.factory.UniverseFactory;
 import App.model.Planet;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -73,6 +74,10 @@ public class Randomizer {
 		}
 		return returnObjects;
 	}
+	public static Object randElement(Object[] objects)
+	{
+		return objects[rand.nextInt(objects.length)];
+	}
 	
 	/**
 	 * Generates a number of randomly assigned Integer[2] arrays
@@ -105,6 +110,38 @@ public class Randomizer {
 
 			}
 			dimensionList.add(dimension);
+		}
+		return dimensionList;
+	}
+	
+	public static List<Integer[]> generateDimensionsRange(int number, int xDim, int yDim, int range)
+	{
+		List<Integer[]> dimensionList=new ArrayList<Integer[]>();
+		Integer[] point=new Integer[2];
+		point[0]=rand.nextInt(xDim);
+		point[1]=rand.nextInt(yDim);
+		boolean outOfRange=true;
+		for (int i=0;i<number;i++)
+		{
+			while (!outOfRange)
+			{
+				outOfRange=true;
+				for (Integer[] p: dimensionList)
+				{
+					if(Point2D.distance(p[0], p[1], point[0], point[1])<range)
+					{
+						outOfRange=false;
+						point[0]=rand.nextInt(xDim);
+						point[1]=rand.nextInt(yDim);
+						break;
+					}
+				}
+			}
+			outOfRange=false;
+			dimensionList.add(point);
+			point=new Integer[2];
+			point[0]=rand.nextInt(xDim);
+			point[1]=rand.nextInt(yDim);
 		}
 		return dimensionList;
 	}

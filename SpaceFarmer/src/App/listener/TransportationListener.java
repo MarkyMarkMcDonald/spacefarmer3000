@@ -1,23 +1,35 @@
 package App.listener;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import App.model.Planet;
 import App.service.TransportationService;
+import App.view.*;
 
-public class TransportationListener implements ActionListener {
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+
+public class TransportationListener extends ContinueListener{
 
 	// The Planet to which this ActionListener is tied
-	private Planet thePlanet;
-	
-	/**
-	 * This constructor associates a Planet with the ActionListener.
-	 * @param p The Planet to travel to.
+	private Planet planet;
+
+    // message describing result of the travel
+    private JLabel message;
+
+    public TransportationListener(JLabel message) {
+        cardToMoveTo = CardName.PLANET_INFORMATION_CARD;
+
+        this.message = message;
+    }
+
+    /**
+	 * This constructor associates the listener with the combo .
 	 */
-	public TransportationListener(Planet p) {
-		thePlanet = p;
-	}
+	public TransportationListener(Planet planet, JLabel message) {
+        cardToMoveTo = CardName.PLANET_INFORMATION_CARD;
+
+        this.planet = planet;
+        this.message = message;
+    }
 	
 	/**
 	 * Travel to a planet by calling the method in TransportationService.
@@ -25,6 +37,26 @@ public class TransportationListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		TransportationService.goToPlanet(thePlanet);
+        String messageFromService = TransportationService.goToPlanet(planet);
+        message.setText(messageFromService);
+        message.setVisible(true);
+        if (messageFromService.contains("You traveled to")){
+            // Hide the Planet Travel Pane
+            TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
+            travelPanel.setVisible(false);
+
+            // Update what planet the player is now on
+            PlanetInformationScreen planetInfo = (PlanetInformationScreen) Display.getCard(cardToMoveTo.toString());
+            planetInfo.update(planet);
+            message.setVisible(true);
+            PlayersInformationSidePanel playersInfo =  (PlayersInformationSidePanel) Display.getSidePanel("Bot");
+            playersInfo.updateBasedOnAllPlayers();
+
+            progressDisplay();
+        }
 	}
+
+    public void setPlanet(Planet planet) {
+        this.planet = planet;
+    }
 }

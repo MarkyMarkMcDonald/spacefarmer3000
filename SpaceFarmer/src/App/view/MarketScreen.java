@@ -1,9 +1,12 @@
 package App.view;
 
+import App.listener.ToggleBuyingAndSellingListener;
 import App.model.Game;
+import App.model.Inventory;
 import App.model.MarketPlace;
 
 import javax.swing.*;
+
 
 /**
  * This screen represents a marketplace with multiple buying/selling venues. (WIP)
@@ -11,10 +14,9 @@ import javax.swing.*;
  */
 public class MarketScreen extends Screen {
 
-    private MarketPlace marketPlace;
     private BuyingPanel buyingPanel;
     private SellingPanel sellingPanel;
-    private JPanel transactionPanel;
+    private ToggleBuyingAndSellingListener toggleBuyingAndSellingListener;
     private JLabel errorMessage;
 
     public MarketScreen(){
@@ -26,11 +28,19 @@ public class MarketScreen extends Screen {
 
         JLabel lblMarketPlace = new JLabel("Market Place");
         add(lblMarketPlace);
+        add(errorMessage);
 
         buyingPanel = new BuyingPanel(errorMessage);
         sellingPanel = new SellingPanel(errorMessage);
+        sellingPanel.setVisible(false);
 
-        transactionPanel = new JPanel();
+        JButton toggleBuyAndSellButton = new JButton("Sell To Market");
+        toggleBuyingAndSellingListener = new ToggleBuyingAndSellingListener(toggleBuyAndSellButton,buyingPanel,sellingPanel,null,null);
+        toggleBuyAndSellButton.addActionListener(toggleBuyingAndSellingListener);
+
+        add(toggleBuyAndSellButton);
+
+        JPanel transactionPanel = new JPanel();
         transactionPanel.setLayout(new BoxLayout(transactionPanel, BoxLayout.X_AXIS));
         transactionPanel.add(buyingPanel);
         transactionPanel.add(sellingPanel);
@@ -47,13 +57,19 @@ public class MarketScreen extends Screen {
 
 
     public void updateMarketPlace(MarketPlace marketPlace) {
-        this.marketPlace = marketPlace;
-
         buyingPanel.setSellingPanel(sellingPanel);
         sellingPanel.setBuyingPanel(buyingPanel);
-        buyingPanel.setMarket(marketPlace);
-        sellingPanel.setMarketPlaceAndInventory(marketPlace,Game.getCurrentPlayer().getInventory());
 
+        Inventory currentPlayersInventory = Game.getCurrentPlayer().getInventory();
+
+        buyingPanel.setMarket(marketPlace);
+        sellingPanel.setMarketPlaceAndInventory(marketPlace, currentPlayersInventory);
+
+        toggleBuyingAndSellingListener.setMarketPlace(marketPlace);
+        toggleBuyingAndSellingListener.setInventory(currentPlayersInventory);
+        if (errorMessage != null) {
+            errorMessage.setVisible(false);
+        }
     }
 
 }

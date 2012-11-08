@@ -77,15 +77,20 @@ public class Game {
         players.add(player);
     }
     
+    /*
+     * Gives the turn to the next player.
+     * If the player was the last player, then assign a new event
+     * to each planet.
+     */
     public void endTurn()
     {
         int	playerIndex=players.indexOf(currentPlayer)+1;
     	if (playerIndex >= players.size())
     	{
     		currentPlayer=players.get(0);
-    		for (int planetIndex=0;planetIndex<planets.size();planetIndex++);
+    		for (int planetIndex=0;planetIndex<planets.size();planetIndex++)
     		{
-    			planets.get(0).determineEvent();
+    			planets.get(planetIndex).determineEvent();
     		}
     	}
     	else

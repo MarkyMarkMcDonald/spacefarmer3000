@@ -10,6 +10,7 @@ import App.view.PlayersInformationSidePanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,21 +29,28 @@ public class SellToMarketListener extends TransactionListener {
 
     public void actionPerformed(ActionEvent actionEvent) {
         super.actionPerformed(actionEvent);
-        String message = TransactionService.sellToMarket(Game.getCurrentPlayer(), marketPlace, price, quantityAsInt, good);
-        errorMessage.setText(message);
-        errorMessage.setVisible(true);
-
-        // update view if there are no errors
-        if (!message.contains("You need")){
-            int previousQuantity = Integer.parseInt(shownQuantity.getText());
-            int changedQuantity = Integer.parseInt(message.split(" ")[2]);
-            String newQuantity = Integer.toString(previousQuantity - changedQuantity);
-            shownQuantity.setText(newQuantity);
-
-            buyingPanel.setMarket(marketPlace);
-
-            PlayersInformationSidePanel playersInformationSidePanel = (PlayersInformationSidePanel) Display.getSidePanel("Bot");
-            playersInformationSidePanel.updateBasedOnAllPlayers();
+        
+        // Do nothing is there's a format mismatch
+        if(quantityAsInt >= 0) {
+	        String message = TransactionService.sellToMarket(Game.getCurrentPlayer(), marketPlace, price, quantityAsInt, good);
+	        errorMessage.setText(message);
+	        errorMessage.setVisible(true);
+	
+	        // update view if there are no errors
+	        if (!message.contains("You need")){
+	            int previousQuantity = Integer.parseInt(shownQuantity.getText());
+	            int changedQuantity = Integer.parseInt(message.split(" ")[2]);
+	            String newQuantity = Integer.toString(previousQuantity - changedQuantity);
+	            shownQuantity.setText(newQuantity);
+	
+	            buyingPanel.setMarket(marketPlace);
+	
+	            PlayersInformationSidePanel playersInformationSidePanel = (PlayersInformationSidePanel) Display.getSidePanel("Bot");
+	            playersInformationSidePanel.updateBasedOnAllPlayers();
+	        }
+        } else {
+	        errorMessage.setText("Quantity must be a number.");
+	        errorMessage.setVisible(true);
         }
     }
 }

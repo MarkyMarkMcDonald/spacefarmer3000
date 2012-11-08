@@ -24,12 +24,14 @@ public class PlayerInformationPanel extends JPanel{
         JLabel shipLabel = new JLabel(shipType.toString());
         JLabel moneyLabel = new JLabel("$" + Integer.toString(money));
         JLabel cargoLabel = new JLabel("Cargo: " + player.getInventory().getSpaceUsed() +"/" + player.getShip().getCargoSize());
+        JLabel fuelLabel = new JLabel("Fuel: " + Integer.toString(player.getFuel()) + "/" + player.getShip().getMaxFuel());
         JLabel planetLabel = new JLabel("On " + player.getCurrentPlanet().getName());
 
         add(nameLabel);
         add(shipLabel);
         add(moneyLabel);
         add(cargoLabel);
+        add(fuelLabel);
         add(planetLabel);
     }
 

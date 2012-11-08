@@ -2,8 +2,12 @@ package App.service;
 
 import App.model.Game;
 import App.model.Planet;
+import App.model.PlanetarySystem;
 import App.model.Player;
 import App.view.Display;
+import App.view.MiniGameScreen;
+
+import java.awt.geom.Point2D;
 
 /**
  * This class handles moving between planets.
@@ -15,26 +19,53 @@ public class TransportationService {
 	 * Travel to a Planet.
 	 * @param p The Planet to travel to.
 	 */
-	public static void goToPlanet(Planet p) {
-		// TODO check conditions that allow travel between planets
-		
-		/* Need to check the current player's fuel level
-		 * Compare the player's fuel level against what is needed to reach Planet p
-		 */
+	public static String goToPlanet(Planet p) {
+
+		// Get data required to make the decision to travel
 		Player currentPlayer = Game.getCurrentPlayer();
+		PlanetarySystem newSystem = p.getPlanetarySystem();
+		PlanetarySystem currSystem = currentPlayer.getCurrentPlanet().getPlanetarySystem();
+		double distance = Point2D.distance(currSystem.getX(), currSystem.getY(), newSystem.getX(), newSystem.getY());
 		
-		boolean condition = true;
-		if(condition) {
-			// Travel successful
-			
-			// If p is not in the Player's current Planetary System, then activate minigame
-			if(p.getPlanetarySystem().equals(currentPlayer.getCurrentPlanet().getPlanetarySystem())) {
-				Display.playMiniGame(); // Results from the minigame are handled in Display.exitGame()
-			}
-		} else {
-			// Travel unsuccessful
-			
-			// TODO: Give a message to the user that you couldn't travel
+		// The planet is in the same system
+		if(newSystem == currSystem) {
+			currentPlayer.setCurrentPlanet(p);
 		}
+        // The planet is in a different system
+        else {
+			
+			// Check if player has enough fuel
+			if(currentPlayer.getFuel() >= distance) {
+				
+				currentPlayer.setCurrentPlanet(p);
+				
+				// Decrease fuel level
+				currentPlayer.setFuel(currentPlayer.getFuel() - (int)distance);
+				
+				// Play asteroid dodge minigame
+				Display.playMiniGame(); // Results from the minigame are saved in MiniGameScreen
+
+                // Return a success message based on game result
+                if (MiniGameScreen.isSuccess()){
+                    return "You traveled to Planet " + p.getName() + "!";
+                }
+                else {
+                    int fuelSpent = Math.min(currentPlayer.getFuel(),20);
+                    currentPlayer.setFuel(currentPlayer.getFuel() - fuelSpent);
+                    return "You traveled to Planet " + p.getName() + "!\n Unfortunately, You lost " + fuelSpent + " fuel after hitting an asteroid";
+                }
+
+			}
+            else {
+
+				// Return a failure message
+				return "You need " + ((int)distance - currentPlayer.getFuel()) + " more fuel to travel to Planet " + p.getName() + ".";
+			}
+		}
+        // return standard travel message
+        return "You traveled to Planet " + p.getName() + "!";
+
+
+
 	}
 }

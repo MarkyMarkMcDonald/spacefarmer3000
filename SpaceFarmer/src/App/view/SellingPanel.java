@@ -6,7 +6,6 @@ import App.model.MarketPlace;
 import App.model.Tradable;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Map;
 
@@ -27,34 +26,7 @@ public class SellingPanel extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.errorMessage = errorMessage;
-
-        JPanel headings = new JPanel();
-        headings.setLayout(new BoxLayout(headings, BoxLayout.X_AXIS));
-
-		JLabel lblItem = new JLabel("Item");
-        headings.add(lblItem);
-		
-		Component horizontalStrut = Box.createHorizontalStrut(20);
-        headings.add(horizontalStrut);
-		
-		JLabel lblBuyingPrice = new JLabel("# Available");
-        headings.add(lblBuyingPrice);
-		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-        headings.add(horizontalStrut_1);
-		
-		JLabel lblAvailable = new JLabel("Selling Price");
-        headings.add(lblAvailable);
-		
-		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-        headings.add(horizontalStrut_2);
-		
-		JLabel lblToBuy = new JLabel("# to Buy");
-        headings.add(lblToBuy);
-		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
-        headings.add(horizontalStrut_3);
-
+        JPanel headings = new HeadingPanel("Item","# Available", "Selling Price", "# to Sell");
         add(headings);
 
         items = new JPanel();
@@ -68,9 +40,9 @@ public class SellingPanel extends JPanel {
 	 * @param inventory The Player's inventory that will interact with the market.
 	 */
     public void setMarketPlaceAndInventory(MarketPlace marketPlace, Inventory inventory){
-
         items.removeAll();
-        items.setLayout(new BoxLayout(items, BoxLayout.Y_AXIS));
+        items.setLayout(new BoxLayout(items,BoxLayout.Y_AXIS));
+
 
         for (Map.Entry<Tradable, Integer> item : inventory.getInventoryEntries()){
             JPanel rowPanel = new JPanel();
@@ -80,10 +52,25 @@ public class SellingPanel extends JPanel {
             // can only sell items at 95% market prices
             int itemPrice = (int) Math.floor(marketPlace.getPriceMap().get(itemInfo) * .95);
             ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Sell!",new SellToMarketListener(marketPlace,itemPrice,itemInfo, errorMessage, buyingPanel));
+
+            // Set item's background color based on comparison of market price and base price
+            int ratio =  itemPrice / itemInfo.getBasePrice() * 100;
+            if (ratio < 50){
+                row.setBackground(Color.red);
+            }
+            else if (ratio >= 50 && ratio <= 150){
+                row.setBackground(Color.yellow);
+            }
+            else {
+                row.setBackground(Color.green);
+            }
+
+            row.setAlignmentX(Component.RIGHT_ALIGNMENT);
+            row.setAlignmentY(Component.TOP_ALIGNMENT);
+
             rowPanel.add(row);
             items.add(rowPanel);
         }
-        items.setBorder(new LineBorder(Color.black));
     }
 
     public void setErrorMessage(JLabel errorMessage) {

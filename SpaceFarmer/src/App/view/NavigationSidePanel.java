@@ -18,6 +18,10 @@ public class NavigationSidePanel extends SidePanel {
     public NavigationSidePanel(){
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
+
+        /**
+         * Current Planet Info
+         */
         JButton planetInfoBtn = new JButton("Current Planet");
         ContinueListener goToPlanetInfoListener = new ContinueListener() {
             @Override
@@ -27,12 +31,19 @@ public class NavigationSidePanel extends SidePanel {
                 PlanetInformationScreen planetScreen = (PlanetInformationScreen) Display.getCard(CardName.PLANET_INFORMATION_CARD.toString());
                 planetScreen.update(Game.getCurrentPlanet());
 
+                // Hide the Planet Travel Pane
+                TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
+                travelPanel.setVisible(false);
+
                 progressDisplay();
             }
         };
         planetInfoBtn.addActionListener(goToPlanetInfoListener);
         add(planetInfoBtn);
 
+        /**
+         * Go to Current Planet's Market Place
+         */
         JButton marketplaceBtn= new JButton("Marketplace");
         ContinueListener goToMarketPlaceListener= new ContinueListener() {
             @Override
@@ -42,6 +53,11 @@ public class NavigationSidePanel extends SidePanel {
                 MarketScreen marketScreen = (MarketScreen) Display.getCard(CardName.MARKETPLACE_CARD.toString());
                 marketScreen.updateMarketPlace(Game.getCurrentMarketPlace());
 
+
+                // Hide the Planet Travel Pane
+                TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
+                travelPanel.setVisible(false);
+
                 progressDisplay();
             }
         };
@@ -49,10 +65,31 @@ public class NavigationSidePanel extends SidePanel {
         marketplaceBtn.addActionListener(goToMarketPlaceListener);
         add(marketplaceBtn);
 
+        /**
+         * Go to current ship's information and peruse upgrade options
+         */
+
         JButton btnShip = new JButton("Ship");
         add(btnShip);
 
+        /**
+         * Travel to a new planet and end the game
+         */
+
         JButton btnTravel = new JButton("Travel");
+        ContinueListener travelListener = new ContinueListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardToMoveTo = CardName.INTERSYSTEM_TRAVEL_CARD;
+                TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
+                travelPanel.updateBasedOnAllPlanets();
+                travelPanel.setVisible(true);
+
+                progressDisplay();
+                System.out.println();
+            }
+        };
+        btnTravel.addActionListener(travelListener);
         add(btnTravel);
     }
 

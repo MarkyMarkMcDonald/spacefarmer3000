@@ -35,46 +35,66 @@ public class UniverseFactory {
     
 
     /**
-     * Fills the factory with planets.
-     *
-     * @param names List of the Planet's possible names
-     * @param maxXDim Length of the game's x-axis
-     * @param maxYDim Length of the game's y-axis
-     * @param numPlanets how many planets for this game
+     * Fills the factory with planetary systems and planets
+     * All parameters are based off values in GameVariables.
      */
-    public static void createUniverse(List<String> planetNames,List<String> planetarySystemNames, int numPlanets,int numSystems,int systemRows, int systemCols, int uniRows, int uniCols,int quadrantXDimension,int quadrantYDimension){
+    public static void createUniverse(List<String> planetNames,List<String> planetarySystemNames, int numPlanets,int numSystems,int systemRows, int systemCols, int uniRows, int uniCols,int quadrantXDimension,int quadrantYDimension,int minDistance){
 
         planets = new HashMap<String, Planet>();
         systems= new HashMap<String,PlanetarySystem>();
-        Map<String,Planet> systemPlanets=new HashMap<String,Planet>();
+        Map<String,Planet> systemPlanets;
         
         Planet planet;
         PlanetarySystem system;
+
         int planetNameIndex,systemNameIndex;
         String planetName,systemName;
         List<String> planetNamesHolder = new ArrayList<String>(planetNames);
         List<String> systemNamesHolder = new ArrayList<String>(planetarySystemNames);
+
+        // systemDistribution and planetDistribution put the planets and systems in
+        // "boxes" which are evenly distributed as possible. The systems are
+        // distributed into quadrants and planets are distributed into systems.
+        //See Randomizer.distributeNumber for more details.
+        //For example, if systemDistribution is {2,2,3}, then 3 total systems have planet counts
+        // 2,2, and 3 respectively.
         int systemDistribution[]=Randomizer.distributeNumber(uniRows*uniCols,numSystems);
         int planetDistribution[]=Randomizer.distributeNumber(numSystems, numPlanets);
         List<Integer[]> planetPositions;
         Map<Integer,List<Integer[]>> systemDimensions=new HashMap<Integer,List<Integer[]>>(numSystems);
         for (int i=0;i<uniRows*uniCols;i++)
         {
-        	systemDimensions.put(i,Randomizer.generateDimensions(systemDistribution[i],quadrantXDimension,quadrantYDimension));
+        	//Give unique X and Y coordinates for each system in a quadrant that are at least minDistance apart.
+        	//See Randomizer.generateDimensionsRange for more details.
+        	systemDimensions.put(i,Randomizer.generateDimensionsRange(systemDistribution[i],quadrantXDimension,quadrantYDimension, minDistance));
         }
         int quadrantIndex=0;
         int systemIndex=0;
         int planetIndex=0;
         int systemCount=0;
+        //A while loop for the quadrant, the system, and the planet to assign the appropriate attributes.
+        
+        //uniRows * uniCols gives the total number of quadrants in the universe.
+        //When quadrantIndex exceeds this number, it's time to stop.
         while (quadrantIndex < uniRows*uniCols && !systemNamesHolder.isEmpty() && !planetNamesHolder.isEmpty()){
+        	//Reset the system index for each quadrant after all the systems in a quadrant are distributed.
         	systemIndex=0;
+        	//systemDistribution[quadrantIndex] gives the number of systems in the current quadrant.
+        	//When systemIndex exceeds this number, it's time to move to the next quadrant.
         	while (systemIndex < systemDistribution[quadrantIndex] && !systemNamesHolder.isEmpty() && !planetNamesHolder.isEmpty()){
         		planetIndex=0;
         		system=new PlanetarySystem();
+        		systemPlanets=new HashMap<String,Planet>();
+        		
+        		//Guarantee that each planet in a system has unique coordinates within the system.
+        		//planetDistribution[systemCount] gives the number of planets in this system.
         		planetPositions=Randomizer.generateDimensions(planetDistribution[systemCount], systemRows, systemCols);
+        		
         		systemNameIndex=Randomizer.nextInt(systemNamesHolder.size());
     			systemName=systemNamesHolder.get(systemNameIndex);
     			systemNamesHolder.remove(systemNameIndex);
+    		
+    			
         		while (planetIndex < planetDistribution[systemCount] && !planetNamesHolder.isEmpty()){
         			planet = new Planet();
         			planetNameIndex = Randomizer.nextInt(planetNamesHolder.size());
@@ -98,6 +118,9 @@ public class UniverseFactory {
         		system.setName(systemName);
         		system.setPlanets(systemPlanets);
         		systems.put(system.getName(),system);
+        		//systemCount exists to keep track of the current system.
+        		//systemIndex cannot do this because it keeps track of planetary systems
+        		//in a quadrant, not the total planetary systems.
         		systemCount++;
         		systemIndex++;
         	}
