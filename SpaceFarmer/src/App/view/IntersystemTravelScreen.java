@@ -38,6 +38,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 	private static final int PLANET_SIZE = 30;
 	private static final Color[] planetColors = {Color.BLUE,Color.GRAY,Color.GREEN,Color.ORANGE,Color.RED,Color.CYAN,Color.DARK_GRAY,Color.LIGHT_GRAY};
 	private static Map<Point, Planet> planetLocations;
+	private static Planet selectedPlanet;
 	public void paintComponent(Graphics g) {
 		
 		// Draw black over the background
@@ -99,6 +100,9 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 							g.setColor(Color.CYAN);
 							g.drawOval(planX - PLANET_SIZE / 2 - 5, planY - PLANET_SIZE / 2 - 5, PLANET_SIZE + 10, PLANET_SIZE + 10);
 						}
+						
+						// If this is the currently selected planet, draw info
+						// TODO draw planet info
 					}
 				} else {
 					
@@ -142,6 +146,9 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 								g.setColor(Color.CYAN);
 								g.drawOval(planX - PLANET_SIZE / 2 - 5, planY - PLANET_SIZE / 2 - 5, PLANET_SIZE + 10, PLANET_SIZE + 10);
 							}
+							
+							// If this is the currently selected planet, draw info
+							// TODO draw planet info
 						}
 						thetaQ += Math.PI * 2 / systemList[i][j].size();
 					}
@@ -155,14 +162,33 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 	 * @param e The data associated with this mouse click.
 	 */
 	public void mousePressed(MouseEvent e) {
+		boolean clickedPlanet = false;
 		
 		// Iterate over each point 
 		for(Point p : planetLocations.keySet()) {
 			if(p.distance(e.getX(), e.getY()) < PLANET_SIZE / 2) {
+				clickedPlanet = true;
 				
 				// Player clicked on a planet
-				System.out.println(planetLocations.get(p).getName());
+				if(planetLocations.get(p).equals(selectedPlanet)) {
+					selectedPlanet = null;
+					
+					// TODO go to planet info page
+					
+					
+					System.out.println("Going to planet info page for " + planetLocations.get(p).getName());
+				} else {
+					selectedPlanet = planetLocations.get(p);
+					repaint();
+					
+					System.out.println("Selected planet " + planetLocations.get(p).getName());
+				}
 			}
+		}
+		
+		// If a planet wasn't clicked, deselect planet
+		if(!clickedPlanet) {
+			selectedPlanet = null;
 		}
 	}
 	
