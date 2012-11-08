@@ -1,22 +1,17 @@
 package App.view;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.*;
-
 import App.factory.UniverseFactory;
 import App.model.Game;
 import App.model.Planet;
 import App.model.PlanetarySystem;
 import Conf.GameVariables;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class acts as the screen handling travel between planets and systems. (WIP)
@@ -44,15 +39,6 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 		// Draw black over the background
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, getWidth(), getHeight());
-		
-		// Draw quadrant lines
-		g.setColor(Color.WHITE);
-		for(int i = 1; i < GameVariables.universeColumns; ++i) {
-			g.drawLine(i * getWidth() / GameVariables.universeColumns, 0, i * getWidth() / GameVariables.universeColumns, getHeight() - 1);
-		}
-		for(int i = 1; i < GameVariables.universeRows; ++i) {
-			g.drawLine(0, i * getHeight() / GameVariables.universeRows, getWidth() - 1, i * getHeight() / GameVariables.universeRows);
-		}
 		
 		// Draw the planetary systems
 		ArrayList[][] systemList = new ArrayList[GameVariables.universeRows][GameVariables.universeColumns];
