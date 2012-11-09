@@ -1,21 +1,15 @@
 package App.service;
 
-<<<<<<< HEAD
-=======
 import App.factory.UniverseFactory;
+import App.model.Player.Player;
+import App.model.RandomEvent;
 import App.model.Universe.Planet;
 
->>>>>>> 0c462c0aeb8a9d37a50c5505f7a6b9c88a80d994
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
-
-import App.factory.UniverseFactory;
-import App.model.Planet;
-import App.model.Player;
-import App.model.RandomEvent;
 
 /**
  * This class is used to handle randomizations in universe generation.
