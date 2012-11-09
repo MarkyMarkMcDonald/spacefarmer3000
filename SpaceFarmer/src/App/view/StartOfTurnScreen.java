@@ -4,6 +4,7 @@ import App.listener.ContinueListener;
 import App.model.Game;
 import App.model.Universe.Planet;
 import App.model.Player.Player;
+import App.view.SidePanels.PlayersInformationSidePanel;
 
 import javax.swing.*;
 import java.awt.*;

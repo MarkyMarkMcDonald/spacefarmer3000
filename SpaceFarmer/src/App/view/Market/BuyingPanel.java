@@ -1,8 +1,9 @@
-package App.view;
+package App.view.Market;
 
 import App.listener.BuyFromMarketListener;
 import App.model.MarketPlace;
 import App.model.TradeGoods.Tradable;
+import App.view.Market.SellingPanel;
 
 import javax.swing.*;
 import java.awt.*;

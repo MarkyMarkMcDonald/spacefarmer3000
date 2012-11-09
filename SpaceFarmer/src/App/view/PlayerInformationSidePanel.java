@@ -13,8 +13,8 @@ import javax.swing.*;
  * Time: 2:21 PM
  * To change this template use File | Settings | File Templates.
  */
-public class PlayerInformationPanel extends JPanel{
-    public PlayerInformationPanel(Player player){
+public class PlayerInformationSidePanel extends JPanel{
+    public PlayerInformationSidePanel(Player player){
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         Ship ship = player.getShip();
         ShipModel shipType = ship.getType();

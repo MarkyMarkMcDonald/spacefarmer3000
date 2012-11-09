@@ -4,9 +4,9 @@ import App.model.Game;
 import App.model.MarketPlace;
 import App.model.TradeGoods.Tradable;
 import App.service.TransactionService;
-import App.view.BuyingPanel;
+import App.view.Market.BuyingPanel;
 import App.view.Display;
-import App.view.PlayersInformationSidePanel;
+import App.view.SidePanels.PlayersInformationSidePanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

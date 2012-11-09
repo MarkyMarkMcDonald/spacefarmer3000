@@ -5,8 +5,8 @@ import App.model.MarketPlace;
 import App.model.TradeGoods.Tradable;
 import App.service.TransactionService;
 import App.view.Display;
-import App.view.PlayersInformationSidePanel;
-import App.view.SellingPanel;
+import App.view.SidePanels.PlayersInformationSidePanel;
+import App.view.Market.SellingPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
