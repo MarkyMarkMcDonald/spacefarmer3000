@@ -36,13 +36,13 @@ public class TransactionService {
         // Make sure player has enough space to hold bought goods
         if (inventory.getSpaceUsed() + quantity > cargoSize){
             message = "You need " + (inventory.getSpaceUsed() + quantity - cargoSize) + " more free space!";
-            Display.setMessage(message, MessageType.BAD);
+            Display.setMessage(message, MessageType.ERROR);
             return false;
         }
         // Make sure player has enough money
         else if (transactionCost > player.getMoney()){
             message = "You need $" + (transactionCost - player.getMoney() + " more!");
-            Display.setMessage(message, MessageType.BAD);
+            Display.setMessage(message, MessageType.ERROR);
             return false;
         }
         else {
@@ -91,7 +91,7 @@ public class TransactionService {
         }
         else {
             message = "You need " + (quantity - amountInInventory) + " more to sell that amount";
-            Display.setMessage(message, MessageType.BAD);
+            Display.setMessage(message, MessageType.ERROR);
             return true;
         }
     }

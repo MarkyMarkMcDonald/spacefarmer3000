@@ -40,7 +40,7 @@ public class SellToMarketListener extends TransactionListener {
 	            Display.updatePlayersInfo();
 	        }
         } else {
-	        Display.setMessage("Quantity must be a number.", MessageType.BAD);
+	        Display.setMessage("Quantity must be a number.", MessageType.ERROR);
         }
     }
 }

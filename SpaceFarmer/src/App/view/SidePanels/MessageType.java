@@ -1,7 +1,9 @@
 package App.view.SidePanels;
 
 /**
- * Created with IntelliJ IDEA.
+ * Bad = something happened, but it wasn't beneficial to the player
+ * Error = nothing happened because of user fault
+ *
  * User: mark.mcdonald
  * Date: 11/9/12
  * Time: 1:21 PM

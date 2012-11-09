@@ -49,7 +49,7 @@ public class TransportationService {
             else {
 
 				// set a failure message
-				Display.setMessage("You need " + ((int)distance - currentPlayer.getFuel()) + " more fuel to travel to Planet " + p.getName() + ".", MessageType.BAD);
+				Display.setMessage("You need " + ((int)distance - currentPlayer.getFuel()) + " more fuel to travel to Planet " + p.getName() + ".", MessageType.ERROR);
                 return false;
 			}
 		}
