@@ -4,6 +4,9 @@ package App.service;
 import App.model.Planet;
 import App.model.Player;
 import App.model.Settings;
+import App.model.SkillType;
+import App.model.Game;
+
 import org.tmatesoft.sqljet.core.SqlJetException;
 import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
 import org.tmatesoft.sqljet.core.table.ISqlJetTable;
@@ -25,6 +28,7 @@ public class Saver_db {
 	Collection<Player> players;
 	Collection <Planet> planets;
 	Settings gameSettings;
+	Game game;
 	//name of the database
 	private static String DB_NAME = "db.sqlite";
 	//table names
@@ -73,19 +77,25 @@ public class Saver_db {
 	 * @param universe a collection of planets in the game
 	 * @param settings the settings for the game.
 	 */
-	 Saver_db(String name,String loc, Collection <Player>people, Collection <Planet>universe, Settings settings){
+	 Saver_db(String name,String loc, Collection <Player>people, Collection <Planet>universe, Settings settings, Game game){
 		saveName=name;
 		saveLocation=loc;
 		players= people;
 		planets=universe;
 		gameSettings=settings;
 		DB_NAME=name+".sqlite";
+		this.game=game;
 	}
+	 /**
+	  * saves all tables to the database by running the individual save table functions
+	  * 
+	  * @throws SqlJetException
+	  */
 	private void SaveGame()throws SqlJetException {
 		File dbFile = new File(DB_NAME);
 	    dbFile.delete();
 
-	    // create database, table and two indices:
+	    // create database
 	    SqlJetDb db = SqlJetDb.open(dbFile, true);
 	    // set DB option that have to be set before running any transactions:
 	    db.getOptions().setAutovacuum(true);
@@ -102,8 +112,14 @@ public class Saver_db {
 		this.SaveSetting(db);
     	db.close();
 	}
+	/**
+	 * saves the players to the players table in the database
+	 * @param db database
+	 * @throws SqlJetException
+	 */
 	private void SavePlayers(SqlJetDb db)throws SqlJetException {
-		 String createTableQuery = "CREATE TABLE " + TABLE_PLAYERS + " " +
+		 Player[] temp=(Player[]) players.toArray();
+		String createTableQuery = "CREATE TABLE " + TABLE_PLAYERS + " " +
 		 		"(" + FIELD_NAME + " TEXT NOT NULL , " + FIELD_MONEY +" TEXT NOT NULL , "+ FIELD_CURRPLANET + " TEXT NOT NULL , " + FIELD_SHIP + " TEXT NOT NULL , " + FIELD_PILOTING + " TEXT NOT NULL , "+ FIELD_TRADING + " TEXT NOT NULL , "+ FIELD_ENGINEERING + " TEXT NOT NULL , "+ FIELD_FIGHTING + " TEXT NOT NULL)";
 		 //makes the table
 		 try {db.createTable(createTableQuery);}
@@ -114,9 +130,17 @@ public class Saver_db {
 		    	ISqlJetTable table = db.getTable(TABLE_PLAYERS);
 		    	//Test entry
 		    	table.insert("ZOOL",9999,"Earth","BFS",1,2,3,4);
+		    	for(int i=0;i<players.size();i++)
+			    	table.insert(temp[i].getName(),temp[i].getMoney(),temp[i].getCurrentPlanet().getName(),temp[i].getShip().getType().toString(),
+			    			temp[i].getSkillLevels().containsKey(SkillType.PILOTING),temp[i].getSkillLevels().containsKey(SkillType.ENGINEERING),temp[i].getSkillLevels().containsKey(SkillType.FIGHTING),temp[i].getSkillLevels().containsKey(SkillType.TRADING));
 		    }
 		 	finally {db.commit();}
 	}
+	/**
+	 * saves the players inventories to the  database
+	 * @param db
+	 * @throws SqlJetException
+	 */
 	private void SaveInventory(SqlJetDb db)throws SqlJetException {
 	/*	String createTableQuery = "CREATE TABLE " + TABLE_INVENTORY + " " +
 		 		"(" + FIELD_NAME + " TEXT NOT NULL , " + FIELD_CURR + " TEXT NOT NULL , " + FIELD_SHIP + " TEXT NOT NULL , " + FIELD_PILOTING + " TEXT NOT NULL , "+ FIELD_TRADING + " TEXT NOT NULL , "+ FIELD_ENGINEERING + " TEXT NOT NULL , "+ FIELD_FIGHTING + " TEXT NOT NULL)";
@@ -133,7 +157,13 @@ public class Saver_db {
 		    }
 		 	finally {db.commit();}
 		*/}
+	/**
+	 * saves the planets to the planets table
+	 * @param db
+	 * @throws SqlJetException
+	 */
 	private void SavePlanets(SqlJetDb db)throws SqlJetException {
+		 Planet[] temp=(Planet[]) planets.toArray();
 		String createTableQuery = "CREATE TABLE " + TABLE_PLANETS + " " +
 		 		"(" + FIELD_PLANET + " TEXT NOT NULL , " + FIELD_TECH + " TEXT NOT NULL , " + FIELD_POLSYS + " TEXT NOT NULL , " + FIELD_RESOURCE + " TEXT NOT NULL , "+ FIELD_X + " TEXT NOT NULL , "+ FIELD_Y + " TEXT NOT NULL)";
 		//makes the table
@@ -145,12 +175,20 @@ public class Saver_db {
 		    	ISqlJetTable table = db.getTable(TABLE_PLANETS);
 		    	//Test entry
 		    	table.insert("EARTH","OVER9000","BICKERING","EVERYTHING",1,2);
+		    	for(int i=0;i<temp.length;i++)
+			    	table.insert(temp[i].getName(),temp[i].getTechnologyLevel().name(),temp[i].getPoliticalSystem().getName(),temp[i].getResourceType().getName(),temp[i].getX(),temp[i].getY());
+
 		    }
 		 	finally {db.commit();}
 	}
+	/**
+	 * saves the settings to the settings table
+	 * @param db
+	 * @throws SqlJetException
+	 */
 	private void SaveSetting(SqlJetDb db)throws SqlJetException {
 		String createTableQuery = "CREATE TABLE " + TABLE_SETTINGS + " " +
-		 		"(" + FIELD_DIFF + " TEXT NOT NULL , " + FIELD_CURRTURN + " TEXT NOT NULL , " + FIELD_CURRPLAYER + " TEXT NOT NULL , " + FIELD_XDIM + " TEXT NOT NULL , "+ FIELD_YDIM + " TEXT NOT NULL)";
+		 		"(" + FIELD_DIFF + " TEXT NOT NULL , " + FIELD_CURRTURN + " TEXT NOT NULL , " + FIELD_CURRPLAYER + " TEXT NOT NULL )";
 		//makes the table
 		try {db.createTable(createTableQuery);}
 			finally {db.commit();}
@@ -160,6 +198,8 @@ public class Saver_db {
 		    	ISqlJetTable table = db.getTable(TABLE_SETTINGS);
 		    	//Test entry
 		    	table.insert(7,-8,"ZOOL",1,2);
+		    	table.insert(gameSettings.getDifficulty(),game.getNumberOfTurns(),game.getCurrentPlayer());
+
 		    }
 		 	finally {db.commit();}
 	}

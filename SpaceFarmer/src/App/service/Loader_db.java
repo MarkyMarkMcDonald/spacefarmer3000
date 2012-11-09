@@ -1,16 +1,35 @@
 package App.service;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Set;
 
 import org.tmatesoft.sqljet.core.SqlJetException;
+import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
+import org.tmatesoft.sqljet.core.schema.ISqlJetIndexDef;
+import org.tmatesoft.sqljet.core.schema.ISqlJetTableDef;
 import org.tmatesoft.sqljet.core.table.ISqlJetCursor;
 import org.tmatesoft.sqljet.core.table.ISqlJetTable;
+import org.tmatesoft.sqljet.core.table.ISqlJetTransaction;
 import org.tmatesoft.sqljet.core.table.SqlJetDb;
 
+import App.model.Planet;
+import App.model.Player;
+import App.model.Settings;
+
+/*
+import App.model.Planet;
+import App.model.Player;
+import App.model.Settings;
+*/
 public class Loader_db {
-	
-	String saveName;
-	String saveLocation;
+	private String saveName;
+	private String saveLocation;
 	/*
 	Collection <Player> players;
 	Collection <Planet> planets;
@@ -18,6 +37,9 @@ public class Loader_db {
 	*/
 	//name of the database
 	private static String DB_NAME = "db.sqlite";
+	private File dbFile = new File(DB_NAME);
+	private SqlJetDb db;
+
 	//table names
     private static final String TABLE_PLAYERS = "Players";
     private static final String TABLE_INVENTORY = "Inventory";
@@ -58,27 +80,18 @@ public class Loader_db {
     private static final String FIELD_XDIM = "X_dimension";
     private static final String FIELD_YDIM = "y_diminsion";
 	
-	public void LoadGame()throws SqlJetException{
-		File dbFile = new File(DB_NAME);
-	    SqlJetDb db = SqlJetDb.open(dbFile, true);
-        //db.beginTransaction(SqlJetTransactionMode.READ_ONLY);
-
-		//LoadPlayers(db.getTable(TABLE_PLAYERS));
-		
+	
+	public void LoadGame(String fName)throws SqlJetException{
+		DB_NAME=fName+".sqlite";
+		dbFile = new File(DB_NAME);
+	    db = SqlJetDb.open(dbFile, true);
+        db.beginTransaction(SqlJetTransactionMode.READ_ONLY);
+		LoadPlayers(db.getTable(TABLE_PLAYERS));
 		LoadPlanets(db.getTable(TABLE_PLANETS));
-		/*
-        db.beginTransaction(SqlJetTransactionMode.READ_ONLY);
-
-		LoadInventory(db.getTable(TABLE_INVENTORY));
-        db.beginTransaction(SqlJetTransactionMode.READ_ONLY);
-
-		LoadPlanets(db.getTable(TABLE_PLANETS));
-        db.beginTransaction(SqlJetTransactionMode.READ_ONLY);
-
+		//LoadInventory(db.getTable(TABLE_INVENTORY));
 		LoadSettings(db.getTable(TABLE_SETTINGS));
-		 */
 	}
-	private void LoadPlayers(ISqlJetTable tbl )throws SqlJetException{
+	private Collection<Player> LoadPlayers(ISqlJetTable tbl )throws SqlJetException{
 		ISqlJetCursor cursor=tbl.open();
 		 try {
 	            if (!cursor.eof()) {
@@ -98,6 +111,7 @@ public class Loader_db {
 	            }
 	        } 
 		 finally {cursor.close();}
+		return null;
 	}
 	private void LoadInventory(ISqlJetTable tbl)throws SqlJetException{
 		ISqlJetCursor cursor=tbl.open();
@@ -116,7 +130,7 @@ public class Loader_db {
 	        } 
 		 finally {cursor.close();}
 	}
-	private void LoadPlanets(ISqlJetTable tbl)throws SqlJetException{
+	private Collection<Planet> LoadPlanets(ISqlJetTable tbl)throws SqlJetException{
 		ISqlJetCursor cursor=tbl.open();
 		 try {
 	            if (!cursor.eof()) {
@@ -134,8 +148,9 @@ public class Loader_db {
 	            }
 	        } 
 		 finally {cursor.close();}
+		return null;
 	}
-	private void LoadSettings(ISqlJetTable tbl)throws SqlJetException{
+	private Settings LoadSettings(ISqlJetTable tbl)throws SqlJetException{
 		ISqlJetCursor cursor=tbl.open();
 		 try {
 	            if (!cursor.eof()) {
@@ -150,6 +165,7 @@ public class Loader_db {
 	            }
 	        } 
 		 finally {cursor.close();}
+		return null;
 	}
 	
 	
