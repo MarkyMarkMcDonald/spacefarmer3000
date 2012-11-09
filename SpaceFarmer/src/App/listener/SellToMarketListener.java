@@ -4,9 +4,9 @@ import App.model.Game;
 import App.model.MarketPlace;
 import App.model.TradeGoods.Tradable;
 import App.service.TransactionService;
-import App.view.Market.BuyingPanel;
 import App.view.Display;
-import App.view.SidePanels.PlayersInformationSidePanel;
+import App.view.Market.BuyingPanel;
+import App.view.SidePanels.MessageType;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -31,25 +31,16 @@ public class SellToMarketListener extends TransactionListener {
         
         // Do nothing is there's a format mismatch
         if(quantityAsInt >= 0) {
-	        String message = TransactionService.sellToMarket(Game.getCurrentPlayer(), marketPlace, price, quantityAsInt, good);
-	        errorMessage.setText(message);
-	        errorMessage.setVisible(true);
-	
+	        boolean transactionIsSuccessful = TransactionService.sellToMarket(Game.getCurrentPlayer(), marketPlace, price, quantityAsInt, good);
+
 	        // update view if there are no errors
-	        if (!message.contains("You need")){
-	            int previousQuantity = Integer.parseInt(shownQuantity.getText());
-	            int changedQuantity = Integer.parseInt(message.split(" ")[2]);
-	            String newQuantity = Integer.toString(previousQuantity - changedQuantity);
-	            shownQuantity.setText(newQuantity);
-	
+	        if (transactionIsSuccessful){
 	            buyingPanel.setMarket(marketPlace);
-	
-	            PlayersInformationSidePanel playersInformationSidePanel = (PlayersInformationSidePanel) Display.getSidePanel("Bot");
-	            playersInformationSidePanel.updateBasedOnAllPlayers();
+
+	            Display.updatePlayersInfo();
 	        }
         } else {
-	        errorMessage.setText("Quantity must be a number.");
-	        errorMessage.setVisible(true);
+	        Display.setMessage("Quantity must be a number.", MessageType.BAD);
         }
     }
 }

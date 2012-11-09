@@ -198,7 +198,7 @@ public class Saver_db {
 		    	ISqlJetTable table = db.getTable(TABLE_SETTINGS);
 		    	//Test entry
 		    	table.insert(7,-8,"ZOOL",1,2);
-//		    	table.insert(gameSettings.getDifficulty(),game.getNumberOfTurns(),game.getCurrentPlayer());
+//		    	table.insert(gameSettings.getDifficulty(),game.getTurnNumber(),game.getCurrentPlayer());
 
 		    }
 		 	finally {db.commit();}

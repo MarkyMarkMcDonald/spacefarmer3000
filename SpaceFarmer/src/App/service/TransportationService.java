@@ -1,11 +1,11 @@
 package App.service;
 
 import App.model.Game;
+import App.model.Player.Player;
 import App.model.Universe.Planet;
 import App.model.Universe.PlanetarySystem;
-import App.model.Player.Player;
 import App.view.Display;
-import App.view.MiniGameScreen;
+import App.view.SidePanels.MessageType;
 
 import java.awt.geom.Point2D;
 
@@ -19,7 +19,7 @@ public class TransportationService {
 	 * Travel to a Planet.
 	 * @param p The Planet to travel to.
 	 */
-	public static String goToPlanet(Planet p) {
+	public static boolean goToPlanet(Planet p) {
 
 		// Get data required to make the decision to travel
 		Player currentPlayer = Game.getCurrentPlayer();
@@ -43,27 +43,19 @@ public class TransportationService {
 				currentPlayer.setFuel(currentPlayer.getFuel() - (int)distance);
 				
 				// Play asteroid dodge minigame
-				Display.playMiniGame(); // Results from the minigame are saved in MiniGameScreen
-
-                // Return a success message based on game result
-                if (MiniGameScreen.isSuccess()){
-                    return "You traveled to Planet " + p.getName() + "!";
-                }
-                else {
-                    int fuelSpent = Math.min(currentPlayer.getFuel(),20);
-                    currentPlayer.setFuel(currentPlayer.getFuel() - fuelSpent);
-                    return "You traveled to Planet " + p.getName() + "!\n Unfortunately, You lost " + fuelSpent + " fuel after hitting an asteroid";
-                }
+				Display.playMiniGame(); // MiniGame puts the results in the message panel
 
 			}
             else {
 
-				// Return a failure message
-				return "You need " + ((int)distance - currentPlayer.getFuel()) + " more fuel to travel to Planet " + p.getName() + ".";
+				// set a failure message
+				Display.setMessage("You need " + ((int)distance - currentPlayer.getFuel()) + " more fuel to travel to Planet " + p.getName() + ".", MessageType.BAD);
+                return false;
 			}
 		}
-        // return standard travel message
-        return "You traveled to Planet " + p.getName() + "!";
+        // set a standard travel message
+        Display.setMessage("You traveled to Planet " + p.getName() + "!", MessageType.GOOD);
+        return true;
 
 
 

@@ -3,6 +3,8 @@ package App.service;
 import App.model.*;
 import App.model.Player.Player;
 import App.model.TradeGoods.Tradable;
+import App.view.Display;
+import App.view.SidePanels.MessageType;
 
 import java.util.Set;
 
@@ -22,7 +24,7 @@ public class TransactionService {
 	 * @param tradeGood The goods that the Player is trying to buy.
 	 * @return A String message telling the outcome of the attempted purchase.
 	 */
-    public static String buyFromMarket(Player player, MarketPlace marketPlace, int price, int quantity, Tradable tradeGood){
+    public static boolean buyFromMarket(Player player, MarketPlace marketPlace, int price, int quantity, Tradable tradeGood){
         String message;
 
         Inventory inventory = player.getInventory();
@@ -34,10 +36,14 @@ public class TransactionService {
         // Make sure player has enough space to hold bought goods
         if (inventory.getSpaceUsed() + quantity > cargoSize){
             message = "You need " + (inventory.getSpaceUsed() + quantity - cargoSize) + " more free space!";
+            Display.setMessage(message, MessageType.BAD);
+            return false;
         }
         // Make sure player has enough money
         else if (transactionCost > player.getMoney()){
             message = "You need $" + (transactionCost - player.getMoney() + " more!");
+            Display.setMessage(message, MessageType.BAD);
+            return false;
         }
         else {
             // Default success message
@@ -48,8 +54,10 @@ public class TransactionService {
             marketPlace.changeQuantity(tradeGood,-quantity);
 
             inventory.addItem(tradeGood,quantity);
+
+            Display.setMessage(message, MessageType.GOOD);
+            return true;
         }
-        return message;
     }
 
     /**
@@ -61,7 +69,7 @@ public class TransactionService {
      * @param tradeGood The good which the Player is trying to sell.
      * @return A string explaining the outcome of the transaction.
      */
-    public static String sellToMarket(Player player, MarketPlace marketPlace, int price, int quantity, Tradable tradeGood){
+    public static boolean sellToMarket(Player player, MarketPlace marketPlace, int price, int quantity, Tradable tradeGood){
         String message;
         Inventory inventory = player.getInventory();
         int amountInInventory = inventory.getQuantity(tradeGood);
@@ -72,26 +80,19 @@ public class TransactionService {
         // make sure player has enough
         if (amountInInventory >= quantity){
             message = "You Sold " + quantity + " " + tradeGood.getName() + "'s for " + transactionCost;
-
             inventory.addItem(tradeGood,-quantity);
 
             marketPlace.changeQuantity(tradeGood,quantity);
-            
+
             player.changeMoney(transactionCost);
+
+            Display.setMessage(message, MessageType.GOOD);
+            return false;
         }
         else {
             message = "You need " + (quantity - amountInInventory) + " more to sell that amount";
+            Display.setMessage(message, MessageType.BAD);
+            return true;
         }
-        return message;
-    }
-
-    /**
-     * What does this method do?
-     * @return ???
-     */
-    public static String buyFromMarket(){
-        String message = "success";
-
-        return message;
     }
 }

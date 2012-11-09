@@ -1,9 +1,7 @@
 package App.view;
 
 import App.model.Game;
-import App.view.SidePanels.NavigationSidePanel;
-import App.view.SidePanels.PlayersInformationSidePanel;
-import App.view.SidePanels.TravelSidePanel;
+import App.view.SidePanels.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -66,17 +64,7 @@ public class Display extends JFrame {
          * Top Panel
          */
 
-        JPanel TopPanel = new JPanel();
-        TopPanel.setBackground(Color.GREEN);
-        TopPanel.setLayout(new BoxLayout(TopPanel, BoxLayout.X_AXIS));
-
-        JLabel lblWip = new JLabel("WIP");
-        TopPanel.add(lblWip);
-
-        Component verticalStrut = Box.createVerticalStrut(80);
-        TopPanel.add(verticalStrut);
-
-
+        MessageSidePanel TopPanel = new MessageSidePanel();
 
         /**
          * Bot Panel
@@ -162,17 +150,27 @@ public class Display extends JFrame {
     	((CardLayout)mainContentPanel.getLayout()).show(mainContentPanel, "MiniGame");
     	MiniGameView.requestFocus();
     }
-    
+
+    public static void setMessage(String message, MessageType messageType){
+        MessageSidePanel sidePanel = (MessageSidePanel) getSidePanel("Top");
+        sidePanel.setMessage(message, messageType);
+    }
+
+    public static void hideMessage(){
+        MessageSidePanel sidePanel = (MessageSidePanel) getSidePanel("Top");
+        sidePanel.setVisible(false);
+    }
+
+    public static void updatePlayersInfo(){
+        PlayersInformationSidePanel playersInformationSidePanel = (PlayersInformationSidePanel) getSidePanel("Bot");
+        playersInformationSidePanel.updateBasedOnAllPlayers();
+    }
+
     /**
      * Return from minigame
      */
-    public static void exitGame(boolean won) {
+    public static void exitGame() {
     	((CardLayout)mainContentPanel.getLayout()).show(mainContentPanel, "Standard");
-    	if(won) {
-    		// TODO code for winning
-    	} else {
-    		// TODO code for losing
-    	}
     }
 
     //--Accessors and Modifiers

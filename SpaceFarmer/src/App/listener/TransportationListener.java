@@ -2,8 +2,9 @@ package App.listener;
 
 import App.model.Universe.Planet;
 import App.service.TransportationService;
-import App.view.*;
-import App.view.SidePanels.PlayersInformationSidePanel;
+import App.view.CardName;
+import App.view.Display;
+import App.view.PlanetInformationScreen;
 import App.view.SidePanels.TravelSidePanel;
 
 import javax.swing.*;
@@ -39,10 +40,8 @@ public class TransportationListener extends ContinueListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-        String messageFromService = TransportationService.goToPlanet(planet);
-        message.setText(messageFromService);
-        message.setVisible(true);
-        if (messageFromService.contains("You traveled to")){
+        boolean successfulFlight = TransportationService.goToPlanet(planet);
+        if (successfulFlight){
             // Hide the Planet Travel Pane
             TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
             travelPanel.setVisible(false);
@@ -51,8 +50,8 @@ public class TransportationListener extends ContinueListener{
             PlanetInformationScreen planetInfo = (PlanetInformationScreen) Display.getCard(cardToMoveTo.toString());
             planetInfo.update(planet);
             message.setVisible(true);
-            PlayersInformationSidePanel playersInfo =  (PlayersInformationSidePanel) Display.getSidePanel("Bot");
-            playersInfo.updateBasedOnAllPlayers();
+
+            Display.updatePlayersInfo();
 
             progressDisplay();
         }

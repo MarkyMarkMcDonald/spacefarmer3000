@@ -77,11 +77,7 @@ public class StartOfTurnScreen extends Screen{
     }
 
     public void updateTurn(){
-        int roundLength = Game.getPlayers().size() + 1;
-        int turnInRound = Game.getNumberOfTurns() % roundLength;
-        int roundNum = (int) Math.floor(Game.getNumberOfTurns() / roundLength + 1);
-        turnInfo.setText(turnInfoStaticText[0] + turnInRound+ turnInfoStaticText[1] + roundNum);
-
+        turnInfo.setText(turnInfoStaticText[0] + Game.getTurnInRound()+ turnInfoStaticText[1] + Game.getRoundNumber());
         Player player = Game.getCurrentPlayer();
         String currentPlayerName = player.getName();
         title.setText(titleStaticText[0] + currentPlayerName + titleStaticText[1]);

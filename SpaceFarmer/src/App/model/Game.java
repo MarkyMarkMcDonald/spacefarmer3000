@@ -30,11 +30,59 @@ public class Game {
 
 
     public Game(){
-        numberOfTurns = 0;
+        numberOfTurns = 1;
         players = new ArrayList<Player>();
     }
 
     //--Accessors and Modifiers
+
+    public static int getTurnNumber() {
+        return numberOfTurns;
+    }
+
+    public static int getRoundLength(){
+        return Game.getPlayers().size() + 1;
+    }
+
+    public static int getRoundNumber(){
+        return getTurnNumber() % players.size() + 1;
+    }
+
+    public static int getTurnInRound(){
+        return (int) Math.floor(Game.getTurnNumber() / Game.getRoundLength());
+    }
+
+    /*
+    * Gives the turn to the next player.
+    * If the player was the last player, then assign a new event
+    * to each planet.
+    */
+    public void endTurn()
+    {
+        int	playerIndex=players.indexOf(currentPlayer)+1;
+        if (playerIndex >= players.size())
+        {
+            currentPlayer=players.get(0);
+            for (int planetIndex=0;planetIndex<planets.size();planetIndex++)
+            {
+                planets.get(planetIndex).determineEvent();
+            }
+        }
+        else
+        {
+            currentPlayer=players.get(playerIndex);
+        }
+    }
+
+    public static Planet getCurrentPlanet() {
+        return currentPlayer.getCurrentPlanet();
+    }
+
+    public static MarketPlace getCurrentMarketPlace() {
+        return getCurrentPlanet().getMarket();
+    }
+
+    // Auto generated
 
     public static Player getCurrentPlayer() {
         return currentPlayer;
@@ -42,10 +90,6 @@ public class Game {
 
     public static void setCurrentPlayer(Player currentPlayer) {
         Game.currentPlayer = currentPlayer;
-    }
-
-    public static int getNumberOfTurns() {
-        return numberOfTurns;
     }
 
     public static void setNumberOfTurns(int numberOfTurns) {
@@ -78,35 +122,5 @@ public class Game {
 
     public void addPlayer(Player player) {
         players.add(player);
-    }
-    
-    /*
-     * Gives the turn to the next player.
-     * If the player was the last player, then assign a new event
-     * to each planet.
-     */
-    public void endTurn()
-    {
-        int	playerIndex=players.indexOf(currentPlayer)+1;
-    	if (playerIndex >= players.size())
-    	{
-    		currentPlayer=players.get(0);
-    		for (int planetIndex=0;planetIndex<planets.size();planetIndex++)
-    		{
-    			planets.get(planetIndex).determineEvent();
-    		}
-    	}
-    	else
-    	{
-    		currentPlayer=players.get(playerIndex);
-    	}
-    }
-    
-    public static Planet getCurrentPlanet() {
-        return currentPlayer.getCurrentPlanet();
-    }
-
-    public static MarketPlace getCurrentMarketPlace() {
-        return getCurrentPlanet().getMarket();
     }
 }

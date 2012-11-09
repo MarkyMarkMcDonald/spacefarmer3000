@@ -1,10 +1,12 @@
 package App.view;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Toolkit;
+import App.model.Game;
+import App.view.SidePanels.MessageSidePanel;
+import App.view.SidePanels.MessageType;
+import Resources.MiniGameGFX;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,18 +17,12 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
-import Resources.MiniGameGFX;
-
 /**
  * This class drives the minigame sequence when travelling between planets.
  * @author Andrew Wilder
  */
 public class MiniGameScreen extends JPanel implements KeyListener, ActionListener {
 
-    private static boolean success;
 
 	// Prevents serializable warning
 	private static final long serialVersionUID = -3027504169648377464L;
@@ -62,7 +58,6 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 	
 	/**
 	 * Construct this minigame screen with the appropriate variables.
-	 * @param frame A link to the instance of Display that this minigame with make interactions with.
 	 */
 	public MiniGameScreen() {
 		
@@ -241,8 +236,13 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 	 */
 	private void endGame(boolean success) {
 		timer.stop();
-		MiniGameScreen.success = success;
-        Display.exitGame(success);
+        MessageSidePanel messageSidePanel = (MessageSidePanel) Display.getSidePanel("Top");
+        String message = "You traveled to Planet " + Game.getCurrentPlanet().getName() + ".";
+        if (!success){
+            message += " Unfortunately, you had to use extra fuel after hitting an asteroid.";
+        }
+        messageSidePanel.setMessage(message, success ? MessageType.GOOD : MessageType.BAD );
+        Display.exitGame();
 	}
 
 	/**
@@ -314,7 +314,4 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 		}
 	}
 
-    public static boolean isSuccess() {
-        return success;
-    }
 }

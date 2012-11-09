@@ -5,7 +5,6 @@ import App.model.MarketPlace;
 import App.model.TradeGoods.Tradable;
 import App.service.TransactionService;
 import App.view.Display;
-import App.view.SidePanels.PlayersInformationSidePanel;
 import App.view.Market.SellingPanel;
 
 import javax.swing.*;
@@ -32,21 +31,13 @@ public class BuyFromMarketListener extends TransactionListener{
         
         // Do not buy something if there's a format mismatch
         if(quantityAsInt >= 0) {
-	        String message = TransactionService.buyFromMarket(Game.getCurrentPlayer(), marketPlace, price, quantityAsInt, good);
-	        errorMessage.setText(message);
-	        errorMessage.setVisible(true);
-	        
+	        boolean transactionSuccess= TransactionService.buyFromMarket(Game.getCurrentPlayer(), marketPlace, price, quantityAsInt, good);
+
 	        // update views if there weren't errors
-	        if (!message.contains("You need")){
-	            int previousQuantity = Integer.parseInt(shownQuantity.getText());
-	            int changedQuantity = Integer.parseInt(message.split(" ")[2]);
-	            String newQuantity = Integer.toString(previousQuantity - changedQuantity);
-	            shownQuantity.setText(newQuantity);
-	
+	        if (transactionSuccess){
 	            sellingPanel.setMarketPlaceAndInventory(marketPlace,Game.getCurrentPlayer().getInventory());
 	
-	            PlayersInformationSidePanel playersInformationSidePanel = (PlayersInformationSidePanel) Display.getSidePanel("Bot");
-	            playersInformationSidePanel.updateBasedOnAllPlayers();
+	            Display.updatePlayersInfo();
 	        }
         } else {
             errorMessage.setText("Quantity must be a number.");

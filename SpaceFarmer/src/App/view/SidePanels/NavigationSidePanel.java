@@ -39,6 +39,8 @@ public class NavigationSidePanel extends SidePanel {
                 TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
                 travelPanel.setVisible(false);
 
+                Display.hideMessage();
+
                 progressDisplay();
             }
         };
@@ -61,6 +63,8 @@ public class NavigationSidePanel extends SidePanel {
                 // Hide the Planet Travel Pane
                 TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
                 travelPanel.setVisible(false);
+
+                Display.hideMessage();
 
                 progressDisplay();
             }
@@ -88,6 +92,15 @@ public class NavigationSidePanel extends SidePanel {
                 TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
                 travelPanel.updateBasedOnAllPlanets();
                 travelPanel.setVisible(true);
+
+                // Hide the tutorial message after the first round
+                if (Game.getRoundNumber() > 1){
+                    Display.hideMessage();
+                }
+                else {
+                    Display.setMessage("Click a Planet to Travel to!", MessageType.GOOD);
+                }
+
 
                 progressDisplay();
                 System.out.println();
