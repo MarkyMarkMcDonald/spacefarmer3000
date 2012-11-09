@@ -6,6 +6,7 @@ import App.model.Tradable;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -40,7 +41,11 @@ abstract public class TransactionListener implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        quantityAsInt = Integer.parseInt(quantity.getText());
+    	if(Pattern.matches("[0-9]+", quantity.getText())) {
+    		quantityAsInt = Integer.parseInt(quantity.getText());
+    	} else {
+    		quantityAsInt = -1;
+    	}
     }
 
 }
