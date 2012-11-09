@@ -1,4 +1,4 @@
-package App.view;
+package App.view.SidePanels;
 
 import App.factory.UniverseFactory;
 import App.listener.ViewPlanetListener;

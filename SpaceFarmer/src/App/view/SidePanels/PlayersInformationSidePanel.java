@@ -1,7 +1,8 @@
-package App.view;
+package App.view.SidePanels;
 
 import App.model.Game;
 import App.model.Player.Player;
+import App.view.PlayerInformationSidePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,8 +24,8 @@ public class PlayersInformationSidePanel extends JPanel{
         items.setLayout(new FlowLayout(FlowLayout.LEFT,20,5));
         if (players != null) {
             for (Player player : players){
-                PlayerInformationPanel playerInformationPanel = new PlayerInformationPanel(player);
-                items.add(playerInformationPanel);
+                PlayerInformationSidePanel playerInformationSidePanel = new PlayerInformationSidePanel(player);
+                items.add(playerInformationSidePanel);
             }
         }
         add(items);
@@ -34,8 +35,8 @@ public class PlayersInformationSidePanel extends JPanel{
         items.removeAll();
         List<Player> players = Game.getPlayers();
         for (Player player : players){
-            PlayerInformationPanel playerInformationPanel = new PlayerInformationPanel(player);
-            items.add(playerInformationPanel);
+            PlayerInformationSidePanel playerInformationSidePanel = new PlayerInformationSidePanel(player);
+            items.add(playerInformationSidePanel);
         }
     }
 }

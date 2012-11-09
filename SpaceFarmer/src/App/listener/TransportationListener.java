@@ -3,6 +3,8 @@ package App.listener;
 import App.model.Universe.Planet;
 import App.service.TransportationService;
 import App.view.*;
+import App.view.SidePanels.PlayersInformationSidePanel;
+import App.view.SidePanels.TravelSidePanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

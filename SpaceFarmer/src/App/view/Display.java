@@ -1,6 +1,9 @@
 package App.view;
 
 import App.model.Game;
+import App.view.SidePanels.NavigationSidePanel;
+import App.view.SidePanels.PlayersInformationSidePanel;
+import App.view.SidePanels.TravelSidePanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

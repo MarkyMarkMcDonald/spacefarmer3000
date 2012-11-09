@@ -1,7 +1,9 @@
-package App.view;
+package App.view.SidePanels;
 
 import App.listener.ConfirmPlayerCreationListener;
 import App.listener.IncrementListener;
+import App.view.CardName;
+import App.view.Screen;
 
 import java.awt.FlowLayout;
 import java.awt.Dimension;
@@ -21,7 +23,7 @@ import javax.swing.Box;
  * This screen shows the Player his information. (WIP)
  * @author Mark McDonald
  */
-public class PlayerInformationScreen extends Screen{
+public class PlayerInformationScreen extends Screen {
 
 	/**
 	 * Prevents "serializable" warning

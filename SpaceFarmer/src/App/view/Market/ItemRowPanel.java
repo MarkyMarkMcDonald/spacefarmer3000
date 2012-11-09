@@ -1,4 +1,4 @@
-package App.view;
+package App.view.Market;
 
 import App.listener.TransactionListener;
 
@@ -28,7 +28,7 @@ public class ItemRowPanel extends JPanel {
 
         add(lblAvailable);
 
-        JLabel lblPrice = new JLabel(Integer.toString(price));
+        JLabel lblPrice = new JLabel("$" + Integer.toString(price));
         lblPrice.setHorizontalAlignment(JLabel.CENTER);
         add(lblPrice);
 
