@@ -2,6 +2,9 @@ package App.model;
 
 
 
+import App.model.Player.Player;
+import App.model.Universe.Planet;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

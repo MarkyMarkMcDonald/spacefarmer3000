@@ -1,5 +1,9 @@
 package App.model;
 
+import App.model.TradeGoods.BasicGood;
+import App.model.TradeGoods.Tradable;
+import App.model.TradeGoods.TradeGoodType;
+import App.model.Universe.Planet;
 import App.service.Randomizer;
 
 import java.util.HashMap;

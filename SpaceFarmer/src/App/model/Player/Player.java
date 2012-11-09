@@ -1,6 +1,8 @@
-package App.model;
+package App.model.Player;
 
 import App.factory.ShipFactory;
+import App.model.*;
+import App.model.Universe.Planet;
 import Conf.GameVariables;
 
 import java.util.HashMap;
@@ -24,6 +26,7 @@ public class Player {
     private Map<SkillType, Integer> skillLevels;
     private Inventory inventory;
     private Planet currentPlanet;
+    private int difficulty;
 
     public Player(){
     }

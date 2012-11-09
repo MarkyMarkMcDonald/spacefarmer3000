@@ -1,4 +1,4 @@
-package App.model;
+package App.model.Player;
 
 import App.view.Screen;
 

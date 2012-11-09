@@ -1,30 +1,20 @@
 package App.service;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
-
+import App.model.Player.Player;
+import App.model.Settings;
+import App.model.Universe.Planet;
 import org.tmatesoft.sqljet.core.SqlJetException;
 import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
-import org.tmatesoft.sqljet.core.schema.ISqlJetIndexDef;
-import org.tmatesoft.sqljet.core.schema.ISqlJetTableDef;
 import org.tmatesoft.sqljet.core.table.ISqlJetCursor;
 import org.tmatesoft.sqljet.core.table.ISqlJetTable;
-import org.tmatesoft.sqljet.core.table.ISqlJetTransaction;
 import org.tmatesoft.sqljet.core.table.SqlJetDb;
 
-import App.model.Planet;
-import App.model.Player;
-import App.model.Settings;
+import java.io.File;
+import java.util.Collection;
 
 /*
-import App.model.Planet;
-import App.model.Player;
+import App.model.Universe.Planet;
+import App.model.Player.Player;
 import App.model.Settings;
 */
 public class Loader_db {

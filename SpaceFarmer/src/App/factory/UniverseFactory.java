@@ -1,6 +1,7 @@
 package App.factory;
 
 import App.model.*;
+import App.model.Universe.*;
 import App.service.Randomizer;
 
 import java.util.ArrayList;

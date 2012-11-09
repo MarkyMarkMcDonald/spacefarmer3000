@@ -1,6 +1,6 @@
 package App.view;
 
-import App.model.Player;
+import App.model.Player.Player;
 import App.model.Ship;
 import App.model.ShipModel;
 

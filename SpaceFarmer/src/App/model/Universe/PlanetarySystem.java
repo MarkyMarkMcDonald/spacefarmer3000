@@ -1,4 +1,6 @@
-package App.model;
+package App.model.Universe;
+
+import App.model.Universe.Planet;
 
 import java.util.Map;
 

@@ -1,11 +1,13 @@
 package App.service;
 
-import java.util.*;
-import java.io.*;
-
-import App.model.Planet;
-import App.model.Player;
+import App.model.Player.Player;
 import App.model.Settings;
+import App.model.Universe.Planet;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Collection;
 
 /**
  * This class handles saving the current game.
@@ -39,7 +41,7 @@ public class Saver_txt {
 	 * saves the players (npc's included) and all their stuff to a file
 	 * @param players a collection of players in the game
 	 */
-	private void savePlayer(String location,Collection <Player> players){	
+	private void savePlayer(String location,Collection <Player> players){
 		try {
 			fWriter = new FileWriter(location+"/players");
 			writer = new BufferedWriter(fWriter);
@@ -128,8 +130,6 @@ public class Saver_txt {
 				java.util.Date date= new java.util.Date();
 				writer.write(date.toString());
 				writer.write((int) date.getTime());
-				writer.write("\n"+gameSettigns.getDifficulty());
-				writer.write("\n"+gameSettigns.getPlayers().toArray().toString());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

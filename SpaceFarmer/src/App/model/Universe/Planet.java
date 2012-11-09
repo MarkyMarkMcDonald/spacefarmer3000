@@ -1,5 +1,6 @@
-package App.model;
+package App.model.Universe;
 
+import App.model.*;
 import App.service.Randomizer;
 
 /**

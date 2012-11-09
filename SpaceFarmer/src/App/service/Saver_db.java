@@ -1,10 +1,10 @@
 package App.service;
 
 
-import App.model.Planet;
-import App.model.Player;
+import App.model.Player.Player;
+import App.model.Universe.Planet;
 import App.model.Settings;
-import App.model.SkillType;
+import App.model.Player.SkillType;
 import App.model.Game;
 
 import org.tmatesoft.sqljet.core.SqlJetException;
@@ -198,7 +198,7 @@ public class Saver_db {
 		    	ISqlJetTable table = db.getTable(TABLE_SETTINGS);
 		    	//Test entry
 		    	table.insert(7,-8,"ZOOL",1,2);
-		    	table.insert(gameSettings.getDifficulty(),game.getNumberOfTurns(),game.getCurrentPlayer());
+//		    	table.insert(gameSettings.getDifficulty(),game.getNumberOfTurns(),game.getCurrentPlayer());
 
 		    }
 		 	finally {db.commit();}

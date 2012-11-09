@@ -2,7 +2,7 @@ package App.listener;
 
 import App.model.Game;
 import App.model.MarketPlace;
-import App.model.Tradable;
+import App.model.TradeGoods.Tradable;
 import App.service.TransactionService;
 import App.view.Display;
 import App.view.PlayersInformationSidePanel;
@@ -10,7 +10,6 @@ import App.view.SellingPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.

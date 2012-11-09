@@ -1,9 +1,12 @@
 package App.model;
 
-import java.util.Map;
-import java.util.Set;
-
+import App.model.Player.Player;
+import App.model.TradeGoods.BasicGood;
+import App.model.TradeGoods.Tradable;
+import App.model.TradeGoods.TradeGoodType;
 import App.service.Randomizer;
+
+import java.util.Set;
 
 public class RandomEvent {
 	

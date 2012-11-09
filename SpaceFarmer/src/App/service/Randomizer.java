@@ -1,7 +1,7 @@
 package App.service;
 
 import App.factory.UniverseFactory;
-import App.model.Planet;
+import App.model.Universe.Planet;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -62,7 +62,6 @@ public class Randomizer {
 	
 	/**
 	 * Gives a random number of unique elements from an array.
-	 * @param Total number to return.
 	 */
 	public static Object[] randElements(Object[] objects,int total)
 	{

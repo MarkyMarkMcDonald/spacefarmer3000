@@ -1,10 +1,14 @@
-package App.model;
+package App.model.TradeGoods;
 
+import App.model.Event;
+import App.model.Universe.Planet;
+import App.model.Universe.ResourceType;
+import App.model.Universe.TechnologyLevel;
 import App.service.Randomizer;
 import Conf.TradeGoodNames.*;
 
-import static App.model.TechnologyLevel.*;
-import static App.model.ResourceType.*;
+import static App.model.Universe.TechnologyLevel.*;
+import static App.model.Universe.ResourceType.*;
 import static App.model.Event.*;
 /**
  * Created with IntelliJ IDEA.

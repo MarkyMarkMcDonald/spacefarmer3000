@@ -1,7 +1,7 @@
 package App.listener;
 
 import App.model.MarketPlace;
-import App.model.Tradable;
+import App.model.TradeGoods.Tradable;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
