@@ -1,5 +1,7 @@
 package App.model;
 
+import App.model.TradeGoods.Tradable;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

@@ -2,6 +2,10 @@ package App.logging;
 
 import App.factory.UniverseFactory;
 import App.model.*;
+import App.model.Player.Player;
+import App.model.Player.SkillType;
+import App.model.Universe.Planet;
+import App.model.Universe.PlanetarySystem;
 
 import java.util.Collection;
 import java.util.List;

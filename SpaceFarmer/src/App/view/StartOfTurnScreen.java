@@ -2,8 +2,8 @@ package App.view;
 
 import App.listener.ContinueListener;
 import App.model.Game;
-import App.model.Planet;
-import App.model.Player;
+import App.model.Universe.Planet;
+import App.model.Player.Player;
 
 import javax.swing.*;
 import java.awt.*;

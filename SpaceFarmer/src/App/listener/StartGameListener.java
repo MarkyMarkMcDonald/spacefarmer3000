@@ -2,13 +2,12 @@ package App.listener;
 
 import App.logging.Logger;
 import App.model.Game;
-import App.model.Player;
+import App.model.Player.Player;
 import App.service.Randomizer;
 import App.view.CardName;
 import App.view.Display;
 import App.view.StartOfTurnScreen;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;

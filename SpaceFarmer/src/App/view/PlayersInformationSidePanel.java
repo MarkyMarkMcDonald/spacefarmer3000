@@ -1,7 +1,7 @@
 package App.view;
 
 import App.model.Game;
-import App.model.Player;
+import App.model.Player.Player;
 
 import javax.swing.*;
 import java.awt.*;
