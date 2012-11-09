@@ -2,7 +2,7 @@ package App.view;
 
 import App.factory.UniverseFactory;
 import App.listener.ViewPlanetListener;
-import App.model.PlanetarySystem;
+import App.model.Universe.PlanetarySystem;
 
 import javax.swing.*;
 import java.util.Collection;

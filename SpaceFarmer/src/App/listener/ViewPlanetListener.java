@@ -1,7 +1,7 @@
 package App.listener;
 
 import App.factory.UniverseFactory;
-import App.model.Planet;
+import App.model.Universe.Planet;
 import App.view.CardName;
 import App.view.Display;
 import App.view.PlanetInformationScreen;

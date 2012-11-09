@@ -1,6 +1,8 @@
 package App.service;
 
 import App.model.*;
+import App.model.Player.Player;
+import App.model.TradeGoods.Tradable;
 
 import java.util.Set;
 

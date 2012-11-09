@@ -1,6 +1,6 @@
 package App.listener;
 
-import App.model.Planet;
+import App.model.Universe.Planet;
 import App.service.TransportationService;
 import App.view.*;
 

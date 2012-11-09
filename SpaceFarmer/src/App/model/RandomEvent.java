@@ -1,5 +1,6 @@
 package App.model;
 
+
 public enum RandomEvent {
 	
 	LOSE_ITEM(EventFunction.loseFunction),
@@ -10,7 +11,7 @@ public enum RandomEvent {
 	private RandomEvent(EventFunction event) {
 		this.event = event;
 	}
-	
+
 	public void giveEvent(Player player)
 	{
 		event.function(player);

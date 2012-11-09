@@ -1,9 +1,9 @@
 package App.service;
 
 import App.model.Game;
-import App.model.Planet;
-import App.model.PlanetarySystem;
-import App.model.Player;
+import App.model.Universe.Planet;
+import App.model.Universe.PlanetarySystem;
+import App.model.Player.Player;
 import App.view.Display;
 import App.view.MiniGameScreen;
 

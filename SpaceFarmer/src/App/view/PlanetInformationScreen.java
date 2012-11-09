@@ -2,8 +2,8 @@ package App.view;
 
 import App.listener.TransportationListener;
 import App.model.Game;
-import App.model.Planet;
-import App.model.PlanetarySystem;
+import App.model.Universe.Planet;
+import App.model.Universe.PlanetarySystem;
 
 import javax.swing.*;
 import java.awt.*;

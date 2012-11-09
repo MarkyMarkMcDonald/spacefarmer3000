@@ -1,4 +1,4 @@
-package App.model;
+package App.model.Player;
 
 /**
  * User: marky

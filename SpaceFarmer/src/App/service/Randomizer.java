@@ -1,5 +1,11 @@
 package App.service;
 
+<<<<<<< HEAD
+=======
+import App.factory.UniverseFactory;
+import App.model.Universe.Planet;
+
+>>>>>>> 0c462c0aeb8a9d37a50c5505f7a6b9c88a80d994
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -64,7 +70,6 @@ public class Randomizer {
 	
 	/**
 	 * Gives a random number of unique elements from an array.
-	 * @param Total number to return.
 	 */
 	public static Object[] randElements(Object[] objects,int total)
 	{
