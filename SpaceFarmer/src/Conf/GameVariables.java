@@ -20,6 +20,7 @@ public class GameVariables {
     public static final int planetarySystemColomns=3;
     public static final int playerStartingMoney = 100000;
     public static final int minimumSystemDistance=5;
+	public static final double randomEventChancce=.05;
     
     public static int getUniverseWidth() {
     	return universeColumns * quadrantXDimension;

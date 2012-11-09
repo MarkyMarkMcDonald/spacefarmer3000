@@ -1,13 +1,15 @@
 package App.service;
 
-import App.factory.UniverseFactory;
-import App.model.Planet;
-
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+
+import App.factory.UniverseFactory;
+import App.model.Planet;
+import App.model.Player;
+import App.model.RandomEvent;
 
 /**
  * This class is used to handle randomizations in universe generation.
@@ -211,5 +213,14 @@ public class Randomizer {
     	}
     	
     	return returnDistribution;
+    }
+    
+    public static void giveEvent(Player player,double chance)
+    {
+    	if (determineSuccess(chance))
+    	{
+    	    RandomEvent event= (RandomEvent) randEnum(RandomEvent.class);	
+    	    event.giveEvent(player);
+    	}
     }
 }
