@@ -47,7 +47,7 @@ public class TransactionService {
         }
         else {
             // Default success message
-            message = "You Purchased " + quantity + " " + tradeGood.getName() + "'s for " + transactionCost;
+            message = "You Purchased " + quantity + " " + tradeGood.getName() + "'s for $" + transactionCost;
 
             player.changeMoney(-transactionCost);
 
@@ -87,12 +87,12 @@ public class TransactionService {
             player.changeMoney(transactionCost);
 
             Display.setMessage(message, MessageType.GOOD);
-            return false;
+            return true;
         }
         else {
             message = "You need " + (quantity - amountInInventory) + " more to sell that amount";
             Display.setMessage(message, MessageType.ERROR);
-            return true;
+            return false;
         }
     }
 }

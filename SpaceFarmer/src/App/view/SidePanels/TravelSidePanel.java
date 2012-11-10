@@ -22,7 +22,7 @@ public class TravelSidePanel extends SidePanel {
 
     public TravelSidePanel(){
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        setPreferredSize(new Dimension(200, 2000));
+        setPreferredSize(new Dimension(250, 2000));
         planetInfoLabel = new PlanetInfoLabel();
         add(planetInfoLabel);
         transportationListener = new TransportationListener();

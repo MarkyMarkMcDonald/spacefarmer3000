@@ -49,7 +49,7 @@ public class Game {
     }
 
     public static int getTurnInRound(){
-        return (int) Math.floor(Game.getTurnNumber() / Game.getRoundLength());
+        return (int) Math.floor(Game.getTurnNumber() % Game.getRoundLength());
     }
 
     /*

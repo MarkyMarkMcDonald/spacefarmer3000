@@ -1,23 +1,10 @@
-package App.view.SidePanels;
+package App.view;
 
 import App.listener.ConfirmPlayerCreationListener;
 import App.listener.IncrementListener;
-import App.view.CardName;
-import App.view.Screen;
 
-import java.awt.FlowLayout;
-import java.awt.Dimension;
-
-import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.Component;
-import javax.swing.Box;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * This screen shows the Player his information. (WIP)
@@ -165,6 +152,14 @@ public class PlayerInformationScreen extends Screen {
         ErrorPanel.add(ErrorLabel);
 
 	}
+
+    public void resetInputs(){
+        enteredEngineerSkill.setText("0");
+        enteredFighterSkill.setText("0");
+        enteredPilotSkill.setText("0");
+        enteredTraderSkill.setText("0");
+        enteredPlayerName.setText("");
+    }
 
     public void setErrorMessage(String message){
     	ErrorLabel.setText(message);

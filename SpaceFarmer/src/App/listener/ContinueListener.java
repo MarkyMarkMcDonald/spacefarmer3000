@@ -1,10 +1,10 @@
 package App.listener;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import App.view.CardName;
 import App.view.Display;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The purpose of this class is to function as a generic screen advancement listener. This will be used for "continue" buttons

@@ -1,11 +1,11 @@
 package App.view;
 
-import App.listener.BasicContinueListener;
 import App.listener.StartGameListener;
 
 import javax.swing.*;
-import java.awt.Component;
-import java.awt.Font;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * This screen confirms the creation of a player.
@@ -25,22 +25,40 @@ public class PlayerCreatedScreen extends Screen {
 		name = CardName.PLAYER_CREATED_CARD;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		JLabel lblYouCreatedA = new JLabel("You created a player!");
-		lblYouCreatedA.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblYouCreatedA.setAlignmentY(Component.TOP_ALIGNMENT);
-		lblYouCreatedA.setAlignmentX(Component.CENTER_ALIGNMENT);
-		add(lblYouCreatedA);
+
+        JLabel lblYouCreatedA = new JLabel("You created a player!");
+        lblYouCreatedA.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblYouCreatedA.setAlignmentY(Component.CENTER_ALIGNMENT);
+        lblYouCreatedA.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton makeAnotherPlayer = new JButton("Add Another Player");
-        BasicContinueListener continueToPlayerCreationListener = new BasicContinueListener(CardName.PLAYER_INFORMATION_CARD);
+        ActionListener continueToPlayerCreationListener = new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                PlayerInformationScreen playerInformationScreen = (PlayerInformationScreen) Display.getCard(CardName.PLAYER_INFORMATION_CARD.toString());
+                playerInformationScreen.resetInputs();
+                Display.changeCard(CardName.PLAYER_INFORMATION_CARD);
+            }
+        };
         makeAnotherPlayer.addActionListener(continueToPlayerCreationListener);
-        add(makeAnotherPlayer);
+        makeAnotherPlayer.setAlignmentY(Component.CENTER_ALIGNMENT);
+        makeAnotherPlayer.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton startGame = new JButton("Start Game");
         StartGameListener startGameListener = new StartGameListener();
         startGame.addActionListener(startGameListener);
+        startGame.setAlignmentY(Component.CENTER_ALIGNMENT);
+        startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        Component topGlue = Box.createVerticalGlue();
+        Component botGlue = Box.createVerticalGlue();
+
+        add(topGlue);
+        add(lblYouCreatedA);
+        add(makeAnotherPlayer);
         add(startGame);
+        add(botGlue);
 	}
 
 }

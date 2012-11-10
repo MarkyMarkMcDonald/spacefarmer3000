@@ -6,7 +6,7 @@ import App.model.Player.Player;
 import App.service.PlayerValidationService;
 import App.view.CardName;
 import App.view.Display;
-import App.view.SidePanels.PlayerInformationScreen;
+import App.view.PlayerInformationScreen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

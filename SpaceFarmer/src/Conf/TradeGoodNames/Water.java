@@ -8,7 +8,7 @@ package Conf.TradeGoodNames;
 public enum Water {
 
     SPRING_WATER("Spring Water"),
-    UNFILTERED_WATER("Unfiltered Water"),
+    UNFILTERED_WATER("Flavored Water"),
     SPORTS_DRINKS("Sports Drinks");
 
     private String name;

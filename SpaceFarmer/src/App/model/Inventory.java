@@ -46,7 +46,10 @@ public class Inventory {
     }
 
     public int getQuantity(Tradable item){
-        return inventory.get(item);
+        if (inventory.containsKey(item)){
+            return inventory.get(item);
+        }
+        else return 0;
     }
 
     public Set<Map.Entry<Tradable,Integer>> getInventoryEntries(){

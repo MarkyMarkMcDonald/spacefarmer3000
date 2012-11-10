@@ -1,7 +1,6 @@
 package App.view;
 
 import App.view.Market.MarketScreen;
-import App.view.SidePanels.PlayerInformationScreen;
 
 /**
  * This class acts as an enumeration for the JPanels acting as cards for the center screen.
