@@ -7,7 +7,6 @@ import App.view.Display;
 import App.view.PlanetInformationScreen;
 import App.view.SidePanels.TravelSidePanel;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class TransportationListener extends ContinueListener{
@@ -15,23 +14,19 @@ public class TransportationListener extends ContinueListener{
 	// The Planet to which this ActionListener is tied
 	private Planet planet;
 
-    // message describing result of the travel
-    private JLabel message;
 
-    public TransportationListener(JLabel message) {
+    public TransportationListener() {
         cardToMoveTo = CardName.PLANET_INFORMATION_CARD;
 
-        this.message = message;
     }
 
     /**
 	 * This constructor associates the listener with the combo .
 	 */
-	public TransportationListener(Planet planet, JLabel message) {
+	public TransportationListener(Planet planet) {
         cardToMoveTo = CardName.PLANET_INFORMATION_CARD;
 
         this.planet = planet;
-        this.message = message;
     }
 	
 	/**
@@ -49,7 +44,6 @@ public class TransportationListener extends ContinueListener{
             // Update what planet the player is now on
             PlanetInformationScreen planetInfo = (PlanetInformationScreen) Display.getCard(cardToMoveTo.toString());
             planetInfo.update(planet);
-            message.setVisible(true);
 
             Display.updatePlayersInfo();
 

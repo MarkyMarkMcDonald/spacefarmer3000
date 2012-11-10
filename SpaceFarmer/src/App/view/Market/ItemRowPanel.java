@@ -33,10 +33,11 @@ public class ItemRowPanel extends JPanel {
         add(lblPrice);
 
 		txtToBuy = new JTextField();
-		txtToBuy.setText("0");
-		add(txtToBuy);
-		txtToBuy.setColumns(7);
-		
+        txtToBuy.setText("0");
+        txtToBuy.setColumns(7);
+        txtToBuy.setHorizontalAlignment(JTextField.CENTER);
+        add(txtToBuy);
+
 		JButton btnBuy = new JButton(actionText);
         transactionListener.setQuantity(txtToBuy);
         transactionListener.setShownQuantity(lblAvailable);

@@ -3,7 +3,6 @@ package App.view.Market;
 import App.listener.BuyFromMarketListener;
 import App.model.MarketPlace;
 import App.model.TradeGoods.Tradable;
-import App.view.Market.SellingPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,7 +37,8 @@ public class BuyingPanel extends JPanel {
      */
     public void setMarket(MarketPlace marketPlace){
         items.removeAll();
-        items.setLayout(new BoxLayout(items,BoxLayout.Y_AXIS));
+        items.setLayout(new BoxLayout(items, BoxLayout.Y_AXIS));
+        items.setPreferredSize(new Dimension(500,2000));
 
         for (Map.Entry<Tradable, Integer> item : marketPlace.getQuantityMap().entrySet()){
             JPanel rowPanel = new JPanel();
@@ -47,7 +47,7 @@ public class BuyingPanel extends JPanel {
             String itemName = itemInfo.getName();
             int itemPrice = marketPlace.getPriceMap().get(itemInfo);      
 
-            ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Buy!", new BuyFromMarketListener(marketPlace,itemPrice,itemInfo,errorMessage, sellingPanel));
+            ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Buy!", new BuyFromMarketListener(marketPlace,itemPrice,itemInfo,errorMessage, this));
 
             // Set item's background color based on comparison of market price and base price
             int ratio =  itemPrice / itemInfo.getBasePrice() * 100;

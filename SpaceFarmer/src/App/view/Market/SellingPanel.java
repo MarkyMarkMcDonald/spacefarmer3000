@@ -4,9 +4,6 @@ import App.listener.SellToMarketListener;
 import App.model.Inventory;
 import App.model.MarketPlace;
 import App.model.TradeGoods.Tradable;
-import App.view.Market.BuyingPanel;
-import App.view.Market.HeadingPanel;
-import App.view.Market.ItemRowPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,7 +51,7 @@ public class SellingPanel extends JPanel {
             String itemName = itemInfo.getName();
             // can only sell items at 95% market prices
             int itemPrice = (int) Math.floor(marketPlace.getPriceMap().get(itemInfo) * .95);
-            ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Sell!",new SellToMarketListener(marketPlace,itemPrice,itemInfo, errorMessage, buyingPanel));
+            ItemRowPanel row = new ItemRowPanel(itemName, quantityAvailable,itemPrice,"Sell!",new SellToMarketListener(marketPlace,inventory,itemPrice,itemInfo, errorMessage, this));
 
             // Set item's background color based on comparison of market price and base price
             int ratio =  itemPrice / itemInfo.getBasePrice() * 100;

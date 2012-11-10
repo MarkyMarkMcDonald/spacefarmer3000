@@ -5,7 +5,7 @@ import App.model.MarketPlace;
 import App.model.TradeGoods.Tradable;
 import App.service.TransactionService;
 import App.view.Display;
-import App.view.Market.SellingPanel;
+import App.view.Market.BuyingPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,11 +19,11 @@ import java.awt.event.ActionEvent;
  */
 public class BuyFromMarketListener extends TransactionListener{
 
-    private SellingPanel sellingPanel;
+    private BuyingPanel buyingPanel;
 
-    public BuyFromMarketListener(MarketPlace marketPlace, int price, Tradable good, JLabel errorMessage, SellingPanel sellingPanel) {
+    public BuyFromMarketListener(MarketPlace marketPlace, int price, Tradable good, JLabel errorMessage, BuyingPanel buyingPanel) {
         super(marketPlace, price, good, errorMessage);
-        this.sellingPanel= sellingPanel;
+        this.buyingPanel = buyingPanel;
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
@@ -35,8 +35,8 @@ public class BuyFromMarketListener extends TransactionListener{
 
 	        // update views if there weren't errors
 	        if (transactionSuccess){
-	            sellingPanel.setMarketPlaceAndInventory(marketPlace,Game.getCurrentPlayer().getInventory());
-	
+                buyingPanel.setMarket(marketPlace);
+
 	            Display.updatePlayersInfo();
 	        }
         } else {

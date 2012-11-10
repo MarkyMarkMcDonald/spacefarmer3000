@@ -1,11 +1,12 @@
 package App.listener;
 
 import App.model.Game;
+import App.model.Inventory;
 import App.model.MarketPlace;
 import App.model.TradeGoods.Tradable;
 import App.service.TransactionService;
 import App.view.Display;
-import App.view.Market.BuyingPanel;
+import App.view.Market.SellingPanel;
 import App.view.SidePanels.MessageType;
 
 import javax.swing.*;
@@ -19,24 +20,25 @@ import java.awt.event.ActionEvent;
  * To change this template use File | Settings | File Templates.
  */
 public class SellToMarketListener extends TransactionListener {
-    private BuyingPanel buyingPanel;
+    private SellingPanel sellingPanel;
+    private Inventory inventory;
 
-    public SellToMarketListener(MarketPlace marketPlace, int price, Tradable good, JLabel errorMessage, BuyingPanel buyingPanel) {
+    public SellToMarketListener(MarketPlace marketPlace, Inventory inventory,int price, Tradable good, JLabel errorMessage, SellingPanel sellingPanel) {
         super(marketPlace, price, good, errorMessage);
-        this.buyingPanel = buyingPanel;
+        this.sellingPanel = sellingPanel;
+        this.inventory = inventory;
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
         super.actionPerformed(actionEvent);
         
-        // Do nothing is there's a format mismatch
+        // Check for format mismatch
         if(quantityAsInt >= 0) {
 	        boolean transactionIsSuccessful = TransactionService.sellToMarket(Game.getCurrentPlayer(), marketPlace, price, quantityAsInt, good);
 
 	        // update view if there are no errors
 	        if (transactionIsSuccessful){
-	            buyingPanel.setMarket(marketPlace);
-
+                sellingPanel.setMarketPlaceAndInventory(marketPlace,inventory);
 	            Display.updatePlayersInfo();
 	        }
         } else {
