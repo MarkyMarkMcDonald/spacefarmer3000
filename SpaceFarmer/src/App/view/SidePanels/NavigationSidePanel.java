@@ -81,7 +81,7 @@ public class NavigationSidePanel extends SidePanel {
         add(btnShip);
 
         /**
-         * Travel to a new planet and end the game
+         * Travel to a new planet and end the turn
          */
 
         JButton btnTravel = new JButton("Travel");
@@ -90,7 +90,6 @@ public class NavigationSidePanel extends SidePanel {
             public void actionPerformed(ActionEvent e) {
                 cardToMoveTo = CardName.INTERSYSTEM_TRAVEL_CARD;
                 TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
-                travelPanel.updateBasedOnAllPlanets();
                 travelPanel.setVisible(true);
 
                 // Hide the tutorial message after the first round

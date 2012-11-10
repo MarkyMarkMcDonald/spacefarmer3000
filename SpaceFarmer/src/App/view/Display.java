@@ -1,6 +1,7 @@
 package App.view;
 
 import App.model.Game;
+import App.model.Universe.Planet;
 import App.view.SidePanels.*;
 
 import javax.swing.*;
@@ -159,6 +160,11 @@ public class Display extends JFrame {
     public static void hideMessage(){
         MessageSidePanel sidePanel = (MessageSidePanel) getSidePanel("Top");
         sidePanel.setVisible(false);
+    }
+
+    public static void updatePlanetTravelInfo(Planet planet){
+        TravelSidePanel sidePanel = (TravelSidePanel) getSidePanel("Right");
+        sidePanel.updateBasedOnPlanet(planet);
     }
 
     public static void updatePlayersInfo(){

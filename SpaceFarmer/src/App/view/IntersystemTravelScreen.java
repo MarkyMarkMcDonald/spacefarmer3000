@@ -19,6 +19,7 @@ import java.util.Map;
  */
 public class IntersystemTravelScreen extends Screen implements MouseListener {
 
+
 	/**
 	 * Create the panel.
 	 */
@@ -153,29 +154,19 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 		// Iterate over each point 
 		for(Point p : planetLocations.keySet()) {
 			if(p.distance(e.getX(), e.getY()) < PLANET_SIZE / 2) {
-				clickedPlanet = true;
-				
-				// Player clicked on a planet
-				if(planetLocations.get(p).equals(selectedPlanet)) {
-					selectedPlanet = null;
-					
-					// TODO go to planet info page
-					
-					
-					System.out.println("Going to planet info page for " + planetLocations.get(p).getName());
-				} else {
-					selectedPlanet = planetLocations.get(p);
-					repaint();
-					
-					System.out.println("Selected planet " + planetLocations.get(p).getName());
-				}
+                clickedPlanet = true;
+
+                selectedPlanet = planetLocations.get(p);
+
+                Display.updatePlanetTravelInfo(selectedPlanet);
 			}
 		}
 		
 		// If a planet wasn't clicked, deselect planet
 		if(!clickedPlanet) {
-			selectedPlanet = null;
-		}
+            selectedPlanet = null;
+            repaint();
+        }
 	}
 	
 	public void mouseClicked(MouseEvent arg0) {}
