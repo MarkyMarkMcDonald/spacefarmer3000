@@ -6,10 +6,10 @@ public enum ResourceType {
 	
 	//This field is for TradeGoods with no increased/decreased
 	//quantity conditions
-	NONE ("NONE"),
-	NO_SPECIAL_RESOURCES ("No Special Resources"),
-	MINERAL_RICH ("Mineral Rich"),
-	MINERAL_POOR ("Mineral Poor"),
+	NONE ("None"),
+	NO_SPECIAL_RESOURCES ("Normal"),
+	MINERAL_RICH ("Abundant Minerals"),
+	MINERAL_POOR ("Scarce Minerals"),
 	DESERT ("Desert"),
 	LOTS_OF_WATER ("Lots of Water"),
 	RICH_SOIL ("Rich Soil"),

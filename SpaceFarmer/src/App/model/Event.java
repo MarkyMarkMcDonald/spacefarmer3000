@@ -2,10 +2,10 @@ package App.model;
 
 public enum Event {
 
-	NO_EVENT ("No Event"),
+	NO_EVENT ("None"),
 	DROUGHT ("Drought"),
 	COLD ("Cold"),
-	CROPFAIL ("Cropfail"),
+	CROPFAIL ("Crop Failure"),
 	WAR ("War"),
 	BOREDOM ("Boredom"),
 	PLAGUE ("Plague"),

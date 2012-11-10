@@ -9,7 +9,7 @@ public enum Narcotics {
 
     MOLLY("Molly"),
     MARIJUANA("Marijuana"),
-    WOW_SUB_CARDS("WoW Game Time");
+    WOW_SUB_CARDS("WoW Subscription");
 
     private String name;
 
