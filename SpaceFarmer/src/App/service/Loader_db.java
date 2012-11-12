@@ -1,8 +1,19 @@
 package App.service;
 
 import App.model.Player.Player;
+import App.model.Player.SkillType;
+import App.model.Event;
+import App.model.MarketPlace;
 import App.model.Settings;
+import App.model.Ship;
+import App.model.ShipModel;
+import App.model.TradeGoods.Tradable;
 import App.model.Universe.Planet;
+import App.model.Universe.PlanetarySystem;
+import App.model.Universe.PoliticalSystem;
+import App.model.Universe.ResourceType;
+import App.model.Universe.TechnologyLevel;
+
 import org.tmatesoft.sqljet.core.SqlJetException;
 import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
 import org.tmatesoft.sqljet.core.table.ISqlJetCursor;
@@ -10,7 +21,9 @@ import org.tmatesoft.sqljet.core.table.ISqlJetTable;
 import org.tmatesoft.sqljet.core.table.SqlJetDb;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 /*
 import App.model.Universe.Planet;
@@ -20,11 +33,11 @@ import App.model.Settings;
 public class Loader_db {
 	private String saveName;
 	private String saveLocation;
-	/*
-	Collection <Player> players;
-	Collection <Planet> planets;
+	
+	ArrayList <Player> players;
+	ArrayList <Planet> planets;
 	Settings gameSettings;
-	*/
+	
 	//name of the database
 	private static String DB_NAME = "db.sqlite";
 	private File dbFile = new File(DB_NAME);
@@ -69,6 +82,11 @@ public class Loader_db {
     private static final String FIELD_DIFF = "Difficulty";
     private static final String FIELD_XDIM = "X_dimension";
     private static final String FIELD_YDIM = "y_diminsion";
+  //added fields
+    private static final String FIELD_SYS = "system";
+    private static final String FIELD_FULE = "fule";
+    private static final String FIELD_EVENT = "event";
+
 	
 	
 	public void LoadGame(String fName)throws SqlJetException{
@@ -81,12 +99,45 @@ public class Loader_db {
 		//LoadInventory(db.getTable(TABLE_INVENTORY));
 		LoadSettings(db.getTable(TABLE_SETTINGS));
 	}
-	private Collection<Player> LoadPlayers(ISqlJetTable tbl )throws SqlJetException{
+/**
+ * CREATES A COLLECTION OF PLAYERS AND RETURNS THEM	
+ * @param tbl
+ * @return
+ * @throws SqlJetException
+ */
+private Collection<Player> LoadPlayers(ISqlJetTable tbl )throws SqlJetException{
 		ISqlJetCursor cursor=tbl.open();
+		Collection<Player> Ret = null;
+		Player tempP = null;
+		Ship tempShip = null;
+		ShipModel tempMod = null;
+		Planet tempPlanet;
+		Map<SkillType, Integer> tempSkill = null;
 		 try {
 	            if (!cursor.eof()) {
 	                do {
-	                	System.out.println("this is a test");
+	                	//name
+	                	tempP.setName(cursor.getString(FIELD_NAME));
+	                	//money
+	                	tempP.setMoney(Integer.parseInt(cursor.getString(FIELD_MONEY)));
+	                	//fule
+	                	tempP.setFuel(Integer.parseInt(cursor.getString(FIELD_FULE)));
+	                	//ship
+	                	tempMod=tempMod.valueOf((cursor.getString(FIELD_SHIP)));
+	                	tempShip.setType(tempMod);
+	                	tempP.setShip(tempShip);
+	                	//curr planet
+	                	//tempP.setCurrentPlanet(cursor.getString(FIELD_CURRPLANET))
+	                	//inventory
+	                	//tempP.setInventory)
+	                	//skills
+	                	tempSkill.put(SkillType.ENGINEERING, Integer.parseInt(cursor.getString(FIELD_ENGINEERING)));
+	                	tempSkill.put(SkillType.FIGHTING, Integer.parseInt(cursor.getString(FIELD_FIGHTING)));
+	                	tempSkill.put(SkillType.PILOTING, Integer.parseInt(cursor.getString(FIELD_PILOTING)));
+	                	tempSkill.put(SkillType.TRADING, Integer.parseInt(cursor.getString(FIELD_TRADING)));
+	                	Ret.add(tempP);
+	                	
+	                	/*System.out.println("this is a test");
 	                    System.out.println(cursor.getRowId()	+ " " + 
 	                            cursor.getString(FIELD_NAME)	+ " " + 
 	                            cursor.getString(FIELD_MONEY)	+ " " + 
@@ -96,14 +147,16 @@ public class Loader_db {
 	                            cursor.getString(FIELD_FIGHTING)	+ " " + 
 	                            cursor.getString(FIELD_ENGINEERING)	+ " " + 
 	                            cursor.getString(FIELD_TRADING)	+ " "
-	                            );
+	                            */
+	                            
 	                } while(cursor.next());
 	            }
 	        } 
 		 finally {cursor.close();}
-		return null;
+		return Ret;
 	}
-	private void LoadInventory(ISqlJetTable tbl)throws SqlJetException{
+	
+private void LoadInventory(ISqlJetTable tbl)throws SqlJetException{
 		ISqlJetCursor cursor=tbl.open();
 		 try {
 	            if (!cursor.eof()) {
@@ -120,11 +173,43 @@ public class Loader_db {
 	        } 
 		 finally {cursor.close();}
 	}
-	private Collection<Planet> LoadPlanets(ISqlJetTable tbl)throws SqlJetException{
+	
+private Collection<Planet> LoadPlanets(ISqlJetTable tbl)throws SqlJetException{
 		ISqlJetCursor cursor=tbl.open();
+		Collection<Planet> Ret=null;
+		Planet tempPlanet = null;
+		TechnologyLevel tempTech=null;
+		PlanetarySystem tempSys=null;
+		ResourceType tempRes=null;
+		PlanetarySystem tempPs=null;
+		PoliticalSystem tempPol=null;
+		Event tempE=null;
 		 try {
 	            if (!cursor.eof()) {
 	                do {
+	                	//planet name
+	                	tempPlanet.setName( cursor.getString(FIELD_PLANET));
+	                	//planet tech level
+	                	tempTech=tempTech.valueOf(cursor.getString(FIELD_TECH));
+	                	tempPlanet.setTechnologyLevel(tempTech);
+	                	// planet x & y
+	                	tempPlanet.setX(Integer.parseInt(cursor.getString(FIELD_X)));
+	                	tempPlanet.setX(Integer.parseInt(cursor.getString(FIELD_Y)));
+	                	//resource type
+	                	tempRes=tempRes.valueOf(cursor.getString(FIELD_RESOURCE));
+	                	tempPlanet.setResourceType(tempRes);
+	                	//Planetary system
+	                	tempPol=tempPol.valueOf(cursor.getString(FIELD_POLSYS));
+	                	tempPlanet.setPoliticalSystem(tempPol);
+	                	//market
+	                	//tempPlanet.setMarket(market)
+	                	//event
+	                	tempE=tempE.valueOf(cursor.getString(FIELD_EVENT));
+	                	tempPlanet.setEvent(tempE);
+
+	     
+	                	Ret.add(tempPlanet);
+	                	/*
 	                	System.out.println("this is a test");
 	                    System.out.println(cursor.getRowId()	+ " " + 
 	                            cursor.getString(FIELD_PLANET)	+ " " + 
@@ -133,24 +218,27 @@ public class Loader_db {
 	                            cursor.getString(FIELD_RESOURCE)	+ " "+
 	                            cursor.getString(FIELD_X)	+ " " + 
 	                            cursor.getString(FIELD_Y)	+ " " 
-	                            );
+	                            */
 	                } while(cursor.next());
 	            }
 	        } 
 		 finally {cursor.close();}
-		return null;
+		return Ret;
 	}
-	private Settings LoadSettings(ISqlJetTable tbl)throws SqlJetException{
+	
+private Settings LoadSettings(ISqlJetTable tbl)throws SqlJetException{
 		ISqlJetCursor cursor=tbl.open();
 		 try {
 	            if (!cursor.eof()) {
-	                do {	               
+	                do {	
+	                	
+	                	/*               
 	                	System.out.println("this is a test");
 	                    System.out.println(cursor.getRowId()	+ " " + 
 	                            cursor.getString(FIELD_CURRTURN)	+ " " + 
 	                            cursor.getString(FIELD_CURRPLAYER)	+ " " + 
 	                            cursor.getString(FIELD_DIFF)	+ " "
-	                            );
+	                            );*/
 	                } while(cursor.next());
 	            }
 	        } 
@@ -158,6 +246,44 @@ public class Loader_db {
 		return null;
 	}
 	
+	private Collection<PlanetarySystem> makeSystems(){
+		ArrayList<PlanetarySystem> PS = null;
+		PlanetarySystem tempPS;
+		Planet tempPlanet = null;
+		/*
+		while(planets.isEmpty()!=true)
+			tempPlanet=planets.remove(0);
+			for(int i=0;i<PS.size();i++)
+				if (PS.get(i).getName().equals(tempPlanet.getPlanetarySystem().getName()))
+			*/		
+				
+		return null;
+		
+	}
+	private ArrayList<MarketPlace> LoadMarkets(ISqlJetTable tbl)throws SqlJetException{
+		MarketPlace tempM = null;
+		Tradable tempTrade;
+		ArrayList Ret = null;
+		ISqlJetCursor cursor=tbl.open();
+		 try {
+	            if (!cursor.eof()) {
+	                do {
+	                	//tempTrade=tempTrade;
+	                	//tempM.setQuantity(cursor.getString(FIELD_ITEM1), cursor.getString(FIELD_Q1));
+	                	
+	                	/*               
+	                            cursor.getString()
+	                            );*/
+	                	Ret.add(tempM);
+	                } while(cursor.next());
+	            }
+	        } 
+		 finally {cursor.close();}
+		
+		return Ret;
+		
+	}
+
 	
 	
 

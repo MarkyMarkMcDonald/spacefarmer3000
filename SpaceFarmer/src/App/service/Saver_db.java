@@ -2,6 +2,7 @@ package App.service;
 
 
 import App.model.Player.Player;
+import App.model.TradeGoods.Tradable;
 import App.model.Universe.Planet;
 import App.model.Settings;
 import App.model.Player.SkillType;
@@ -14,6 +15,8 @@ import org.tmatesoft.sqljet.core.table.SqlJetDb;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 /**
 * hold the information for the
@@ -36,6 +39,7 @@ public class Saver_db {
     private static final String TABLE_INVENTORY = "Inventory";
     private static final String TABLE_PLANETS = "Planets";
     private static final String TABLE_SETTINGS = "Game";
+
     //player colls
     private static final String FIELD_NAME = "Name";
     private static final String FIELD_PILOTING = "Piloting";
@@ -69,6 +73,35 @@ public class Saver_db {
     private static final String FIELD_DIFF = "Difficulty";
     private static final String FIELD_XDIM = "X_dimension";
     private static final String FIELD_YDIM = "y_diminsion";
+    
+    //added fields
+    private static final String FIELD_SYS = "system";
+    private static final String FIELD_FULE = "fule";
+    private static final String FIELD_EVENT = "event";
+    
+    private static final String TABLE_MARKETS = "Market";
+    private static final String FIELD_ITEM1 = "Item1";
+    private static final String FIELD_ITEM2 = "Item2";
+    private static final String FIELD_ITEM3 = "Item3";
+    private static final String FIELD_ITEM4 = "Item4";
+    private static final String FIELD_ITEM5 = "Item5";
+    private static final String FIELD_ITEM6 = "Item6";
+    private static final String FIELD_ITEM7 = "Item7";
+    private static final String FIELD_ITEM8 = "Item8";
+    private static final String FIELD_ITEM9 = "Item9";
+    private static final String FIELD_ITEM10 = "Item10";
+    private static final String FIELD_Q1 = "Quantity1";
+    private static final String FIELD_Q2 = "Quantity2";
+    private static final String FIELD_Q3 = "Quantity3";
+    private static final String FIELD_Q4 = "Quantity4";
+    private static final String FIELD_Q5 = "Quantity5";
+    private static final String FIELD_Q6 = "Quantity6";
+    private static final String FIELD_Q7 = "Quantity7";
+    private static final String FIELD_Q8 = "Quantity8";
+    private static final String FIELD_Q9 = "Quantity9";
+    private static final String FIELD_Q10 = "Quantity10";
+
+
 
 	/**
 	 * Constructer for the saver
@@ -120,7 +153,7 @@ public class Saver_db {
 	private void SavePlayers(SqlJetDb db)throws SqlJetException {
 		 Player[] temp=(Player[]) players.toArray();
 		String createTableQuery = "CREATE TABLE " + TABLE_PLAYERS + " " +
-		 		"(" + FIELD_NAME + " TEXT NOT NULL , " + FIELD_MONEY +" TEXT NOT NULL , "+ FIELD_CURRPLANET + " TEXT NOT NULL , " + FIELD_SHIP + " TEXT NOT NULL , " + FIELD_PILOTING + " TEXT NOT NULL , "+ FIELD_TRADING + " TEXT NOT NULL , "+ FIELD_ENGINEERING + " TEXT NOT NULL , "+ FIELD_FIGHTING + " TEXT NOT NULL)";
+		 		"(" + FIELD_NAME + " TEXT NOT NULL , " + FIELD_MONEY +" TEXT NOT NULL , "+FIELD_FULE+" TEXT NOT NULL , "+ FIELD_CURRPLANET + " TEXT NOT NULL , " + FIELD_SHIP + " TEXT NOT NULL , " + FIELD_PILOTING + " TEXT NOT NULL , "+ FIELD_TRADING + " TEXT NOT NULL , "+ FIELD_ENGINEERING + " TEXT NOT NULL , "+ FIELD_FIGHTING + " TEXT NOT NULL)";
 		 //makes the table
 		 try {db.createTable(createTableQuery);}
 		 	finally {db.commit();}
@@ -131,7 +164,7 @@ public class Saver_db {
 		    	//Test entry
 		    	table.insert("ZOOL",9999,"Earth","BFS",1,2,3,4);
 		    	for(int i=0;i<players.size();i++)
-			    	table.insert(temp[i].getName(),temp[i].getMoney(),temp[i].getCurrentPlanet().getName(),temp[i].getShip().getType().toString(),
+			    	table.insert(temp[i].getName(),temp[i].getMoney(),temp[i].getFuel(),temp[i].getCurrentPlanet().getName(),temp[i].getShip().getType().toString(),
 			    			temp[i].getSkillLevels().containsKey(SkillType.PILOTING),temp[i].getSkillLevels().containsKey(SkillType.ENGINEERING),temp[i].getSkillLevels().containsKey(SkillType.FIGHTING),temp[i].getSkillLevels().containsKey(SkillType.TRADING));
 		    }
 		 	finally {db.commit();}
@@ -165,7 +198,7 @@ public class Saver_db {
 	private void SavePlanets(SqlJetDb db)throws SqlJetException {
 		 Planet[] temp=(Planet[]) planets.toArray();
 		String createTableQuery = "CREATE TABLE " + TABLE_PLANETS + " " +
-		 		"(" + FIELD_PLANET + " TEXT NOT NULL , " + FIELD_TECH + " TEXT NOT NULL , " + FIELD_POLSYS + " TEXT NOT NULL , " + FIELD_RESOURCE + " TEXT NOT NULL , "+ FIELD_X + " TEXT NOT NULL , "+ FIELD_Y + " TEXT NOT NULL)";
+		 		"(" + FIELD_PLANET + " TEXT NOT NULL PRIMARY KEY, "+FIELD_SYS +"TEXT NOT NULL, "+ FIELD_TECH + " TEXT NOT NULL , " + FIELD_POLSYS + " TEXT NOT NULL , " + FIELD_RESOURCE + " TEXT NOT NULL , "+ FIELD_X + " TEXT NOT NULL , "+ FIELD_Y + " TEXT NOT NULL, "+ FIELD_EVENT+" TEXT NOT NULL)";
 		//makes the table
 		try {db.createTable(createTableQuery);}
 			finally {db.commit();}
@@ -174,9 +207,9 @@ public class Saver_db {
 		    {
 		    	ISqlJetTable table = db.getTable(TABLE_PLANETS);
 		    	//Test entry
-		    	table.insert("EARTH","OVER9000","BICKERING","EVERYTHING",1,2);
+		    	table.insert("EARTH","milky way","OVER9000","BICKERING","EVERYTHING",1,2);
 		    	for(int i=0;i<temp.length;i++)
-			    	table.insert(temp[i].getName(),temp[i].getTechnologyLevel().name(),temp[i].getPoliticalSystem().getName(),temp[i].getResourceType().getName(),temp[i].getX(),temp[i].getY());
+			    	table.insert(temp[i].getName(),temp[i].getPlanetarySystem().getName(),temp[i].getTechnologyLevel().name(),temp[i].getPoliticalSystem().getName(),temp[i].getResourceType().getName(),temp[i].getX(),temp[i].getY(),temp[i].getEvent().toString());
 
 		    }
 		 	finally {db.commit();}
@@ -195,10 +228,60 @@ public class Saver_db {
 		 //fill in the Database
 		 try
 		    {
+			 //gameSettings.
 		    	ISqlJetTable table = db.getTable(TABLE_SETTINGS);
 		    	//Test entry
-		    	table.insert(7,-8,"ZOOL",1,2);
-//		    	table.insert(gameSettings.getDifficulty(),game.getTurnNumber(),game.getCurrentPlayer());
+		    	//table.insert("ZOOL",1,2);
+		    	//table.insert(game.getNumberOfTurns(),game.getCurrentPlayer());
+
+		    }
+		 	finally {db.commit();}
+	}
+	
+	private void SaveMarkets(SqlJetDb db)throws SqlJetException {
+		Planet[] tempP=(Planet[]) planets.toArray();
+		Map<Tradable,Integer> tempM;
+		Tradable[] tempTradeArray;
+		String createTableQuery = "CREATE TABLE " + TABLE_MARKETS + " " +
+		 		"(" + FIELD_PLANET + " TEXT NOT NULL PRIMARY KEY, " +
+		 		FIELD_ITEM1 + " TEXT NOT NULL , " + FIELD_Q1 + " TEXT NOT NULL,"+
+		 		FIELD_ITEM2 + " TEXT NOT NULL , " + FIELD_Q2 + " TEXT NOT NULL,"+
+		 		FIELD_ITEM3 + " TEXT NOT NULL , " + FIELD_Q3 + " TEXT NOT NULL,"+
+		 		FIELD_ITEM4 + " TEXT NOT NULL , " + FIELD_Q4 + " TEXT NOT NULL,"+
+		 		FIELD_ITEM5 + " TEXT NOT NULL , " + FIELD_Q5 + " TEXT NOT NULL,"+
+		 		FIELD_ITEM6 + " TEXT NOT NULL , " + FIELD_Q6 + " TEXT NOT NULL,"+
+		 		FIELD_ITEM7 + " TEXT NOT NULL , " + FIELD_Q7 + " TEXT NOT NULL,"+
+		 		FIELD_ITEM8 + " TEXT NOT NULL , " + FIELD_Q8 + " TEXT NOT NULL,"+
+		 		FIELD_ITEM9 + " TEXT NOT NULL , " + FIELD_Q9 + " TEXT NOT NULL,"+
+		 		FIELD_ITEM10 + " TEXT NOT NULL , " + FIELD_Q10 + " TEXT NOT NULL)";
+		
+		//makes the table
+		try {db.createTable(createTableQuery);}
+			finally {db.commit();}
+		 //fill in the Database
+		 try
+		    {
+		    	ISqlJetTable table = db.getTable(TABLE_SETTINGS);
+		    	//Test entry
+
+		    	//table.insert("ZOOL",1,2);
+		    	for(int i=0;i<tempP.length;i++)
+		    	{
+		    		tempM=tempP[i].getMarket().getQuantityMap();
+	    			tempTradeArray=(Tradable[]) tempM.keySet().toArray();
+
+			    	table.insert(tempP[i].getName(),
+			    			tempTradeArray[0].getName(),tempM.get(tempTradeArray[0]),
+			    			tempTradeArray[1].getName(),tempM.get(tempTradeArray[1]),
+			    			tempTradeArray[2].getName(),tempM.get(tempTradeArray[2]),
+			    			tempTradeArray[3].getName(),tempM.get(tempTradeArray[3]),
+			    			tempTradeArray[4].getName(),tempM.get(tempTradeArray[4]),
+			    			tempTradeArray[5].getName(),tempM.get(tempTradeArray[5]),
+			    			tempTradeArray[6].getName(),tempM.get(tempTradeArray[6]),
+			    			tempTradeArray[7].getName(),tempM.get(tempTradeArray[7]),
+			    			tempTradeArray[8].getName(),tempM.get(tempTradeArray[8]),
+			    			tempTradeArray[9].getName(),tempM.get(tempTradeArray[9]));
+		    	}
 
 		    }
 		 	finally {db.commit();}
