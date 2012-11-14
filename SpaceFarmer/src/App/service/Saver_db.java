@@ -3,7 +3,6 @@ package App.service;
 
 import App.model.Game;
 import App.model.Player.Player;
-import App.model.Player.SkillType;
 import App.model.Settings;
 import App.model.TradeGoods.Tradable;
 import App.model.Universe.Planet;
@@ -133,29 +132,32 @@ public class Saver_db {
 	 * @throws SqlJetException
 	 */
 	private void SavePlayers(SqlJetDb db)throws SqlJetException {
-		 Player[] temp=(Player[]) players.toArray();
 		String createTableQuery = "CREATE TABLE " + TABLE_PLAYERS + " " +
 		 		"(" + FIELD_NAME + TNN + FIELD_MONEY +TNN+FIELD_FULE+TNN+ FIELD_CURRPLANET + TNN + FIELD_SHIP + TNN + FIELD_PILOTING + TNN+ FIELD_TRADING + TNN+ FIELD_ENGINEERING + TNN+ FIELD_FIGHTING + " TEXT NOT NULL)";
-		 //makes the table
-		 try {db.createTable(createTableQuery);}
-		 	finally {db.commit();}
-		 //fill in the Database
-		 try
-		    {
+		//makes the table
+		try {
+             db.createTable(createTableQuery);
+        } finally {db.commit();}
+		//fill in the Database
+		try {
 		    	ISqlJetTable table = db.getTable(TABLE_PLAYERS);
 		    	//Test entry
 		    	table.insert("ZOOL",9999,"Earth","BFS",1,2,3,4);
-		    	for(int i=0;i<players.size();i++)
-			    	table.insert(temp[i].getName(),temp[i].getMoney(),temp[i].getFuel(),temp[i].getCurrentPlanet().getName(),temp[i].getShip().getType().toString(),
-			    			temp[i].getSkillLevels().containsKey(SkillType.PILOTING),temp[i].getSkillLevels().containsKey(SkillType.ENGINEERING),temp[i].getSkillLevels().containsKey(SkillType.FIGHTING),temp[i].getSkillLevels().containsKey(SkillType.TRADING));
-		    }
-		 	finally {db.commit();}
-	}
-	/**
-	 * saves the players inventories to the  database
-	 * @param db
-	 * @throws SqlJetException
-	 */
+                for (Player player : players){
+//                table.insert(temp[i].getName(),temp[i].getMoney(),temp[i].getFuel(),temp[i].getCurrentPlanet().getName(),temp[i].getShip().getType().toString(),
+//                            temp[i].getSkillLevels().containsKey(SkillType.PILOTING),temp[i].getSkillLevels().containsKey(SkillType.ENGINEERING),temp[i].getSkillLevels().containsKey(SkillType.FIGHTING),temp[i].getSkillLevels().containsKey(SkillType.TRADING));
+//
+                }
+        }
+        finally {
+             db.commit();
+        }
+    }
+        /**
+       * saves the players inventories to the  database
+       * @param db
+       * @throws SqlJetException
+       */
 	private void SaveInventory(SqlJetDb db)throws SqlJetException {
 	/*	String createTableQuery = "CREATE TABLE " + TABLE_INVENTORY + " " +
 		 		"(" + FIELD_NAME + " TEXT NOT NULL , " + FIELD_CURR + " TEXT NOT NULL , " + FIELD_SHIP + " TEXT NOT NULL , " + FIELD_PILOTING + " TEXT NOT NULL , "+ FIELD_TRADING + " TEXT NOT NULL , "+ FIELD_ENGINEERING + " TEXT NOT NULL , "+ FIELD_FIGHTING + " TEXT NOT NULL)";
