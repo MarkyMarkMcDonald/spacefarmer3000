@@ -32,7 +32,6 @@ public class Player {
     }
 
     public Player(String name, int piloting, int trading, int engineering, int fighting) {
-		super();
 		this.name = name;
 		skillLevels = new HashMap<SkillType, Integer>();
         skillLevels.put(SkillType.PILOTING,piloting);

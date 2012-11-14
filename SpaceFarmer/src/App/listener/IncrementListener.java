@@ -29,8 +29,8 @@ public class IncrementListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
         if(Pattern.matches("[0-9]+", theField.getText())) {
-			int n = Integer.parseInt(theField.getText());
-            theField.setText(n + (IncType ? (n < 16 ? 1 : 0) : (n > 0 ? -1 : 0)) + "");
+			final int amount = Integer.parseInt(theField.getText());
+            theField.setText((amount + (IncType ? (amount < 16 ? 1 : 0) : (amount > 0 ? -1 : 0))) + "");
 		} else {
 			theField.setText("0");
 		}

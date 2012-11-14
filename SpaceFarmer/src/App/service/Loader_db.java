@@ -117,31 +117,31 @@ private Collection<Player> LoadPlayers(ISqlJetTable tbl )throws SqlJetException{
 		ShipModel tempMod = null;
 		Planet tempPlanet;
 		Map<SkillType, Integer> tempSkill = null;
-		 try {
-	            if (!cursor.eof()) {
-	                do {
-	                	//name
-	                	tempP.setName(cursor.getString(FIELD_NAME));
-	                	//money
-	                	tempP.setMoney(Integer.parseInt(cursor.getString(FIELD_MONEY)));
-	                	//fule
-	                	tempP.setFuel(Integer.parseInt(cursor.getString(FIELD_FULE)));
-	                	//ship
-	                	tempMod=tempMod.valueOf((cursor.getString(FIELD_SHIP)));
-	                	tempShip.setType(tempMod);
-	                	tempP.setShip(tempShip);
-	                	//curr planet
-	                	//tempP.setCurrentPlanet(cursor.getString(FIELD_CURRPLANET))
-	                	//inventory
-	                	//tempP.setInventory)
-	                	//skills
-	                	tempSkill.put(SkillType.ENGINEERING, Integer.parseInt(cursor.getString(FIELD_ENGINEERING)));
-	                	tempSkill.put(SkillType.FIGHTING, Integer.parseInt(cursor.getString(FIELD_FIGHTING)));
-	                	tempSkill.put(SkillType.PILOTING, Integer.parseInt(cursor.getString(FIELD_PILOTING)));
-	                	tempSkill.put(SkillType.TRADING, Integer.parseInt(cursor.getString(FIELD_TRADING)));
-	                	Ret.add(tempP);
-	                	
-	                	/*System.out.println("this is a test");
+		try {
+			if (!cursor.eof()) {
+				do {
+					//name
+					tempP.setName(cursor.getString(FIELD_NAME));
+					//money
+					tempP.setMoney(Integer.parseInt(cursor.getString(FIELD_MONEY)));
+					//fule
+					tempP.setFuel(Integer.parseInt(cursor.getString(FIELD_FULE)));
+					//ship
+					tempMod=tempMod.valueOf((cursor.getString(FIELD_SHIP)));
+					tempShip.setType(tempMod);
+					tempP.setShip(tempShip);
+					//curr planet
+					//tempP.setCurrentPlanet(cursor.getString(FIELD_CURRPLANET))
+					//inventory
+					//tempP.setInventory)
+					//skills
+					tempSkill.put(SkillType.ENGINEERING, Integer.parseInt(cursor.getString(FIELD_ENGINEERING)));
+					tempSkill.put(SkillType.FIGHTING, Integer.parseInt(cursor.getString(FIELD_FIGHTING)));
+					tempSkill.put(SkillType.PILOTING, Integer.parseInt(cursor.getString(FIELD_PILOTING)));
+					tempSkill.put(SkillType.TRADING, Integer.parseInt(cursor.getString(FIELD_TRADING)));
+					Ret.add(tempP);
+
+					/*System.out.println("this is a test");
 	                    System.out.println(cursor.getRowId()	+ " " + 
 	                            cursor.getString(FIELD_NAME)	+ " " + 
 	                            cursor.getString(FIELD_MONEY)	+ " " + 
@@ -151,14 +151,14 @@ private Collection<Player> LoadPlayers(ISqlJetTable tbl )throws SqlJetException{
 	                            cursor.getString(FIELD_FIGHTING)	+ " " + 
 	                            cursor.getString(FIELD_ENGINEERING)	+ " " + 
 	                            cursor.getString(FIELD_TRADING)	+ " "
-	                            */
-	                            
-	                } while(cursor.next());
-	            }
-	        } 
-		 finally {cursor.close();}
+					 */
+
+				} while(cursor.next());
+			}
+		} 
+		finally {cursor.close();}
 		return Ret;
-	}
+}
 	
 private void LoadInventory(ISqlJetTable tbl)throws SqlJetException{
 		/*ISqlJetCursor cursor=tbl.open();

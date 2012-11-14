@@ -36,7 +36,6 @@ public class Planet {
 
 	public Planet(String name,TechnologyLevel technologyLevel, PoliticalSystem politicalSystem,
 			ResourceType resourceType, int x, int y) {
-		super();
 		this.name=name;
 		this.technologyLevel = technologyLevel;
 		this.politicalSystem = politicalSystem;
