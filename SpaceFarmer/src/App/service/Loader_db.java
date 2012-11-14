@@ -99,7 +99,7 @@ public class Loader_db {
     Map<String,Planet> Planets;
     Collection<Player> players;
 	
-	public void LoadGame(String fName)throws SqlJetException{
+	public void LoadGame(String fName,Map<String,PlanetarySystem> PS,Map<String,Planet> Planets,Collection<Player> players)throws SqlJetException{
 		DB_NAME=fName+".sqlite";
 		dbFile = new File(DB_NAME);
 	    db = SqlJetDb.open(dbFile, true);
@@ -110,6 +110,10 @@ public class Loader_db {
 		Planets=LoadPlanets(db.getTable(TABLE_PLANETS));
 		//make the players
 		players=LoadPlayers(db.getTable(TABLE_PLAYERS));
+		//markets
+		LoadMarkets(db.getTable(TABLE_MARKETS));
+		
+		
 		
 		//LoadInventory(db.getTable(TABLE_INVENTORY));
 		//LoadSettings(db.getTable(TABLE_SETTINGS));
