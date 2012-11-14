@@ -15,8 +15,7 @@ abstract public class TradeGood {
         return tradable.getName().equals(name);
     }
     
-    //In all my days, I never knew about this. Apparently, this needs
-    //to be overridden for maps with this object to work properly.
+    
     public int hashCode()
     {
     	return name.hashCode();

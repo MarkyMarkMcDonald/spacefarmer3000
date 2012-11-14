@@ -38,6 +38,16 @@ public class UniverseFactory {
     /**
      * Fills the factory with planetary systems and planets
      * All parameters are based off values in GameVariables.
+     * @param planetNames List of all the possible planet names.
+     * @param planetarySystemNames List of all the possible planetary system names.
+     * @param numPlanets Number of planets to be generated.
+     * @param systemRows Number of rows in a  planetary system grid.
+     * @param systemCols Number of columns in a planetary system grid.
+     * @param uniRows Number of quadrants in a row of the universe.
+     * @param uniCols Number of quadrants in a column of the universe.
+     * @param quadrantXDimension Width of a quadrant.
+     * @param quadrantYDimension Height of a quadrant
+     * @param minDistance The minimum distance two systems must be from each other..
      */
     public static void createUniverse(List<String> planetNames,List<String> planetarySystemNames, int numPlanets,int numSystems,int systemRows, int systemCols, int uniRows, int uniCols,int quadrantXDimension,int quadrantYDimension,int minDistance){
 

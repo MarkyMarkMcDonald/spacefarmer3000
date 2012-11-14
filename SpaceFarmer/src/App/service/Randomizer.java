@@ -20,7 +20,8 @@ public class Randomizer {
 
 	/**
 	 * Generates a random element from the enum class given.
-	 * @param enumClass Enumerated class to generate from
+	 * @param enumClass Enumerated class to generate from.
+	 * @return A random element from that class.
 	 */
 	public static Enum<?> randEnum(Class<? extends Enum<?>> enumClass)
 	{
@@ -214,6 +215,11 @@ public class Randomizer {
     	return returnDistribution;
     }
     
+    /**
+     * Gives a player a random event if a probability check succeeds.
+     * @param player Player potentially receiving the event.
+     * @param chance Chance the player will receive the event.
+     */
     public static void giveEvent(Player player,double chance)
     {
     	if (determineSuccess(chance))

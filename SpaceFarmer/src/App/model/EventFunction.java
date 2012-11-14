@@ -23,7 +23,7 @@ public interface EventFunction {
 	public static final EventFunction  loseFunction=new LoseEvent();
 	public static final EventFunction winFunction=new WinEvent();
 	
-	/*
+	/**
 	 * Class corresponding to an event where a players loses
 	 * an item.
 	 */
@@ -45,7 +45,7 @@ public interface EventFunction {
 		}
 	}
 	
-	/*
+	/**
 	 * Class corresponding to an event where 
 	 * a player finds an item.
 	 */
