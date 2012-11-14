@@ -3,6 +3,7 @@ package App.listener;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,6 +17,7 @@ public class FileChooserListener implements ActionListener{
 
     private JFileChooser fileChooser;
     private JTextField textField;
+    private File dbFile;
 
     public FileChooserListener(JFileChooser fileChooser, JTextField textField) {
         this.fileChooser = fileChooser;
@@ -27,7 +29,11 @@ public class FileChooserListener implements ActionListener{
         int option = fileChooser.showSaveDialog(null);
         if (option == JFileChooser.APPROVE_OPTION){
             textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
+            dbFile = fileChooser.getSelectedFile();
         }
+    }
 
+    public File getDbFile() {
+        return dbFile;
     }
 }

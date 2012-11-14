@@ -29,8 +29,8 @@ public class SaveAndLoad extends Screen {
         fileChooser.setFileFilter(fileNameExtensionFilter);
 
         FileChooserListener fileChooserListener = new FileChooserListener(fileChooser, filePath);
-        LoaderListener loaderListener = new LoaderListener(filePath);
-        SaverListener saverListener = new SaverListener(filePath);
+        LoaderListener loaderListener = new LoaderListener(filePath,fileChooserListener);
+        SaverListener saverListener = new SaverListener(filePath, fileChooserListener);
 
         JButton choose = new JButton("Choose File");
         choose.addActionListener(fileChooserListener);

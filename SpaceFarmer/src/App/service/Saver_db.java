@@ -24,14 +24,12 @@ import java.util.Map;
 *
 **/
 public class Saver_db {
-	String saveName;
-	String saveLocation;
 	Collection<Player> players;
 	Collection <Planet> planets;
 	Settings gameSettings;
 	Game game;
-	//name of the database
-	private static String DB_NAME = "db.sqlite";
+	//db file
+    File dbFile;
 	//table names
     private static final String TABLE_PLAYERS = "Players";
     private static final String TABLE_INVENTORY = "Inventory";
@@ -90,18 +88,16 @@ public class Saver_db {
 
 	/**
 	 * Constructer for the saver
-	 * @param loc the array of save locations
-	 * @param people a collection of players in the game
-	 * @param universe a collection of planets in the game
-	 * @param settings the settings for the game.
-	 */
-	 public Saver_db(String name,String loc, Collection <Player>people, Collection <Planet>universe, Settings settings, Game game){
-		saveName=name;
-		saveLocation=loc;
-		players= people;
+     * @param dbFile
+     * @param people a collection of players in the game
+     * @param universe a collection of planets in the game
+     * @param settings the settings for the game.
+     */
+	 public Saver_db(File dbFile, Collection<Player> people, Collection<Planet> universe, Settings settings, Game game){
+		this.dbFile = dbFile;
+        players= people;
 		planets=universe;
 		gameSettings=settings;
-		DB_NAME=name+".sqlite";
 		this.game=game;
 	}
 	 /**
@@ -110,7 +106,6 @@ public class Saver_db {
 	  * @throws SqlJetException
 	  */
 	public void SaveGame()throws SqlJetException {
-		File dbFile = new File(DB_NAME);
 	    dbFile.delete();
 
 	    // create database

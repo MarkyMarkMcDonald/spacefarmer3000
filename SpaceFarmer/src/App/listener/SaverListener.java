@@ -20,13 +20,16 @@ public class SaverListener implements ActionListener{
 
     private JTextField jTextField;
 
-    public SaverListener(JTextField jTextField) {
+    private FileChooserListener fileChooserListener;
+
+    public SaverListener(JTextField jTextField, FileChooserListener fileChooserListener) {
         this.jTextField = jTextField;
+        this.fileChooserListener = fileChooserListener;
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        Saver_db saver = new Saver_db(jTextField.getText(), jTextField.getText(), Game.getPlayers(), UniverseFactory.getPlanets().values(),new Settings(), new Game());
+        Saver_db saver = new Saver_db(fileChooserListener.getDbFile(), Game.getPlayers(), UniverseFactory.getPlanets().values(),new Settings(), new Game());
         try {
             saver.SaveGame();
         } catch (Exception e){

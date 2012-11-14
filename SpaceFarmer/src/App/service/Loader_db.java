@@ -1,22 +1,11 @@
 package App.service;
 
+import App.model.*;
 import App.model.Player.Player;
 import App.model.Player.SkillType;
-import App.model.Event;
-import App.model.MarketPlace;
-import App.model.Settings;
-import App.model.Ship;
-import App.model.ShipModel;
 import App.model.TradeGoods.BasicGood;
-import App.model.TradeGoods.Tradable;
-import App.model.TradeGoods.TradeGood;
 import App.model.TradeGoods.TradeGoodType;
-import App.model.Universe.Planet;
-import App.model.Universe.PlanetarySystem;
-import App.model.Universe.PoliticalSystem;
-import App.model.Universe.ResourceType;
-import App.model.Universe.TechnologyLevel;
-
+import App.model.Universe.*;
 import org.tmatesoft.sqljet.core.SqlJetException;
 import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
 import org.tmatesoft.sqljet.core.table.ISqlJetCursor;
@@ -41,8 +30,6 @@ public class Loader_db {
 	Settings gameSettings;
 	
 	//name of the database
-	private static String DB_NAME = "db.sqlite";
-	private File dbFile = new File(DB_NAME);
 	private SqlJetDb db;
 
 	//table names
@@ -99,9 +86,7 @@ public class Loader_db {
     Map<String,Planet> Planets;
     Collection<Player> players;
 	
-	public void LoadGame(String fName,Map<String,PlanetarySystem> PS,Map<String,Planet> Planets,Collection<Player> players)throws SqlJetException{
-		DB_NAME=fName+".sqlite";
-		dbFile = new File(DB_NAME);
+	public void LoadGame(File dbFile, Map<String, PlanetarySystem> PS, Map<String, Planet> Planets, Collection<Player> players)throws SqlJetException{
 	    db = SqlJetDb.open(dbFile, true);
         db.beginTransaction(SqlJetTransactionMode.READ_ONLY);
         //make the systems

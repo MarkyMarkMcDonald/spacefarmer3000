@@ -19,15 +19,18 @@ public class LoaderListener implements ActionListener {
 
     private JTextField filePath;
 
-    public LoaderListener(JTextField filePath) {
+    private FileChooserListener fileChooserListener;
+
+    public LoaderListener(JTextField filePath, FileChooserListener fileChooserListener) {
         this.filePath = filePath;
+        this.fileChooserListener = fileChooserListener;
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Loader_db loader = new Loader_db();
         try {
-            loader.LoadGame(filePath.getText(), UniverseFactory.getPlanetarySystems(),UniverseFactory.getPlanets(),Game.getPlayers());
+            loader.LoadGame(fileChooserListener.getDbFile(), UniverseFactory.getPlanetarySystems(),UniverseFactory.getPlanets(),Game.getPlayers());
         } catch (Exception e){
             e.printStackTrace();
         }
