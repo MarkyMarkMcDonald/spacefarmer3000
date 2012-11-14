@@ -96,7 +96,7 @@ public class Loader_db {
         db.beginTransaction(SqlJetTransactionMode.READ_ONLY);
 		LoadPlayers(db.getTable(TABLE_PLAYERS));
 		LoadPlanets(db.getTable(TABLE_PLANETS));
-		//LoadInventory(db.getTable(TABLE_INVENTORY));
+		LoadInventory(db.getTable(TABLE_INVENTORY));
 		LoadSettings(db.getTable(TABLE_SETTINGS));
 	}
 /**
@@ -157,21 +157,21 @@ private Collection<Player> LoadPlayers(ISqlJetTable tbl )throws SqlJetException{
 	}
 	
 private void LoadInventory(ISqlJetTable tbl)throws SqlJetException{
-		ISqlJetCursor cursor=tbl.open();
+		/*ISqlJetCursor cursor=tbl.open();
 		 try {
 	            if (!cursor.eof()) {
-	                do {/*
+	                do {
 	                	System.out.println("this is a test");
 	                    System.out.println(cursor.getRowId()	+ " " + 
 	                            cursor.getString()	+ " " + 
 	                            cursor.getString()	+ " " + 
 	                            cursor.getString()	+ " " + 
 	                            cursor.getString()	+ " "
-	                            );*/
+	                            );
 	                } while(cursor.next());
 	            }
 	        } 
-		 finally {cursor.close();}
+		 finally {cursor.close();}*/
 	}
 	
 private Collection<Planet> LoadPlanets(ISqlJetTable tbl)throws SqlJetException{
@@ -246,7 +246,7 @@ private Settings LoadSettings(ISqlJetTable tbl)throws SqlJetException{
 		return null;
 	}
 	
-	private Collection<PlanetarySystem> makeSystems(){
+private Collection<PlanetarySystem> makeSystems(){
 		ArrayList<PlanetarySystem> PS = null;
 		PlanetarySystem tempPS;
 		Planet tempPlanet = null;
@@ -260,7 +260,8 @@ private Settings LoadSettings(ISqlJetTable tbl)throws SqlJetException{
 		return null;
 		
 	}
-	private ArrayList<MarketPlace> LoadMarkets(ISqlJetTable tbl)throws SqlJetException{
+	
+private ArrayList<MarketPlace> LoadMarkets(ISqlJetTable tbl)throws SqlJetException{
 		MarketPlace tempM = null;
 		Tradable tempTrade;
 		ArrayList Ret = null;

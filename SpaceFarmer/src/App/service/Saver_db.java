@@ -39,6 +39,8 @@ public class Saver_db {
     private static final String TABLE_INVENTORY = "Inventory";
     private static final String TABLE_PLANETS = "Planets";
     private static final String TABLE_SETTINGS = "Game";
+    private static final String TABLE_PLANSYS = "PlanetarySys";
+
 
     //player colls
     private static final String FIELD_NAME = "Name";
@@ -71,35 +73,20 @@ public class Saver_db {
     private static final String FIELD_CURRTURN = "Current_Turn";
     private static final String FIELD_CURRPLAYER = "Current_player";
     private static final String FIELD_DIFF = "Difficulty";
-    private static final String FIELD_XDIM = "X_dimension";
-    private static final String FIELD_YDIM = "y_diminsion";
+
     
     //added fields
     private static final String FIELD_SYS = "system";
     private static final String FIELD_FULE = "fule";
     private static final String FIELD_EVENT = "event";
+    private static final String TNN = " TEXT NOT NULL , ";
+
     
     private static final String TABLE_MARKETS = "Market";
-    private static final String FIELD_ITEM1 = "Item1";
-    private static final String FIELD_ITEM2 = "Item2";
-    private static final String FIELD_ITEM3 = "Item3";
-    private static final String FIELD_ITEM4 = "Item4";
-    private static final String FIELD_ITEM5 = "Item5";
-    private static final String FIELD_ITEM6 = "Item6";
-    private static final String FIELD_ITEM7 = "Item7";
-    private static final String FIELD_ITEM8 = "Item8";
-    private static final String FIELD_ITEM9 = "Item9";
-    private static final String FIELD_ITEM10 = "Item10";
-    private static final String FIELD_Q1 = "Quantity1";
-    private static final String FIELD_Q2 = "Quantity2";
-    private static final String FIELD_Q3 = "Quantity3";
-    private static final String FIELD_Q4 = "Quantity4";
-    private static final String FIELD_Q5 = "Quantity5";
-    private static final String FIELD_Q6 = "Quantity6";
-    private static final String FIELD_Q7 = "Quantity7";
-    private static final String FIELD_Q8 = "Quantity8";
-    private static final String FIELD_Q9 = "Quantity9";
-    private static final String FIELD_Q10 = "Quantity10";
+    private static final String FIELD_ITEM = "Item";
+
+    private static final String FIELD_Q = "Quantity";
+   
 
 
 
@@ -124,7 +111,7 @@ public class Saver_db {
 	  * 
 	  * @throws SqlJetException
 	  */
-	private void SaveGame()throws SqlJetException {
+	public void SaveGame()throws SqlJetException {
 		File dbFile = new File(DB_NAME);
 	    dbFile.delete();
 
@@ -143,6 +130,8 @@ public class Saver_db {
 		this.SaveInventory(db);
 		this.SavePlanets(db);
 		this.SaveSetting(db);
+		this.SaveMarkets(db);
+		this.SaveSystems(db);
     	db.close();
 	}
 	/**
@@ -153,7 +142,7 @@ public class Saver_db {
 	private void SavePlayers(SqlJetDb db)throws SqlJetException {
 		 Player[] temp=(Player[]) players.toArray();
 		String createTableQuery = "CREATE TABLE " + TABLE_PLAYERS + " " +
-		 		"(" + FIELD_NAME + " TEXT NOT NULL , " + FIELD_MONEY +" TEXT NOT NULL , "+FIELD_FULE+" TEXT NOT NULL , "+ FIELD_CURRPLANET + " TEXT NOT NULL , " + FIELD_SHIP + " TEXT NOT NULL , " + FIELD_PILOTING + " TEXT NOT NULL , "+ FIELD_TRADING + " TEXT NOT NULL , "+ FIELD_ENGINEERING + " TEXT NOT NULL , "+ FIELD_FIGHTING + " TEXT NOT NULL)";
+		 		"(" + FIELD_NAME + TNN + FIELD_MONEY +TNN+FIELD_FULE+TNN+ FIELD_CURRPLANET + TNN + FIELD_SHIP + TNN + FIELD_PILOTING + TNN+ FIELD_TRADING + TNN+ FIELD_ENGINEERING + TNN+ FIELD_FIGHTING + " TEXT NOT NULL)";
 		 //makes the table
 		 try {db.createTable(createTableQuery);}
 		 	finally {db.commit();}
@@ -198,7 +187,7 @@ public class Saver_db {
 	private void SavePlanets(SqlJetDb db)throws SqlJetException {
 		 Planet[] temp=(Planet[]) planets.toArray();
 		String createTableQuery = "CREATE TABLE " + TABLE_PLANETS + " " +
-		 		"(" + FIELD_PLANET + " TEXT NOT NULL PRIMARY KEY, "+FIELD_SYS +"TEXT NOT NULL, "+ FIELD_TECH + " TEXT NOT NULL , " + FIELD_POLSYS + " TEXT NOT NULL , " + FIELD_RESOURCE + " TEXT NOT NULL , "+ FIELD_X + " TEXT NOT NULL , "+ FIELD_Y + " TEXT NOT NULL, "+ FIELD_EVENT+" TEXT NOT NULL)";
+		 		"(" + FIELD_PLANET + " TEXT NOT NULL PRIMARY KEY, "+FIELD_SYS +TNN+ FIELD_TECH + TNN + FIELD_POLSYS + TNN + FIELD_RESOURCE + TNN+ FIELD_X + TNN+ FIELD_Y + TNN+ FIELD_EVENT+" TEXT NOT NULL)";
 		//makes the table
 		try {db.createTable(createTableQuery);}
 			finally {db.commit();}
@@ -220,8 +209,9 @@ public class Saver_db {
 	 * @throws SqlJetException
 	 */
 	private void SaveSetting(SqlJetDb db)throws SqlJetException {
+		/*
 		String createTableQuery = "CREATE TABLE " + TABLE_SETTINGS + " " +
-		 		"(" + FIELD_DIFF + " TEXT NOT NULL , " + FIELD_CURRTURN + " TEXT NOT NULL , " + FIELD_CURRPLAYER + " TEXT NOT NULL )";
+		 		"(" + FIELD_DIFF + TNN + FIELD_CURRTURN + TNN + FIELD_CURRPLAYER + " TEXT NOT NULL )";
 		//makes the table
 		try {db.createTable(createTableQuery);}
 			finally {db.commit();}
@@ -236,6 +226,7 @@ public class Saver_db {
 
 		    }
 		 	finally {db.commit();}
+		 	*/
 	}
 	
 	private void SaveMarkets(SqlJetDb db)throws SqlJetException {
@@ -243,17 +234,7 @@ public class Saver_db {
 		Map<Tradable,Integer> tempM;
 		Tradable[] tempTradeArray;
 		String createTableQuery = "CREATE TABLE " + TABLE_MARKETS + " " +
-		 		"(" + FIELD_PLANET + " TEXT NOT NULL PRIMARY KEY, " +
-		 		FIELD_ITEM1 + " TEXT NOT NULL , " + FIELD_Q1 + " TEXT NOT NULL,"+
-		 		FIELD_ITEM2 + " TEXT NOT NULL , " + FIELD_Q2 + " TEXT NOT NULL,"+
-		 		FIELD_ITEM3 + " TEXT NOT NULL , " + FIELD_Q3 + " TEXT NOT NULL,"+
-		 		FIELD_ITEM4 + " TEXT NOT NULL , " + FIELD_Q4 + " TEXT NOT NULL,"+
-		 		FIELD_ITEM5 + " TEXT NOT NULL , " + FIELD_Q5 + " TEXT NOT NULL,"+
-		 		FIELD_ITEM6 + " TEXT NOT NULL , " + FIELD_Q6 + " TEXT NOT NULL,"+
-		 		FIELD_ITEM7 + " TEXT NOT NULL , " + FIELD_Q7 + " TEXT NOT NULL,"+
-		 		FIELD_ITEM8 + " TEXT NOT NULL , " + FIELD_Q8 + " TEXT NOT NULL,"+
-		 		FIELD_ITEM9 + " TEXT NOT NULL , " + FIELD_Q9 + " TEXT NOT NULL,"+
-		 		FIELD_ITEM10 + " TEXT NOT NULL , " + FIELD_Q10 + " TEXT NOT NULL)";
+		 		"("+FIELD_ITEM + TNN + FIELD_Q + TNN+ FIELD_PLANET + " TEXT NOT NULL)";
 		
 		//makes the table
 		try {db.createTable(createTableQuery);}
@@ -261,7 +242,7 @@ public class Saver_db {
 		 //fill in the Database
 		 try
 		    {
-		    	ISqlJetTable table = db.getTable(TABLE_SETTINGS);
+		    	ISqlJetTable table = db.getTable(TABLE_MARKETS);
 		    	//Test entry
 
 		    	//table.insert("ZOOL",1,2);
@@ -269,21 +250,35 @@ public class Saver_db {
 		    	{
 		    		tempM=tempP[i].getMarket().getQuantityMap();
 	    			tempTradeArray=(Tradable[]) tempM.keySet().toArray();
+	    			for(int j=0;j<tempTradeArray.length;j++)
+	    			{
+				    	table.insert(tempTradeArray[j],tempM.get(tempTradeArray[j]),tempP[i].getName());
 
-			    	table.insert(tempP[i].getName(),
-			    			tempTradeArray[0].getName(),tempM.get(tempTradeArray[0]),
-			    			tempTradeArray[1].getName(),tempM.get(tempTradeArray[1]),
-			    			tempTradeArray[2].getName(),tempM.get(tempTradeArray[2]),
-			    			tempTradeArray[3].getName(),tempM.get(tempTradeArray[3]),
-			    			tempTradeArray[4].getName(),tempM.get(tempTradeArray[4]),
-			    			tempTradeArray[5].getName(),tempM.get(tempTradeArray[5]),
-			    			tempTradeArray[6].getName(),tempM.get(tempTradeArray[6]),
-			    			tempTradeArray[7].getName(),tempM.get(tempTradeArray[7]),
-			    			tempTradeArray[8].getName(),tempM.get(tempTradeArray[8]),
-			    			tempTradeArray[9].getName(),tempM.get(tempTradeArray[9]));
+	    			}
 		    	}
 
 		    }
 		 	finally {db.commit();}
+	}
+
+	private void SaveSystems(SqlJetDb db)throws SqlJetException {
+		Planet[] tempPlan=(Planet[]) planets.toArray();
+		String createTableQuery = "CREATE TABLE " + TABLE_PLANSYS + " " +
+		 		"("+FIELD_SYS + TNN +FIELD_X+ TNN+FIELD_Y+TNN+FIELD_PLANET + " TEXT NOT NULL)";
+		
+		//makes the table
+		try {db.createTable(createTableQuery);}
+			finally {db.commit();}
+		 //fill in the Database
+		 try
+		    {
+		    	ISqlJetTable table = db.getTable(TABLE_PLANSYS);
+			 for(int i=0;i<tempPlan.length;i++)
+			 {
+				 table.insert(tempPlan[i].getPlanetarySystem().getName(),tempPlan[i].getPlanetarySystem().getX(),tempPlan[i].getPlanetarySystem().getY(),tempPlan[i].getName());
+			 }
+		    }
+		 	finally {db.commit();}
+		
 	}
 }
