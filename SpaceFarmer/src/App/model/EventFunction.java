@@ -8,7 +8,7 @@ import App.service.Randomizer;
 
 import java.util.Set;
 
-/*
+/**
  * This interface requires a method that
  * takes in a Player. The methods acts as
  * a random event and alters the player.
