@@ -7,7 +7,10 @@ import App.model.MarketPlace;
 import App.model.Settings;
 import App.model.Ship;
 import App.model.ShipModel;
+import App.model.TradeGoods.BasicGood;
 import App.model.TradeGoods.Tradable;
+import App.model.TradeGoods.TradeGood;
+import App.model.TradeGoods.TradeGoodType;
 import App.model.Universe.Planet;
 import App.model.Universe.PlanetarySystem;
 import App.model.Universe.PoliticalSystem;
@@ -34,8 +37,7 @@ public class Loader_db {
 	private String saveName;
 	private String saveLocation;
 	
-	ArrayList <Player> players;
-	ArrayList <Planet> planets;
+	
 	Settings gameSettings;
 	
 	//name of the database
@@ -88,20 +90,29 @@ public class Loader_db {
     private static final String FIELD_SYS = "system";
     private static final String FIELD_FULE = "fule";
     private static final String FIELD_EVENT = "event";
+    
+    private static final String TABLE_MARKETS = "Market";
+    private static final String FIELD_ITEM = "Item";
+    private static final String FIELD_Q = "Quantity";
 
     Map<String,PlanetarySystem> PS;
+    Map<String,Planet> Planets;
+    Collection<Player> players;
 	
 	public void LoadGame(String fName)throws SqlJetException{
 		DB_NAME=fName+".sqlite";
 		dbFile = new File(DB_NAME);
 	    db = SqlJetDb.open(dbFile, true);
         db.beginTransaction(SqlJetTransactionMode.READ_ONLY);
+        //make the systems
 		PS=loadSystems(db.getTable(TABLE_PLANSYS));
-		LoadPlanets(db.getTable(TABLE_PLANETS));
-
-		LoadPlayers(db.getTable(TABLE_PLAYERS));
-		LoadInventory(db.getTable(TABLE_INVENTORY));
-		LoadSettings(db.getTable(TABLE_SETTINGS));
+		//make the planets
+		Planets=LoadPlanets(db.getTable(TABLE_PLANETS));
+		//make the players
+		players=LoadPlayers(db.getTable(TABLE_PLAYERS));
+		
+		//LoadInventory(db.getTable(TABLE_INVENTORY));
+		//LoadSettings(db.getTable(TABLE_SETTINGS));
 	}
 /**
  * CREATES A COLLECTION OF PLAYERS AND RETURNS THEM	
@@ -178,9 +189,9 @@ private void LoadInventory(ISqlJetTable tbl)throws SqlJetException{
 		 finally {cursor.close();}*/
 	}
 	
-private Collection<Planet> LoadPlanets(ISqlJetTable tbl)throws SqlJetException{
+private Map<String,Planet> LoadPlanets(ISqlJetTable tbl)throws SqlJetException{
 		ISqlJetCursor cursor=tbl.open();
-		Collection<Planet> Ret=null;
+		Map<String,Planet> Ret=null;
 		Planet tempPlanet = null;
 		TechnologyLevel tempTech=null;
 		PlanetarySystem tempSys=null;
@@ -218,7 +229,7 @@ private Collection<Planet> LoadPlanets(ISqlJetTable tbl)throws SqlJetException{
 
 
 	     
-	                	Ret.add(tempPlanet);
+	                	Ret.put(tempPlanet.getName(),tempPlanet);
 	                	/*
 	                	System.out.println("this is a test");
 	                    System.out.println(cursor.getRowId()	+ " " + 
@@ -279,28 +290,24 @@ private Map<String,PlanetarySystem>loadSystems(ISqlJetTable tbl)throws SqlJetExc
 		
 	}
 	
-private ArrayList<MarketPlace> LoadMarkets(ISqlJetTable tbl)throws SqlJetException{
+private void LoadMarkets(ISqlJetTable tbl)throws SqlJetException{
 		MarketPlace tempM = null;
-		Tradable tempTrade;
+		BasicGood tempTrade;
+		TradeGoodType tempType = null;
 		ArrayList Ret = null;
 		ISqlJetCursor cursor=tbl.open();
 		 try {
 	            if (!cursor.eof()) {
 	                do {
-	                	//tempTrade=tempTrade;
-	                	//tempM.setQuantity(cursor.getString(FIELD_ITEM1), cursor.getString(FIELD_Q1));
-	                	
-	                	/*               
-	                            cursor.getString()
-	                            );*/
+	                	tempType=tempType.valueOf(cursor.getString(FIELD_ITEM));
+	                	tempTrade=new BasicGood(tempType,tempType);
+	                	Planets.get(cursor.getString(FIELD_PLANET)).setMarket(tempM);
+	                	Planets.get(cursor.getString(FIELD_PLANET)).getMarket().changeQuantity(tempTrade, Integer.parseInt(cursor.getString(FIELD_Q)));
 	                	Ret.add(tempM);
 	                } while(cursor.next());
 	            }
 	        } 
 		 finally {cursor.close();}
-		
-		return Ret;
-		
 	}
 
 	
