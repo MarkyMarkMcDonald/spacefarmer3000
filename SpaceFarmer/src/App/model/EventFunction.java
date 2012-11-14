@@ -9,7 +9,7 @@ import App.service.Randomizer;
 import java.util.Set;
 
 /*
- * This interface required a method that
+ * This interface requires a method that
  * takes in a Player. The methods acts as
  * a random event and alters the player.
  */
@@ -31,6 +31,8 @@ public interface EventFunction {
 	{
 		public void function(Player player)
 		{
+			if (player.getInventory().getSpaceUsed() == 0)
+				return;
 			int loseAmount=CHANGE_MIN+Randomizer.nextInt(CHANGE_MAX-CHANGE_MIN+1);
 			Set<Tradable> goodsSet=player.getInventory().getTradablesHeld();
 			Tradable[] goods=goodsSet.toArray(new Tradable[0]);
@@ -55,8 +57,7 @@ public interface EventFunction {
 			int addAmount=CHANGE_MIN+Randomizer.nextInt(CHANGE_MAX-CHANGE_MIN+1);
 			TradeGoodType type=(TradeGoodType) Randomizer.randEnum(TradeGoodType.class);
 			Enum<?>[] subNames=type.getSubNames();
-			Class<? extends Enum<?>> enumType=(Class<? extends Enum<?>>) subNames[0].getClass();
-			BasicGood good=new BasicGood(type, (Enum<?>) Randomizer.randEnum(enumType));
+			BasicGood good=new BasicGood(type, (Enum<?>) Randomizer.randElement(subNames));
 			Ship ship=player.getShip();
 			int cargoSize=ship.getCargoSize();
 			if (player.getInventory().getSpaceUsed()+addAmount>cargoSize)
