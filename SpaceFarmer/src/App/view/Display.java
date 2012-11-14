@@ -72,14 +72,14 @@ public class Display extends JFrame {
          */
 
         JPanel BottomPanel = new PlayersInformationSidePanel(null);
-        BottomPanel.setBackground(Color.MAGENTA);
+        BottomPanel.setBackground(Color.GRAY);
 
         /**
          * Left Panel
          */
 
         JPanel LeftPanel = new NavigationSidePanel();
-        LeftPanel.setBackground(Color.CYAN);
+        LeftPanel.setBackground(new Color(205,201,205));
 
         Component horizontalStrut = Box.createHorizontalStrut(100);
         LeftPanel.add(horizontalStrut);
@@ -89,7 +89,7 @@ public class Display extends JFrame {
          */
 
         TravelSidePanel RightPanel = new TravelSidePanel();
-        RightPanel.setBackground(Color.PINK);
+        RightPanel.setBackground(new Color(205,201,205));
 
         /**
          * Center Panel
@@ -155,6 +155,11 @@ public class Display extends JFrame {
     public static void setMessage(String message, MessageType messageType){
         MessageSidePanel sidePanel = (MessageSidePanel) getSidePanel("Top");
         sidePanel.setMessage(message, messageType);
+    }
+
+    public static void addToMessage(String addendum){
+        MessageSidePanel sidePanel = (MessageSidePanel) getSidePanel("Top");
+        sidePanel.addToMessage(addendum);
     }
 
     public static void hideMessage(){

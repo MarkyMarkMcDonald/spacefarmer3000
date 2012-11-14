@@ -1,11 +1,14 @@
 package App.view.SidePanels;
 
+import App.listener.ContinueListener;
 import App.model.Game;
 import App.model.Player.Player;
+import App.view.CardName;
 import App.view.PlayerInformationSidePanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.List;
 
 /**
@@ -20,6 +23,17 @@ public class PlayersInformationSidePanel extends JPanel{
     private JPanel items;
 
     public PlayersInformationSidePanel(List<Player> players){
+        JButton dbButton = new JButton("Save and Load");
+        ContinueListener saveAndLoadListener = new ContinueListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardToMoveTo = CardName.SAVING_AND_LOADING_CARD;
+                progressDisplay();
+            }
+        };
+        dbButton.addActionListener(saveAndLoadListener);
+        add(dbButton);
+
         items = new JPanel();
         items.setLayout(new FlowLayout(FlowLayout.LEFT,20,5));
         if (players != null) {

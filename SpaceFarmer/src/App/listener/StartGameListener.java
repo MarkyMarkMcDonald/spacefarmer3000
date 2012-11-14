@@ -9,7 +9,6 @@ import App.view.Display;
 import App.view.StartOfTurnScreen;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ import java.util.List;
  * Date: 10/13/12
  * Time: 6:48 PM
  */
-public class StartGameListener extends ContinueListener implements ActionListener {
+public class StartGameListener extends ContinueListener {
 
     public StartGameListener(){
         cardToMoveTo = CardName.START_OF_TURN_CARD;

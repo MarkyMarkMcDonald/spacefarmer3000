@@ -22,6 +22,11 @@ public class MessageSidePanel extends SidePanel{
         this.setVisible(false);
     }
 
+    public void addToMessage(String addenum){
+        baseMessage += addenum;
+        message.setText(baseMessage);
+    }
+
     /**
      * Changes the message. If this is the same message as last time, it will display a count of how many times
      * it's been displayed in a row

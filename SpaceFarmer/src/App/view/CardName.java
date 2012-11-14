@@ -49,6 +49,11 @@ public enum CardName {
         public Screen getScreen(){
             return  new IntersystemTravelScreen();
         }
+    },
+    SAVING_AND_LOADING_CARD("SavingAndLoadingCard"){
+        public Screen getScreen(){
+            return new SaveAndLoad();
+        }
     };
 
     private final String name;

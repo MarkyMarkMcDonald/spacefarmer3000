@@ -1,13 +1,12 @@
 package App.service;
 
 
+import App.model.Game;
 import App.model.Player.Player;
+import App.model.Player.SkillType;
+import App.model.Settings;
 import App.model.TradeGoods.Tradable;
 import App.model.Universe.Planet;
-import App.model.Settings;
-import App.model.Player.SkillType;
-import App.model.Game;
-
 import org.tmatesoft.sqljet.core.SqlJetException;
 import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
 import org.tmatesoft.sqljet.core.table.ISqlJetTable;
@@ -16,7 +15,6 @@ import org.tmatesoft.sqljet.core.table.SqlJetDb;
 import java.io.File;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
 /**
 * hold the information for the
@@ -97,7 +95,7 @@ public class Saver_db {
 	 * @param universe a collection of planets in the game
 	 * @param settings the settings for the game.
 	 */
-	 Saver_db(String name,String loc, Collection <Player>people, Collection <Planet>universe, Settings settings, Game game){
+	 public Saver_db(String name,String loc, Collection <Player>people, Collection <Planet>universe, Settings settings, Game game){
 		saveName=name;
 		saveLocation=loc;
 		players= people;
