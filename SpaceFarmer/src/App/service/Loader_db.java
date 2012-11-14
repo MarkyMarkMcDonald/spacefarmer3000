@@ -48,6 +48,8 @@ public class Loader_db {
     private static final String TABLE_INVENTORY = "Inventory";
     private static final String TABLE_PLANETS = "Planets";
     private static final String TABLE_SETTINGS = "Game";
+    private static final String TABLE_PLANSYS = "PlanetarySys";
+
     //player colls
     //private static final String FIELD_INDEX = "NUMBER";
     private static final String FIELD_NAME = "Name";
@@ -87,15 +89,17 @@ public class Loader_db {
     private static final String FIELD_FULE = "fule";
     private static final String FIELD_EVENT = "event";
 
-	
+    Map<String,PlanetarySystem> PS;
 	
 	public void LoadGame(String fName)throws SqlJetException{
 		DB_NAME=fName+".sqlite";
 		dbFile = new File(DB_NAME);
 	    db = SqlJetDb.open(dbFile, true);
         db.beginTransaction(SqlJetTransactionMode.READ_ONLY);
-		LoadPlayers(db.getTable(TABLE_PLAYERS));
+		PS=loadSystems(db.getTable(TABLE_PLANSYS));
 		LoadPlanets(db.getTable(TABLE_PLANETS));
+
+		LoadPlayers(db.getTable(TABLE_PLAYERS));
 		LoadInventory(db.getTable(TABLE_INVENTORY));
 		LoadSettings(db.getTable(TABLE_SETTINGS));
 	}
@@ -198,14 +202,20 @@ private Collection<Planet> LoadPlanets(ISqlJetTable tbl)throws SqlJetException{
 	                	//resource type
 	                	tempRes=tempRes.valueOf(cursor.getString(FIELD_RESOURCE));
 	                	tempPlanet.setResourceType(tempRes);
-	                	//Planetary system
+	                	//Political system
 	                	tempPol=tempPol.valueOf(cursor.getString(FIELD_POLSYS));
 	                	tempPlanet.setPoliticalSystem(tempPol);
+	                	//Planetary system
+	                	tempSys=PS.get(cursor.getString(FIELD_SYS));
+	                	tempPlanet.setPlanetarySystem(tempSys);
 	                	//market
 	                	//tempPlanet.setMarket(market)
 	                	//event
 	                	tempE=tempE.valueOf(cursor.getString(FIELD_EVENT));
 	                	tempPlanet.setEvent(tempE);
+	                	
+	                	PS.get(cursor.getString(FIELD_SYS)).getPlanets().put(tempPlanet.getName(), tempPlanet);
+
 
 	     
 	                	Ret.add(tempPlanet);
@@ -246,18 +256,26 @@ private Settings LoadSettings(ISqlJetTable tbl)throws SqlJetException{
 		return null;
 	}
 	
-private Collection<PlanetarySystem> makeSystems(){
-		ArrayList<PlanetarySystem> PS = null;
-		PlanetarySystem tempPS;
-		Planet tempPlanet = null;
-		/*
-		while(planets.isEmpty()!=true)
-			tempPlanet=planets.remove(0);
-			for(int i=0;i<PS.size();i++)
-				if (PS.get(i).getName().equals(tempPlanet.getPlanetarySystem().getName()))
-			*/		
-				
-		return null;
+private Map<String,PlanetarySystem>loadSystems(ISqlJetTable tbl)throws SqlJetException{
+		Map<String,PlanetarySystem> PSMap = null;
+		PlanetarySystem tempPS = null;
+		ISqlJetCursor cursor=tbl.open();
+		//Makes a map of systeems
+		try {
+	            if (!cursor.eof()) {
+	                do {
+	                	if(PSMap.containsKey(cursor.getString(FIELD_SYS))!=true)
+	                	{
+	                		tempPS.setName(cursor.getString(FIELD_SYS));	          
+	                		tempPS.setX(Integer.parseInt(cursor.getString(FIELD_X)));
+	                		tempPS.setY(Integer.parseInt(cursor.getString(FIELD_Y)));
+	                		PSMap.put(tempPS.getName(), tempPS);
+	                	}
+	                } while(cursor.next());
+	            }
+	        } 
+		 finally {cursor.close();}
+		return PSMap;
 		
 	}
 	
