@@ -184,7 +184,8 @@ public class Display extends JFrame {
 	}
 
 	public static void updatePlayersInfo() {
-		PlayersInformationSidePanel playersInformationSidePanel = (PlayersInformationSidePanel) getSidePanel("Bot");
+		PlayersInformationSidePanel playersInformationSidePanel = 
+				(PlayersInformationSidePanel) getSidePanel("Bot");
 		playersInformationSidePanel.updateBasedOnAllPlayers();
 	}
 

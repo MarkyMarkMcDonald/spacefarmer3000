@@ -116,8 +116,8 @@ public class UniverseFactory {
 		int planetDistribution[] = Randomizer.distributeNumber(numSystems,
 				numPlanets);
 		List<Integer[]> planetPositions;
-		Map<Integer, List<Integer[]>> systemDimensions = new HashMap<Integer, List<Integer[]>>(
-				numSystems);
+		Map<Integer, List<Integer[]>> systemDimensions = 
+				new HashMap<Integer, List<Integer[]>>(numSystems);
 		for (int i = 0; i < uniRows * uniCols; i++) {
 			// Give unique X and Y coordinates for each system in a quadrant
 			// that are at least minDistance apart.

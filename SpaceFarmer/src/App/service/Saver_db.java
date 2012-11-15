@@ -179,11 +179,16 @@ public class Saver_db {
 			ISqlJetTable table = db.getTable(TABLE_PLAYERS);
 			// Test entry
 			table.insert("ZOOL", 9999, "Earth", "BFS", 1, 2, 3, 4);
-//			for (Player player : players) {
-				// table.insert(temp[i].getName(),temp[i].getMoney(),temp[i].getFuel(),temp[i].getCurrentPlanet().getName(),temp[i].getShip().getType().toString(),
-				// temp[i].getSkillLevels().containsKey(SkillType.PILOTING),temp[i].getSkillLevels().containsKey(SkillType.ENGINEERING),temp[i].getSkillLevels().containsKey(SkillType.FIGHTING),temp[i].getSkillLevels().containsKey(SkillType.TRADING));
-				//
-//			}
+			// for (Player player : players) {
+			// table.insert(temp[i].getName(),temp[i].getMoney(),temp[i].getFuel(),
+			// temp[i].getCurrentPlanet().getName(),temp[i].getShip().getType().
+			// toString(),
+			// temp[i].getSkillLevels().containsKey(SkillType.PILOTING),temp[i].get
+			// SkillLevels().containsKey(SkillType.ENGINEERING),temp[i].getSkillLevel
+			// s().containsKey(SkillType.FIGHTING),temp[i].getSkillLevels().containsK
+			// ey(SkillType.TRADING));
+			//
+			// }
 		} finally {
 			db.commit();
 		}

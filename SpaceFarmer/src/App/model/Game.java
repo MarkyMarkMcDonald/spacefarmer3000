@@ -24,8 +24,8 @@ public class Game {
 	private static Player CurrentPlayer;
 
 	public Game() {
-		NumberOfTurns = 1;
-		Players = new ArrayList<Player>();
+		setNumberOfTurns(1);
+		setPlayers(new ArrayList<Player>());
 	}
 
 	// --Accessors and Modifiers
@@ -52,12 +52,12 @@ public class Game {
 	public void endTurn() {
 		int playerIndex = Players.indexOf(CurrentPlayer) + 1;
 		if (playerIndex >= Players.size()) {
-			CurrentPlayer = Players.get(0);
+			setCurrentPlayer(Players.get(0));
 			for (int planetIndex = 0; planetIndex < Planets.size(); planetIndex++) {
 				Planets.get(planetIndex).determineEvent();
 			}
 		} else {
-			CurrentPlayer = Players.get(playerIndex);
+			setCurrentPlayer(Players.get(playerIndex));
 		}
 	}
 

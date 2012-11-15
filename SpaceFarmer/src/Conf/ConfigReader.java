@@ -25,7 +25,8 @@ public class ConfigReader {
 
 		// Wrap file creation in a try-catch block to prevent uncaught IO exception
 		try {
-	        URL location = ConfigReader.class.getProtectionDomain().getCodeSource().getLocation();
+	        URL location = 
+	        	ConfigReader.class.getProtectionDomain().getCodeSource().getLocation();
 
             sc = new Scanner(new File(location.getPath() + "Conf/" + confFile));
 		} catch(FileNotFoundException e) {

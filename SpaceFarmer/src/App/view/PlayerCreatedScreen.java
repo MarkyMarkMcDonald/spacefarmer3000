@@ -37,7 +37,8 @@ public class PlayerCreatedScreen extends Screen {
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				PlayerInformationScreen playerInformationScreen = (PlayerInformationScreen) Display
+				PlayerInformationScreen playerInformationScreen = 
+						(PlayerInformationScreen) Display
 						.getCard(CardName.PLAYER_INFORMATION_CARD.toString());
 				playerInformationScreen.resetInputs();
 				Display.changeCard(CardName.PLAYER_INFORMATION_CARD);

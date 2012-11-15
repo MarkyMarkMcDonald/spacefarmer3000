@@ -50,7 +50,8 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 		g.fillRect(0, 0, getWidth(), getHeight());
 
 		// Draw the planetary systems
-		ArrayList[][] systemList = new ArrayList[GameVariables.UniverseRows][GameVariables.UniverseColumns];
+		ArrayList[][] systemList = 
+				new ArrayList[GameVariables.UniverseRows][GameVariables.UniverseColumns];
 		PlanetLocations = new HashMap<Point, Planet>();
 		for (int i = 0; i < GameVariables.UniverseRows; ++i) {
 			for (int j = 0; j < GameVariables.UniverseColumns; ++j) {
@@ -70,8 +71,10 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 					// Get dimensions of the system to draw
 					PlanetarySystem ps = (PlanetarySystem) systemList[i][j]
 							.get(0);
-					int sysX = (int) ((0.5 + j) * getWidth() / GameVariables.UniverseColumns);
-					int sysY = (int) ((0.5 + i) * getHeight() / GameVariables.UniverseRows);
+					int sysX = (int) ((0.5 + j) * getWidth() / 
+							GameVariables.UniverseColumns);
+					int sysY = (int) ((0.5 + i) * getHeight() / 
+							GameVariables.UniverseRows);
 					int sysD = (int) (0.75 * Math.min(getWidth()
 							/ GameVariables.UniverseColumns, getHeight()
 							/ GameVariables.UniverseRows));
@@ -117,7 +120,8 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 				} else {
 
 					// Locate the center of this quadrant
-					int qX = (int) ((0.5 + j) * getWidth() / GameVariables.UniverseColumns);
+					int qX = (int) ((0.5 + j) * getWidth() / 
+							GameVariables.UniverseColumns);
 					int qY = (int) ((0.5 + i) * getHeight() / GameVariables.UniverseRows);
 					int qD = (int) (0.7 * Math.min(getWidth()
 							/ GameVariables.UniverseColumns, getHeight()

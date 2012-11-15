@@ -57,8 +57,8 @@ public class StartOfTurnScreen extends Screen {
 				// player's planet
 				Player currentPlayerPlayer = Game.getCurrentPlayer();
 				Planet currentPlanet = currentPlayerPlayer.getCurrentPlanet();
-				PlanetInformationScreen planetInformationScreen = (PlanetInformationScreen) Display
-						.getCard(cardToMoveTo.toString());
+				PlanetInformationScreen planetInformationScreen = 
+					(PlanetInformationScreen) Display.getCard(cardToMoveTo.toString());
 				planetInformationScreen.update(currentPlanet);
 
 				progressDisplay();
@@ -67,8 +67,8 @@ public class StartOfTurnScreen extends Screen {
 				JPanel navPanel = Display.getSidePanel("Left");
 				navPanel.setVisible(true);
 
-				PlayersInformationSidePanel playersInfoPanel = (PlayersInformationSidePanel) Display
-						.getSidePanel("Bot");
+				PlayersInformationSidePanel playersInfoPanel = 
+						(PlayersInformationSidePanel) Display.getSidePanel("Bot");
 				playersInfoPanel.updateBasedOnAllPlayers();
 				playersInfoPanel.setVisible(true);
 			}

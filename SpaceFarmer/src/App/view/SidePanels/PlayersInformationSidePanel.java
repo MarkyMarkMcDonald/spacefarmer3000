@@ -35,7 +35,8 @@ public class PlayersInformationSidePanel extends JPanel {
 		items.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 5));
 		if (players != null) {
 			for (Player player : players) {
-				PlayerInformationSidePanel playerInformationSidePanel = new PlayerInformationSidePanel(
+				PlayerInformationSidePanel playerInformationSidePanel = 
+						new PlayerInformationSidePanel(
 						player);
 				items.add(playerInformationSidePanel);
 			}
@@ -47,8 +48,8 @@ public class PlayersInformationSidePanel extends JPanel {
 		items.removeAll();
 		List<Player> players = Game.getPlayers();
 		for (Player player : players) {
-			PlayerInformationSidePanel playerInformationSidePanel = new PlayerInformationSidePanel(
-					player);
+			PlayerInformationSidePanel playerInformationSidePanel = 
+					new PlayerInformationSidePanel(player);
 			items.add(playerInformationSidePanel);
 		}
 	}
