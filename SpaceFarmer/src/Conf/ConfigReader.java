@@ -1,4 +1,4 @@
-package Conf;
+package conf;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,7 +28,7 @@ public class ConfigReader {
 	        URL location = 
 	        	ConfigReader.class.getProtectionDomain().getCodeSource().getLocation();
 
-            sc = new Scanner(new File(location.getPath() + "Conf/" + confFile));
+            sc = new Scanner(new File(location.getPath() + "conf/" + confFile));
 		} catch(FileNotFoundException e) {
 		    System.out.println("File not found!");
 		    return null;
@@ -57,7 +57,7 @@ public class ConfigReader {
         try {
             URL location = 
             	ConfigReader.class.getProtectionDomain().getCodeSource().getLocation();
-            scanner = new Scanner(new File(location.getPath() + "Conf/" + confFile));
+            scanner = new Scanner(new File(location.getPath() + "conf/" + confFile));
         } catch (FileNotFoundException e){
             System.out.println("File not found!");
             return null;

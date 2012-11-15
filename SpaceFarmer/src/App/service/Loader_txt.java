@@ -1,4 +1,4 @@
-package App.service;
+package app.service;
 
 /**
  * Andrew: What does this class do? Andrew: There doesn't appear to be a point

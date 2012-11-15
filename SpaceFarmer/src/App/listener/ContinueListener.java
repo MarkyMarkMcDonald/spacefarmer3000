@@ -1,7 +1,7 @@
-package App.listener;
+package app.listener;
 
-import App.view.CardName;
-import App.view.Display;
+import app.view.CardName;
+import app.view.Display;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

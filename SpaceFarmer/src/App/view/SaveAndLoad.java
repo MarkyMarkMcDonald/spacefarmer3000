@@ -1,8 +1,8 @@
-package App.view;
+package app.view;
 
-import App.listener.FileChooserListener;
-import App.listener.LoaderListener;
-import App.listener.SaverListener;
+import app.listener.FileChooserListener;
+import app.listener.LoaderListener;
+import app.listener.SaverListener;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
