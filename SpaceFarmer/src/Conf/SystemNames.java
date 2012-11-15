@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SystemNames {
+	
     public static final String[] systemNames =new String[] {
     	"Milky Way Galaxy", 	
     	"Andromeda", 
@@ -20,7 +21,8 @@ public class SystemNames {
     	"Sunflower Galaxy", 
     	"Tadpole Galaxy",
     	"Whirlpool Galaxy"};
-    public static List<String> getSystemNamesAsList(){
+    
+    public static List<String> getSystemNamesAsList() {
         return Arrays.asList(SystemNames.systemNames);
     }
 }

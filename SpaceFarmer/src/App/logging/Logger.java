@@ -37,17 +37,17 @@ public class Logger {
         int playerCounter = 0;
         for (Player player : players){
             playerCounter++;
-            System.out.println("\n");
+            System.out.println('\n');
             System.out.println("Player " + playerCounter + ":");
             printPlayerInfo(player);
-            System.out.print("\n");
+            System.out.print('\n');
         }
 
         System.out.println("Current Player: " + Game.getCurrentPlayer().getName());
-        System.out.print("\n");
+        System.out.print('\n');
         System.out.println("## Planets ##");
         System.out.print("Number of Planets: " + planets.size());
-        System.out.print("\n");
+        System.out.print('\n');
         for (Object planet : planets){
            printPlanetInfo((Planet) planet);
         }

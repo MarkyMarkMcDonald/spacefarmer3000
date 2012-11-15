@@ -17,15 +17,15 @@ import java.awt.event.ActionListener;
  * To change this template use File | Settings | File Templates.
  */
 public class ToggleBuyingAndSellingListener implements ActionListener {
-    JButton toggleButton;
+    private JButton toggleButton;
     
-    BuyingPanel buyingPanel;
+    private BuyingPanel buyingPanel;
     
-    SellingPanel sellingPanel;
+    private SellingPanel sellingPanel;
     
-    MarketPlace marketPlace;
+    private MarketPlace marketPlace;
     
-    Inventory inventory;
+    private Inventory inventory;
 
     public ToggleBuyingAndSellingListener(JButton toggleButton, BuyingPanel buyingPanel, SellingPanel sellingPanel, MarketPlace marketPlace, Inventory inventory) {
         this.toggleButton = toggleButton;

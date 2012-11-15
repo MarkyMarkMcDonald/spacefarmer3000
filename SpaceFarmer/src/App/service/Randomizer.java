@@ -28,7 +28,7 @@ public class Randomizer {
 		int length=enums.length;
 		return enums[rand.nextInt(length)];
 	}
-	
+
 	/**
 	 * Returns an array of unique integers.
 	 * @param lowerBound lowest value possible.
@@ -46,9 +46,9 @@ public class Randomizer {
 		int randInt=lowerBound+rand.nextInt(upperBound-lowerBound);
 		int index=1;
 		while (index<numberOfInts) {
-			if (returnInts.contains(randInt))
+			if (returnInts.contains(randInt)) {
 				randInt=lowerBound+rand.nextInt(upperBound-lowerBound);
-			else {
+			} else {
 				index++;
 				returnInts.add(randInt);
 				randInt=lowerBound+rand.nextInt(upperBound-lowerBound);
@@ -56,7 +56,7 @@ public class Randomizer {
 		}
 		return returnInts.toArray(new Integer[0]);
 	}
-	
+
 	/**
 	 * Gives a random number of unique elements from an array.
 	 */
@@ -68,11 +68,11 @@ public class Randomizer {
 		}
 		return returnObjects;
 	}
-	
+
 	public static Object randElement(Object[] objects) {
 		return objects[rand.nextInt(objects.length)];
 	}
-	
+
 	/**
 	 * Generates a number of randomly assigned Integer[2] arrays
 	 * Ensures every array is unique
@@ -82,30 +82,30 @@ public class Randomizer {
 	 */
 	public static List<Integer[]> generateDimensions(int number, int xDim, int yDim) {
 		List<Integer[]> dimensionList=new ArrayList<Integer[]>();
-        boolean isUniqueDimension;
+		boolean isUniqueDimension;
 
-        for (int i=0;i<number;i++) {
-            Integer[] dimension=new Integer[2];
-            dimension[0]=rand.nextInt(xDim);
-            dimension[1]=rand.nextInt(yDim);
+		for (int i=0;i<number;i++) {
+			Integer[] dimension=new Integer[2];
+			dimension[0]=rand.nextInt(xDim);
+			dimension[1]=rand.nextInt(yDim);
 
-            // We don't know if the dimension is unique, so treat as might not be unique
-            isUniqueDimension = false;
+			// We don't know if the dimension is unique, so treat as might not be unique
+			isUniqueDimension = false;
 
 			while(!isUniqueDimension) {
-                if (!isUniqueDimension(dimensionList, dimension)){
-                    dimension[0]=rand.nextInt(xDim);
-                    dimension[1]=rand.nextInt(yDim);
-                }
-                isUniqueDimension = isUniqueDimension(dimensionList,dimension);
+				if (!isUniqueDimension(dimensionList, dimension)){
+					dimension[0]=rand.nextInt(xDim);
+					dimension[1]=rand.nextInt(yDim);
+				}
+				isUniqueDimension = isUniqueDimension(dimensionList,dimension);
 
 			}
 			dimensionList.add(dimension);
 		}
 		return dimensionList;
 	}
-	
-public static List<Integer[]> generateDimensionsRange(int number, int xDim, int yDim, int range) {
+
+	public static List<Integer[]> generateDimensionsRange(int number, int xDim, int yDim, int range) {
 		List<Integer[]> dimensionList=new ArrayList<Integer[]>();
 		Integer[] point=new Integer[2];
 		point[0]=rand.nextInt(xDim);
@@ -138,24 +138,26 @@ public static List<Integer[]> generateDimensionsRange(int number, int xDim, int 
 	 * @param dimension An integer array to determine if it's unique.
 	 * @return True if this array of integers being checked is unique.
 	 */
-    public static boolean isUniqueDimension(List<Integer[]> dimensionList, Integer[] dimension){
-        for (int i = 0; i < dimensionList.size(); i++){
-            if (dimensionList.get(i)[0].equals(dimension[0]) && dimensionList.get(i)[1].equals(dimension[1])){
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    /**
-     * Serves as the upper bound in determining a valid probabilistic outcome.
-     * @param probability The upper bound for the allowed probability.
-     * @return true if a randomly-generated number falls within the probability bounds.
-     */
-    public static boolean determineSuccess(double probability) {
-    	return rand.nextDouble() <= probability;
-    }
-	
+	public static boolean isUniqueDimension(List<Integer[]> dimensionList,
+			Integer[] dimension){
+		for (int i = 0; i < dimensionList.size(); i++){
+			if (dimensionList.get(i)[0].equals(dimension[0]) && 
+					dimensionList.get(i)[1].equals(dimension[1])){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Serves as the upper bound in determining a valid probabilistic outcome.
+	 * @param probability The upper bound for the allowed probability.
+	 * @return true if a randomly-generated number falls within the probability bounds.
+	 */
+	public static boolean determineSuccess(double probability) {
+		return rand.nextDouble() <= probability;
+	}
+
 	/**
 	 * Serves only to mimic Random.nextInt() when necessary
 	 * @param upperBound Generated value is 0 to this number-1
@@ -164,44 +166,44 @@ public static List<Integer[]> generateDimensionsRange(int number, int xDim, int 
 		return rand.nextInt(upperBound);
 	}
 
-    public static Planet getRandomPlanet(){
-        Collection<Planet> planetCollection = UniverseFactory.getPlanets().values();
-        List<Planet> planets = new ArrayList<Planet>(planetCollection);
-        int numberOfPlanets = UniverseFactory.getNumberOfPlanets();
-        int chosenPlanetNumber = Randomizer.nextInt(numberOfPlanets);
-        return planets.get(chosenPlanetNumber);
-    }
-    
-    /**
-     * Distributes a number into parts as an array as evenly as possible
-     * while randomizing any leftover parts.
-     * Ex: distributeNumber(5,32) may yield {6,6,7,6,7}
-     * @param numSlots The number of parts to divide the number into.
-     * @param number The number being divided.
-     * @return An int array with numSlots indices, each containing a subdivision of the number.
-     */
-    public static int[] distributeNumber(int numSlots, int number) {
-    	int[] returnDistribution=new int[numSlots];
-    	int minimum=number/numSlots;
-    	Integer[] augmentedIndices=uniqueRandomInts(0,numSlots,number%numSlots);
-    	for (int i=0;i<numSlots;i++) {
-    		returnDistribution[i]=minimum;
-    	}
-    	for (int i=0;i<number%numSlots;i++) {
-    		returnDistribution[augmentedIndices[i]]++;
-    	}
-    	return returnDistribution;
-    }
-    
-    /**
-     * Gives a player a random event if a probability check succeeds.
-     * @param player Player potentially receiving the event.
-     * @param chance Chance the player will receive the event.
-     */
-    public static void giveEvent(Player player,double chance) {
-    	if (determineSuccess(chance)) {
-    	    RandomEvent event= (RandomEvent) randEnum(RandomEvent.class);	
-    	    event.giveEvent(player);
-    	}
-    }
+	public static Planet getRandomPlanet(){
+		Collection<Planet> planetCollection = UniverseFactory.getPlanets().values();
+		List<Planet> planets = new ArrayList<Planet>(planetCollection);
+		int numberOfPlanets = UniverseFactory.getNumberOfPlanets();
+		int chosenPlanetNumber = Randomizer.nextInt(numberOfPlanets);
+		return planets.get(chosenPlanetNumber);
+	}
+
+	/**
+	 * Distributes a number into parts as an array as evenly as possible
+	 * while randomizing any leftover parts.
+	 * Ex: distributeNumber(5,32) may yield {6,6,7,6,7}
+	 * @param numSlots The number of parts to divide the number into.
+	 * @param number The number being divided.
+	 * @return An int array with numSlots indices, each containing a subdivision of the number.
+	 */
+	public static int[] distributeNumber(int numSlots, int number) {
+		int[] returnDistribution=new int[numSlots];
+		int minimum=number/numSlots;
+		Integer[] augmentedIndices=uniqueRandomInts(0,numSlots,number%numSlots);
+		for (int i=0;i<numSlots;i++) {
+			returnDistribution[i]=minimum;
+		}
+		for (int i=0;i<number%numSlots;i++) {
+			returnDistribution[augmentedIndices[i]]++;
+		}
+		return returnDistribution;
+	}
+
+	/**
+	 * Gives a player a random event if a probability check succeeds.
+	 * @param player Player potentially receiving the event.
+	 * @param chance Chance the player will receive the event.
+	 */
+	public static void giveEvent(Player player,double chance) {
+		if (determineSuccess(chance)) {
+			RandomEvent event= (RandomEvent) randEnum(RandomEvent.class);	
+			event.giveEvent(player);
+		}
+	}
 }

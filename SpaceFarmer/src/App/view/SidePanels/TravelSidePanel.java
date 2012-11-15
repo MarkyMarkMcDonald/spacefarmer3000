@@ -16,8 +16,11 @@ import java.awt.*;
  * To change this template use File | Settings | File Templates.
  */
 public class TravelSidePanel extends SidePanel {
+	
     private PlanetInfoLabel planetInfoLabel;
+    
     private JButton travelButton;
+    
     private TransportationListener transportationListener;
 
     public TravelSidePanel(){

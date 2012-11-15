@@ -12,6 +12,10 @@ public class BasicGood extends TradeGood implements Tradable {
     }
     
     public boolean equals(Object object){
-        return super.equals(object);
+    	if(object instanceof BasicGood) {
+    		return super.equals(object);
+    	} else {
+    		return false;
+    	}
     }
 }

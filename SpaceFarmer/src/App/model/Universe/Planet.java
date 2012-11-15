@@ -119,9 +119,10 @@ public class Planet {
 	}
 
 	public void determineEvent() {
-		if (Randomizer.determineSuccess(eventProbability))
+		if (Randomizer.determineSuccess(eventProbability)) {
 			event=(Event) Randomizer.randEnum(Event.class);
-		else
+		} else {
 			event=Event.NO_EVENT;
+		}
 	}
 }

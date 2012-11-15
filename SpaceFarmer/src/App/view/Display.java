@@ -32,6 +32,7 @@ public class Display extends JFrame {
     private static Game game;
 
     private static MiniGameScreen MiniGameView;
+    
     // We need this to be able to update cards instead of creating new ones every time
     private static Map<String, Screen> cardMap;
     

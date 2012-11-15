@@ -14,17 +14,17 @@ import java.util.Collection;
  * @author Mykal Thomas, Mark McDonald
  */
 public class Saver_txt {
-	String saveLocations[];
+	private String saveLocations[];
 	
-	FileWriter fWriter;
+	private FileWriter fWriter;
 	
-	BufferedWriter writer;
+	private BufferedWriter writer;
 	
-	Collection <Player> players;
+	private Collection <Player> players;
 	
-	Collection <Planet> planets;
+	private Collection <Planet> planets;
 	
-	Settings gameSettings;
+	private Settings gameSettings;
 	
 	/**
 	 * Constructer for the saver
@@ -33,7 +33,7 @@ public class Saver_txt {
 	 * @param universe a collection of planets in the game
 	 * @param settings the settings for the game.
 	 */
-	Saver_txt(String loctaions[], Collection <Player>people, Collection <Planet>universe, Settings settings){
+	public Saver_txt(String loctaions[], Collection <Player>people, Collection <Planet>universe, Settings settings){
 		saveLocations= loctaions;
 		players= people;
 		fWriter = null;

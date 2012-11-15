@@ -20,6 +20,7 @@ public class PlanetInfoLabel extends JLabel {
         JButton testBut = new JButton("Testing");
         add(testBut);
     }
+    
     public PlanetInfoLabel(Planet planet){
         this();
         updateBasedOnPlanet(planet);

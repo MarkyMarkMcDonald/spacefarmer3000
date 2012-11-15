@@ -16,15 +16,15 @@ import java.util.Set;
  */
 public class Inventory {
 
-    private Map<Tradable, Integer> inventory;
+    private Map<Tradable, Integer> theInventory;
 
     public Inventory(){
-        inventory = new HashMap<Tradable, Integer>();
+        theInventory = new HashMap<Tradable, Integer>();
     }
 
     public int getSpaceUsed(){
         int sum = 0;
-        Collection<Integer> quantities = inventory.values();
+        Collection<Integer> quantities = theInventory.values();
         for (Integer quantity : quantities){
             sum+= quantity;
         }
@@ -32,31 +32,31 @@ public class Inventory {
     }
 
     public void addItem(Tradable item, int quantity){
-        if (!inventory.containsKey(item)){
-            inventory.put(item,quantity);
+        if (!theInventory.containsKey(item)){
+            theInventory.put(item,quantity);
         }
         else {
-            Integer currentQuantity = inventory.get(item);
-            inventory.put(item,currentQuantity + quantity);
+            Integer currentQuantity = theInventory.get(item);
+            theInventory.put(item,currentQuantity + quantity);
         }
-        if (inventory.get(item) == 0) {
-        	inventory.remove(item);
+        if (theInventory.get(item) == 0) {
+        	theInventory.remove(item);
         }
     }
 
     public int getQuantity(Tradable item){
-        if (inventory.containsKey(item)){
-            return inventory.get(item);
+        if (theInventory.containsKey(item)){
+            return theInventory.get(item);
         }
         else return 0;
     }
 
     public Set<Map.Entry<Tradable,Integer>> getInventoryEntries(){
-        return inventory.entrySet();
+        return theInventory.entrySet();
     }
 
     public Set<Tradable> getTradablesHeld(){
-        return inventory.keySet();
+        return theInventory.keySet();
     }
 
 

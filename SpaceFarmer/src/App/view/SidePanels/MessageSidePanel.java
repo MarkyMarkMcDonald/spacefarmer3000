@@ -11,8 +11,11 @@ import java.awt.*;
  * To change this template use File | Settings | File Templates.
  */
 public class MessageSidePanel extends SidePanel{
+	
     private JLabel message;
+    
     private String baseMessage;
+    
     private int count;
 
     public MessageSidePanel(){

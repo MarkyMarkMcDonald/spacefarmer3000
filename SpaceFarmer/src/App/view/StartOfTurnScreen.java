@@ -18,10 +18,13 @@ import java.awt.event.ActionEvent;
  * To change this template use File | Settings | File Templates.
  */
 public class StartOfTurnScreen extends Screen{
+	
     private JLabel turnInfo;
+    
     private JLabel title;
 
     private final String[] turnInfoStaticText = new String[] {"Turn "," of Round "};
+    
     private final String[] titleStaticText = new String[] {"It is now ","'s turn."};
 
     public StartOfTurnScreen(){
@@ -67,7 +70,6 @@ public class StartOfTurnScreen extends Screen{
                 playersInfoPanel.updateBasedOnAllPlayers();
                 playersInfoPanel.setVisible(true);
             }
-
 
         };
         start.addActionListener(continueListener);

@@ -71,7 +71,7 @@ public class ShipFactory {
                     ship.setMaxFuel((int) (GameVariables.largestFuelTank * 1.5));
                     break;
             }
-            ships.put(ship.getType(),ship);
+            ships.put(ship.getType(), ship);
             return ship;
         }
         else {

@@ -27,7 +27,7 @@ public class CardFactory {
         else {
             //need to create a screen here
             Screen screen = cardName.getScreen();
-            cards.put(cardName,screen);
+            cards.put(cardName, screen);
             return screen;
         }
 

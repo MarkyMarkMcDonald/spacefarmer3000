@@ -16,11 +16,17 @@ public class PlayerInformationScreen extends Screen {
 	 * Prevents "serializable" warning
 	 */
 	private static final long serialVersionUID = -3313579360751444648L;
+	
     private JTextField enteredPlayerName;
+    
     private JFormattedTextField enteredPilotSkill;
+    
     private JFormattedTextField enteredFighterSkill;
+    
     private JFormattedTextField enteredTraderSkill;
+    
     private JFormattedTextField enteredEngineerSkill;
+    
     private JLabel ErrorLabel;
 
     /**
@@ -40,7 +46,6 @@ public class PlayerInformationScreen extends Screen {
 
         JLabel lblPlayerName = new JLabel("Player Name");
         playerName.add(lblPlayerName);
-
 
         enteredPlayerName = new JTextField();
         playerName.add(enteredPlayerName);

@@ -8,8 +8,6 @@ package App.model.TradeGoods;
  * To change this template use File | Settings | File Templates.
  */
 public interface Tradable {
-
-    public boolean equals(Tradable tradable);
     
     public int getBasePrice();
 

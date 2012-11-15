@@ -45,31 +45,35 @@ public class UniverseFactory {
      * @param quadrantYDimension Height of a quadrant
      * @param minDistance The minimum distance two systems must be from each other..
      */
-    public static void createUniverse(List<String> planetNames,List<String> planetarySystemNames, int numPlanets,int numSystems,int systemRows, int systemCols, int uniRows, int uniCols,int quadrantXDimension,int quadrantYDimension,int minDistance){
+    public static void createUniverse(List<String> planetNames, 
+    		List<String> planetarySystemNames, int numPlanets, int numSystems, 
+    		int systemRows, int systemCols, int uniRows, int uniCols, 
+    		int quadrantXDimension, int quadrantYDimension, int minDistance) {
 
         planets = new HashMap<String, Planet>();
-        systems= new HashMap<String,PlanetarySystem>();
+        systems= new HashMap<String, PlanetarySystem>();
         Map<String,Planet> systemPlanets;
         
         Planet planet;
         PlanetarySystem system;
 
-        int planetNameIndex,systemNameIndex;
-        String planetName,systemName;
+        int planetNameIndex, systemNameIndex;
+        String planetName, systemName;
         List<String> planetNamesHolder = new ArrayList<String>(planetNames);
         List<String> systemNamesHolder = new ArrayList<String>(planetarySystemNames);
 
         // systemDistribution and planetDistribution put the planets and systems in
         // "boxes" which are evenly distributed as possible. The systems are
         // distributed into quadrants and planets are distributed into systems.
-        //See Randomizer.distributeNumber for more details.
-        //For example, if systemDistribution is {2,2,3}, then 3 total systems have planet counts
+        // See Randomizer.distributeNumber for more details.
+        // For example, if systemDistribution is {2,2,3}, then 3 total systems have planet
+        // counts
         // 2,2, and 3 respectively.
-        int systemDistribution[]=Randomizer.distributeNumber(uniRows*uniCols,numSystems);
+        int systemDistribution[]=Randomizer.distributeNumber(uniRows*uniCols, numSystems);
         int planetDistribution[]=Randomizer.distributeNumber(numSystems, numPlanets);
         List<Integer[]> planetPositions;
-        Map<Integer,List<Integer[]>> systemDimensions=new HashMap<Integer,List<Integer[]>>(numSystems);
-        for (int i=0;i<uniRows*uniCols;i++) {
+        Map<Integer,List<Integer[]>> systemDimensions = new HashMap<Integer, List<Integer[]>>(numSystems);
+        for (int i=0; i<uniRows*uniCols; i++) {
         	//Give unique X and Y coordinates for each system in a quadrant that are at least minDistance apart.
         	//See Randomizer.generateDimensionsRange for more details.
         	systemDimensions.put(i,Randomizer.generateDimensionsRange(systemDistribution[i],quadrantXDimension,quadrantYDimension, minDistance));

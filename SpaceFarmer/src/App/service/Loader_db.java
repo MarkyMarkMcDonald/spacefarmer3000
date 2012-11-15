@@ -27,7 +27,7 @@ public class Loader_db {
 	
 	private String saveLocation;
 	
-	Settings gameSettings;
+	private Settings gameSettings;
 	
 	//name of the database
 	private SqlJetDb db;
@@ -83,6 +83,7 @@ public class Loader_db {
     private static final String FIELD_X = "X";
     
     private static final String FIELD_Y = "Y";
+    
     //Game
     private static final String FIELD_CURRTURN = "Current_Turn";
     
@@ -93,6 +94,7 @@ public class Loader_db {
     private static final String FIELD_XDIM = "X_dimension";
     
     private static final String FIELD_YDIM = "y_diminsion";
+    
   //added fields
     private static final String FIELD_SYS = "system";
     
@@ -106,9 +108,11 @@ public class Loader_db {
     
     private static final String FIELD_Q = "Quantity";
 
-    Map<String,PlanetarySystem> PS;
-    Map<String,Planet> Planets;
-    Collection<Player> players;
+    private Map<String,PlanetarySystem> PS;
+    
+    private Map<String,Planet> Planets;
+    
+    private Collection<Player> players;
 	
 	public void LoadGame(File dbFile, Map<String, PlanetarySystem> PS, Map<String, Planet> Planets, Collection<Player> players)throws SqlJetException{
 	    db = SqlJetDb.open(dbFile, true);
@@ -122,11 +126,10 @@ public class Loader_db {
 		//markets
 		LoadMarkets(db.getTable(TABLE_MARKETS));
 		
-		
-		
 		//LoadInventory(db.getTable(TABLE_INVENTORY));
 		//LoadSettings(db.getTable(TABLE_SETTINGS));
 	}
+	
 /**
  * CREATES A COLLECTION OF PLAYERS AND RETURNS THEM	
  * @param tbl
@@ -242,8 +245,6 @@ private Map<String,Planet> LoadPlanets(ISqlJetTable tbl)throws SqlJetException{
 	                	
 	                	PS.get(cursor.getString(FIELD_SYS)).getPlanets().put(tempPlanet.getName(), tempPlanet);
 
-
-	     
 	                	Ret.put(tempPlanet.getName(),tempPlanet);
 	                	/*
 	                	System.out.println("this is a test");

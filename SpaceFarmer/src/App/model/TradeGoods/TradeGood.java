@@ -11,17 +11,17 @@ abstract public class TradeGood {
     protected TradeGoodType tradeGoodType;
     
     protected Enum<?> tradeGoodSubName;
-
-    public boolean equals(Tradable tradable){
-        return tradable.getName().equals(name);
-    }
     
     public int hashCode() {
     	return name.hashCode();
     }
     
-    public boolean equals (Object object) {
-    	return equals( (Tradable) object);
+    public boolean equals(Object object) {
+    	if(object instanceof Tradable) {
+    		return ((Tradable) object).getName().equals(name);
+    	} else {
+    		return false;
+    	}
     }
 
     public TradeGood(TradeGoodType tradeGoodType, Enum<?> tradeGoodSubName){

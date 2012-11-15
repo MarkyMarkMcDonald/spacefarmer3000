@@ -13,7 +13,7 @@ public enum Water {
 
     private String name;
 
-    String getName(){
+    public String getName(){
         return name;
     }
 

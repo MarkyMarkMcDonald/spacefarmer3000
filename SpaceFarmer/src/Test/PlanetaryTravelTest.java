@@ -21,13 +21,19 @@ import static org.junit.Assert.assertTrue;
  */
 public class PlanetaryTravelTest {
 
-    Player player1;
-    Player player2;
-    PlanetarySystem system1;
-    PlanetarySystem system2;
-    Planet planet1;
-    Planet planet2;
-    Planet planet3;
+	private Player player1;
+	
+	private Player player2;
+	
+	private PlanetarySystem system1;
+	
+	private PlanetarySystem system2;
+	
+	private Planet planet1;
+	
+	private Planet planet2;
+	
+	private Planet planet3;
 
     @Before
     public void setup(){
@@ -49,14 +55,13 @@ public class PlanetaryTravelTest {
 
     }
 
-    public void TravelInSystem(){
+    public void TravelInSystem() {
         TransportationService.goToPlanet(planet1);
         assertTrue(player1.getCurrentPlanet().equals(planet1));
     }
 
-    public void TravelOutOfSystem(){
+    public void TravelOutOfSystem() {
         TransportationService.goToPlanet(planet2);
         assertTrue(player1.getCurrentPlanet().equals(planet2));
     }
-
 }

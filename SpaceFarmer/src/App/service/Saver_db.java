@@ -23,15 +23,17 @@ import java.util.Map;
  *
  **/
 public class Saver_db {
-	Collection<Player> players;
+	private Collection<Player> players;
 	
-	Collection <Planet> planets;
+	private Collection <Planet> planets;
 	
-	Settings gameSettings;
+	private Settings gameSettings;
 	
-	Game game;
+	private Game game;
+	
 	//db file
-	File dbFile;
+	private File dbFile;
+	
 	//table names
 	private static final String TABLE_PLAYERS = "Players";
 	
@@ -82,13 +84,13 @@ public class Saver_db {
 	private static final String FIELD_X = "X";
 	
 	private static final String FIELD_Y = "Y";
+	
 	//Game
 	private static final String FIELD_CURRTURN = "Current_Turn";
 	
 	private static final String FIELD_CURRPLAYER = "Current_player";
 	
 	private static final String FIELD_DIFF = "Difficulty";
-
 
 	//added fields
 	private static final String FIELD_SYS = "system";
@@ -106,9 +108,6 @@ public class Saver_db {
 
 	private static final String FIELD_Q = "Quantity";
 
-
-
-
 	/**
 	 * Constructer for the saver
 	 * @param dbFile
@@ -123,6 +122,7 @@ public class Saver_db {
 		gameSettings=settings;
 		this.game=game;
 	}
+	
 	/**
 	 * saves all tables to the database by running the individual save table functions
 	 * 
@@ -154,6 +154,7 @@ public class Saver_db {
 		this.SaveSystems(db);
 		db.close();
 	}
+	
 	/**
 	 * saves the players to the players table in the database
 	 * @param db database
@@ -183,6 +184,7 @@ public class Saver_db {
 			db.commit();
 		}
 	}
+	
 	/**
 	 * saves the players inventories to the  database
 	 * @param db
@@ -205,6 +207,7 @@ public class Saver_db {
 		 	finally {db.commit();}
 		 */
 	}
+	
 	/**
 	 * saves the planets to the planets table
 	 * @param db
@@ -234,6 +237,7 @@ public class Saver_db {
 			db.commit();
 		}
 	}
+	
 	/**
 	 * saves the settings to the settings table
 	 * @param db

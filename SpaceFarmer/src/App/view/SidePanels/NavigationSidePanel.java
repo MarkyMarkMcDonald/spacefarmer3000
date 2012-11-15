@@ -22,7 +22,6 @@ public class NavigationSidePanel extends SidePanel {
     public NavigationSidePanel(){
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
-
         /**
          * Current Planet Info
          */
@@ -58,7 +57,6 @@ public class NavigationSidePanel extends SidePanel {
 
                 MarketScreen marketScreen = (MarketScreen) Display.getCard(CardName.MARKETPLACE_CARD.toString());
                 marketScreen.updateMarketPlace(Game.getCurrentMarketPlace());
-
 
                 // Hide the Planet Travel Pane
                 TravelSidePanel travelPanel = (TravelSidePanel) Display.getSidePanel("Right");
@@ -100,7 +98,6 @@ public class NavigationSidePanel extends SidePanel {
                     Display.setMessage("Click a Planet to Travel to!", MessageType.GOOD);
                 }
 
-
                 progressDisplay();
                 System.out.println();
             }
@@ -108,5 +105,4 @@ public class NavigationSidePanel extends SidePanel {
         btnTravel.addActionListener(travelListener);
         add(btnTravel);
     }
-
 }

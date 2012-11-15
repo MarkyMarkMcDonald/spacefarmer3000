@@ -16,7 +16,9 @@ import java.util.Map;
 public class SellingPanel extends JPanel {
 
     private JPanel items;
+    
     private JLabel errorMessage;
+    
     private BuyingPanel buyingPanel;
 
     /**
@@ -31,7 +33,6 @@ public class SellingPanel extends JPanel {
 
         items = new JPanel();
         add(items);
-
 	}
 
 	/**
@@ -42,7 +43,6 @@ public class SellingPanel extends JPanel {
     public void setMarketPlaceAndInventory(MarketPlace marketPlace, Inventory inventory){
         items.removeAll();
         items.setLayout(new BoxLayout(items,BoxLayout.Y_AXIS));
-
 
         for (Map.Entry<Tradable, Integer> item : inventory.getInventoryEntries()){
             JPanel rowPanel = new JPanel();
