@@ -15,10 +15,15 @@ import java.util.Collection;
  */
 public class Saver_txt {
 	String saveLocations[];
+	
 	FileWriter fWriter;
+	
 	BufferedWriter writer;
+	
 	Collection <Player> players;
+	
 	Collection <Planet> planets;
+	
 	Settings gameSettings;
 	
 	/**
@@ -51,8 +56,7 @@ public class Saver_txt {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}
-		for (Player player : players)
-		{
+		for (Player player : players) {
 			try {
 				writer.write("\n"+player.getName());
 				writer.write("\n"+player.getMoney());
@@ -88,8 +92,7 @@ public class Saver_txt {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}
-		for (Planet planet : planets)
-		{
+		for (Planet planet : planets) {
 			try {
 				writer.write("\n"+planet.getName());
 				writer.write("\n"+planet.getX()+","+planet.getY());

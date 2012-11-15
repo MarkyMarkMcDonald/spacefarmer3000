@@ -17,12 +17,14 @@ import java.util.Map;
  */
 public class MarketPlace {
 	private static final int MINIMUM_SUBGOODS=1;
+	
 	private static final int MAXIMUM_SUBGOODS=1;
+	
     private Map<Tradable,Integer> priceMap;
+    
 	private Map<Tradable,Integer> quantityMap;
 
-	public MarketPlace(Planet planet)
-	{
+	public MarketPlace(Planet planet) {
         priceMap = new HashMap<Tradable, Integer>();
         quantityMap = new HashMap<Tradable, Integer>();
         for (TradeGoodType tradeGoodType : TradeGoodType.values()){
@@ -44,16 +46,14 @@ public class MarketPlace {
 	/*
 	 * Sets a TradeGoodType to a given quantity.
 	 */
-	public void setQuantity(Tradable tradable, int quantity)
-	{
+	public void setQuantity(Tradable tradable, int quantity) {
 		quantityMap.put(tradable,quantity);
 	}
 	
 	/*
 	 * Alters the quantity of a TradeGoodType by a particular amount.
 	 */
-	public void changeQuantity(Tradable tradable, int amount)
-	{
+	public void changeQuantity(Tradable tradable, int amount) {
 		if (quantityMap.containsKey(tradable)){
             quantityMap.put(tradable, quantityMap.get(tradable)+amount);
         }
@@ -66,7 +66,7 @@ public class MarketPlace {
 	 * Varies each of the TradeGoodTypes prices based on the Planet
 	 * the MarketPlace is on.
 	 */
-	public void updatePrices(Planet planet){
+	public void updatePrices(Planet planet) {
 //	{
 //		for (Tradable t: priceMap.keySet().toArray(new Tradable[0]))
 //			priceMap.put(t, t.calculatePrice(planet));
@@ -74,7 +74,7 @@ public class MarketPlace {
 		//TODO: This! (this is bad practice btw, don't make these like this)
 	}
 
-    public Map<Tradable, Integer> getPriceMap(){
+    public Map<Tradable, Integer> getPriceMap() {
         return priceMap;
     }
 

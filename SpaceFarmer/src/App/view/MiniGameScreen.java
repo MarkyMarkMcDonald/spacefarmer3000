@@ -282,7 +282,9 @@ public class MiniGameScreen extends JPanel implements KeyListener, ActionListene
 	 * @param arg0 The instance of KeyEvent associated with this event call.
 	 */
 	@Override
-	public void keyTyped(KeyEvent arg0) {}
+	public void keyTyped(KeyEvent arg0) {
+		// stub
+	}
 
 	/**
 	 * This inner class is simply an association of doubles and a boolean that make

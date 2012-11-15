@@ -24,6 +24,7 @@ public class ViewPlanetListener extends ContinueListener {
         cardToMoveTo = CardName.PLANET_INFORMATION_CARD;
         this.planetChoices = planetChoices;
     }
+
     public void actionPerformed(ActionEvent e){
         PlanetInformationScreen planetInfoScreen = (PlanetInformationScreen) Display.getCard(cardToMoveTo.toString());
         String selectedPlanetName = (String) planetChoices.getSelectedItem();

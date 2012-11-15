@@ -24,8 +24,8 @@ import App.model.Settings;
 */
 public class Loader_db {
 	private String saveName;
-	private String saveLocation;
 	
+	private String saveLocation;
 	
 	Settings gameSettings;
 	
@@ -34,20 +34,31 @@ public class Loader_db {
 
 	//table names
     private static final String TABLE_PLAYERS = "Players";
+    
     private static final String TABLE_INVENTORY = "Inventory";
+    
     private static final String TABLE_PLANETS = "Planets";
+    
     private static final String TABLE_SETTINGS = "Game";
+    
     private static final String TABLE_PLANSYS = "PlanetarySys";
 
     //player colls
     //private static final String FIELD_INDEX = "NUMBER";
     private static final String FIELD_NAME = "Name";
+    
     private static final String FIELD_PILOTING = "Piloting";
+    
     private static final String FIELD_TRADING = "Trading";
+    
     private static final String FIELD_ENGINEERING = "Engineering";
+    
     private static final String FIELD_FIGHTING = "Fighting";
+    
     private static final String FIELD_MONEY = "Money";
+    
     private static final String FIELD_SHIP = "Ship";
+    
     private static final String FIELD_CURRPLANET = "Current_Planet";
 
     //Inventory colls
@@ -62,24 +73,37 @@ public class Loader_db {
 	*/
     //Planet colls
     private static final String FIELD_PLANET = "name";
+    
     private static final String FIELD_TECH = "Tech_LV";
+    
     private static final String FIELD_POLSYS = "Political_sys";
+    
     private static final String FIELD_RESOURCE = "Resource_Type";
+    
     private static final String FIELD_X = "X";
+    
     private static final String FIELD_Y = "Y";
     //Game
     private static final String FIELD_CURRTURN = "Current_Turn";
+    
     private static final String FIELD_CURRPLAYER = "Current_player";
+    
     private static final String FIELD_DIFF = "Difficulty";
+    
     private static final String FIELD_XDIM = "X_dimension";
+    
     private static final String FIELD_YDIM = "y_diminsion";
   //added fields
     private static final String FIELD_SYS = "system";
+    
     private static final String FIELD_FULE = "fule";
+    
     private static final String FIELD_EVENT = "event";
     
     private static final String TABLE_MARKETS = "Market";
+    
     private static final String FIELD_ITEM = "Item";
+    
     private static final String FIELD_Q = "Quantity";
 
     Map<String,PlanetarySystem> PS;
@@ -156,7 +180,9 @@ private Collection<Player> LoadPlayers(ISqlJetTable tbl )throws SqlJetException{
 				} while(cursor.next());
 			}
 		} 
-		finally {cursor.close();}
+		finally {
+			cursor.close();
+		}
 		return Ret;
 }
 	
@@ -232,8 +258,10 @@ private Map<String,Planet> LoadPlanets(ISqlJetTable tbl)throws SqlJetException{
 	                } while(cursor.next());
 	            }
 	        } 
-		 finally {cursor.close();}
-		return Ret;
+		 finally {
+			 cursor.close();
+		 }
+		 return Ret;
 	}
 	
 private Settings LoadSettings(ISqlJetTable tbl)throws SqlJetException{
@@ -252,7 +280,9 @@ private Settings LoadSettings(ISqlJetTable tbl)throws SqlJetException{
 	                } while(cursor.next());
 	            }
 	        } 
-		 finally {cursor.close();}
+		finally {
+			 cursor.close();
+		}
 		return null;
 	}
 	
@@ -264,8 +294,7 @@ private Map<String,PlanetarySystem>loadSystems(ISqlJetTable tbl)throws SqlJetExc
 		try {
 	            if (!cursor.eof()) {
 	                do {
-	                	if(PSMap.containsKey(cursor.getString(FIELD_SYS))!=true)
-	                	{
+	                	if(PSMap.containsKey(cursor.getString(FIELD_SYS))!=true) {
 	                		tempPS.setName(cursor.getString(FIELD_SYS));	          
 	                		tempPS.setX(Integer.parseInt(cursor.getString(FIELD_X)));
 	                		tempPS.setY(Integer.parseInt(cursor.getString(FIELD_Y)));
@@ -274,9 +303,10 @@ private Map<String,PlanetarySystem>loadSystems(ISqlJetTable tbl)throws SqlJetExc
 	                } while(cursor.next());
 	            }
 	        } 
-		 finally {cursor.close();}
+		finally {
+			 cursor.close();
+		}
 		return PSMap;
-		
 	}
 	
 private void LoadMarkets(ISqlJetTable tbl)throws SqlJetException{
@@ -296,7 +326,9 @@ private void LoadMarkets(ISqlJetTable tbl)throws SqlJetException{
 	                } while(cursor.next());
 	            }
 	        } 
-		 finally {cursor.close();}
+		finally {
+			 cursor.close();
+		}
 	}
 
 	

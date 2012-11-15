@@ -18,24 +18,22 @@ public class ShipFactory {
 
     static private Map<ShipModel, Ship> ships;
 
-
     /**
      * Returns a ship based on the Enum ShipModel.
      * This will only instantiate a new ship if it does not exist yet
      * @param shipModel determines the stats of the ship to create or retrieve
      * @return the created or retrieved ship
      */
-    static public Ship getShip(ShipModel shipModel){
-        if (ships == null){
+    static public Ship getShip(ShipModel shipModel) {
+        if (ships == null) {
             ships = new HashMap<ShipModel, Ship>(4);
         }
         // Check to see if we need to create a new ship
-        if ( !ships.containsKey(shipModel) ){
+        if ( !ships.containsKey(shipModel)) {
             Ship ship = new Ship();
 
             // Assign the stats based on the kind of ship. This information should probably exist in the config files instead of hard coded
-            switch (shipModel)
-            {
+            switch (shipModel) {
                 case GNAT:
                     ship.setType(ShipModel.GNAT);
                     ship.setCargoSize(15);

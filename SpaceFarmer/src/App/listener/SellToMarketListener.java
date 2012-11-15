@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
  */
 public class SellToMarketListener extends TransactionListener {
     private SellingPanel sellingPanel;
+    
     private Inventory inventory;
 
     public SellToMarketListener(MarketPlace marketPlace, Inventory inventory,int price, Tradable good, JLabel errorMessage, SellingPanel sellingPanel) {

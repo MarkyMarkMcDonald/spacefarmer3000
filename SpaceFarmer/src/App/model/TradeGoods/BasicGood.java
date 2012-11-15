@@ -10,6 +10,7 @@ public class BasicGood extends TradeGood implements Tradable {
         super(tradeGoodType, tradeGoodSubName);
         this.name = tradeGoodSubName.toString();
     }
+    
     public boolean equals(Object object){
         return super.equals(object);
     }

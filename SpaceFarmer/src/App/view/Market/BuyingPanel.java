@@ -14,7 +14,9 @@ import java.util.Map;
  */
 public class BuyingPanel extends JPanel {
     private JPanel items;
+    
     private JLabel errorMessage;
+    
     private SellingPanel sellingPanel;
 
     /**
@@ -60,7 +62,6 @@ public class BuyingPanel extends JPanel {
             else {
                 row.setBackground(Color.red);
             }
-
 
             row.setAlignmentX(Component.RIGHT_ALIGNMENT);
             row.setAlignmentY(Component.TOP_ALIGNMENT);

@@ -18,6 +18,7 @@ import javax.swing.JFormattedTextField;
 public class IncrementListener implements ActionListener {
 	
 	private JFormattedTextField theField;
+	
 	private boolean IncType;
 	
 	public static boolean INC = true, DEC = false;

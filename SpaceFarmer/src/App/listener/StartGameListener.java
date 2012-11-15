@@ -42,8 +42,6 @@ public class StartGameListener extends ContinueListener {
         StartOfTurnScreen startOfTurnScreen = (StartOfTurnScreen) Display.getCard(CardName.START_OF_TURN_CARD.toString());
         startOfTurnScreen.updateTurn();
 
-
-
         this.progressDisplay();
         Logger.printGameToConsole();
     }

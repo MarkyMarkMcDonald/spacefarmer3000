@@ -18,9 +18,13 @@ import java.awt.event.ActionListener;
  */
 public class ToggleBuyingAndSellingListener implements ActionListener {
     JButton toggleButton;
+    
     BuyingPanel buyingPanel;
+    
     SellingPanel sellingPanel;
+    
     MarketPlace marketPlace;
+    
     Inventory inventory;
 
     public ToggleBuyingAndSellingListener(JButton toggleButton, BuyingPanel buyingPanel, SellingPanel sellingPanel, MarketPlace marketPlace, Inventory inventory) {

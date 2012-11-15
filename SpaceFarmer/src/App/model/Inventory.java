@@ -39,8 +39,7 @@ public class Inventory {
             Integer currentQuantity = inventory.get(item);
             inventory.put(item,currentQuantity + quantity);
         }
-        if (inventory.get(item) == 0)
-        {
+        if (inventory.get(item) == 0) {
         	inventory.remove(item);
         }
     }

@@ -19,8 +19,11 @@ import javax.swing.*;
 public class MarketScreen extends Screen {
 
     private BuyingPanel buyingPanel;
+    
     private SellingPanel sellingPanel;
+    
     private ToggleBuyingAndSellingListener toggleBuyingAndSellingListener;
+    
     private JLabel errorMessage;
 
     public MarketScreen(){
@@ -58,7 +61,6 @@ public class MarketScreen extends Screen {
         this();
         updateMarketPlace(marketPlace);
 	}
-
 
     public void updateMarketPlace(MarketPlace marketPlace) {
         buyingPanel.setSellingPanel(sellingPanel);

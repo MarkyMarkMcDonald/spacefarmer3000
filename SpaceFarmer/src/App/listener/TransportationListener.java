@@ -17,10 +17,8 @@ public class TransportationListener extends ContinueListener{
 	// The Planet to which this ActionListener is tied
 	private Planet planet;
 
-
     public TransportationListener() {
         cardToMoveTo = CardName.PLANET_INFORMATION_CARD;
-
     }
 
     /**

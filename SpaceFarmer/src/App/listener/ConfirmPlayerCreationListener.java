@@ -28,8 +28,7 @@ public class ConfirmPlayerCreationListener implements ActionListener {
         this.playerInformationScreen = playerInformationScreen;
     }
 
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
         Player player = new Player(playerInformationScreen.getTxtEnterPlayerNameData(), playerInformationScreen.getEnteredPilotSkill(),
                 playerInformationScreen.getEnteredTraderSkill(), playerInformationScreen.getEnteredEngineerSkill(), playerInformationScreen.getEnteredFighterSkill());
         player.setInventory(new Inventory());

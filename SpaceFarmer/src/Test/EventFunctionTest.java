@@ -19,8 +19,7 @@ import Conf.TradeGoodNames.Firearms;
 public class EventFunctionTest {
 
 	@Test
-	public void test() 
-	{
+	public void test() {
 		Player player=new Player("Dude",4,4,4,4);
 		Inventory inventory=new Inventory();
 		player.setInventory(inventory);

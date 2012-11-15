@@ -6,23 +6,21 @@ package App.model.TradeGoods;
  * Time: 5:58 PM
  */
 abstract public class TradeGood {
-
     protected String name;
+    
     protected TradeGoodType tradeGoodType;
+    
     protected Enum<?> tradeGoodSubName;
 
     public boolean equals(Tradable tradable){
         return tradable.getName().equals(name);
     }
     
-    
-    public int hashCode()
-    {
+    public int hashCode() {
     	return name.hashCode();
     }
     
-    public boolean equals (Object object)
-    {
+    public boolean equals (Object object) {
     	return equals( (Tradable) object);
     }
 
@@ -38,5 +36,4 @@ abstract public class TradeGood {
     public String getName(){
         return name;
     }
-
 }

@@ -4,7 +4,6 @@ package App.model;
 import App.model.Player.Player;
 
 public enum RandomEvent {
-	
 	LOSE_ITEM(EventFunction.loseFunction),
 	FIND_ITEM(EventFunction.winFunction);
 
@@ -14,10 +13,7 @@ public enum RandomEvent {
 		this.event = event;
 	}
 
-	public void giveEvent(Player player)
-	{
+	public void giveEvent(Player player) {
 		event.function(player);
 	}
-	
-
 }

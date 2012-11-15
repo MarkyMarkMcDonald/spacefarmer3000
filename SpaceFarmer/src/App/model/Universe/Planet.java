@@ -13,6 +13,7 @@ import App.service.Randomizer;
 public class Planet {
 	
 	private static final double eventProbability=.1;
+	
     private String name;
 
 	private TechnologyLevel technologyLevel;
@@ -30,7 +31,7 @@ public class Planet {
 	
 	private PlanetarySystem planetarySystem;
 
-	public Planet(){
+	public Planet() {
 
     }
 
@@ -45,7 +46,6 @@ public class Planet {
 	}
 
     //--- Accessors and Modifiers
-
     public MarketPlace getMarket() {
         return market;
     }
@@ -65,6 +65,7 @@ public class Planet {
     public void setName(String name) {
         this.name = name;
     }
+    
     public String getName() {
         return name;
     }
@@ -108,9 +109,7 @@ public class Planet {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
-	
-	
+
 	public PlanetarySystem getPlanetarySystem() {
 		return planetarySystem;
 	}
@@ -119,12 +118,10 @@ public class Planet {
 		this.planetarySystem = planetarySystem;
 	}
 
-	public void determineEvent()
-	{
+	public void determineEvent() {
 		if (Randomizer.determineSuccess(eventProbability))
 			event=(Event) Randomizer.randEnum(Event.class);
 		else
 			event=Event.NO_EVENT;
 	}
-	
 }

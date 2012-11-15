@@ -28,10 +28,13 @@ public class Display extends JFrame {
 	}
 
     private static JPanel CenterPanel, mainContentPanel;
+    
     private static Game game;
+
     private static MiniGameScreen MiniGameView;
     // We need this to be able to update cards instead of creating new ones every time
     private static Map<String, Screen> cardMap;
+    
     private static Map<String, JPanel> sidePanelMap;
 
     /**
@@ -185,7 +188,6 @@ public class Display extends JFrame {
     }
 
     //--Accessors and Modifiers
-
     public static Screen getCard(String cardName){
         return cardMap.get(cardName);
     }

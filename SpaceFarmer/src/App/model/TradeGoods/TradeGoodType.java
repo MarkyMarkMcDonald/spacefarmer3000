@@ -45,26 +45,39 @@ public enum TradeGoodType {
 	private static final double INCREASE_AMOUNT=1.5;
 	
 	private static final double REDUCED_QUANTITY=.5;
+	
 	private static final double INCREASED_QUANTITY=1.5;
+	
 	private static final int AVERAGE_QUANTITY=100;
+	
 	private static final int MINIMUM_QUANTITY=20;
+	
 	private static final double TECH_LEVEL_INCREASE=1.5;
+	
     private String name;
+    
     private Enum[] subNames;
 
     private TechnologyLevel minToProduce;
+    
     private TechnologyLevel minToSell;
+    
 	private TechnologyLevel mostProduced;
 	
 	private int basePrice;
+	
 	private int increasePerLevel;
+	
 	private int variance;
 	
 	private Event priceIncrease;
+	
 	private ResourceType lowCondition;
+	
 	private ResourceType highCondition;
 
 	private int minTrader;
+	
 	private int maxTrader;
 
 	public String getName() {
@@ -78,7 +91,6 @@ public enum TradeGoodType {
     public int getBasePrice(){
         return basePrice;
     }
-
 
 	private TradeGoodType(String name, Enum[] subNames, TechnologyLevel minToProduce,
                           TechnologyLevel minToSell, TechnologyLevel mostProduced,
@@ -109,16 +121,14 @@ public enum TradeGoodType {
      * @param event Event the Planet is currently experiencing.
      * @param techLevel TechnologyLevel of the Planet.
      */
-	public int calculatePrice(Planet planet)
-	{
+	public int calculatePrice(Planet planet) {
 		int price;
 		TechnologyLevel techLevel=planet.getTechnologyLevel();
 		Event event=planet.getEvent();
 		price=basePrice;
 	    price+=Randomizer.nextInt(2*variance)-variance;
 	    price+=increasePerLevel*(techLevel.ordinal()-minToProduce.ordinal());
-		if (priceIncrease.ordinal() == event.ordinal())
-		{
+		if (priceIncrease.ordinal() == event.ordinal()) {
 			price=(int) (price*INCREASE_AMOUNT);
 		}
 	    return price;
@@ -131,26 +141,21 @@ public enum TradeGoodType {
 	 * @param resource The ResourceType of the Planet.
 	 * @param techLevel The TechnologyLevel of the Planet.
 	 */
-	public int determineQuantity(Planet planet)
-	{
+	public int determineQuantity(Planet planet) {
 		ResourceType resource=planet.getResourceType();
 		TechnologyLevel techLevel=planet.getTechnologyLevel();
 		int quantity;
-		if (lowCondition.ordinal()==resource.ordinal())
-		{
+		if (lowCondition.ordinal()==resource.ordinal()) {
 			quantity= (int) (REDUCED_QUANTITY*(Randomizer.nextInt(AVERAGE_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY));
 		}
-		else if (highCondition.ordinal()==resource.ordinal())
-		{
+		else if (highCondition.ordinal()==resource.ordinal()) {
 			quantity= (int) (INCREASED_QUANTITY*(Randomizer.nextInt(AVERAGE_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY));
 		}
-		else
-		{
+		else {
 			quantity = (int) (Randomizer.nextInt(AVERAGE_QUANTITY-MINIMUM_QUANTITY)+MINIMUM_QUANTITY);
 		}
 		
-		if (techLevel.ordinal() == mostProduced.ordinal())
-		{
+		if (techLevel.ordinal() == mostProduced.ordinal()) {
 			quantity= (int) (quantity*TECH_LEVEL_INCREASE);
 		}
 		return quantity;
@@ -161,8 +166,7 @@ public enum TradeGoodType {
 	 * @param techLevel TechnologyLevel of the Planet.
 	 * @return true if the good will appear, false otherwise.
 	 */
-	public boolean buyable(Planet planet)
-	{
+	public boolean buyable(Planet planet) {
         return planet.getTechnologyLevel().ordinal() >= minToProduce.ordinal();
 	}
 	
@@ -173,10 +177,7 @@ public enum TradeGoodType {
 	 * @param quantity Amount being sold.
 	 * @return true if the good was sold, false otherwise.
 	 */
-	public boolean sellable(Planet planet)
-	{
+	public boolean sellable(Planet planet) {
         return planet.getTechnologyLevel().ordinal() >= minToSell.ordinal();
 	}
-
-
 }

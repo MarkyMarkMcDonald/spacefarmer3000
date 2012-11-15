@@ -23,6 +23,7 @@ public class PlanetarySystem {
     private int x;
     
     private int y;
+    
     public int getX() {
 		return x;
 	}

@@ -11,7 +11,6 @@ public interface Tradable {
 
     public boolean equals(Tradable tradable);
     
-
     public int getBasePrice();
 
     public String getName();

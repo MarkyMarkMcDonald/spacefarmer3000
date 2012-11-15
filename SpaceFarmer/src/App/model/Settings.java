@@ -21,14 +21,14 @@ public class Settings {
 	 * this is the constructor for the settings.
 	 **/
 	public Settings() {
+		// stub
 	}
 
 	public void addPlayer(Player player) {
+		// stub
 	}
 
 	// --Accessors and Modifiers
-
-
 	/**
 	 * gets the current save location of the game
 	 * 

@@ -17,8 +17,7 @@ import Conf.TradeGoodNames.Firearms;
 public class EventFunctionTest {
 
 	@Test
-	public void test() 
-	{
+	public void test() {
 		Player player=new Player("Dude",4,4,4,4);
 		Inventory inventory=new Inventory();
 		player.setInventory(inventory);
@@ -58,5 +57,4 @@ public class EventFunctionTest {
 		//Make sure that items lost near 0 push the inventory space to 0 and not anywhere else.
 		Assert.assertEquals("Items lost near 0?",inventory.getSpaceUsed(),0);
 	}
-
 }

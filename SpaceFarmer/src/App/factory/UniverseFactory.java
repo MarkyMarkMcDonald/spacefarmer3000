@@ -15,13 +15,11 @@ public class UniverseFactory {
     
     private static Map<String, PlanetarySystem> systems;
 
-    public static PlanetarySystem getSystem(String name)
-    {
+    public static PlanetarySystem getSystem(String name) {
     	return systems.get(name);
     }
 
-	public static Planet getPlanet(String name)
-	{
+	public static Planet getPlanet(String name) {
         return planets.get(name);
 	}
 
@@ -32,8 +30,6 @@ public class UniverseFactory {
     public static Map<String, PlanetarySystem> getPlanetarySystems(){
         return systems;
     }
-    
-    
 
     /**
      * Fills the factory with planetary systems and planets
@@ -73,8 +69,7 @@ public class UniverseFactory {
         int planetDistribution[]=Randomizer.distributeNumber(numSystems, numPlanets);
         List<Integer[]> planetPositions;
         Map<Integer,List<Integer[]>> systemDimensions=new HashMap<Integer,List<Integer[]>>(numSystems);
-        for (int i=0;i<uniRows*uniCols;i++)
-        {
+        for (int i=0;i<uniRows*uniCols;i++) {
         	//Give unique X and Y coordinates for each system in a quadrant that are at least minDistance apart.
         	//See Randomizer.generateDimensionsRange for more details.
         	systemDimensions.put(i,Randomizer.generateDimensionsRange(systemDistribution[i],quadrantXDimension,quadrantYDimension, minDistance));
@@ -105,7 +100,6 @@ public class UniverseFactory {
     			systemName=systemNamesHolder.get(systemNameIndex);
     			systemNamesHolder.remove(systemNameIndex);
     		
-    			
         		while (planetIndex < planetDistribution[systemCount] && !planetNamesHolder.isEmpty()){
         			planet = new Planet();
         			planetNameIndex = Randomizer.nextInt(planetNamesHolder.size());

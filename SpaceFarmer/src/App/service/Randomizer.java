@@ -23,8 +23,7 @@ public class Randomizer {
 	 * @param enumClass Enumerated class to generate from.
 	 * @return A random element from that class.
 	 */
-	public static Enum<?> randEnum(Class<? extends Enum<?>> enumClass)
-	{
+	public static Enum<?> randEnum(Class<? extends Enum<?>> enumClass) {
 		Enum<?> enums[]=enumClass.getEnumConstants();
 		int length=enums.length;
 		return enums[rand.nextInt(length)];
@@ -35,13 +34,10 @@ public class Randomizer {
 	 * @param lowerBound lowest value possible.
 	 * @param upperBound highest value possible +1
 	 */
-	public static Integer[] uniqueRandomInts(int lowerBound, int upperBound,int numberOfInts)
-	{
+	public static Integer[] uniqueRandomInts(int lowerBound, int upperBound,int numberOfInts) {
 		ArrayList<Integer> returnInts=new ArrayList<Integer>(numberOfInts);
-		if (numberOfInts>=upperBound-lowerBound)
-		{
-			for (int i=lowerBound;i<upperBound;i++)
-			{
+		if (numberOfInts>=upperBound-lowerBound) {
+			for (int i=lowerBound;i<upperBound;i++) {
 				returnInts.add(i);
 			}
 			return returnInts.toArray(new Integer[0]);
@@ -49,12 +45,10 @@ public class Randomizer {
 		returnInts.add(lowerBound+rand.nextInt(upperBound-lowerBound));
 		int randInt=lowerBound+rand.nextInt(upperBound-lowerBound);
 		int index=1;
-		while (index<numberOfInts)
-		{
+		while (index<numberOfInts) {
 			if (returnInts.contains(randInt))
 				randInt=lowerBound+rand.nextInt(upperBound-lowerBound);
-			else
-			{
+			else {
 				index++;
 				returnInts.add(randInt);
 				randInt=lowerBound+rand.nextInt(upperBound-lowerBound);
@@ -66,18 +60,16 @@ public class Randomizer {
 	/**
 	 * Gives a random number of unique elements from an array.
 	 */
-	public static Object[] randElements(Object[] objects,int total)
-	{
+	public static Object[] randElements(Object[] objects,int total) {
 		Object[] returnObjects=new Object[total];
 		Integer[] indexes=uniqueRandomInts(0,objects.length,total);
-		for (int i=0;i<total;i++)
-		{
+		for (int i=0;i<total;i++) {
 			returnObjects[i]=objects[indexes[i]];
 		}
 		return returnObjects;
 	}
-	public static Object randElement(Object[] objects)
-	{
+	
+	public static Object randElement(Object[] objects) {
 		return objects[rand.nextInt(objects.length)];
 	}
 	
@@ -88,13 +80,11 @@ public class Randomizer {
 	 * @param xDim Upperbound value for the x-coordinate
 	 * @param yDim Upperbound value for the y-coordinate
 	 */
-	public static List<Integer[]> generateDimensions(int number, int xDim, int yDim)
-	{
+	public static List<Integer[]> generateDimensions(int number, int xDim, int yDim) {
 		List<Integer[]> dimensionList=new ArrayList<Integer[]>();
         boolean isUniqueDimension;
 
-        for (int i=0;i<number;i++)
-		{
+        for (int i=0;i<number;i++) {
             Integer[] dimension=new Integer[2];
             dimension[0]=rand.nextInt(xDim);
             dimension[1]=rand.nextInt(yDim);
@@ -102,8 +92,7 @@ public class Randomizer {
             // We don't know if the dimension is unique, so treat as might not be unique
             isUniqueDimension = false;
 
-			while(!isUniqueDimension)
-			{
+			while(!isUniqueDimension) {
                 if (!isUniqueDimension(dimensionList, dimension)){
                     dimension[0]=rand.nextInt(xDim);
                     dimension[1]=rand.nextInt(yDim);
@@ -116,22 +105,17 @@ public class Randomizer {
 		return dimensionList;
 	}
 	
-	public static List<Integer[]> generateDimensionsRange(int number, int xDim, int yDim, int range)
-	{
+public static List<Integer[]> generateDimensionsRange(int number, int xDim, int yDim, int range) {
 		List<Integer[]> dimensionList=new ArrayList<Integer[]>();
 		Integer[] point=new Integer[2];
 		point[0]=rand.nextInt(xDim);
 		point[1]=rand.nextInt(yDim);
 		boolean outOfRange=true;
-		for (int i=0;i<number;i++)
-		{
-			while (!outOfRange)
-			{
+		for (int i=0;i<number;i++) {
+			while (!outOfRange) {
 				outOfRange=true;
-				for (Integer[] p: dimensionList)
-				{
-					if(Point2D.distance(p[0], p[1], point[0], point[1])<range)
-					{
+				for (Integer[] p: dimensionList) {
+					if(Point2D.distance(p[0], p[1], point[0], point[1])<range) {
 						outOfRange=false;
 						point[0]=rand.nextInt(xDim);
 						point[1]=rand.nextInt(yDim);
@@ -168,8 +152,7 @@ public class Randomizer {
      * @param probability The upper bound for the allowed probability.
      * @return true if a randomly-generated number falls within the probability bounds.
      */
-    public static boolean determineSuccess(double probability)
-    {
+    public static boolean determineSuccess(double probability) {
     	return rand.nextDouble() <= probability;
     }
 	
@@ -177,8 +160,7 @@ public class Randomizer {
 	 * Serves only to mimic Random.nextInt() when necessary
 	 * @param upperBound Generated value is 0 to this number-1
 	 */
-	public static int nextInt(int upperBound)
-	{
+	public static int nextInt(int upperBound) {
 		return rand.nextInt(upperBound);
 	}
 
@@ -198,20 +180,16 @@ public class Randomizer {
      * @param number The number being divided.
      * @return An int array with numSlots indices, each containing a subdivision of the number.
      */
-    public static int[] distributeNumber(int numSlots, int number)
-    {
+    public static int[] distributeNumber(int numSlots, int number) {
     	int[] returnDistribution=new int[numSlots];
     	int minimum=number/numSlots;
     	Integer[] augmentedIndices=uniqueRandomInts(0,numSlots,number%numSlots);
-    	for (int i=0;i<numSlots;i++)
-    	{
+    	for (int i=0;i<numSlots;i++) {
     		returnDistribution[i]=minimum;
     	}
-    	for (int i=0;i<number%numSlots;i++)
-    	{
+    	for (int i=0;i<number%numSlots;i++) {
     		returnDistribution[augmentedIndices[i]]++;
     	}
-    	
     	return returnDistribution;
     }
     
@@ -220,10 +198,8 @@ public class Randomizer {
      * @param player Player potentially receiving the event.
      * @param chance Chance the player will receive the event.
      */
-    public static void giveEvent(Player player,double chance)
-    {
-    	if (determineSuccess(chance))
-    	{
+    public static void giveEvent(Player player,double chance) {
+    	if (determineSuccess(chance)) {
     	    RandomEvent event= (RandomEvent) randEnum(RandomEvent.class);	
     	    event.giveEvent(player);
     	}

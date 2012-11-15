@@ -19,13 +19,19 @@ import java.util.Map;
  */
 public class Player {
     private PlayerType playerType;
+    
     private String name;
 
     private Ship ship;
+    
     private int money, fuel;
+    
     private Map<SkillType, Integer> skillLevels;
+    
     private Inventory inventory;
+    
     private Planet currentPlanet;
+    
     private int difficulty;
 
     public Player(){

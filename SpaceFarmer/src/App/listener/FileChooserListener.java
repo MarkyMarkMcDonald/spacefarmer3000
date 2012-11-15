@@ -16,7 +16,9 @@ public class FileChooserListener implements ActionListener{
 
 
     private JFileChooser fileChooser;
+    
     private JTextField textField;
+    
     private File dbFile;
 
     public FileChooserListener(JFileChooser fileChooser, JTextField textField) {

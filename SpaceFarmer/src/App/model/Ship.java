@@ -25,7 +25,6 @@ public class Ship {
     private int maxFuel;
 
     //--Accessors and Modifiers
-
     public int getMaxFuel() {
         return maxFuel;
     }
@@ -33,7 +32,6 @@ public class Ship {
     public void setMaxFuel(int maxFuel) {
         this.maxFuel = maxFuel;
     }
-
 
     public ShipModel getType() {
         return type;

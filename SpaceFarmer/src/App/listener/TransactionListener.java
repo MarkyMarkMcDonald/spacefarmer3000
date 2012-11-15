@@ -17,11 +17,17 @@ import java.util.regex.Pattern;
  */
 abstract public class TransactionListener implements ActionListener{
     protected MarketPlace marketPlace;
+    
     protected int price;
+    
     protected Tradable good;
+    
     protected JTextField quantity;
+    
     protected JLabel errorMessage;
+    
     protected int quantityAsInt;
+    
     protected JLabel shownQuantity;
 
     protected TransactionListener(MarketPlace marketPlace, int price, Tradable good, JLabel errorMessage) {

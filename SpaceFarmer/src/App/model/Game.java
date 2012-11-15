@@ -28,14 +28,12 @@ public class Game {
 
     private static Player currentPlayer;
 
-
     public Game(){
         numberOfTurns = 1;
         players = new ArrayList<Player>();
     }
 
     //--Accessors and Modifiers
-
     public static int getTurnNumber() {
         return numberOfTurns;
     }
@@ -57,19 +55,15 @@ public class Game {
     * If the player was the last player, then assign a new event
     * to each planet.
     */
-    public void endTurn()
-    {
+    public void endTurn() {
         int	playerIndex=players.indexOf(currentPlayer)+1;
-        if (playerIndex >= players.size())
-        {
+        if (playerIndex >= players.size()) {
             currentPlayer=players.get(0);
-            for (int planetIndex=0;planetIndex<planets.size();planetIndex++)
-            {
+            for (int planetIndex=0;planetIndex<planets.size();planetIndex++) {
                 planets.get(planetIndex).determineEvent();
             }
         }
-        else
-        {
+        else {
             currentPlayer=players.get(playerIndex);
         }
     }
@@ -83,7 +77,6 @@ public class Game {
     }
 
     // Auto generated
-
     public static Player getCurrentPlayer() {
         return currentPlayer;
     }

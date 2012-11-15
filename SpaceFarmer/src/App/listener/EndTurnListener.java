@@ -8,12 +8,12 @@ import App.model.Game;
 public class EndTurnListener implements ActionListener{
 
 	private Game game;
-	public EndTurnListener(Game game)
-	{
+	
+	public EndTurnListener(Game game) {
 		this.game=game;
 	}
-	public void actionPerformed(ActionEvent event)
-	{
+	
+	public void actionPerformed(ActionEvent event) {
 		game.endTurn();
 	}
 }

@@ -63,7 +63,6 @@ public class Logger {
     /*
      * Helper Methods for the console dump
      */
-
     public static void printPlayerInfo(Player player){
         System.out.println("Name: " + player.getName());
         System.out.println("Money: " + player.getMoney());

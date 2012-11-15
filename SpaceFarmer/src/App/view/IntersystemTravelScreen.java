@@ -19,7 +19,6 @@ import java.util.Map;
  */
 public class IntersystemTravelScreen extends Screen implements MouseListener {
 
-
 	/**
 	 * Create the panel.
 	 */
@@ -32,9 +31,13 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 	 * Draw a grid with the quadrants for the universe, and each system in the quadrants.
 	 */
 	private static final int PLANET_SIZE = 30;
+	
 	private static final Color[] planetColors = {Color.BLUE,Color.GRAY,Color.GREEN,Color.ORANGE,Color.RED,Color.CYAN,Color.DARK_GRAY,Color.LIGHT_GRAY};
+
 	private static Map<Point, Planet> planetLocations;
+	
 	private static Planet selectedPlanet;
+	
 	public void paintComponent(Graphics g) {
 		
 		// Draw black over the background
@@ -169,8 +172,19 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
         }
 	}
 	
-	public void mouseClicked(MouseEvent arg0) {}
-	public void mouseEntered(MouseEvent arg0) {}
-	public void mouseExited(MouseEvent arg0) {}
-	public void mouseReleased(MouseEvent arg0) {}
+	public void mouseClicked(MouseEvent arg0) {
+		// LOL NOTHING HERE
+	}
+	
+	public void mouseEntered(MouseEvent arg0) {
+		// LOL CODEPRO AUDIT
+	}
+	
+	public void mouseExited(MouseEvent arg0) {
+		// LOL I HATE CS2340
+	}
+	
+	public void mouseReleased(MouseEvent arg0) {
+		// LOL STUBBY STUBBY STUB STUB
+	}
 }

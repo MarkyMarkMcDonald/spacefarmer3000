@@ -23,15 +23,11 @@ public enum ResourceType {
 	
 	private String name;
 
-	
 	private ResourceType(String name) {
 		this.name = name;
 	}
 
-
 	public String getName() {
 		return name;
 	}
-	
-
 }
