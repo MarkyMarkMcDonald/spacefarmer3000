@@ -3,16 +3,16 @@
  * Author: Bobbey Reese
  */
 
-package App.model;
+package app.model;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import App.model.Player.Player;
-import App.model.TradeGoods.BasicGood;
-import App.model.TradeGoods.TradeGoodType;
-import Conf.TradeGoodNames.Firearms;
+import app.model.Player.Player;
+import app.model.TradeGoods.BasicGood;
+import app.model.TradeGoods.TradeGoodType;
+import conf.TradeGoodNames.Firearms;
 
 public class EventFunctionTest {
 

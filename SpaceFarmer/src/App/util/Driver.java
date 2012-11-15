@@ -1,12 +1,11 @@
-package App.util;
+package app.util;
 
-import App.factory.UniverseFactory;
-import App.model.Game;
-import App.model.Settings;
-import App.view.Display;
-import Conf.GameVariables;
-import Conf.PlanetNames;
-import Conf.SystemNames;
+import app.factory.UniverseFactory;
+import app.model.Game;
+import app.view.Display;
+import conf.GameVariables;
+import conf.PlanetNames;
+import conf.SystemNames;
 
 import java.awt.*;
 

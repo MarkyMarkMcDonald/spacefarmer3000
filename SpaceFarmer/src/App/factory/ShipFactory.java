@@ -1,8 +1,8 @@
-package App.factory;
+package app.factory;
 
-import App.model.Ship;
-import App.model.ShipModel;
-import Conf.GameVariables;
+import app.model.Ship;
+import app.model.ShipModel;
+import conf.GameVariables;
 
 import java.util.HashMap;
 import java.util.Map;
