@@ -4,40 +4,38 @@ import App.model.*;
 import App.service.Randomizer;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Marky
- * Date: 9/22/12
- * Time: 12:32 AM
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:32 AM To
+ * change this template use File | Settings | File Templates.
  */
 public class Planet {
-	
-	private static final double eventProbability=.1;
-	
-    private String name;
+
+	private static final double EventProbability = .1;
+
+	private String name;
 
 	private TechnologyLevel technologyLevel;
 
 	private PoliticalSystem politicalSystem;
 
 	private Event event;
-	
-    private ResourceType resourceType;
 
-    // Position within the solar system
-    private int x,y;
+	private ResourceType resourceType;
+
+	// Position within the solar system
+	private int x, y;
 
 	private MarketPlace market;
-	
+
 	private PlanetarySystem planetarySystem;
 
 	public Planet() {
 
-    }
+	}
 
-	public Planet(String name,TechnologyLevel technologyLevel, PoliticalSystem politicalSystem,
-			ResourceType resourceType, int x, int y) {
-		this.name=name;
+	public Planet(String name, TechnologyLevel technologyLevel,
+			PoliticalSystem politicalSystem, ResourceType resourceType, int x,
+			int y) {
+		this.name = name;
 		this.technologyLevel = technologyLevel;
 		this.politicalSystem = politicalSystem;
 		this.resourceType = resourceType;
@@ -45,12 +43,12 @@ public class Planet {
 		this.y = y;
 	}
 
-    //--- Accessors and Modifiers
-    public MarketPlace getMarket() {
-        return market;
-    }
+	// --- Accessors and Modifiers
+	public MarketPlace getMarket() {
+		return market;
+	}
 
-    public Event getEvent() {
+	public Event getEvent() {
 		return event;
 	}
 
@@ -59,16 +57,16 @@ public class Planet {
 	}
 
 	public void setMarket(MarketPlace market) {
-        this.market = market;
-    }
+		this.market = market;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getName() {
-        return name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
 
 	public TechnologyLevel getTechnologyLevel() {
 		return technologyLevel;
@@ -118,11 +116,28 @@ public class Planet {
 		this.planetarySystem = planetarySystem;
 	}
 
+	/**
+	 * Determine if an event is to occur by using static fields.
+	 */
 	public void determineEvent() {
-		if (Randomizer.determineSuccess(eventProbability)) {
-			event=(Event) Randomizer.randEnum(Event.class);
+		if (Randomizer.determineSuccess(EventProbability)) {
+			event = (Event) Randomizer.randEnum(Event.class);
 		} else {
-			event=Event.NO_EVENT;
+			event = Event.NO_EVENT;
 		}
+	}
+
+	/**
+	 * @return Information about this object as a String.
+	 */
+	public String toString() {
+		return "Planet";
+	}
+
+	/**
+	 * @return The hash code for this Planet object, based on its name.
+	 */
+	public int hashCode() {
+		return name.hashCode();
 	}
 }

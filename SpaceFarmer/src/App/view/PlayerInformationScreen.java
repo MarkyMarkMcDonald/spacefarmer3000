@@ -8,6 +8,7 @@ import java.awt.*;
 
 /**
  * This screen shows the Player his information. (WIP)
+ * 
  * @author Mark McDonald
  */
 public class PlayerInformationScreen extends Screen {
@@ -16,177 +17,186 @@ public class PlayerInformationScreen extends Screen {
 	 * Prevents "serializable" warning
 	 */
 	private static final long serialVersionUID = -3313579360751444648L;
-	
-    private JTextField enteredPlayerName;
-    
-    private JFormattedTextField enteredPilotSkill;
-    
-    private JFormattedTextField enteredFighterSkill;
-    
-    private JFormattedTextField enteredTraderSkill;
-    
-    private JFormattedTextField enteredEngineerSkill;
-    
-    private JLabel ErrorLabel;
 
-    /**
+	private JTextField enteredPlayerName;
+
+	private JFormattedTextField enteredPilotSkill;
+
+	private JFormattedTextField enteredFighterSkill;
+
+	private JFormattedTextField enteredTraderSkill;
+
+	private JFormattedTextField enteredEngineerSkill;
+
+	private JLabel ErrorLabel;
+
+	/**
 	 * Create the panel.
 	 */
 	public PlayerInformationScreen() {
 		name = CardName.PLAYER_INFORMATION_CARD;
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        
-        Component verticalStrut = Box.createVerticalStrut(20);
-        add(verticalStrut);
 
-        JPanel playerName = new JPanel();
-        add(playerName);
-        playerName.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		Component verticalStrut = Box.createVerticalStrut(20);
+		add(verticalStrut);
 
-        JLabel lblPlayerName = new JLabel("Player Name");
-        playerName.add(lblPlayerName);
+		JPanel playerName = new JPanel();
+		add(playerName);
+		playerName.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        enteredPlayerName = new JTextField();
-        playerName.add(enteredPlayerName);
-        enteredPlayerName.setColumns(10);
+		JLabel lblPlayerName = new JLabel("Player Name");
+		playerName.add(lblPlayerName);
 
-        JPanel allocatePointsInfo = new JPanel();
-        JLabel numPointsToAllocate = new JLabel("Please Allocate 16 Points");
-        allocatePointsInfo.add(numPointsToAllocate);
-        add(allocatePointsInfo);
+		enteredPlayerName = new JTextField();
+		playerName.add(enteredPlayerName);
+		enteredPlayerName.setColumns(10);
 
-        JPanel PilotSkill = new JPanel();
-        add(PilotSkill);
+		JPanel allocatePointsInfo = new JPanel();
+		JLabel numPointsToAllocate = new JLabel("Please Allocate 16 Points");
+		allocatePointsInfo.add(numPointsToAllocate);
+		add(allocatePointsInfo);
 
-        JLabel lblPilotSkill = new JLabel("Pilot Skill Points");
-        PilotSkill.add(lblPilotSkill);
+		JPanel pilotSkill = new JPanel();
+		add(pilotSkill);
 
-        enteredPilotSkill = new JFormattedTextField();
-        enteredPilotSkill.setText("0");
-        enteredPilotSkill.setColumns(2);
-        PilotSkill.add(enteredPilotSkill);
-        
-        JButton PInc = new JButton("+");
-        PInc.addActionListener(new IncrementListener(enteredPilotSkill, IncrementListener.INC));
-        PilotSkill.add(PInc);
-        
-        JButton PDec = new JButton("-");
-        PDec.addActionListener(new IncrementListener(enteredPilotSkill, IncrementListener.DEC));
-        PilotSkill.add(PDec);
+		JLabel lblPilotSkill = new JLabel("Pilot Skill Points");
+		pilotSkill.add(lblPilotSkill);
 
-        JPanel FighterSkill = new JPanel();
-        add(FighterSkill);
+		enteredPilotSkill = new JFormattedTextField();
+		enteredPilotSkill.setText("0");
+		enteredPilotSkill.setColumns(2);
+		pilotSkill.add(enteredPilotSkill);
 
-        JLabel lblFighterSkill = new JLabel("Fighter Skill Points");
-        FighterSkill.add(lblFighterSkill);
+		JButton pInc = new JButton("+");
+		pInc.addActionListener(new IncrementListener(enteredPilotSkill,
+				IncrementListener.INC));
+		pilotSkill.add(pInc);
 
-        enteredFighterSkill = new JFormattedTextField();
-        enteredFighterSkill.setText("0");
-        enteredFighterSkill.setColumns(2);
-        FighterSkill.add(enteredFighterSkill);
-        
-        JButton FInc = new JButton("+");
-        FInc.addActionListener(new IncrementListener(enteredFighterSkill, IncrementListener.INC));
-        FighterSkill.add(FInc);
-        
-        JButton FDec = new JButton("-");
-        FDec.addActionListener(new IncrementListener(enteredFighterSkill, IncrementListener.DEC));
-        FighterSkill.add(FDec);
+		JButton pDec = new JButton("-");
+		pDec.addActionListener(new IncrementListener(enteredPilotSkill,
+				IncrementListener.DEC));
+		pilotSkill.add(pDec);
 
-        JPanel TraderSkill = new JPanel();
-        add(TraderSkill);
+		JPanel fighterSkill = new JPanel();
+		add(fighterSkill);
 
-        JLabel lblTraderSkill = new JLabel("Trader Skill Points");
-        TraderSkill.add(lblTraderSkill);
+		JLabel lblFighterSkill = new JLabel("Fighter Skill Points");
+		fighterSkill.add(lblFighterSkill);
 
-        enteredTraderSkill = new JFormattedTextField();
-        enteredTraderSkill.setText("0");
-        enteredTraderSkill.setColumns(2);
-        TraderSkill.add(enteredTraderSkill);
-        
-        JButton TInc = new JButton("+");
-        TInc.addActionListener(new IncrementListener(enteredTraderSkill, IncrementListener.INC));
-        TraderSkill.add(TInc);
-        
-        JButton TDec = new JButton("-");
-        TDec.addActionListener(new IncrementListener(enteredTraderSkill, IncrementListener.DEC));
-        TraderSkill.add(TDec);
+		enteredFighterSkill = new JFormattedTextField();
+		enteredFighterSkill.setText("0");
+		enteredFighterSkill.setColumns(2);
+		fighterSkill.add(enteredFighterSkill);
 
-        JPanel EngineerSkill = new JPanel();
-        add(EngineerSkill);
+		JButton fInc = new JButton("+");
+		fInc.addActionListener(new IncrementListener(enteredFighterSkill,
+				IncrementListener.INC));
+		fighterSkill.add(fInc);
 
-        JLabel lblEngineerSkill = new JLabel("Engineer Skill Points");
-        EngineerSkill.add(lblEngineerSkill);
+		JButton fDec = new JButton("-");
+		fDec.addActionListener(new IncrementListener(enteredFighterSkill,
+				IncrementListener.DEC));
+		fighterSkill.add(fDec);
 
-        enteredEngineerSkill = new JFormattedTextField();
-        enteredEngineerSkill.setText("0");
-        enteredEngineerSkill.setColumns(2);
-        EngineerSkill.add(enteredEngineerSkill);
-        
-        JButton EInc = new JButton("+");
-        EInc.addActionListener(new IncrementListener(enteredEngineerSkill, IncrementListener.INC));
-        EngineerSkill.add(EInc);
-        
-        JButton EDec = new JButton("-");
-        EDec.addActionListener(new IncrementListener(enteredEngineerSkill, IncrementListener.DEC));
-        EngineerSkill.add(EDec);
+		JPanel traderSkill = new JPanel();
+		add(traderSkill);
 
-        JPanel Difficulty = new JPanel();
-        add(Difficulty);
+		JLabel lblTraderSkill = new JLabel("Trader Skill Points");
+		traderSkill.add(lblTraderSkill);
 
-        JLabel lblDifficulty = new JLabel("Difficulty");
-        Difficulty.add(lblDifficulty);
+		enteredTraderSkill = new JFormattedTextField();
+		enteredTraderSkill.setText("0");
+		enteredTraderSkill.setColumns(2);
+		traderSkill.add(enteredTraderSkill);
 
-        JComboBox comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Easy", "Medium", "Hard", "Impossible"}));
-        Difficulty.add(comboBox);
+		JButton tInc = new JButton("+");
+		tInc.addActionListener(new IncrementListener(enteredTraderSkill,
+				IncrementListener.INC));
+		traderSkill.add(tInc);
 
-        JPanel Confirm = new JPanel();
-        add(Confirm);
+		JButton tDec = new JButton("-");
+		tDec.addActionListener(new IncrementListener(enteredTraderSkill,
+				IncrementListener.DEC));
+		traderSkill.add(tDec);
 
-        JButton btnConfirm = new JButton("Confirm");
-        btnConfirm.setPreferredSize(new Dimension(120, 30));
-        btnConfirm.addActionListener(new ConfirmPlayerCreationListener(this));
-        Confirm.add(btnConfirm);
-        
-        JPanel ErrorPanel = new JPanel();
-        add(ErrorPanel);
-        
-        ErrorLabel = new JLabel("");
-        ErrorPanel.add(ErrorLabel);
+		JPanel engineerSkill = new JPanel();
+		add(engineerSkill);
+
+		JLabel lblEngineerSkill = new JLabel("Engineer Skill Points");
+		engineerSkill.add(lblEngineerSkill);
+
+		enteredEngineerSkill = new JFormattedTextField();
+		enteredEngineerSkill.setText("0");
+		enteredEngineerSkill.setColumns(2);
+		engineerSkill.add(enteredEngineerSkill);
+
+		JButton eInc = new JButton("+");
+		eInc.addActionListener(new IncrementListener(enteredEngineerSkill,
+				IncrementListener.INC));
+		engineerSkill.add(eInc);
+
+		JButton eDec = new JButton("-");
+		eDec.addActionListener(new IncrementListener(enteredEngineerSkill,
+				IncrementListener.DEC));
+		engineerSkill.add(eDec);
+
+		JPanel difficulty = new JPanel();
+		add(difficulty);
+
+		JLabel lblDifficulty = new JLabel("Difficulty");
+		difficulty.add(lblDifficulty);
+
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Easy",
+				"Medium", "Hard", "Impossible" }));
+		difficulty.add(comboBox);
+
+		JPanel confirm = new JPanel();
+		add(confirm);
+
+		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm.setPreferredSize(new Dimension(120, 30));
+		btnConfirm.addActionListener(new ConfirmPlayerCreationListener(this));
+		confirm.add(btnConfirm);
+
+		JPanel errorPanel = new JPanel();
+		add(errorPanel);
+
+		ErrorLabel = new JLabel("");
+		errorPanel.add(ErrorLabel);
 
 	}
 
-    public void resetInputs(){
-        enteredEngineerSkill.setText("0");
-        enteredFighterSkill.setText("0");
-        enteredPilotSkill.setText("0");
-        enteredTraderSkill.setText("0");
-        enteredPlayerName.setText("");
-    }
+	public void resetInputs() {
+		enteredEngineerSkill.setText("0");
+		enteredFighterSkill.setText("0");
+		enteredPilotSkill.setText("0");
+		enteredTraderSkill.setText("0");
+		enteredPlayerName.setText("");
+	}
 
-    public void setErrorMessage(String message){
-    	ErrorLabel.setText(message);
-    }
+	public void setErrorMessage(String message) {
+		ErrorLabel.setText(message);
+	}
 
-    public String getTxtEnterPlayerNameData() {
-        return enteredPlayerName.getText();
-    }
+	public String getTxtEnterPlayerNameData() {
+		return enteredPlayerName.getText();
+	}
 
-    public int getEnteredPilotSkill() {
-        return Integer.parseInt(enteredPilotSkill.getText());
-    }
+	public int getEnteredPilotSkill() {
+		return Integer.parseInt(enteredPilotSkill.getText());
+	}
 
-    public int getEnteredFighterSkill() {
-        return Integer.parseInt(enteredFighterSkill.getText());
-    }
+	public int getEnteredFighterSkill() {
+		return Integer.parseInt(enteredFighterSkill.getText());
+	}
 
-    public int getEnteredTraderSkill() {
-        return Integer.parseInt(enteredTraderSkill.getText());
-    }
+	public int getEnteredTraderSkill() {
+		return Integer.parseInt(enteredTraderSkill.getText());
+	}
 
-    public int getEnteredEngineerSkill() {
-        return Integer.parseInt(enteredEngineerSkill.getText());
-    }
+	public int getEnteredEngineerSkill() {
+		return Integer.parseInt(enteredEngineerSkill.getText());
+	}
 }

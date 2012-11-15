@@ -5,26 +5,23 @@ import App.model.Universe.Planet;
 import java.util.Map;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Marky
- * Date: 9/22/12
- * Time: 12:32 AM
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:32 AM To
+ * change this template use File | Settings | File Templates.
  */
 public class PlanetarySystem {
 
-    private String name;
+	private String name;
 
-    private Map<String,Planet> planets;
+	private Map<String, Planet> planets;
 
-    // Thinking this should replace String->Planet Map.
-    private Map<Integer[], Planet> slots;
+	// Thinking this should replace String->Planet Map.
+	private Map<Integer[], Planet> slots;
 
-    private int x;
-    
-    private int y;
-    
-    public int getX() {
+	private int x;
+
+	private int y;
+
+	public int getX() {
 		return x;
 	}
 
@@ -41,20 +38,20 @@ public class PlanetarySystem {
 	}
 
 	public String getName() {
-        return name;
-    }
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Map<String,Planet> getPlanets() {
-        return planets;
-    }
+	public Map<String, Planet> getPlanets() {
+		return planets;
+	}
 
-    public void setPlanets(Map<String, Planet> planets) {
-        this.planets = planets;
-    }
+	public void setPlanets(Map<String, Planet> planets) {
+		this.planets = planets;
+	}
 
 	public Map<Integer[], Planet> getSlots() {
 		return slots;
@@ -63,6 +60,11 @@ public class PlanetarySystem {
 	public void setSlots(Map<Integer[], Planet> slots) {
 		this.slots = slots;
 	}
-    
-    
+
+	/**
+	 * @return Information about this object as a String.
+	 */
+	public String toString() {
+		return "PlanetarySystem";
+	}
 }

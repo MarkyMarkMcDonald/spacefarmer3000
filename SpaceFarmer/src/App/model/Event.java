@@ -2,15 +2,10 @@ package App.model;
 
 public enum Event {
 
-	NO_EVENT ("None"),
-	DROUGHT ("Drought"),
-	COLD ("Cold"),
-	CROPFAIL ("Crop Failure"),
-	WAR ("War"),
-	BOREDOM ("Boredom"),
-	PLAGUE ("Plague"),
-	LACKOFWORKERS ("Lack of Workers");
-	
+	NO_EVENT("None"), DROUGHT("Drought"), COLD("Cold"), CROPFAIL("Crop Failure"), WAR(
+			"War"), BOREDOM("Boredom"), PLAGUE("Plague"), LACKOFWORKERS(
+			"Lack of Workers");
+
 	private String name;
 
 	private Event(String name) {
@@ -20,6 +15,5 @@ public enum Event {
 	public String getName() {
 		return name;
 	}
-	
-	
+
 }

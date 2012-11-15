@@ -1,29 +1,24 @@
 package Conf.TradeGoodNames;
 
 /**
- * User: marky
- * Date: 10/22/12
- * Time: 2:24 PM
+ * User: marky Date: 10/22/12 Time: 2:24 PM
  */
 public enum Firearms {
 
-    PISTOLS("Pistols"),
-    RIFLES("Rifles"),
-    SHOTGUNS("Shotguns");
+	PISTOLS("Pistols"), RIFLES("Rifles"), SHOTGUNS("Shotguns");
 
-    private String name;
+	private String name;
 
-    public String getName(){
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    private Firearms(String name){
-        this.name = name;
-    }
+	private Firearms(String name) {
+		this.name = name;
+	}
 
-    public String toString(){
-        return name;
-    }
-    
+	public String toString() {
+		return name;
+	}
 
 }

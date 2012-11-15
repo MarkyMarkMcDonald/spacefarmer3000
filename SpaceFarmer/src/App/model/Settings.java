@@ -1,10 +1,8 @@
 package App.model;
 
-
 import App.model.Player.Player;
 
 import java.util.Collection;
-
 
 /**
  * This class is used to save/load the game and hold the information for the
@@ -44,7 +42,7 @@ public class Settings {
 	 * @param save
 	 *            is the new location that the game will be saved to
 	 **/
-	//TODO create helper functions to individualy write / load
+	// TODO create helper functions to individualy write / load
 	private void setSave(String save) {
 		saveLocation = save;
 	}
@@ -91,5 +89,12 @@ public class Settings {
 	 **/
 	private void Save(Collection<Player> players, String save) {
 		// TODO implement
+	}
+
+	/**
+	 * @return Information about this object as a String.
+	 */
+	public String toString() {
+		return "Settings";
 	}
 }

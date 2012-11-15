@@ -9,107 +9,112 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represents a Player.
- * Information Holder
- *
- * User: Mark McDaniel, Andrew Wilder
- * Date: 9/22/12
- * Time: 12:33 AM
- * To change this template use File | Settings | File Templates.
+ * Represents a Player. Information Holder
+ * 
+ * User: Mark McDaniel, Andrew Wilder Date: 9/22/12 Time: 12:33 AM To change
+ * this template use File | Settings | File Templates.
  */
 public class Player {
-    private PlayerType playerType;
-    
-    private String name;
+	private PlayerType playerType;
 
-    private Ship ship;
-    
-    private int money, fuel;
-    
-    private Map<SkillType, Integer> skillLevels;
-    
-    private Inventory inventory;
-    
-    private Planet currentPlanet;
-    
-    private int difficulty;
+	private String name;
 
-    public Player(){
-    }
+	private Ship ship;
 
-    public Player(String name, int piloting, int trading, int engineering, int fighting) {
-		this.name = name;
-		skillLevels = new HashMap<SkillType, Integer>();
-        skillLevels.put(SkillType.PILOTING,piloting);
-		skillLevels.put(SkillType.TRADING,trading);
-		skillLevels.put(SkillType.ENGINEERING,engineering);
-		skillLevels.put(SkillType.FIGHTING,fighting);
-		this.money= GameVariables.playerStartingMoney;
-		this.ship= ShipFactory.getShip(ShipModel.GNAT);
-        this.fuel = ship.getMaxFuel();
+	private int money, fuel;
+
+	private Map<SkillType, Integer> skillLevels;
+
+	private Inventory inventory;
+
+	private Planet currentPlanet;
+
+	private int difficulty;
+
+	public Player() {
 	}
 
-    public void changeMoney(int amount){
-        money += amount;
-    }
+	public Player(String name, int piloting, int trading, int engineering,
+			int fighting) {
+		this.name = name;
+		skillLevels = new HashMap<SkillType, Integer>();
+		skillLevels.put(SkillType.PILOTING, piloting);
+		skillLevels.put(SkillType.TRADING, trading);
+		skillLevels.put(SkillType.ENGINEERING, engineering);
+		skillLevels.put(SkillType.FIGHTING, fighting);
+		this.money = GameVariables.PlayerStartingMoney;
+		this.ship = ShipFactory.getShip(ShipModel.GNAT);
+		this.fuel = ship.getMaxFuel();
+	}
 
-    //--Accessors and Modifiers
-    public Planet getCurrentPlanet() {
-        return currentPlanet;
-    }
+	public void changeMoney(int amount) {
+		money += amount;
+	}
 
-    public void setCurrentPlanet(Planet currentPlanet) {
-        this.currentPlanet = currentPlanet;
-    }
+	// --Accessors and Modifiers
+	public Planet getCurrentPlanet() {
+		return currentPlanet;
+	}
+
+	public void setCurrentPlanet(Planet currentPlanet) {
+		this.currentPlanet = currentPlanet;
+	}
 
 	public String getName() {
-        return name;
-    }
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Ship getShip() {
-        return ship;
-    }
+	public Ship getShip() {
+		return ship;
+	}
 
-    public void setShip(Ship ship) {
-        this.ship = ship;
-    }
+	public void setShip(Ship ship) {
+		this.ship = ship;
+	}
 
-    public int getMoney() {
-        return money;
-    }
+	public int getMoney() {
+		return money;
+	}
 
-    public void setMoney(int money) {
-        this.money = money;
-    }
+	public void setMoney(int money) {
+		this.money = money;
+	}
 
-    public Inventory getInventory() {
-        return inventory;
-    }
+	public Inventory getInventory() {
+		return inventory;
+	}
 
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
 
-    public Map<SkillType, Integer> getSkillLevels() {
-        return skillLevels;
-    }
+	public Map<SkillType, Integer> getSkillLevels() {
+		return skillLevels;
+	}
 
-    public void setSkillLevels(Map<SkillType, Integer> skillLevels) {
-        this.skillLevels = skillLevels;
-    }
-    
-    public int getFuel() {
-    	return fuel;
-    }
+	public void setSkillLevels(Map<SkillType, Integer> skillLevels) {
+		this.skillLevels = skillLevels;
+	}
 
-    public void setFuel(int fuel) {
-    	if (fuel < 0){
-            this.fuel = 0;
-        }
-        this.fuel = fuel;
-    }
+	public int getFuel() {
+		return fuel;
+	}
+
+	public void setFuel(int fuel) {
+		if (fuel < 0) {
+			this.fuel = 0;
+		}
+		this.fuel = fuel;
+	}
+
+	/**
+	 * @return Information about this object as a String.
+	 */
+	public String toString() {
+		return "Player";
+	}
 }

@@ -12,8 +12,6 @@ import java.util.*;
 
 public class ConfigReader {
 
-
-
 	/**
 	 * Parse a file as a Collection of Strings, delimited by newlines.
 	 * @param confFile The path to the file to parse.
@@ -46,7 +44,8 @@ public class ConfigReader {
 	}
 
     /**
-     * parse a file that determines game configuration variables into a map based on the name of the value and the integer value.
+     * parse a file that determines game configuration variables into a map based on the
+     * name of the value and the integer value.
      * Variables should be in the form of 'foo: 1'
      * @param confFile the name of the file in the Conf folder to parse
      * @return a map to use for settings game variables
@@ -55,7 +54,8 @@ public class ConfigReader {
         Map<String, Integer> variables = new HashMap<String, Integer>();
         Scanner scanner;
         try {
-            URL location = ConfigReader.class.getProtectionDomain().getCodeSource().getLocation();
+            URL location = 
+            	ConfigReader.class.getProtectionDomain().getCodeSource().getLocation();
             scanner = new Scanner(new File(location.getPath() + "Conf/" + confFile));
         } catch (FileNotFoundException e){
             System.out.println("File not found!");
@@ -67,9 +67,16 @@ public class ConfigReader {
         while (scanner.hasNext()){
             line = scanner.nextLine();
             String[] variableAndValue = line.split("");
-            variables.put(variableAndValue[0],Integer.parseInt(variableAndValue[1]));
+            variables.put(variableAndValue[0], Integer.parseInt(variableAndValue[1]));
         }
 
         return variables;
+    }
+    
+    /**
+     * @return Information about this object as a String.
+     */
+    public String toString() {
+    	return "ConfigReader";
     }
 }

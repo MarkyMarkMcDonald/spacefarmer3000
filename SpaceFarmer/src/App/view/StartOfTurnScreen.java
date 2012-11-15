@@ -11,77 +11,81 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
- * Created with IntelliJ IDEA.
- * User: mark.mcdonald
- * Date: 10/31/12
- * Time: 11:18 AM
+ * Created with IntelliJ IDEA. User: mark.mcdonald Date: 10/31/12 Time: 11:18 AM
  * To change this template use File | Settings | File Templates.
  */
-public class StartOfTurnScreen extends Screen{
-	
-    private JLabel turnInfo;
-    
-    private JLabel title;
+public class StartOfTurnScreen extends Screen {
 
-    private final String[] turnInfoStaticText = new String[] {"Turn "," of Round "};
-    
-    private final String[] titleStaticText = new String[] {"It is now ","'s turn."};
+	private JLabel turnInfo;
 
-    public StartOfTurnScreen(){
-        name = CardName.START_OF_TURN_CARD;
+	private JLabel title;
 
-        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+	private final String[] turnInfoStaticText = new String[] { "Turn ",
+			" of Round " };
 
-        Component glue1 = Box.createVerticalGlue();
-        Component glue2 = Box.createVerticalGlue();
-        title = new JLabel();
-        turnInfo = new JLabel();
+	private final String[] titleStaticText = new String[] { "It is now ",
+			"'s turn." };
 
-        title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        title.setAlignmentY(JLabel.CENTER_ALIGNMENT);
-        turnInfo.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        turnInfo.setAlignmentY(JLabel.CENTER_ALIGNMENT);
+	public StartOfTurnScreen() {
+		name = CardName.START_OF_TURN_CARD;
 
-        add(glue1);
-        add(title);
-        add(turnInfo);
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        JButton start = new JButton("Start");
-        start.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        start.setAlignmentY(JButton.CENTER_ALIGNMENT);
-        ContinueListener continueListener = new ContinueListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardToMoveTo = CardName.PLANET_INFORMATION_CARD;
+		Component glue1 = Box.createVerticalGlue();
+		Component glue2 = Box.createVerticalGlue();
+		title = new JLabel();
+		turnInfo = new JLabel();
 
-                // update the planet info screen to be based on the current player's planet
-                Player currentPlayerPlayer = Game.getCurrentPlayer();
-                Planet currentPlanet = currentPlayerPlayer.getCurrentPlanet();
-                PlanetInformationScreen planetInformationScreen = (PlanetInformationScreen) Display.getCard(cardToMoveTo.toString());
-                planetInformationScreen.update(currentPlanet);
+		title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		title.setAlignmentY(JLabel.CENTER_ALIGNMENT);
+		turnInfo.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		turnInfo.setAlignmentY(JLabel.CENTER_ALIGNMENT);
 
-                progressDisplay();
+		add(glue1);
+		add(title);
+		add(turnInfo);
 
-                // enable the navigation panel
-                JPanel navPanel = Display.getSidePanel("Left");
-                navPanel.setVisible(true);
+		JButton start = new JButton("Start");
+		start.setAlignmentX(JButton.CENTER_ALIGNMENT);
+		start.setAlignmentY(JButton.CENTER_ALIGNMENT);
+		ContinueListener continueListener = new ContinueListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cardToMoveTo = CardName.PLANET_INFORMATION_CARD;
 
-                PlayersInformationSidePanel playersInfoPanel = (PlayersInformationSidePanel) Display.getSidePanel("Bot");
-                playersInfoPanel.updateBasedOnAllPlayers();
-                playersInfoPanel.setVisible(true);
-            }
+				// update the planet info screen to be based on the current
+				// player's planet
+				Player currentPlayerPlayer = Game.getCurrentPlayer();
+				Planet currentPlanet = currentPlayerPlayer.getCurrentPlanet();
+				PlanetInformationScreen planetInformationScreen = (PlanetInformationScreen) Display
+						.getCard(cardToMoveTo.toString());
+				planetInformationScreen.update(currentPlanet);
 
-        };
-        start.addActionListener(continueListener);
-        add(start);
+				progressDisplay();
 
-        add(glue2);
-    }
+				// enable the navigation panel
+				JPanel navPanel = Display.getSidePanel("Left");
+				navPanel.setVisible(true);
 
-    public void updateTurn(){
-        turnInfo.setText(turnInfoStaticText[0] + Game.getTurnInRound()+ turnInfoStaticText[1] + Game.getRoundNumber());
-        Player player = Game.getCurrentPlayer();
-        String currentPlayerName = player.getName();
-        title.setText(titleStaticText[0] + currentPlayerName + titleStaticText[1]);
-    }
+				PlayersInformationSidePanel playersInfoPanel = (PlayersInformationSidePanel) Display
+						.getSidePanel("Bot");
+				playersInfoPanel.updateBasedOnAllPlayers();
+				playersInfoPanel.setVisible(true);
+			}
+
+		};
+		start.addActionListener(continueListener);
+		add(start);
+
+		add(glue2);
+	}
+
+	public void updateTurn() {
+		turnInfo.setText(turnInfoStaticText[0] + Game.getTurnInRound()
+				+ turnInfoStaticText[1] + Game.getRoundNumber());
+		Player player = Game.getCurrentPlayer();
+		String currentPlayerName = player.getName();
+		title.setText(titleStaticText[0] + currentPlayerName
+				+ titleStaticText[1]);
+	}
 }

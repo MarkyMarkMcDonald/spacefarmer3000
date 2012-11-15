@@ -10,29 +10,42 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
- * Created with IntelliJ IDEA.
- * User: mark.mcdonald
- * Date: 11/7/12
- * Time: 1:05 AM
+ * Created with IntelliJ IDEA. User: mark.mcdonald Date: 11/7/12 Time: 1:05 AM
  * To change this template use File | Settings | File Templates.
  */
 public class ViewPlanetListener extends ContinueListener {
 
-    private JComboBox planetChoices;
+	/**
+	 * A combo box containing the planet choices for this ViewPlanetListener to
+	 * use.
+	 */
+	private final JComboBox<Planet> planetChoices;
 
-    public ViewPlanetListener(JComboBox planetChoices){
-        cardToMoveTo = CardName.PLANET_INFORMATION_CARD;
-        this.planetChoices = planetChoices;
-    }
+	/**
+	 * Set up this ViewPlanetListener object.
+	 * 
+	 * @param planetChoices
+	 *            A combo box containing the Planet choices.
+	 */
+	public ViewPlanetListener(JComboBox<Planet> planetChoices) {
+		cardToMoveTo = CardName.PLANET_INFORMATION_CARD;
+		this.planetChoices = planetChoices;
+	}
 
-    public void actionPerformed(ActionEvent e){
-        PlanetInformationScreen planetInfoScreen = (PlanetInformationScreen) Display.getCard(cardToMoveTo.toString());
-        String selectedPlanetName = (String) planetChoices.getSelectedItem();
-        Planet selectedPlanet = UniverseFactory.getPlanet(selectedPlanetName);
-        planetInfoScreen.update(selectedPlanet);
+	public void actionPerformed(ActionEvent e) {
+		PlanetInformationScreen planetInfoScreen = (PlanetInformationScreen) Display
+				.getCard(cardToMoveTo.toString());
+		String selectedPlanetName = (String) planetChoices.getSelectedItem();
+		Planet selectedPlanet = UniverseFactory.getPlanet(selectedPlanetName);
+		planetInfoScreen.update(selectedPlanet);
 
-        progressDisplay();
-    }
+		progressDisplay();
+	}
 
-
+	/**
+	 * @return Information about this object as a String.
+	 */
+	public String toString() {
+		return "ViewPlanetListener";
+	}
 }

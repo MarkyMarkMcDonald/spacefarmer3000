@@ -10,7 +10,7 @@ import java.util.List;
  * Time: 2:25 PM
  */
 public class PlanetNames {
-    public static final String[] planetNames = new String[]{
+    public static final String[] PlanetNamesArray = new String[]{
             "Acamar",
             "Adahn",		// The alternate personality for The Nameless One in "Planescape: Torment"
             "Aldea",
@@ -134,6 +134,13 @@ public class PlanetNames {
     };
 
     public static List<String> getPlanetNamesAsList(){
-        return Arrays.asList(PlanetNames.planetNames);
+        return Arrays.asList(PlanetNames.PlanetNamesArray);
+    }
+    
+    /**
+     * @return Information about this object as a String.
+     */
+    public String toString() {
+    	return "PlanetNames";
     }
 }
