@@ -33,7 +33,7 @@ public class TransactionService {
 		String message;
 
 		Inventory inventory = player.getInventory();
-		Set<Tradable> inventoryItems = inventory.getTradablesHeld();
+		// Set<Tradable> inventoryItems = inventory.getTradablesHeld();
 		Ship ship = player.getShip();
 		int cargoSize = ship.getCargoSize();
 		int transactionCost = (price * quantity);
@@ -90,7 +90,7 @@ public class TransactionService {
 		Inventory inventory = player.getInventory();
 		int amountInInventory = inventory.getQuantity(tradeGood);
 		Ship ship = player.getShip();
-		int cargoSize = ship.getCargoSize();
+		// int cargoSize = ship.getCargoSize();
 		int transactionCost = price * quantity;
 
 		// make sure player has enough

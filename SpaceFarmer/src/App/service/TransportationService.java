@@ -33,7 +33,7 @@ public class TransportationService {
 				currSystem.getY(), newSystem.getX(), newSystem.getY());
 
 		// The planet is in the same system
-		if (newSystem == currSystem) {
+		if (newSystem.equals(currSystem)) {
 			currentPlayer.setCurrentPlanet(p);
 		}
 		// The planet is in a different system

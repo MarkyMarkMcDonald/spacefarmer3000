@@ -144,7 +144,7 @@ public class Loader_db {
 		Player tempP = null;
 		Ship tempShip = null;
 		ShipModel tempMod = null;
-		Planet tempPlanet;
+		// Planet tempPlanet;
 		Map<SkillType, Integer> tempSkill = null;
 		try {
 			if (!cursor.eof()) {
@@ -215,7 +215,7 @@ public class Loader_db {
 		TechnologyLevel tempTech = null;
 		PlanetarySystem tempSys = null;
 		ResourceType tempRes = null;
-		PlanetarySystem tempPs = null;
+		// PlanetarySystem tempPs = null;
 		PoliticalSystem tempPol = null;
 		Event tempE = null;
 		try {
