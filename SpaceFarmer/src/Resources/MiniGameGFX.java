@@ -1,4 +1,4 @@
-package resources;
+package Resources;
 
 public class MiniGameGFX {
 	public static int[] AsteroidGFX = { 0x00000000, 0x00000000, 0x00000000,

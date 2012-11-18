@@ -1,10 +1,10 @@
-package test;
+package Test;
 
-import app.model.Game;
-import app.model.Player.Player;
-import app.model.Universe.Planet;
-import app.model.Universe.PlanetarySystem;
-import app.service.TransportationService;
+import App.model.Game;
+import App.model.Player.Player;
+import App.model.Universe.Planet;
+import App.model.Universe.PlanetarySystem;
+import App.service.TransportationService;
 import org.junit.*;
 
 import java.util.HashMap;

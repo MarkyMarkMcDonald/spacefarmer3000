@@ -1,6 +1,6 @@
-package app.view;
+package App.view;
 
-import app.listener.BasicContinueListener;
+import App.listener.BasicContinueListener;
 
 import java.awt.Component;
 import java.awt.Font;

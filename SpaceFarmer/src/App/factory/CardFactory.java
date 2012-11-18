@@ -1,7 +1,7 @@
-package app.factory;
+package App.factory;
 
-import app.view.CardName;
-import app.view.Screen;
+import App.view.CardName;
+import App.view.Screen;
 
 import java.util.EnumMap;
 import java.util.Map;

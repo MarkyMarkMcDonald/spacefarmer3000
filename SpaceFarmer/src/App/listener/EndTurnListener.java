@@ -1,9 +1,9 @@
-package app.listener;
+package App.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import app.model.Game;
+import App.model.Game;
 
 public class EndTurnListener implements ActionListener {
 

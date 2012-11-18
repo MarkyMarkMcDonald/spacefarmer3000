@@ -1,6 +1,6 @@
-package app.view;
+package App.view;
 
-import app.listener.StartGameListener;
+import App.listener.StartGameListener;
 
 import javax.swing.*;
 import java.awt.*;

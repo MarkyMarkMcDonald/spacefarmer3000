@@ -1,11 +1,11 @@
-package app.view.sidepanels;
+package App.view.SidePanels;
 
-import app.listener.ContinueListener;
-import app.model.Game;
-import app.view.CardName;
-import app.view.Display;
-import app.view.market.MarketScreen;
-import app.view.PlanetInformationScreen;
+import App.listener.ContinueListener;
+import App.model.Game;
+import App.view.CardName;
+import App.view.Display;
+import App.view.Market.MarketScreen;
+import App.view.PlanetInformationScreen;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

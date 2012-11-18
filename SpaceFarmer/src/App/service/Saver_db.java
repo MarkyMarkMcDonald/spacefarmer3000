@@ -1,10 +1,10 @@
-package app.service;
+package App.service;
 
-import app.model.Game;
-import app.model.Player.Player;
-import app.model.Settings;
-import app.model.TradeGoods.Tradable;
-import app.model.Universe.Planet;
+import App.model.Game;
+import App.model.Player.Player;
+import App.model.Settings;
+import App.model.TradeGoods.Tradable;
+import App.model.Universe.Planet;
 import org.tmatesoft.sqljet.core.SqlJetException;
 import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
 import org.tmatesoft.sqljet.core.table.ISqlJetTable;
@@ -177,7 +177,7 @@ public class Saver_db {
 		// fill in the Database
 		try {
 			ISqlJetTable table = db.getTable(TABLE_PLAYERS);
-			// test entry
+			// Test entry
 			table.insert("ZOOL", 9999, "Earth", "BFS", 1, 2, 3, 4);
 			// for (Player player : players) {
 			// table.insert(temp[i].getName(),temp[i].getMoney(),temp[i].getFuel(),
@@ -238,7 +238,7 @@ public class Saver_db {
 		// fill in the Database
 		try {
 			ISqlJetTable table = db.getTable(TABLE_PLANETS);
-			// test entry
+			// Test entry
 			table.insert("EARTH", "milky way", "OVER9000", "BICKERING",
 					"EVERYTHING", 1, 2);
 			for (int i = 0; i < temp.length; i++)
@@ -266,7 +266,7 @@ public class Saver_db {
 		 * " TEXT NOT NULL )"; //makes the table try
 		 * {db.createTable(createTableQuery);} finally {db.commit();} //fill in
 		 * the Database try { //gameSettings. ISqlJetTable table =
-		 * db.getTable(TABLE_SETTINGS); //test entry //table.insert("ZOOL",1,2);
+		 * db.getTable(TABLE_SETTINGS); //Test entry //table.insert("ZOOL",1,2);
 		 * //table.insert(game.getNumberOfTurns(),game.getCurrentPlayer());
 		 * 
 		 * } finally {db.commit();}
@@ -290,7 +290,7 @@ public class Saver_db {
 		// fill in the Database
 		try {
 			ISqlJetTable table = db.getTable(TABLE_MARKETS);
-			// test entry
+			// Test entry
 
 			// table.insert("ZOOL",1,2);
 			for (int i = 0; i < tempP.length; i++) {

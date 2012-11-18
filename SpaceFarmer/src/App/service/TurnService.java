@@ -1,6 +1,6 @@
-package app.service;
+package App.service;
 
-import app.model.Game;
+import App.model.Game;
 
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 11/14/12 Time: 3:06 AM

@@ -1,4 +1,4 @@
-package app.view.sidepanels;
+package App.view.SidePanels;
 
 /**
  * Bad = something happened, but it wasn't beneficial to the player Error =

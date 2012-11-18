@@ -1,6 +1,6 @@
-package app.service;
+package App.service;
 
-import app.model.Settings;
+import App.model.Settings;
 
 /**
  * User: marky Date: 10/8/12 Time: 1:36 PM
