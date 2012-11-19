@@ -1,10 +1,10 @@
-package App.view;
+package app.view;
 
-import App.factory.UniverseFactory;
-import App.model.Game;
-import App.model.Universe.Planet;
-import App.model.Universe.PlanetarySystem;
-import Conf.GameVariables;
+import app.factory.UniverseFactory;
+import app.model.Game;
+import app.model.Universe.Planet;
+import app.model.Universe.PlanetarySystem;
+import conf.GameVariables;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

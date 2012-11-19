@@ -1,9 +1,9 @@
-package App.listener;
+package app.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import App.view.CardName;
+import app.view.CardName;
 
 /**
  * The purpose of this class is to function as a generic screen advancement

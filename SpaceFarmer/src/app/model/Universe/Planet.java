@@ -1,7 +1,7 @@
-package App.model.Universe;
+package app.model.Universe;
 
-import App.model.*;
-import App.service.Randomizer;
+import app.model.*;
+import app.service.Randomizer;
 
 /**
  * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:32 AM To

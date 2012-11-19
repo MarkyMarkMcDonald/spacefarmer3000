@@ -1,4 +1,4 @@
-package App.view;
+package app.view;
 
 import javax.swing.*;
 

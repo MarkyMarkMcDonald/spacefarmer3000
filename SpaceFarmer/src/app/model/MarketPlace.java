@@ -1,10 +1,10 @@
-package App.model;
+package app.model;
 
-import App.model.TradeGoods.BasicGood;
-import App.model.TradeGoods.Tradable;
-import App.model.TradeGoods.TradeGoodType;
-import App.model.Universe.Planet;
-import App.service.Randomizer;
+import app.model.TradeGoods.BasicGood;
+import app.model.TradeGoods.Tradable;
+import app.model.TradeGoods.TradeGoodType;
+import app.model.Universe.Planet;
+import app.service.Randomizer;
 
 import java.util.HashMap;
 import java.util.Map;

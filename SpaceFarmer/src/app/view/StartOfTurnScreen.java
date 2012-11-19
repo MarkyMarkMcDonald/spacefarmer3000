@@ -1,10 +1,10 @@
-package App.view;
+package app.view;
 
-import App.listener.ContinueListener;
-import App.model.Game;
-import App.model.Universe.Planet;
-import App.model.Player.Player;
-import App.view.SidePanels.PlayersInformationSidePanel;
+import app.listener.ContinueListener;
+import app.model.Game;
+import app.model.Universe.Planet;
+import app.model.Player.Player;
+import app.view.SidePanels.PlayersInformationSidePanel;
 
 import javax.swing.*;
 import java.awt.*;

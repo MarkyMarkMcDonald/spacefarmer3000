@@ -1,4 +1,4 @@
-package Conf;
+package conf;
 
 import java.io.File;
 import java.io.FileNotFoundException;

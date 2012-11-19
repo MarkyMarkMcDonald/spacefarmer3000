@@ -1,13 +1,13 @@
-package App.listener;
+package app.listener;
 
-import App.model.Game;
-import App.model.Inventory;
-import App.model.MarketPlace;
-import App.model.TradeGoods.Tradable;
-import App.service.TransactionService;
-import App.view.Display;
-import App.view.Market.SellingPanel;
-import App.view.SidePanels.MessageType;
+import app.model.Game;
+import app.model.Inventory;
+import app.model.MarketPlace;
+import app.model.TradeGoods.Tradable;
+import app.service.TransactionService;
+import app.view.Display;
+import app.view.Market.SellingPanel;
+import app.view.SidePanels.MessageType;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,6 +1,6 @@
-package App.model;
+package app.model;
 
-import App.model.TradeGoods.Tradable;
+import app.model.TradeGoods.Tradable;
 
 import java.util.Collection;
 import java.util.HashMap;

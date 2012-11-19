@@ -1,11 +1,11 @@
 // made my mykal thomas
-package App.service;
+package app.service;
 
-import App.model.Game;
-import App.model.Player.Player;
-import App.model.Settings;
-import App.model.TradeGoods.Tradable;
-import App.model.Universe.Planet;
+import app.model.Game;
+import app.model.Player.Player;
+import app.model.Settings;
+import app.model.TradeGoods.Tradable;
+import app.model.Universe.Planet;
 import org.tmatesoft.sqljet.core.SqlJetException;
 import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
 import org.tmatesoft.sqljet.core.table.ISqlJetTable;

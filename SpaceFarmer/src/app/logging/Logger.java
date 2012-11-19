@@ -1,11 +1,11 @@
-package App.logging;
+package app.logging;
 
-import App.factory.UniverseFactory;
-import App.model.*;
-import App.model.Player.Player;
-import App.model.Player.SkillType;
-import App.model.Universe.Planet;
-import App.model.Universe.PlanetarySystem;
+import app.factory.UniverseFactory;
+import app.model.*;
+import app.model.Player.Player;
+import app.model.Player.SkillType;
+import app.model.Universe.Planet;
+import app.model.Universe.PlanetarySystem;
 
 import java.util.Collection;
 import java.util.List;

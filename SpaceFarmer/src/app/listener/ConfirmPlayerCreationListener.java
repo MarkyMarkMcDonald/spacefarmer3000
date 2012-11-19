@@ -1,18 +1,18 @@
-package App.listener;
+package app.listener;
 
-import App.model.Game;
-import App.model.Inventory;
-import App.model.Player.Player;
-import App.service.PlayerValidationService;
-import App.view.CardName;
-import App.view.Display;
-import App.view.PlayerInformationScreen;
+import app.model.Game;
+import app.model.Inventory;
+import app.model.Player.Player;
+import app.service.PlayerValidationService;
+import app.view.CardName;
+import app.view.Display;
+import app.view.PlayerInformationScreen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//import App.Util.Settings;
-//import App.service.SettingService;
+//import app.Util.Settings;
+//import app.service.SettingService;
 
 /**
  * This class is used as an ActionListener for the confirm button on the create

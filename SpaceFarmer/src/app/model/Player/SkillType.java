@@ -1,6 +1,6 @@
-package App.model.Player;
+package app.model.Player;
 
-import App.view.Screen;
+import app.view.Screen;
 
 /**
  * User: marky Date: 10/7/12 Time: 8:46 PM

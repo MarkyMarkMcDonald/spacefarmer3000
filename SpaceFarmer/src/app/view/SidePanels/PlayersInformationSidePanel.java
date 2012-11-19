@@ -1,10 +1,10 @@
-package App.view.SidePanels;
+package app.view.SidePanels;
 
-import App.listener.ContinueListener;
-import App.model.Game;
-import App.model.Player.Player;
-import App.view.CardName;
-import App.view.PlayerInformationSidePanel;
+import app.listener.ContinueListener;
+import app.model.Game;
+import app.model.Player.Player;
+import app.view.CardName;
+import app.view.PlayerInformationSidePanel;
 
 import javax.swing.*;
 import java.awt.*;

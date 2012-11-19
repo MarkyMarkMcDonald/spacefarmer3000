@@ -1,11 +1,11 @@
-package App.listener;
+package app.listener;
 
-import App.factory.UniverseFactory;
-import App.model.Game;
-import App.model.Settings;
-import App.model.Player.Player;
-import App.model.Universe.Planet;
-import App.service.Saver_db;
+import app.factory.UniverseFactory;
+import app.model.Game;
+import app.model.Settings;
+import app.model.Player.Player;
+import app.model.Universe.Planet;
+import app.service.Saver_db;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

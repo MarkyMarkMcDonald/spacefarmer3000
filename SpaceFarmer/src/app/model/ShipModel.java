@@ -1,4 +1,4 @@
-package App.model;
+package app.model;
 
 public enum ShipModel {
 	GNAT("Gnat"), FIREFLY("Firefly"), MOSQUITO("Mosquito"), BUMBLEBEE(

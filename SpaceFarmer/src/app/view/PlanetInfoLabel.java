@@ -1,8 +1,8 @@
-package App.view;
+package app.view;
 
-import App.model.Game;
-import App.model.Universe.Planet;
-import App.model.Universe.PlanetarySystem;
+import app.model.Game;
+import app.model.Universe.Planet;
+import app.model.Universe.PlanetarySystem;
 
 import javax.swing.*;
 import java.awt.geom.Point2D;

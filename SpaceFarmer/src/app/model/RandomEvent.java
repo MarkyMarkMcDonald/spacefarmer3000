@@ -1,6 +1,6 @@
-package App.model;
+package app.model;
 
-import App.model.Player.Player;
+import app.model.Player.Player;
 
 public enum RandomEvent {
 	LOSE_ITEM(EventFunction.LoseFunction), FIND_ITEM(EventFunction.WinFunction);

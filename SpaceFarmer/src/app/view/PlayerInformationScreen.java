@@ -1,7 +1,7 @@
-package App.view;
+package app.view;
 
-import App.listener.ConfirmPlayerCreationListener;
-import App.listener.IncrementListener;
+import app.listener.ConfirmPlayerCreationListener;
+import app.listener.IncrementListener;
 
 import javax.swing.*;
 import java.awt.*;

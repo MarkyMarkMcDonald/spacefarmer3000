@@ -1,11 +1,11 @@
-package App.service;
+package app.service;
 
-import App.model.Game;
-import App.model.Player.Player;
-import App.model.Universe.Planet;
-import App.model.Universe.PlanetarySystem;
-import App.view.Display;
-import App.view.SidePanels.MessageType;
+import app.model.Game;
+import app.model.Player.Player;
+import app.model.Universe.Planet;
+import app.model.Universe.PlanetarySystem;
+import app.view.Display;
+import app.view.SidePanels.MessageType;
 
 import java.awt.geom.Point2D;
 

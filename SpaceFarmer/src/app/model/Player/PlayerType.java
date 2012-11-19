@@ -1,4 +1,4 @@
-package App.model.Player;
+package app.model.Player;
 
 /**
  * User: marky Date: 10/13/12 Time: 5:58 PM

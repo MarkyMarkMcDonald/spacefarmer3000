@@ -1,6 +1,6 @@
-package App.view.Market;
+package app.view.Market;
 
-import App.listener.TransactionListener;
+import app.listener.TransactionListener;
 
 import javax.swing.*;
 import java.awt.*;

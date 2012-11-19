@@ -1,8 +1,8 @@
-package App.factory;
+package app.factory;
 
-import App.model.*;
-import App.model.Universe.*;
-import App.service.Randomizer;
+import app.model.*;
+import app.model.Universe.*;
+import app.service.Randomizer;
 
 import java.util.ArrayList;
 import java.util.HashMap;

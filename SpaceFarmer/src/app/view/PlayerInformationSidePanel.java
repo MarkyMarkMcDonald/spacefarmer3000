@@ -1,8 +1,8 @@
-package App.view;
+package app.view;
 
-import App.model.Player.Player;
-import App.model.Ship;
-import App.model.ShipModel;
+import app.model.Player.Player;
+import app.model.Ship;
+import app.model.ShipModel;
 
 import javax.swing.*;
 

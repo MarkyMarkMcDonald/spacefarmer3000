@@ -1,4 +1,4 @@
-package App.model.TradeGoods;
+package app.model.TradeGoods;
 
 /**
  * User: marky Date: 10/21/12 Time: 5:58 PM

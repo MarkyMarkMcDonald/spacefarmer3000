@@ -1,11 +1,11 @@
-package App.service;
+package app.service;
 
-import App.model.*;
-import App.model.Player.Player;
-import App.model.Player.SkillType;
-import App.model.TradeGoods.BasicGood;
-import App.model.TradeGoods.TradeGoodType;
-import App.model.Universe.*;
+import app.model.*;
+import app.model.Player.Player;
+import app.model.Player.SkillType;
+import app.model.TradeGoods.BasicGood;
+import app.model.TradeGoods.TradeGoodType;
+import app.model.Universe.*;
 import org.tmatesoft.sqljet.core.SqlJetException;
 import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
 import org.tmatesoft.sqljet.core.table.ISqlJetCursor;
@@ -18,9 +18,9 @@ import java.util.Collection;
 import java.util.Map;
 
 /*
- import App.model.Universe.Planet;
- import App.model.Player.Player;
- import App.model.Settings;
+ import app.model.Universe.Planet;
+ import app.model.Player.Player;
+ import app.model.Settings;
  */
 /**
  * 

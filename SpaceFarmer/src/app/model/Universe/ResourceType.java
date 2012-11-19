@@ -1,4 +1,4 @@
-package App.model.Universe;
+package app.model.Universe;
 
 public enum ResourceType {
 

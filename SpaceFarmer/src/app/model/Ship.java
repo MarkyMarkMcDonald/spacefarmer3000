@@ -1,4 +1,4 @@
-package App.model;
+package app.model;
 
 /**
  * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:33 AM To

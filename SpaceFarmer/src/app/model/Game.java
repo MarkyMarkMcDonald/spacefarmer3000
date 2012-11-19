@@ -1,7 +1,7 @@
-package App.model;
+package app.model;
 
-import App.model.Player.Player;
-import App.model.Universe.Planet;
+import app.model.Player.Player;
+import app.model.Universe.Planet;
 
 import java.util.ArrayList;
 import java.util.List;

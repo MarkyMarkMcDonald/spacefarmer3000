@@ -1,10 +1,10 @@
-package App.model;
+package app.model;
 
-import App.model.Player.Player;
-import App.model.TradeGoods.BasicGood;
-import App.model.TradeGoods.Tradable;
-import App.model.TradeGoods.TradeGoodType;
-import App.service.Randomizer;
+import app.model.Player.Player;
+import app.model.TradeGoods.BasicGood;
+import app.model.TradeGoods.Tradable;
+import app.model.TradeGoods.TradeGoodType;
+import app.service.Randomizer;
 
 import java.util.Set;
 

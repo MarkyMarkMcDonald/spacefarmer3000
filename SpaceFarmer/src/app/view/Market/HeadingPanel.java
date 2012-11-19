@@ -1,4 +1,4 @@
-package App.view.Market;
+package app.view.Market;
 
 import javax.swing.*;
 import java.awt.*;

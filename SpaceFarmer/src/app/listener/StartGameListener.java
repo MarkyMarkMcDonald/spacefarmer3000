@@ -1,12 +1,12 @@
-package App.listener;
+package app.listener;
 
-import App.logging.Logger;
-import App.model.Game;
-import App.model.Player.Player;
-import App.service.Randomizer;
-import App.view.CardName;
-import App.view.Display;
-import App.view.StartOfTurnScreen;
+import app.logging.Logger;
+import app.model.Game;
+import app.model.Player.Player;
+import app.service.Randomizer;
+import app.view.CardName;
+import app.view.Display;
+import app.view.StartOfTurnScreen;
 
 import java.awt.event.ActionEvent;
 import java.util.List;

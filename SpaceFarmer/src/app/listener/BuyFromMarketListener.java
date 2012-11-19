@@ -1,11 +1,11 @@
-package App.listener;
+package app.listener;
 
-import App.model.Game;
-import App.model.MarketPlace;
-import App.model.TradeGoods.Tradable;
-import App.service.TransactionService;
-import App.view.Display;
-import App.view.Market.BuyingPanel;
+import app.model.Game;
+import app.model.MarketPlace;
+import app.model.TradeGoods.Tradable;
+import app.service.TransactionService;
+import app.view.Display;
+import app.view.Market.BuyingPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,10 +1,10 @@
-package App.listener;
+package app.listener;
 
-import App.factory.UniverseFactory;
-import App.model.Universe.Planet;
-import App.view.CardName;
-import App.view.Display;
-import App.view.PlanetInformationScreen;
+import app.factory.UniverseFactory;
+import app.model.Universe.Planet;
+import app.view.CardName;
+import app.view.Display;
+import app.view.PlanetInformationScreen;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,9 +1,9 @@
-package App.view.SidePanels;
+package app.view.SidePanels;
 
-import App.listener.TransportationListener;
-import App.model.Game;
-import App.model.Universe.Planet;
-import App.view.PlanetInfoLabel;
+import app.listener.TransportationListener;
+import app.model.Game;
+import app.model.Universe.Planet;
+import app.view.PlanetInfoLabel;
 
 import javax.swing.*;
 import java.awt.*;

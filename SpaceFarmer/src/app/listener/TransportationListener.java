@@ -1,14 +1,14 @@
-package App.listener;
+package app.listener;
 
-import App.model.EventFunction;
-import App.model.Game;
-import App.model.Universe.Planet;
-import App.service.Randomizer;
-import App.service.TransportationService;
-import App.view.CardName;
-import App.view.Display;
-import App.view.PlanetInformationScreen;
-import App.view.SidePanels.TravelSidePanel;
+import app.model.EventFunction;
+import app.model.Game;
+import app.model.Universe.Planet;
+import app.service.Randomizer;
+import app.service.TransportationService;
+import app.view.CardName;
+import app.view.Display;
+import app.view.PlanetInformationScreen;
+import app.view.SidePanels.TravelSidePanel;
 
 import java.awt.event.ActionEvent;
 

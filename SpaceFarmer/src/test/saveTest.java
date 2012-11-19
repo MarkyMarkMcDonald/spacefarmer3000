@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Test;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +14,7 @@ import org.junit.Test;
 public class saveTest {
 
 	/**
-	 * Test method for {@link App.service.Saver_db#Saver_db(java.io.File, java.util.Collection, java.util.Map, App.model.Settings, App.model.Game)}.
+	 * Test method for {@link app.service.Saver_db#Saver_db(java.io.File, java.util.Collection, java.util.Map, app.model.Settings, app.model.Game)}.
 	 */
 	@Test
 	public void testSaver_db() {
@@ -22,7 +22,7 @@ public class saveTest {
 	}
 
 	/**
-	 * Test method for {@link App.service.Saver_db#saveGame()}.
+	 * Test method for {@link app.service.Saver_db#saveGame()}.
 	 */
 	@Test
 	public void testSaveGame() {
