@@ -50,7 +50,7 @@ public class SaverListener implements ActionListener {
 		//Planet[] tempPlan=new Planet[UniverseFactory.getPlanets().size()];
 		//tempPlan=(Planet[]) UniverseFactory.getPlanets().values().toArray();
 		Saver_db saver = new Saver_db(fileChooserListener.getDbFile(),
-				Game.getPlayers(), UniverseFactory.getPlanets(),
+				Game.getPlayers(), UniverseFactory.getAllPlanets(),
 				new Settings(), new Game());
 		try {
 			saver.saveGame();

@@ -9,11 +9,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class creates the universe
+ * @author Bobby
+ * @version 1
+ *
+ */
 public class UniverseFactory {
 
-	private static Map<String, Planet> Planets;
+	/**
+	 * map of the planets to be
+	 */
+	private static Map<String, Planet> Planets=null;
 
-	private static Map<String, PlanetarySystem> Systems;
+	/**
+	 * map of the systems to be
+	 */
+	private static Map<String, PlanetarySystem> Systems=null;
 
 	/**
 	 * Perform a reverse lookup of a PlanetarySystem from its unique name.
@@ -43,7 +55,7 @@ public class UniverseFactory {
 	 * @return The mapping of Planet names (as Strings) onto their respective
 	 *         Planets.
 	 */
-	public static Map<String, Planet> getPlanets() {
+	public static Map<String, Planet> getAllPlanets() {
 		return Planets;
 	}
 

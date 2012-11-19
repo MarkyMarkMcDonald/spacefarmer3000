@@ -21,7 +21,7 @@ public class Logger {
 	 */
 	public static void printGameToConsole() {
 		List<Player> players = Game.getPlayers();
-		Collection<Planet> planets = UniverseFactory.getPlanets().values();
+		Collection<Planet> planets = UniverseFactory.getAllPlanets().values();
 		Collection<PlanetarySystem> systems = UniverseFactory
 				.getPlanetarySystems().values();
 

@@ -190,7 +190,7 @@ public class Randomizer {
 	}
 
 	public static Planet getRandomPlanet() {
-		Collection<Planet> planetCollection = UniverseFactory.getPlanets()
+		Collection<Planet> planetCollection = UniverseFactory.getAllPlanets()
 				.values();
 		List<Planet> planets = new ArrayList<Planet>(planetCollection);
 		int numberOfPlanets = UniverseFactory.getNumberOfPlanets();
