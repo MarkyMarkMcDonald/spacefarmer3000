@@ -13,7 +13,10 @@ import org.tmatesoft.sqljet.core.table.SqlJetDb;
 
 import java.io.File;
 //import java.util.Collection;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * hold the information for the game in a database
@@ -206,11 +209,21 @@ public class Saver_db {
 	 * @param game
 	 * 	the actual game
 	 */
-	public Saver_db(File dbFile, Player[] people,
-			Planet[] universe, Settings settings, Game game) {
+	public Saver_db(File dbFile, List<Player> people,
+			Map<String,Planet> universe, Settings settings, Game game) {
 		this.dbFile = dbFile;
-		this.players = people;
-		this.planets = universe;
+		this.players = new Player[people.size()];
+		for(int i=0;i<people.size();i++)
+			players[i]=people.get(i);
+			
+		Set temp=universe.keySet();
+		
+		Object[] tempO=temp.toArray();
+		Planet[] tempP=new Planet[tempO.length];
+		for(int i=0;i<tempO.length;i++)
+			tempP[i]=universe.get(tempO[i]);
+		
+		this.planets =tempP;
 		this.gameSettings = settings;
 		this.game = game;
 	}
@@ -222,8 +235,11 @@ public class Saver_db {
 	 * @throws SqlJetException
 	 */
 	public void saveGame() throws SqlJetException {
+		try{
 		dbFile.delete();
-		
+		} finally{
+			
+		}
 		// create database
 		final SqlJetDb db = SqlJetDb.open(dbFile, true);
 		// set DB option that have to be set before running any transactions:
@@ -364,6 +380,7 @@ public class Saver_db {
 			// Test entry
 
 			// table.insert("ZOOL",1,2);
+			/*
 			for (int i = 0; i < tempP.length; i++) {
 				tempM = tempP[i].getMarket().getQuantityMap();
 				tempTradeArray = (Tradable[]) tempM.keySet().toArray();
@@ -372,7 +389,8 @@ public class Saver_db {
 							tempM.get(tempTradeArray[j]), tempP[i].getName());
 
 				}
-			}
+				
+			}*/
 		} finally {
 			db.commit();
 		}
