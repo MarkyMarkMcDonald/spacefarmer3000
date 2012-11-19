@@ -110,8 +110,8 @@ public class UniverseFactory {
 
 		int planetNameIndex, systemNameIndex;
 		String planetName, systemName;
-		List<String> planetNamesHolder = new ArrayList<String>(planetNames);
-		List<String> systemNamesHolder = new ArrayList<String>(
+		final List<String> planetNamesHolder = new ArrayList<String>(planetNames);
+		final List<String> systemNamesHolder = new ArrayList<String>(
 				planetarySystemNames);
 
 		// systemDistribution and planetDistribution put the planets and systems
@@ -123,12 +123,12 @@ public class UniverseFactory {
 		// have planet
 		// counts
 		// 2,2, and 3 respectively.
-		int systemDistribution[] = Randomizer.distributeNumber(uniRows
+		final int systemDistribution[] = Randomizer.distributeNumber(uniRows
 				* uniCols, numSystems);
-		int planetDistribution[] = Randomizer.distributeNumber(numSystems,
+		final int planetDistribution[] = Randomizer.distributeNumber(numSystems,
 				numPlanets);
 		List<Integer[]> planetPositions;
-		Map<Integer, List<Integer[]>> systemDimensions = 
+		final Map<Integer, List<Integer[]>> systemDimensions = 
 				new HashMap<Integer, List<Integer[]>>(numSystems);
 		for (int i = 0; i < uniRows * uniCols; i++) {
 			// Give unique X and Y coordinates for each system in a quadrant
