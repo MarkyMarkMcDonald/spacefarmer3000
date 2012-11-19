@@ -44,13 +44,13 @@ public class SaverListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		Player[] tempP=new Player[Game.getPlayers().size()];
-		System.out.println(Game.getPlayers().toArray());
-		tempP=(Player[]) Game.getPlayers().toArray();
-		Planet[] tempPlan=new Planet[UniverseFactory.getPlanets().size()];
-		tempPlan=(Planet[]) UniverseFactory.getPlanets().values().toArray();
+		//Player[] tempP=new Player[Game.getPlayers().size()];
+		//System.out.println(Game.getPlayers().toArray());
+		//tempP=(Player[]) Game.getPlayers().toArray();
+		//Planet[] tempPlan=new Planet[UniverseFactory.getPlanets().size()];
+		//tempPlan=(Planet[]) UniverseFactory.getPlanets().values().toArray();
 		Saver_db saver = new Saver_db(fileChooserListener.getDbFile(),
-				tempP, tempPlan,
+				Game.getPlayers(), UniverseFactory.getPlanets(),
 				new Settings(), new Game());
 		try {
 			saver.saveGame();
