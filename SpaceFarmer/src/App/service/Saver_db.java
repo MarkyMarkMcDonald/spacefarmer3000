@@ -1,3 +1,4 @@
+// made my mykal thomas
 package App.service;
 
 import App.model.Game;
@@ -11,53 +12,105 @@ import org.tmatesoft.sqljet.core.table.ISqlJetTable;
 import org.tmatesoft.sqljet.core.table.SqlJetDb;
 
 import java.io.File;
-import java.util.Collection;
+//import java.util.Collection;
 import java.util.Map;
 
 /**
  * hold the information for the game in a database
  * 
- * Mykal Thomas Settings 11/1/2012
- * 
+ * @author mykal thomas
+ * @version 1
  **/
 public class Saver_db {
-	private Collection<Player> players;
+	
+	/**
+	 * an array of the game's current players
+	 */
+	private final Player[] players;
+	
+	/**
+	 * an array of the game's current planets
+	 */
+	 private final Planet[] planets;
+	
+	/**
+	 * the game's current settings
+	 */
+	private final Settings gameSettings;
+	
+	/**
+	 * the current game
+	 */
+	private final Game game;
 
-	private Collection<Planet> planets;
-
-	private Settings gameSettings;
-
-	private Game game;
-
-	// db file
-	private File dbFile;
-
-	// table names
+	/**
+	 *  db file
+	 */
+	private final File dbFile;
+	
+	/**
+	 *  table:players
+	 */
 	private static final String TABLE_PLAYERS = "Players";
-
+	
+	/**
+	 *  table:Inventory
+	 */
 	private static final String TABLE_INVENTORY = "Inventory";
-
+	
+	/**
+	 *  table:Planets
+	 */
 	private static final String TABLE_PLANETS = "Planets";
-
-	private static final String TABLE_SETTINGS = "Game";
-
+	
+	/*
+	 * table settings
+	//private static final String TABLE_SETTINGS = "Game";
+	 */
+	/**
+	 * table:Planetary systems
+	 */
 	private static final String TABLE_PLANSYS = "PlanetarySys";
-
-	// player colls
+	
+	//PLAYER COLLUMS
+	/** 
+	 * Player field: Name
+	 */
 	private static final String FIELD_NAME = "Name";
 
+	/** 
+	 * Player field: Piloting
+	 */
 	private static final String FIELD_PILOTING = "Piloting";
 
+	/** 
+	 * Player field: Trading
+	 */
 	private static final String FIELD_TRADING = "Trading";
 
+	/** 
+	 * Player field: Engineering
+	 */
 	private static final String FIELD_ENGINEERING = "Engineering";
 
+	/** 
+	 * Player field: Fighting
+	 */
 	private static final String FIELD_FIGHTING = "Fighting";
 
+	/** 
+	 * Player field: Money
+	 */
 	private static final String FIELD_MONEY = "Money";
 
+	/** 
+	 * Player field: Ship
+	 */
 	private static final String FIELD_SHIP = "Ship";
 
+	/** 
+	 * Player field: Current Planet
+	 */
 	private static final String FIELD_CURRPLANET = "Current_Planet";
 
 	// Inventory colls
@@ -68,58 +121,97 @@ public class Saver_db {
 	 * private static final String FIELD_ = ""; private static final String
 	 * FIELD_ = "";
 	 */
-	// Planet colls
+	// PLANET COLLUMS
+	/**
+	 * Planet Table: Name
+	 */
 	private static final String FIELD_PLANET = "name";
 
+	/**
+	 * Planet Table: Tech Level
+	 */
 	private static final String FIELD_TECH = "Tech_LV";
 
+	/**
+	 * Planet Table: Political system
+	 */
 	private static final String FIELD_POLSYS = "Political_sys";
 
+	/**
+	 * Planet Table: Resource type
+	 */
 	private static final String FIELD_RESOURCE = "Resource_Type";
 
+	/**
+	 * Planet Table: X coordinate
+	 */
 	private static final String FIELD_X = "X";
 
+	/**
+	 * Planet Table: Y coordinate
+	 */
 	private static final String FIELD_Y = "Y";
 
-	// Game
-	private static final String FIELD_CURRTURN = "Current_Turn";
-
-	private static final String FIELD_CURRPLAYER = "Current_player";
-
-	private static final String FIELD_DIFF = "Difficulty";
-
-	// added fields
+	/**
+	 * Planet Table/ System Table: SYSTEM
+	 */
 	private static final String FIELD_SYS = "system";
-
+	
+	/**
+	 * Player Table: Fule
+	 */
 	private static final String FIELD_FULE = "fule";
 
+	/**
+	 * Planet Table: event
+	 */
 	private static final String FIELD_EVENT = "event";
 
+	/**
+	 * Query short hand
+	 */
 	private static final String TNN = " TEXT NOT NULL , ";
 
+	/**
+	 * table:market
+	 */
 	private static final String TABLE_MARKETS = "Market";
 
-	private static final String FIELD_ITEM = "Item";
-
-	private static final String FIELD_Q = "Quantity";
+	/**
+	 * Market table: item name
+	 */
+	private static final String FIELD_ITEM = "Item name";
 
 	/**
-	 * Constructer for the saver
+	 * Market table: Quantity
+	 */
+	private static final String FIELD_Q = "Quantity";
+	
+	/**
+	 * Market table: item subname
+	 */
+	private static final String FIELD_SUB = "Item SubName";
+	
+	/**
+	 * Constructor for the saver
 	 * 
 	 * @param dbFile
+	 * 	the database file
 	 * @param people
-	 *            a collection of players in the game
+	 *  an array of players in the game
 	 * @param universe
-	 *            a collection of planets in the game
+	 * 	an array of players
 	 * @param settings
-	 *            the settings for the game.
+	 * 	the games settings
+	 * @param game
+	 * 	the actual game
 	 */
-	public Saver_db(File dbFile, Collection<Player> people,
-			Collection<Planet> universe, Settings settings, Game game) {
+	public Saver_db(File dbFile, Player[] people,
+			Planet[] universe, Settings settings, Game game) {
 		this.dbFile = dbFile;
-		players = people;
-		planets = universe;
-		gameSettings = settings;
+		this.players = people;
+		this.planets = universe;
+		this.gameSettings = settings;
 		this.game = game;
 	}
 
@@ -129,11 +221,11 @@ public class Saver_db {
 	 * 
 	 * @throws SqlJetException
 	 */
-	public void SaveGame() throws SqlJetException {
+	public void saveGame() throws SqlJetException {
 		dbFile.delete();
-
+		
 		// create database
-		SqlJetDb db = SqlJetDb.open(dbFile, true);
+		final SqlJetDb db = SqlJetDb.open(dbFile, true);
 		// set DB option that have to be set before running any transactions:
 		db.getOptions().setAutovacuum(true);
 		db.beginTransaction(SqlJetTransactionMode.WRITE);
@@ -145,12 +237,12 @@ public class Saver_db {
 
 			db.beginTransaction(SqlJetTransactionMode.WRITE);
 
-			this.SavePlayers(db);
-			this.SaveInventory(db);
-			this.SavePlanets(db);
-			this.SaveSetting(db);
-			this.SaveMarkets(db);
-			this.SaveSystems(db);
+			this.savePlayers(db);
+			//this.saveInventory(db);
+			this.savePlanets(db);
+			//this.SaveSetting(db);
+			this.saveMarkets(db);
+			this.saveSystems(db);
 			db.close();
 		}
 	}
@@ -162,8 +254,8 @@ public class Saver_db {
 	 *            database
 	 * @throws SqlJetException
 	 */
-	private void SavePlayers(SqlJetDb db) throws SqlJetException {
-		String createTableQuery = "CREATE TABLE " + TABLE_PLAYERS + " " + "("
+	private void savePlayers(SqlJetDb db) throws SqlJetException {
+		final String createTableQuery = "CREATE TABLE " + TABLE_PLAYERS + " " + "("
 				+ FIELD_NAME + TNN + FIELD_MONEY + TNN + FIELD_FULE + TNN
 				+ FIELD_CURRPLANET + TNN + FIELD_SHIP + TNN + FIELD_PILOTING
 				+ TNN + FIELD_TRADING + TNN + FIELD_ENGINEERING + TNN
@@ -176,9 +268,9 @@ public class Saver_db {
 		}
 		// fill in the Database
 		try {
-			ISqlJetTable table = db.getTable(TABLE_PLAYERS);
+			final ISqlJetTable table = db.getTable(TABLE_PLAYERS);
 			// Test entry
-			table.insert("ZOOL", 9999, "Earth", "BFS", 1, 2, 3, 4);
+			//table.insert("ZOOL", 9999, "Earth", "BFS", 1, 2, 3, 4);
 			// for (Player player : players) {
 			// table.insert(temp[i].getName(),temp[i].getMoney(),temp[i].getFuel(),
 			// temp[i].getCurrentPlanet().getName(),temp[i].getShip().getType().
@@ -195,36 +287,14 @@ public class Saver_db {
 	}
 
 	/**
-	 * saves the players inventories to the database
-	 * 
-	 * @param db
-	 * @throws SqlJetException
-	 */
-	private void SaveInventory(SqlJetDb db) throws SqlJetException {
-		/*
-		 * String createTableQuery = "CREATE TABLE " + TABLE_INVENTORY + " " +
-		 * "(" + FIELD_NAME + " TEXT NOT NULL , " + FIELD_CURR +
-		 * " TEXT NOT NULL , " + FIELD_SHIP + " TEXT NOT NULL , " +
-		 * FIELD_PILOTING + " TEXT NOT NULL , "+ FIELD_TRADING +
-		 * " TEXT NOT NULL , "+ FIELD_ENGINEERING + " TEXT NOT NULL , "+
-		 * FIELD_FIGHTING + " TEXT NOT NULL)";
-		 * 
-		 * //makes the table try {db.createTable(createTableQuery);} finally
-		 * {db.commit();} //fill in the Database try { ISqlJetTable table =
-		 * db.getTable(TABLE_PLAYERS); table.insert("Thomas","Mykal");
-		 * table.insert("nortan","Mykal"); } finally {db.commit();}
-		 */
-	}
-
-	/**
 	 * saves the planets to the planets table
 	 * 
 	 * @param db
 	 * @throws SqlJetException
 	 */
-	private void SavePlanets(SqlJetDb db) throws SqlJetException {
-		Planet[] temp = (Planet[]) planets.toArray();
-		String createTableQuery = "CREATE TABLE " + TABLE_PLANETS + " " + "("
+	private void savePlanets(SqlJetDb db) throws SqlJetException {
+		final Planet[] temp =planets;
+		final String createTableQuery = "CREATE TABLE " + TABLE_PLANETS + " " + "("
 				+ FIELD_PLANET + " TEXT NOT NULL PRIMARY KEY, " + FIELD_SYS
 				+ TNN + FIELD_TECH + TNN + FIELD_POLSYS + TNN + FIELD_RESOURCE
 				+ TNN + FIELD_X + TNN + FIELD_Y + TNN + FIELD_EVENT
@@ -237,10 +307,10 @@ public class Saver_db {
 		}
 		// fill in the Database
 		try {
-			ISqlJetTable table = db.getTable(TABLE_PLANETS);
+			final ISqlJetTable table = db.getTable(TABLE_PLANETS);
 			// Test entry
-			table.insert("EARTH", "milky way", "OVER9000", "BICKERING",
-					"EVERYTHING", 1, 2);
+			/*table.insert("EARTH", "milky way", "OVER9000", "BICKERING",
+					"EVERYTHING", 1, 2);*/
 			for (int i = 0; i < temp.length; i++)
 				table.insert(temp[i].getName(), temp[i].getPlanetarySystem()
 						.getName(), temp[i].getTechnologyLevel().name(),
@@ -259,8 +329,9 @@ public class Saver_db {
 	 * @param db
 	 * @throws SqlJetException
 	 */
-	private void SaveSetting(SqlJetDb db) throws SqlJetException {
-		/*
+	
+	/*private void SaveSetting(SqlJetDb db) throws SqlJetException {
+		
 		 * String createTableQuery = "CREATE TABLE " + TABLE_SETTINGS + " " +
 		 * "(" + FIELD_DIFF + TNN + FIELD_CURRTURN + TNN + FIELD_CURRPLAYER +
 		 * " TEXT NOT NULL )"; //makes the table try
@@ -270,14 +341,14 @@ public class Saver_db {
 		 * //table.insert(game.getNumberOfTurns(),game.getCurrentPlayer());
 		 * 
 		 * } finally {db.commit();}
-		 */
-	}
+		 
+	}*/
 
-	private void SaveMarkets(SqlJetDb db) throws SqlJetException {
-		Planet[] tempP = (Planet[]) planets.toArray();
+	private void saveMarkets(SqlJetDb db) throws SqlJetException {
+		final Planet[] tempP =planets;
 		Map<Tradable, Integer> tempM;
 		Tradable[] tempTradeArray;
-		String createTableQuery = "CREATE TABLE " + TABLE_MARKETS + " " + "("
+		final String createTableQuery = "CREATE TABLE " + TABLE_MARKETS + " " + "("
 				+ FIELD_ITEM + TNN + FIELD_Q + TNN + FIELD_PLANET
 				+ " TEXT NOT NULL)";
 
@@ -289,7 +360,7 @@ public class Saver_db {
 		}
 		// fill in the Database
 		try {
-			ISqlJetTable table = db.getTable(TABLE_MARKETS);
+			final ISqlJetTable table = db.getTable(TABLE_MARKETS);
 			// Test entry
 
 			// table.insert("ZOOL",1,2);
@@ -306,10 +377,16 @@ public class Saver_db {
 			db.commit();
 		}
 	}
-
-	private void SaveSystems(SqlJetDb db) throws SqlJetException {
-		Planet[] tempPlan = (Planet[]) planets.toArray();
-		String createTableQuery = "CREATE TABLE " + TABLE_PLANSYS + " " + "("
+	
+/**
+ * 
+ * @param db
+ * 	database passed into the function
+ * @throws SqlJetException
+ */
+	private void saveSystems(SqlJetDb db) throws SqlJetException {
+		final Planet[] tempPlan =planets;
+		final String createTableQuery = "CREATE TABLE " + TABLE_PLANSYS + " " + "("
 				+ FIELD_SYS + TNN + FIELD_X + TNN + FIELD_Y + TNN
 				+ FIELD_PLANET + " TEXT NOT NULL)";
 
@@ -321,7 +398,7 @@ public class Saver_db {
 		}
 		// fill in the Database
 		try {
-			ISqlJetTable table = db.getTable(TABLE_PLANSYS);
+			final ISqlJetTable table = db.getTable(TABLE_PLANSYS);
 			for (int i = 0; i < tempPlan.length; i++) {
 				table.insert(tempPlan[i].getPlanetarySystem().getName(),
 						tempPlan[i].getPlanetarySystem().getX(), tempPlan[i]

@@ -3,6 +3,8 @@ package App.listener;
 import App.factory.UniverseFactory;
 import App.model.Game;
 import App.model.Settings;
+import App.model.Player.Player;
+import App.model.Universe.Planet;
 import App.service.Saver_db;
 
 import javax.swing.*;
@@ -42,11 +44,16 @@ public class SaverListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
+		Player[] tempP=new Player[Game.getPlayers().size()];
+		System.out.println(Game.getPlayers().toArray());
+		tempP=(Player[]) Game.getPlayers().toArray();
+		Planet[] tempPlan=new Planet[UniverseFactory.getPlanets().size()];
+		tempPlan=(Planet[]) UniverseFactory.getPlanets().values().toArray();
 		Saver_db saver = new Saver_db(fileChooserListener.getDbFile(),
-				Game.getPlayers(), UniverseFactory.getPlanets().values(),
+				tempP, tempPlan,
 				new Settings(), new Game());
 		try {
-			saver.SaveGame();
+			saver.saveGame();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

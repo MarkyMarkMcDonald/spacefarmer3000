@@ -44,7 +44,7 @@ public class LoaderListener implements ActionListener {
 	public void actionPerformed(ActionEvent actionEvent) {
 		Loader_db loader = new Loader_db();
 		try {
-			loader.LoadGame(fileChooserListener.getDbFile(),
+			loader.loadGame(fileChooserListener.getDbFile(),
 					UniverseFactory.getPlanetarySystems(),
 					UniverseFactory.getPlanets(), Game.getPlayers());
 		} catch (Exception e) {

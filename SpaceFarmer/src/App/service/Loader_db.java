@@ -22,44 +22,98 @@ import java.util.Map;
  import App.model.Player.Player;
  import App.model.Settings;
  */
+/**
+ * 
+ * @author Mykal Thomas
+ * @version 1
+ *
+ */
 public class Loader_db {
+	
+	/**
+	 * name of the saved game
+	 */
 	private String saveName;
 
+	/**
+	 * location of the saved game
+	 */
 	private String saveLocation;
 
+	/**
+	 * game settings
+	 */
 	private Settings gameSettings;
 
-	// name of the database
+	/**
+	 * the game database
+	 */
 	private SqlJetDb db;
-
-	// table names
+	
+	/**
+	 *  table:players
+	 */
 	private static final String TABLE_PLAYERS = "Players";
-
+	
+	/**
+	 *  table:Inventory
+	 */
 	private static final String TABLE_INVENTORY = "Inventory";
-
+	
+	/**
+	 *  table:Planets
+	 */
 	private static final String TABLE_PLANETS = "Planets";
-
-	private static final String TABLE_SETTINGS = "Game";
-
+	
+	/*
+	 * table settings
+	//private static final String TABLE_SETTINGS = "Game";
+	 */
+	/**
+	 * table:Planetary systems
+	 */
 	private static final String TABLE_PLANSYS = "PlanetarySys";
 
-	// player colls
-	// private static final String FIELD_INDEX = "NUMBER";
-	private static final String FIELD_NAME = "Name";
+	//PLAYER COLLUMS
+		/** 
+		 * Player field: Name
+		 */
+		private static final String FIELD_NAME = "Name";
 
-	private static final String FIELD_PILOTING = "Piloting";
+		/** 
+		 * Player field: Piloting
+		 */
+		private static final String FIELD_PILOTING = "Piloting";
 
-	private static final String FIELD_TRADING = "Trading";
+		/** 
+		 * Player field: Trading
+		 */
+		private static final String FIELD_TRADING = "Trading";
 
-	private static final String FIELD_ENGINEERING = "Engineering";
+		/** 
+		 * Player field: Engineering
+		 */
+		private static final String FIELD_ENGINEERING = "Engineering";
 
-	private static final String FIELD_FIGHTING = "Fighting";
+		/** 
+		 * Player field: Fighting
+		 */
+		private static final String FIELD_FIGHTING = "Fighting";
 
-	private static final String FIELD_MONEY = "Money";
+		/** 
+		 * Player field: Money
+		 */
+		private static final String FIELD_MONEY = "Money";
 
-	private static final String FIELD_SHIP = "Ship";
+		/** 
+		 * Player field: Ship
+		 */
+		private static final String FIELD_SHIP = "Ship";
 
-	private static final String FIELD_CURRPLANET = "Current_Planet";
+		/** 
+		 * Player field: Current Planet
+		 */
+		private static final String FIELD_CURRPLANET = "Current_Planet";
 
 	// Inventory colls
 	/*
@@ -69,50 +123,100 @@ public class Loader_db {
 	 * private static final String FIELD_ = ""; private static final String
 	 * FIELD_ = "";
 	 */
-	// Planet colls
+	// PLANET COLLUMS
+	/**
+	 * Planet Table: Name
+	 */
 	private static final String FIELD_PLANET = "name";
 
+	/**
+	 * Planet Table: Tech Level
+	 */
 	private static final String FIELD_TECH = "Tech_LV";
 
+	/**
+	 * Planet Table: Political system
+	 */
 	private static final String FIELD_POLSYS = "Political_sys";
 
+	/**
+	 * Planet Table: Resource type
+	 */
 	private static final String FIELD_RESOURCE = "Resource_Type";
 
+	/**
+	 * Planet Table: X coordinate
+	 */
 	private static final String FIELD_X = "X";
 
+	/**
+	 * Planet Table: Y coordinate
+	 */
 	private static final String FIELD_Y = "Y";
 
-	// Game
-	private static final String FIELD_CURRTURN = "Current_Turn";
-
-	private static final String FIELD_CURRPLAYER = "Current_player";
-
-	private static final String FIELD_DIFF = "Difficulty";
-
-	private static final String FIELD_XDIM = "X_dimension";
-
-	private static final String FIELD_YDIM = "y_diminsion";
-
-	// added fields
+	/**
+	 * Planet Table/ System Table: SYSTEM
+	 */
 	private static final String FIELD_SYS = "system";
-
+	
+	/**
+	 * Player Table: Fule
+	 */
 	private static final String FIELD_FULE = "fule";
 
+	/**
+	 * Planet Table: event
+	 */
 	private static final String FIELD_EVENT = "event";
-
+	
+	/**
+	 * table:market
+	 */
 	private static final String TABLE_MARKETS = "Market";
 
-	private static final String FIELD_ITEM = "Item";
+	/**
+	 * Market table: item name
+	 */
+	private static final String FIELD_ITEM = "Item name";
 
+	/**
+	* Market table: Quantity
+	*/
 	private static final String FIELD_Q = "Quantity";
+		
+	/**
+	 * Market table: item subname
+	 */
+	private static final String FIELD_SUB = "Item SubName";
 
-	private Map<String, PlanetarySystem> PS;
+	/**
+	 * map of the PlanetarySystems pulled from the tables
+	 */
+	private static Map<String, PlanetarySystem> Ps=null;
 
-	private Map<String, Planet> Planets;
+	/**
+	 * map of the planets pulled from the tables
+	 */
+	private static Map<String, Planet> Planets=null;
 
-	private Collection<Player> players;
+	/**
+	 * array of players pulled from the tables.
+	 */
+	private static Player[] Players=null;
 
-	public void LoadGame(File dbFile, Map<String, PlanetarySystem> ps,
+	/**
+	 * loads the file and recreates the game
+	 * @param dbFile
+	 * 	the game file
+	 * @param ps
+	 * 	planetary system
+	 * @param planets
+	 * 	the planets
+	 * @param players
+	 * 	array of players
+	 * @throws SqlJetException
+	 */
+	public void loadGame(File dbFile, Map<String, PlanetarySystem> ps,
 			Map<String, Planet> planets, Collection<Player> players)
 			throws SqlJetException {
 		db = SqlJetDb.open(dbFile, true);
@@ -120,11 +224,11 @@ public class Loader_db {
 		// make the systems
 		ps = loadSystems(db.getTable(TABLE_PLANSYS));
 		// make the planets
-		planets = LoadPlanets(db.getTable(TABLE_PLANETS));
+		planets = loadPlanets(db.getTable(TABLE_PLANETS));
 		// make the players
-		players = LoadPlayers(db.getTable(TABLE_PLAYERS));
+		players = loadPlayers(db.getTable(TABLE_PLAYERS));
 		// markets
-		LoadMarkets(db.getTable(TABLE_MARKETS));
+		loadMarkets(db.getTable(TABLE_MARKETS));
 
 		// LoadInventory(db.getTable(TABLE_INVENTORY));
 		// LoadSettings(db.getTable(TABLE_SETTINGS));
@@ -134,18 +238,18 @@ public class Loader_db {
 	 * CREATES A COLLECTION OF PLAYERS AND RETURNS THEM
 	 * 
 	 * @param tbl
-	 * @return
+	 * @return a collection of players
 	 * @throws SqlJetException
 	 */
-	private Collection<Player> LoadPlayers(ISqlJetTable tbl)
+	private Collection<Player> loadPlayers(ISqlJetTable tbl)
 			throws SqlJetException {
-		ISqlJetCursor cursor = tbl.open();
-		Collection<Player> ret = null;
-		Player tempP = null;
-		Ship tempShip = null;
+		final ISqlJetCursor cursor = tbl.open();
+		final Collection<Player> ret = null;
+		final Player tempP = null;
+		final Ship tempShip = null;
 		ShipModel tempMod = null;
 		// Planet tempPlanet;
-		Map<SkillType, Integer> tempSkill = null;
+		final Map<SkillType, Integer> tempSkill = null;
 		try {
 			if (!cursor.eof()) {
 				do {
@@ -196,22 +300,19 @@ public class Loader_db {
 		return ret;
 	}
 
-	private void LoadInventory(ISqlJetTable tbl) throws SqlJetException {
-		/*
-		 * ISqlJetCursor cursor=tbl.open(); try { if (!cursor.eof()) { do {
-		 * System.out.println("this is a test");
-		 * System.out.println(cursor.getRowId() + " " + cursor.getString() + " "
-		 * + cursor.getString() + " " + cursor.getString() + " " +
-		 * cursor.getString() + " " ); } while(cursor.next()); } } finally
-		 * {cursor.close();}
-		 */
-	}
-
-	private Map<String, Planet> LoadPlanets(ISqlJetTable tbl)
+	/**
+	 * reads the planets table and creates the planets from them
+	 * @param tbl
+	 * 	planets table
+	 * @return
+	 *  a map of the created planets
+	 * @throws SqlJetException
+	 */
+	private Map<String, Planet> loadPlanets(ISqlJetTable tbl)
 			throws SqlJetException {
-		ISqlJetCursor cursor = tbl.open();
-		Map<String, Planet> ret = null;
-		Planet tempPlanet = null;
+		final ISqlJetCursor cursor = tbl.open();
+		final Map<String, Planet> ret = null;
+		final Planet tempPlanet = null;
 		TechnologyLevel tempTech = null;
 		PlanetarySystem tempSys = null;
 		ResourceType tempRes = null;
@@ -238,7 +339,7 @@ public class Loader_db {
 					tempPol = tempPol.valueOf(cursor.getString(FIELD_POLSYS));
 					tempPlanet.setPoliticalSystem(tempPol);
 					// Planetary system
-					tempSys = PS.get(cursor.getString(FIELD_SYS));
+					tempSys = Ps.get(cursor.getString(FIELD_SYS));
 					tempPlanet.setPlanetarySystem(tempSys);
 					// market
 					// tempPlanet.setMarket(market)
@@ -246,7 +347,7 @@ public class Loader_db {
 					tempE = tempE.valueOf(cursor.getString(FIELD_EVENT));
 					tempPlanet.setEvent(tempE);
 
-					PS.get(cursor.getString(FIELD_SYS)).getPlanets()
+					Ps.get(cursor.getString(FIELD_SYS)).getPlanets()
 							.put(tempPlanet.getName(), tempPlanet);
 
 					ret.put(tempPlanet.getName(), tempPlanet);
@@ -268,32 +369,19 @@ public class Loader_db {
 		return ret;
 	}
 
-	private Settings LoadSettings(ISqlJetTable tbl) throws SqlJetException {
-		ISqlJetCursor cursor = tbl.open();
-		try {
-			if (!cursor.eof()) {
-				do {
-
-					/*
-					 * System.out.println("this is a test");
-					 * System.out.println(cursor.getRowId() + " " +
-					 * cursor.getString(FIELD_CURRTURN) + " " +
-					 * cursor.getString(FIELD_CURRPLAYER) + " " +
-					 * cursor.getString(FIELD_DIFF) + " " );
-					 */
-				} while (cursor.next());
-			}
-		} finally {
-			cursor.close();
-		}
-		return null;
-	}
-
+	/**
+	 * makes the planetary systems based of the table
+	 * @param tbl
+	 * 	ps table
+	 * @return
+	 * 	a map of the planetary systems
+	 * @throws SqlJetException
+	 */
 	private Map<String, PlanetarySystem> loadSystems(ISqlJetTable tbl)
 			throws SqlJetException {
-		Map<String, PlanetarySystem> psMap = null;
-		PlanetarySystem tempPS = null;
-		ISqlJetCursor cursor = tbl.open();
+		final Map<String, PlanetarySystem> psMap = null;
+		final PlanetarySystem tempPS = null;
+		final ISqlJetCursor cursor = tbl.open();
 		// Makes a map of systems
 		try {
 			if (!cursor.eof()) {
@@ -312,12 +400,17 @@ public class Loader_db {
 		return psMap;
 	}
 
-	private void LoadMarkets(ISqlJetTable tbl) throws SqlJetException {
-		MarketPlace tempM = null;
+	/**
+	 * loads the markets based on the markets table
+	 * @param tbl
+	 * @throws SqlJetException
+	 */
+	private void loadMarkets(ISqlJetTable tbl) throws SqlJetException {
+		final MarketPlace tempM = null;
 		BasicGood tempTrade;
 		TradeGoodType tempType = null;
 		ArrayList ret = null;
-		ISqlJetCursor cursor = tbl.open();
+		final ISqlJetCursor cursor = tbl.open();
 		try {
 			if (!cursor.eof()) {
 				do {
