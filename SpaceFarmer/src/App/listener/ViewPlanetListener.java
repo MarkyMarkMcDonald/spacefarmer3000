@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 11/7/12 Time: 1:05 AM
  * To change this template use File | Settings | File Templates.
+ * @author Mark
+ * @version 1
  */
 public class ViewPlanetListener extends ContinueListener {
 
@@ -32,11 +34,14 @@ public class ViewPlanetListener extends ContinueListener {
 		this.planetChoices = planetChoices;
 	}
 
+	/**
+	 * action listener for the information screen
+	 */
 	public void actionPerformed(ActionEvent e) {
-		PlanetInformationScreen planetInfoScreen = (PlanetInformationScreen) Display
+		final PlanetInformationScreen planetInfoScreen = (PlanetInformationScreen) Display
 				.getCard(cardToMoveTo.toString());
-		String selectedPlanetName = (String) planetChoices.getSelectedItem();
-		Planet selectedPlanet = UniverseFactory.getPlanet(selectedPlanetName);
+		final String selectedPlanetName = (String) planetChoices.getSelectedItem();
+		final Planet selectedPlanet = UniverseFactory.getPlanet(selectedPlanetName);
 		planetInfoScreen.update(selectedPlanet);
 
 		progressDisplay();

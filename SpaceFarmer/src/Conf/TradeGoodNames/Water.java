@@ -33,6 +33,7 @@ public enum Water {
 
 	/**
 	 * override for the to string method
+	 * @return the name of the object
 	 */
 	public String toString() {
 		return name;
