@@ -1,15 +1,51 @@
 package app.model.TradeGoods;
 
+import static app.model.Event.BOREDOM;
+import static app.model.Event.COLD;
+import static app.model.Event.CROPFAIL;
+import static app.model.Event.DROUGHT;
+import static app.model.Event.LACKOFWORKERS;
+import static app.model.Event.PLAGUE;
+import static app.model.Event.WAR;
+import static app.model.Universe.ResourceType.ARTISTIC;
+import static app.model.Universe.ResourceType.DESERT;
+import static app.model.Universe.ResourceType.LIFELESS;
+import static app.model.Universe.ResourceType.LOTS_OF_HERBS;
+import static app.model.Universe.ResourceType.LOTS_OF_WATER;
+import static app.model.Universe.ResourceType.MINERAL_POOR;
+import static app.model.Universe.ResourceType.MINERAL_RICH;
+import static app.model.Universe.ResourceType.NONE;
+import static app.model.Universe.ResourceType.POOR_SOIL;
+import static app.model.Universe.ResourceType.RICH_FAUNA;
+import static app.model.Universe.ResourceType.RICH_SOIL;
+import static app.model.Universe.ResourceType.WARLIKE;
+import static app.model.Universe.ResourceType.WEIRD_MUSHROOMS;
+import static app.model.Universe.TechnologyLevel.AGRICULTURE;
+import static app.model.Universe.TechnologyLevel.EARLY_INDUSTRIAL;
+import static app.model.Universe.TechnologyLevel.HI_TECH;
+import static app.model.Universe.TechnologyLevel.INDUSTRIAL;
+import static app.model.Universe.TechnologyLevel.MEDIEVAL;
+import static app.model.Universe.TechnologyLevel.POST_INDUSTRIAL;
+import static app.model.Universe.TechnologyLevel.PRE_AGRICULTURE;
+import static app.model.Universe.TechnologyLevel.RENAISSANCE;
+
+import java.util.EnumSet;
+
 import app.model.Event;
 import app.model.Universe.Planet;
 import app.model.Universe.ResourceType;
 import app.model.Universe.TechnologyLevel;
 import app.service.Randomizer;
-import conf.TradeGoodNames.*;
-
-import static app.model.Universe.TechnologyLevel.*;
-import static app.model.Universe.ResourceType.*;
-import static app.model.Event.*;
+import conf.TradeGoodNames.Firearms;
+import conf.TradeGoodNames.Food;
+import conf.TradeGoodNames.Furs;
+import conf.TradeGoodNames.Games;
+import conf.TradeGoodNames.Machines;
+import conf.TradeGoodNames.Medicine;
+import conf.TradeGoodNames.Narcotics;
+import conf.TradeGoodNames.Ore;
+import conf.TradeGoodNames.Robots;
+import conf.TradeGoodNames.Water;
 
 /**
  * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:31 AM To
@@ -18,126 +54,243 @@ import static app.model.Event.*;
 
 public enum TradeGoodType {
 
-	// NAME Possible SubNames MTLP MTLU TTP BASE IPL VAR IE CR ER MTL MTH
+	WATER, FURS, FOOD, ORE, GAMES, FIREARMS, MDEDICINE, MACHINES, NARCOTICS, ROBOTS;
 
-	WATER("Water", Water.values(), PRE_AGRICULTURE, PRE_AGRICULTURE, MEDIEVAL,
-			30, 3, 4, DROUGHT, LOTS_OF_WATER, DESERT, 30, 50),
-
-	FURS("Furs", Furs.values(), PRE_AGRICULTURE, PRE_AGRICULTURE,
-			PRE_AGRICULTURE, 250, 10, 10, COLD, RICH_FAUNA, LIFELESS, 230, 280),
-
-	FOOD("Food", Food.values(), AGRICULTURE, PRE_AGRICULTURE, AGRICULTURE, 100,
-			5, 5, CROPFAIL, RICH_SOIL, POOR_SOIL, 90, 160),
-
-	ORE("Ore", Ore.values(), MEDIEVAL, MEDIEVAL, RENAISSANCE, 350, 20, 10, WAR,
-			MINERAL_RICH, MINERAL_POOR, 350, 420),
-
-	GAMES("Games", Games.values(), RENAISSANCE, AGRICULTURE, POST_INDUSTRIAL,
-			250, -10, 5, BOREDOM, ARTISTIC, NONE, 160, 270),
-
-	FIREARMS("Firearms", Firearms.values(), RENAISSANCE, AGRICULTURE,
-			INDUSTRIAL, 1250, -75, 100, WAR, WARLIKE, NONE, 600, 1100),
-
-	MEDICINE("Medicine", Medicine.values(), EARLY_INDUSTRIAL, AGRICULTURE,
-			POST_INDUSTRIAL, 650, -20, 10, PLAGUE, LOTS_OF_HERBS, NONE, 400,
-			700),
-
-	MACHINES("Machines", Machines.values(), EARLY_INDUSTRIAL, RENAISSANCE,
-			INDUSTRIAL, 900, -30, 5, LACKOFWORKERS, NONE, NONE, 600, 800),
-
-	NARCOTICS("Narcotics", Narcotics.values(), INDUSTRIAL, PRE_AGRICULTURE,
-			INDUSTRIAL, 3500, -125, 150, BOREDOM, WEIRD_MUSHROOMS, NONE, 2000,
-			3000),
-
-	ROBOTS("Robots", Robots.values(), POST_INDUSTRIAL, EARLY_INDUSTRIAL,
-			HI_TECH, 5000, -150, 100, LACKOFWORKERS, NONE, NONE, 3500, 5000);
-
+	/**
+	 * Amount by which the price of a good increases in a price increase Event.
+	 */
 	private static final double INCREASE_AMOUNT = 1.5;
 
+	/**
+	 * Amount by which the quantity of a good is reduced in a low condition
+	 * ResourceType.
+	 */
 	private static final double REDUCED_QUANTITY = .5;
 
+	/**
+	 * Amount by which the quantity of a good is increased in a high condition
+	 * ResourceType.
+	 */
 	private static final double INCREASED_QUANTITY = 1.5;
 
-	private static final int AVERAGE_QUANTITY = 100;
+	/**
+	 * Maximum default quantity of a good in a MarketPlace.
+	 */
+	private static final int MAXIMUM_QUANTITY = 100;
 
+	/**
+	 * Minimum default quantity of a good in a MarketPlace.
+	 */
 	private static final int MINIMUM_QUANTITY = 20;
 
+	/**
+	 * Amount by which the quantity of a good is increased in a favoring
+	 * TechnologyLevel.
+	 */
 	private static final double TECH_LEVEL_INCREASE = 1.5;
 
+	/**
+	 * Number which determines the range of the variance.
+	 */
+	private static final int VARIANCE_AMOUNT = 2;
+
+	/**
+	 * Argument to be put in Randomizer.nextInt for randomizing the quantity.
+	 */
+	private static final int QUANTITY_INPUT = MAXIMUM_QUANTITY
+			- MINIMUM_QUANTITY + 1;
+
+	/**
+	 * The names of the TradeGoodTypes.
+	 */
+	public static final String[] NAME_CONSTANTS = 
+		{ "Water,Furs,Food,Ore,Games,Firearms,Medicine,Machines,Narcotics,Robots" };
+
+	/**
+	 * The enumerated subNames of the TradeGoodTypes.
+	 */
+	public static final Enum<?>[][] SUBNAMES_CONSTANTS = { Water.values(),
+			Furs.values(), Food.values(), Ore.values(), Games.values(),
+			Firearms.values(), Medicine.values(), Machines.values(),
+			Narcotics.values(), Robots.values() };
+
+	/**
+	 * The minimum technology levels to produce the TradeGoodTypes.
+	 */
+	public static final TechnologyLevel[] MINIMUM_LEVEL_TO_PRODUCE = {
+			PRE_AGRICULTURE, PRE_AGRICULTURE, AGRICULTURE, MEDIEVAL,
+			RENAISSANCE, RENAISSANCE, EARLY_INDUSTRIAL, EARLY_INDUSTRIAL,
+			INDUSTRIAL, POST_INDUSTRIAL };
+
+	/**
+	 * The minimum TechnologyLevels to sell the TradeGoodTypes to the
+	 * MarketPlace.
+	 */
+	public static final TechnologyLevel[] MINIMUM_LEVEL_TO_SELL = {
+			PRE_AGRICULTURE, PRE_AGRICULTURE, PRE_AGRICULTURE, MEDIEVAL,
+			AGRICULTURE, AGRICULTURE, AGRICULTURE, RENAISSANCE,
+			PRE_AGRICULTURE, EARLY_INDUSTRIAL, };
+
+	/**
+	 * The TechnologyLevels in which most of the TradeGoodTypes are produced.
+	 */
+	public static final TechnologyLevel[] MOST_PRODUCED = { MEDIEVAL,
+			PRE_AGRICULTURE, AGRICULTURE, RENAISSANCE, POST_INDUSTRIAL,
+			INDUSTRIAL, POST_INDUSTRIAL, INDUSTRIAL, INDUSTRIAL, HI_TECH };
+
+	/**
+	 * The base price of the TradeGoodTypes.
+	 */
+	public static final int[] BASE_PRICE = { 30, 250, 100, 350, 250, 1250, 650,
+			900, 3500, 5000 };
+
+	/**
+	 * The amount by which the price of a TradeGoodType is increased per
+	 * TechnologyLevel.
+	 */
+	public static final int[] INCREASE_PER_LEVEL = { 3, 10, 5, 20, -10, -75,
+			-20, -30, -125, -150 };
+
+	/**
+	 * The variance of the price of the TradeGoodTypes.
+	 */
+	public static final int[] VARIANCE_CONSTANTS = { 4, 10, 5, 10, 5, 100, 10,
+			5, 150, 100 };
+
+	/**
+	 * The increased price Events of the TradeGoodTypes.
+	 */
+	public static final Event[] INCREASE_EVENT = { DROUGHT, COLD, CROPFAIL,
+			WAR, BOREDOM, WAR, PLAGUE, LACKOFWORKERS, BOREDOM, LACKOFWORKERS };
+
+	/**
+	 * The low quantity ResourceType conditions of the TradeGoodTypes.
+	 */
+	public static final ResourceType[] LOW_CONDITION = { LOTS_OF_WATER,
+			RICH_FAUNA, RICH_SOIL, MINERAL_RICH, ARTISTIC, WARLIKE,
+			LOTS_OF_HERBS, NONE, WEIRD_MUSHROOMS, NONE };
+
+	/**
+	 * The high quantity ResourceType conditions of the TradeGoodTypes.
+	 */
+	public static final ResourceType[] HIGH_CONDITION = { DESERT, LIFELESS,
+			POOR_SOIL, MINERAL_POOR, NONE, NONE, NONE, NONE, NONE, NONE };
+
+	static {
+		for (TradeGoodType goods : EnumSet.allOf(TradeGoodType.class)) {
+			int position = goods.ordinal();
+			goods.name = NAME_CONSTANTS[position];
+			goods.subNames = SUBNAMES_CONSTANTS[position];
+			goods.minToProduce = MINIMUM_LEVEL_TO_PRODUCE[position];
+			goods.minToSell = MINIMUM_LEVEL_TO_SELL[position];
+			goods.mostProduced = MOST_PRODUCED[position];
+			goods.basePrice = BASE_PRICE[position];
+			goods.increasePerLevel = INCREASE_PER_LEVEL[position];
+			goods.variance = VARIANCE_CONSTANTS[position];
+			goods.priceIncrease = INCREASE_EVENT[position];
+			goods.lowCondition = LOW_CONDITION[position];
+			goods.highCondition = HIGH_CONDITION[position];
+		}
+	}
+
+	/**
+	 * Name of the TradeGoodType.
+	 */
 	private String name;
 
-	private Enum[] subNames;
+	/**
+	 * Enumerated subnames associated with the TradeGoodType.
+	 */
+	private Enum<?>[] subNames;
 
+	/**
+	 * Minimum TechnologyLevel to produce this TradeGoodType.
+	 */
 	private TechnologyLevel minToProduce;
 
+	/**
+	 * Minimum TechnologyLevel to sell this TradeGoodType.
+	 */
 	private TechnologyLevel minToSell;
 
+	/**
+	 * TechnologyLevel in which more of this TradeGoodType is produced.
+	 */
 	private TechnologyLevel mostProduced;
 
+	/**
+	 * Base price of this TradeGoodType.
+	 */
 	private int basePrice;
 
+	/**
+	 * Price increase per TechnologyLevel of this TradeGoodType.
+	 */
 	private int increasePerLevel;
 
+	/**
+	 * Variance in price of this TradeGoodType.
+	 */
 	private int variance;
 
+	/**
+	 * Event in which the price of this TradeGoodType is increased.
+	 */
 	private Event priceIncrease;
 
+	/**
+	 * ResourceType in which less of this TradeGoodType is present.
+	 */
 	private ResourceType lowCondition;
 
+	/**
+	 * ResourceType in which more of this TradeGoodType is present.
+	 */
 	private ResourceType highCondition;
 
-	private int minTrader;
-
-	private int maxTrader;
-
+	/**
+	 * Gives the name of this TradeGoodType.
+	 * 
+	 * @return String representation of the name.
+	 */
 	public String getName() {
 		return name;
 	}
 
-	public Enum[] getSubNames() {
+	/**
+	 * Gives the enumerated subnames of this TradeGoodType.
+	 * 
+	 * @return Enum<?>[] representing the subnames.
+	 */
+	public Enum<?>[] getSubNames() {
 		return subNames;
 	}
 
+	/**
+	 * Gives the base price of this TradeGoodType.
+	 * 
+	 * @return Integer representing the base price.
+	 */
 	public int getBasePrice() {
 		return basePrice;
 	}
 
-	private TradeGoodType(String name, Enum[] subNames,
-			TechnologyLevel minToProduce, TechnologyLevel minToSell,
-			TechnologyLevel mostProduced, int basePrice, int increasePerLevel,
-			int variance, Event priceIncrease, ResourceType lowCondition,
-			ResourceType highCondition, int minTrader, int maxTrader) {
-		this.name = name;
-		this.minToProduce = minToProduce;
-		this.minToSell = minToSell;
-		this.mostProduced = mostProduced;
-		this.basePrice = basePrice;
-		this.increasePerLevel = increasePerLevel;
-		this.variance = variance;
-		this.priceIncrease = priceIncrease;
-		this.lowCondition = lowCondition;
-		this.highCondition = highCondition;
-		this.minTrader = minTrader;
-		this.maxTrader = maxTrader;
-		this.subNames = subNames;
-	}
-
 	// TODO: Move this into another class
-	/*
+	/**
 	 * Calculates the price of the TradeGood using information about the Planet
 	 * it is on. Should be called whenever a Player lands on a Planet to vary
 	 * the absolute price of the good.
 	 * 
-	 * @param event Event the Planet is currently experiencing.
-	 * 
-	 * @param techLevel TechnologyLevel of the Planet.
+	 * @param planet
+	 *            Planet on which the price is to be calculated.
+	 * @return Modified price of the TradeGood.
 	 */
 	public int calculatePrice(Planet planet) {
 		int price;
-		TechnologyLevel techLevel = planet.getTechnologyLevel();
-		Event event = planet.getEvent();
+		final TechnologyLevel techLevel = planet.getTechnologyLevel();
+		final Event event = planet.getEvent();
 		price = basePrice;
-		price += Randomizer.nextInt(2 * variance) - variance;
+		price += Randomizer.nextInt(VARIANCE_AMOUNT * variance) - variance;
 		price += increasePerLevel
 				* (techLevel.ordinal() - minToProduce.ordinal());
 		if (priceIncrease.ordinal() == event.ordinal()) {
@@ -147,27 +300,26 @@ public enum TradeGoodType {
 	}
 
 	// TODO: Move this into another class... Maybe planet creation?
-	/*
+	/**
 	 * This setQuantity sets the quantity based on information from the Planet
-	 * rather than a given int.
+	 * rather than a given Integer.
 	 * 
-	 * @param resource The ResourceType of the Planet.
-	 * 
-	 * @param techLevel The TechnologyLevel of the Planet.
+	 * @param planet
+	 *            Planet on which the quantity is to be determined.
+	 * @return Initial quantity of the TradeGood.
 	 */
 	public int determineQuantity(Planet planet) {
-		ResourceType resource = planet.getResourceType();
-		TechnologyLevel techLevel = planet.getTechnologyLevel();
+		final ResourceType resource = planet.getResourceType();
+		final TechnologyLevel techLevel = planet.getTechnologyLevel();
 		int quantity;
 		if (lowCondition.ordinal() == resource.ordinal()) {
 			quantity = (int) (REDUCED_QUANTITY * (Randomizer
-					.nextInt(AVERAGE_QUANTITY - MINIMUM_QUANTITY) + MINIMUM_QUANTITY));
+					.nextInt(QUANTITY_INPUT) + MINIMUM_QUANTITY));
 		} else if (highCondition.ordinal() == resource.ordinal()) {
 			quantity = (int) (INCREASED_QUANTITY * (Randomizer
-					.nextInt(AVERAGE_QUANTITY - MINIMUM_QUANTITY) + MINIMUM_QUANTITY));
+					.nextInt(QUANTITY_INPUT) + MINIMUM_QUANTITY));
 		} else {
-			quantity = (int) (Randomizer.nextInt(AVERAGE_QUANTITY
-					- MINIMUM_QUANTITY) + MINIMUM_QUANTITY);
+			quantity = (Randomizer.nextInt(QUANTITY_INPUT) + MINIMUM_QUANTITY);
 		}
 
 		if (techLevel.ordinal() == mostProduced.ordinal()) {
@@ -176,28 +328,26 @@ public enum TradeGoodType {
 		return quantity;
 	}
 
-	/*
+	/**
 	 * Determines whether this good will appear in the MarketPlace
 	 * 
-	 * @param techLevel TechnologyLevel of the Planet.
+	 * @param planet
+	 *            Planet on which to check if the good is buyable.
 	 * 
 	 * @return true if the good will appear, false otherwise.
 	 */
-	public boolean buyable(Planet planet) {
+	public boolean isBuyable(Planet planet) {
 		return planet.getTechnologyLevel().ordinal() >= minToProduce.ordinal();
 	}
 
-	/*
-	 * Determines whether a sell was successful. If so, the quantity is
-	 * decreased appropriately.
+	/**
+	 * Determines whether a TradeGood can be sold.
 	 * 
-	 * @param techLevel TechnologyLevel of the Planet.
-	 * 
-	 * @param quantity Amount being sold.
-	 * 
-	 * @return true if the good was sold, false otherwise.
+	 * @param planet
+	 *            Planet on which to check if the TradeGood can be sold.
+	 * @return true if the TradeGood can be sold, false otherwise.
 	 */
-	public boolean sellable(Planet planet) {
+	public boolean isSellable(Planet planet) {
 		return planet.getTechnologyLevel().ordinal() >= minToSell.ordinal();
 	}
 }
