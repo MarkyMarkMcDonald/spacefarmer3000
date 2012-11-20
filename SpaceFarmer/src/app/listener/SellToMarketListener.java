@@ -69,7 +69,7 @@ public class SellToMarketListener extends TransactionListener {
 		// Check for format mismatch
 		if (quantityAsInt >= 0) {
 			final boolean transactionIsSuccessful = TransactionService
-					.sellToMarket(Game.getCurrentPlayer(), marketPlace, price,
+					.hasSoldToMarket(Game.getCurrentPlayer(), marketPlace, price,
 							quantityAsInt, good);
 
 			// update view if there are no errors

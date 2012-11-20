@@ -13,11 +13,13 @@ import conf.SystemNames;
  * This class starts the SpaceFarmer game; it has the program's main method.
  * 
  * @author Mark McDonald, Andrew Wilder
+ * @version 1.0
  */
 public class Driver {
 
 	/**
 	 * Launch the application.
+	 * @param args Unused
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -26,9 +28,9 @@ public class Driver {
 					// There is a singleton Game (holds all information) and
 					// Display (Holds all the views and the layout
 					// configuration)s.
-					Display frame = new Display();
+					final Display frame = new Display();
 					frame.setVisible(true);
-					Game game = new Game();
+					final Game game = new Game();
 					Display.setGame(game);
 					UniverseFactory.createUniverse(
 							PlanetNames.getPlanetNamesAsList(),

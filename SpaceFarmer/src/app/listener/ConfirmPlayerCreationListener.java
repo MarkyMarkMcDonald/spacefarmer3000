@@ -57,7 +57,7 @@ public class ConfirmPlayerCreationListener implements ActionListener {
 				playerInformationScreen.getEnteredFighterSkill());
 		player.setInventory(new Inventory());
 		final Game game = Display.getGame();
-		final String message = PlayerValidationService.isValidPlayer(player,
+		final String message = PlayerValidationService.checkValidPlayer(player,
 				conf.GameVariables.MaxSkillPoints);
 		if (message.equals("success")) {
 			game.addPlayer(player);

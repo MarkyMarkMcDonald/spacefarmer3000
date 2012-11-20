@@ -53,12 +53,12 @@ public class PlanetaryTravelTest {
 	}
 
 	public void TravelInSystem() {
-		TransportationService.goToPlanet(planet1);
+		TransportationService.hasGoneToPlanet(planet1);
 		assertTrue(player1.getCurrentPlanet().equals(planet1));
 	}
 
 	public void TravelOutOfSystem() {
-		TransportationService.goToPlanet(planet2);
+		TransportationService.hasGoneToPlanet(planet2);
 		assertTrue(player1.getCurrentPlanet().equals(planet2));
 	}
 

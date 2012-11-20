@@ -54,7 +54,7 @@ public class TransportationListener extends ContinueListener {
 	public void actionPerformed(ActionEvent e) {
 		final String displayString;
 		final boolean successfulFlight = TransportationService
-				.goToPlanet(planet);
+				.hasGoneToPlanet(planet);
 		if (successfulFlight) {
 			// Hide the Planet Travel Pane
 			final TravelSidePanel travelPanel = (TravelSidePanel) Display

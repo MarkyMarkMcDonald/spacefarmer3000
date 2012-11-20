@@ -13,6 +13,7 @@ import java.awt.geom.Point2D;
  * This class handles moving between planets.
  * 
  * @author Andrew Wilder
+ * @version 1.0
  */
 public class TransportationService {
 
@@ -21,15 +22,16 @@ public class TransportationService {
 	 * 
 	 * @param p
 	 *            The Planet to travel to.
+	 * @return true if the travel was successful, false otherwise.
 	 */
-	public static boolean goToPlanet(Planet p) {
+	public static boolean hasGoneToPlanet(Planet p) {
 
 		// Get data required to make the decision to travel
-		Player currentPlayer = Game.getCurrentPlayer();
-		PlanetarySystem newSystem = p.getPlanetarySystem();
-		PlanetarySystem currSystem = currentPlayer.getCurrentPlanet()
+		final Player currentPlayer = Game.getCurrentPlayer();
+		final PlanetarySystem newSystem = p.getPlanetarySystem();
+		final PlanetarySystem currSystem = currentPlayer.getCurrentPlanet()
 				.getPlanetarySystem();
-		double distance = Point2D.distance(currSystem.getX(),
+		final double distance = Point2D.distance(currSystem.getX(),
 				currSystem.getY(), newSystem.getX(), newSystem.getY());
 
 		// The planet is in the same system

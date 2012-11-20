@@ -1,15 +1,17 @@
 package app.service;
 
-import app.model.*;
+import app.model.Inventory;
+import app.model.MarketPlace;
+import app.model.Ship;
 import app.model.player.Player;
 import app.model.tradegoods.Tradable;
 import app.view.Display;
 import app.view.sidepanels.MessageType;
 
-import java.util.Set;
-
 /**
  * User: marky Date: 10/18/12 Time: 11:14 PM
+ * @author Mark
+ * @version 1.0
  */
 public class TransactionService {
 
@@ -28,14 +30,14 @@ public class TransactionService {
 	 *            The goods that the Player is trying to buy.
 	 * @return A String message telling the outcome of the attempted purchase.
 	 */
-	public static boolean buyFromMarket(Player player, MarketPlace marketPlace,
+	public static boolean hasBoughtFromMarket(Player player, MarketPlace marketPlace,
 			int price, int quantity, Tradable tradeGood) {
 		String message;
 
-		Inventory inventory = player.getInventory();
+		final Inventory inventory = player.getInventory();
 		// Set<Tradable> inventoryItems = inventory.getTradablesHeld();
-		Ship ship = player.getShip();
-		int cargoSize = ship.getCargoSize();
+		final Ship ship = player.getShip();
+		final int cargoSize = ship.getCargoSize();
 		int transactionCost = (price * quantity);
 
 		// Make sure player has enough space to hold bought goods
@@ -84,14 +86,12 @@ public class TransactionService {
 	 *            The good which the Player is trying to sell.
 	 * @return A string explaining the outcome of the transaction.
 	 */
-	public static boolean sellToMarket(Player player, MarketPlace marketPlace,
+	public static boolean hasSoldToMarket(Player player, MarketPlace marketPlace,
 			int price, int quantity, Tradable tradeGood) {
 		String message;
-		Inventory inventory = player.getInventory();
-		int amountInInventory = inventory.getQuantity(tradeGood);
-		Ship ship = player.getShip();
-		// int cargoSize = ship.getCargoSize();
-		int transactionCost = price * quantity;
+		final Inventory inventory = player.getInventory();
+		final int amountInInventory = inventory.getQuantity(tradeGood);
+		final int transactionCost = price * quantity;
 
 		// make sure player has enough
 		if (amountInInventory >= quantity) {

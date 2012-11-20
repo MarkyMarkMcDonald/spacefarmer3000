@@ -284,6 +284,7 @@ public class Randomizer {
 	 *            Player potentially receiving the event.
 	 * @param chance
 	 *            Chance the player will receive the event.
+	 * @return String explaining what happened to the Player.
 	 */
 	public static String giveEvent(Player player, double chance) {
 		if (isSuccessful(chance)) {
@@ -291,7 +292,7 @@ public class Randomizer {
 			return event.giveEvent(player);
 		}
 		else{
-		    return null;	
+			return null;	
 		}
 	}
 

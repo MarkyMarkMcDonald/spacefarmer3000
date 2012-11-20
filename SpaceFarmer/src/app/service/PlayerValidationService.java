@@ -8,6 +8,9 @@ import java.util.Map;
 /**
  * Used to confirm the user's inputs follow the character creation rules User:
  * marky Date: 10/7/12 Time: 8:32 PM
+ * 
+ * @author Mark
+ * @version 1.0
  */
 public class PlayerValidationService {
 
@@ -18,7 +21,7 @@ public class PlayerValidationService {
 	 *            player in question
 	 * @return true if name is correct
 	 */
-	public static boolean playerNameIsSet(Player player) {
+	public static boolean isPlayerNameSet(Player player) {
 		return (player != null && player.getName() != null && !player.getName()
 				.isEmpty());
 	}
@@ -32,9 +35,9 @@ public class PlayerValidationService {
 	 *            number to check against, will likely be 16
 	 * @return true if points distributed correctly
 	 */
-	public static boolean allPointsAreDistributed(Player player,
+	public static boolean hasDistributedPoints(Player player,
 			int numPointsToDistribute) {
-		Map<SkillType, Integer> skills = player.getSkillLevels();
+		final Map<SkillType, Integer> skills = player.getSkillLevels();
 		return sumOfSkillPoints(skills) == numPointsToDistribute;
 	}
 
@@ -61,12 +64,12 @@ public class PlayerValidationService {
 	 *            allocated to the user
 	 * @return an error message or "success"
 	 */
-	public static String isValidPlayer(Player player,
+	public static String checkValidPlayer(Player player,
 			int numOfPointsToDistribute) {
 		String message = "success";
-		if (!allPointsAreDistributed(player, numOfPointsToDistribute)) {
+		if (!hasDistributedPoints(player, numOfPointsToDistribute)) {
 			message = "Please allocate exactly 16 points!";
-		} else if (!playerNameIsSet(player)) {
+		} else if (!isPlayerNameSet(player)) {
 			message = "Please enter a name for this player!";
 		}
 		return message;

@@ -57,7 +57,7 @@ public class BuyFromMarketListener extends TransactionListener {
 		// Do not buy something if there's a format mismatch
 		if (quantityAsInt >= 0) {
 			final boolean transactionSuccess = TransactionService
-					.buyFromMarket(Game.getCurrentPlayer(), marketPlace, price,
+					.hasBoughtFromMarket(Game.getCurrentPlayer(), marketPlace, price,
 							quantityAsInt, good);
 
 			// update views if there weren't errors
