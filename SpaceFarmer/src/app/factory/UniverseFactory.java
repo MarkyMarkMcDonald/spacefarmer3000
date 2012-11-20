@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * This class creates the universe
- * @author Bobbey
+ * @author Bobby
  * @version 1
  *
  */

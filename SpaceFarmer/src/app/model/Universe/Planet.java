@@ -120,7 +120,7 @@ public class Planet {
 	 * Determine if an event is to occur by using static fields.
 	 */
 	public void determineEvent() {
-		if (Randomizer.isSuccessful(EventProbability)) {
+		if (Randomizer.determineSuccess(EventProbability)) {
 			event = (Event) Randomizer.randEnum(Event.class);
 		} else {
 			event = Event.NO_EVENT;

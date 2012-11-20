@@ -1,9 +1,11 @@
 package app.model;
 
+import static app.model.EventFunction.LOSE_FUNCTION;
+import static app.model.EventFunction.WIN_FUNCTION;
 import app.model.Player.Player;
 
 public enum RandomEvent {
-	LOSE_ITEM(EventFunction.LoseFunction), FIND_ITEM(EventFunction.WinFunction);
+	LOSE_ITEM(LOSE_FUNCTION), FIND_ITEM(WIN_FUNCTION);
 
 	private EventFunction event;
 

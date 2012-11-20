@@ -11,31 +11,67 @@ import java.util.Set;
 /**
  * This interface requires a method that takes in a Player. The methods acts as
  * a random event and alters the player.
+ * 
+ * @author Bobbey
+ * @version 1.0
  */
 public interface EventFunction {
 
-	public void function(Player player);
+	/**
+	 * Gives a Player a randomEvent.
+	 * 
+	 * @param player
+	 *            Player to give the event to.
+	 */
+	void function(Player player);
 
-	public static final int CHANGE_MIN = 1;
+	/**
+	 * Minimum amount of an item that a player can find/lose.
+	 */
+	int CHANGE_MIN = 1;
 
-	public static final int CHANGE_MAX = 10;
+	/**
+	 * Maximum amount of an item that a player can find/lose.
+	 */
+	int CHANGE_MAX = 10;
+	
+	/**
+	 * Array needed for some methods to properly return Integer arrays.
+	 */
+    Tradable[] DUMMY_ARRAY= new Tradable[0];
 
-	public static final EventFunction LoseFunction = new LoseEvent();
+	/**
+	 * EventFunction holding method corresponding to a Player losing an item.
+	 */
+	EventFunction LOSE_FUNCTION = new LoseEvent();
 
-	public static final EventFunction WinFunction = new WinEvent();
+	/**
+	 * EventFunction holding method corresponding to a Player finding an item.
+	 */
+	EventFunction WIN_FUNCTION = new WinEvent();
 
 	/**
 	 * Class corresponding to an event where a players loses an item.
+	 * 
+	 * @author Bobbey
 	 */
 	public static class LoseEvent implements EventFunction {
+		/**
+		 * Actual method that causes a player to lose items.
+		 * 
+		 * @param player
+		 *            Player that will find items.
+		 */
 		public void function(Player player) {
-			if (player.getInventory().getSpaceUsed() == 0)
+			if (player.getInventory().getSpaceUsed() == 0) {
 				return;
+			}
 			int loseAmount = CHANGE_MIN
 					+ Randomizer.nextInt(CHANGE_MAX - CHANGE_MIN + 1);
-			Set<Tradable> goodsSet = player.getInventory().getTradablesHeld();
-			Tradable[] goods = goodsSet.toArray(new Tradable[0]);
-			Tradable lostGood = (Tradable) Randomizer.randElement(goods);
+			final Set<Tradable> goodsSet = player.getInventory()
+					.getTradablesHeld();
+			final Tradable[] goods = goodsSet.toArray(DUMMY_ARRAY);
+			final Tradable lostGood = (Tradable) Randomizer.randElement(goods);
 			if (player.getInventory().getQuantity(lostGood) < loseAmount) {
 				loseAmount = player.getInventory().getQuantity(lostGood);
 			}
@@ -52,19 +88,27 @@ public interface EventFunction {
 
 	/**
 	 * Class corresponding to an event where a player finds an item.
+	 * 
+	 * @author Bobbey
 	 */
 
 	public static class WinEvent implements EventFunction {
+		/**
+		 * Actual method where a player finds items.
+		 * 
+		 * @param player
+		 *            Player that will find items.
+		 */
 		public void function(Player player) {
 			int addAmount = CHANGE_MIN
 					+ Randomizer.nextInt(CHANGE_MAX - CHANGE_MIN + 1);
-			TradeGoodType type = (TradeGoodType) Randomizer
+			final TradeGoodType type = (TradeGoodType) Randomizer
 					.randEnum(TradeGoodType.class);
-			Enum<?>[] subNames = type.getSubNames();
-			BasicGood good = new BasicGood(type,
+			final Enum<?>[] subNames = type.getSubNames();
+			final BasicGood good = new BasicGood(type,
 					(Enum<?>) Randomizer.randElement(subNames));
-			Ship ship = player.getShip();
-			int cargoSize = ship.getCargoSize();
+			final Ship ship = player.getShip();
+			final int cargoSize = ship.getCargoSize();
 			if (player.getInventory().getSpaceUsed() + addAmount > cargoSize) {
 				addAmount = cargoSize - player.getInventory().getSpaceUsed();
 			}
