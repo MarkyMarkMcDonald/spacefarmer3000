@@ -54,6 +54,9 @@ public enum CardName {
 		}
 	};
 
+	/**
+	 * The CardName's associated name String.
+	 */
 	private final String name;
 
 	/**

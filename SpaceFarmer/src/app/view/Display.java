@@ -16,6 +16,8 @@ import java.util.Map;
  * the changeCard() method.
  * 
  * @author Mark McDonald, Andrew Wilder
+ * @version 1.0
+ * 
  */
 public class Display extends JFrame {
 
@@ -24,20 +26,38 @@ public class Display extends JFrame {
 	 */
 	private static final long serialVersionUID = 5472341215748317058L;
 
+	/**
+	 * Constructs a Display by Calling a method to setup the Display.
+	 */
 	public Display() {
 		this.setup();
 	}
 
+	/**
+	 * Panels on the Display.
+	 */
 	private static JPanel CenterPanel, MainContentPanel;
 
+	/**
+	 * Game associated with the Display.
+	 */
 	private static Game Game;
 
+	/**
+	 * MiniGameScreen associated with the Display.
+	 */
 	private static MiniGameScreen MiniGameView;
 
 	// We need this to be able to update cards instead of creating new ones
 	// every time
+	/**
+	 * Map from the card names to their Screens.
+	 */
 	private static Map<String, Screen> CardMap;
 
+	/**
+	 * Map from the SidePanel names to their JPanels.
+	 */
 	private static Map<String, JPanel> SidePanelMap;
 
 	/**
@@ -136,6 +156,9 @@ public class Display extends JFrame {
 
 	}
 
+	/**
+	 * Shuts off the SidePanels.
+	 */
 	public static void turnOffSidePanels() {
 		for (JPanel sidePanel : SidePanelMap.values()) {
 			sidePanel.setVisible(false);
@@ -184,8 +207,7 @@ public class Display extends JFrame {
 	}
 
 	public static void updatePlayersInfo() {
-		PlayersInformationSidePanel playersInformationSidePanel = 
-				(PlayersInformationSidePanel) getSidePanel("Bot");
+		PlayersInformationSidePanel playersInformationSidePanel = (PlayersInformationSidePanel) getSidePanel("Bot");
 		playersInformationSidePanel.updateBasedOnAllPlayers();
 	}
 
