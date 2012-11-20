@@ -1,12 +1,30 @@
-package app.view;
+// $codepro.audit.disable lossOfPrecisionInCast, com.instantiations.assist.eclipse.analysis.unusedReturnValue
 
+/* lossOfPrecisionInCast is disabled because the ship's coordinates, speed and direction
+ * are stored as doubles, but they must be used as integers in calculations for drawing
+ * to the screen. The most convenient way to do this is through casting, and the precision
+ * loss in this context is negligible.
+ * unusedReturnValue is disabled because the method Graphics.drawImage() returns a boolean
+ * whose value is not necessary for program control, but unusedReturnValue complains that
+ * all returned boolean values must be used.
+ */
+
+/**
+ * This file contains the class code responsible for driving the minigame sequence when
+ * traveling between different PlanetarySystems.
+ */
+
+package app.view;
+import resources.MiniGameGFX;
 import app.model.Game;
 import app.view.sidepanels.MessageSidePanel;
 import app.view.sidepanels.MessageType;
-import resources.MiniGameGFX;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -18,44 +36,55 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
 /**
- * This class drives the minigame sequence when travelling between planets.
+ * This class drives the minigame sequence when traveling between planets.
  * 
  * @author Andrew Wilder
+ * @version 1.0
  */
 public class MiniGameScreen extends JPanel implements KeyListener,
 		ActionListener {
 
-	// Prevents serializable warning
+	/** Prevents serializable warning */
 	private static final long serialVersionUID = -3027504169648377464L;
 
-	/*
+	/**
 	 * Provides interaction between the KeyListener and ActionListener
 	 * functionalities of this class
 	 */
 	private boolean holdingLeft, holdingRight;
 
-	// Constants that govern the minigame's physics
-	private static final int SHIP_SIZE = 64, ASTEROID_SIZE = 42,
+	/** Constants that govern the minigame's physics */
+	private static final int SHIP_SIZE = 64, SHIP_SIZE_HALF = SHIP_SIZE >> 1,
+			ASTEROID_SIZE = 42, ASTEROID_SIZE_HALF = ASTEROID_SIZE >> 1,
 			ASTEROID_COUNT = 25, SAFETY_DIST = 200, SHIP_GFX_SIZE = 64,
-			ASTEROID_GFX_SIZE = 42;
+			ASTEROID_GFX_SIZE = 42, SIMULATION_PERIOD = 30,
+			ASTEROID_DENSITY_DIVISOR = 480000, STAR_DENSITY_DIVISOR = 480,
+			ANOTHER_CONSTANT = (SHIP_SIZE + ASTEROID_SIZE) >> 1,
+			NEGATIVE_ASTEROID_HALF = -ASTEROID_SIZE_HALF;
 
+	/** Constants used by the game */
 	private static final double SPEED_CAP = 5.5, TURN_AMOUNT = 0.055,
-			TOLERANCE = 7.5, ASTEROID_SPEED = 1.35, ASTEROID_ROTATION = 0.015;
+			TOLERANCE = 7.5, ASTEROID_SPEED = 1.35, ASTEROID_ROTATION = 0.015,
+			SHIP_SPEED = 0.1, TWO_PI = 2 * Math.PI;
 
-	// An ArrayList to hold the Asteroid objects
-	private Collection asteroids;
+	/** An ArrayList to hold the Asteroid objects */
+	private Collection<Asteroid> asteroids;
 
-	private Collection stars;
+	/** An ArrayList to hold the stars for the generated background */
+	private Collection<Point> stars;
 
-	// Variables that control the player's ship
+	/** Variables that control the player's ship */
 	private double shipX, shipY, shipAngle, shipSpeed;
 
-	// A Timer object meant to trigger frames of gameplay in the minigame
-	private Timer timer;
+	/** A Timer object meant to trigger frames of gameplay in the minigame */
+	private final Timer timer;
 
-	// Instances of the graphics used by the minigame
-	private BufferedImage shipGFX, asteroidGFX;
+	/** Instances of the graphics used by the minigame */
+	private final BufferedImage shipGFX, asteroidGFX;
 
 	/**
 	 * Construct this minigame screen with the appropriate variables.
@@ -63,10 +92,8 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 	public MiniGameScreen() {
 
 		// Set up listeners
-		timer = new Timer(30, this);
-		setFocusable(true);
-		addKeyListener(this);
-		setDoubleBuffered(true);
+		timer = new Timer(SIMULATION_PERIOD, this);
+		doNonStaticMethods(this);
 
 		// Set up BufferedImage graphics
 		asteroidGFX = new BufferedImage(ASTEROID_GFX_SIZE, ASTEROID_GFX_SIZE,
@@ -81,6 +108,19 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 	}
 
 	/**
+	 * Perform the non-final methods required by the constructor. Stupid CodePro
+	 * audit. Fascists.
+	 * 
+	 * @param mgs
+	 *            The instance of MiniGameScreen to complete construction for.
+	 */
+	private static void doNonStaticMethods(MiniGameScreen mgs) {
+		mgs.setFocusable(true);
+		mgs.addKeyListener(mgs);
+		mgs.setDoubleBuffered(true);
+	}
+
+	/**
 	 * Simulate the gameplay for one frame.
 	 * 
 	 * @param e
@@ -92,82 +132,90 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 
 		// Update ship angle
 		if (holdingLeft) {
-			shipAngle += 2 * Math.PI - TURN_AMOUNT;
+			shipAngle += TWO_PI - TURN_AMOUNT;
 		}
 		if (holdingRight) {
 			shipAngle += TURN_AMOUNT;
 		}
-		if (shipAngle > 2 * Math.PI) {
-			shipAngle -= 2 * Math.PI;
+		if (shipAngle > TWO_PI) {
+			shipAngle -= TWO_PI;
 		} else if (shipAngle < 0) {
-			shipAngle += 2 * Math.PI;
+			shipAngle += TWO_PI;
 		}
 
 		// Update ship speed
 		if (shipSpeed < SPEED_CAP) {
-			shipSpeed += 0.1;
+			shipSpeed += SHIP_SPEED;
 		}
 
 		// Update ship position
 		shipX += Math.cos(shipAngle) * shipSpeed;
 		shipY += Math.sin(shipAngle) * shipSpeed;
 
-		// Detect collision with asteroids and update their position
-		for (Object o : asteroids) {
-			Asteroid a = (Asteroid) o;
-			if (Point2D.distance(shipX, shipY, a.x, a.y)
-					- (SHIP_SIZE + ASTEROID_SIZE) / 2 < -TOLERANCE) {
-				endGame(false);
-			} else {
-				a.x += Math.cos(a.a) * ASTEROID_SPEED;
-
-				// Leaving off the sides puts it in the middle, top or bottom
-				if (a.x + ASTEROID_SIZE / 2 < 0
-						|| a.x - ASTEROID_SIZE / 2 > getWidth()) {
-
-					a.x = getWidth() / 2.0;
-					if (a.a < Math.PI) {
-						a.y = ASTEROID_SIZE / 2.0 + getHeight();
-					} else {
-						a.y = -ASTEROID_SIZE / 2.0;
-					}
-				}
-				a.y += Math.sin(a.a) * ASTEROID_SPEED;
-
-				// Leaving off the top or bottom wraps the asteroid
-				if (a.y + ASTEROID_SIZE / 2 < 0) {
-					a.y += ASTEROID_SIZE + getHeight();
-				} else if (a.y - ASTEROID_SIZE / 2 > getHeight()) {
-					a.y -= ASTEROID_SIZE + getHeight();
-				}
-
-				// Rotate the asteroid
-				if (a.direction) {
-					a.r += ASTEROID_ROTATION;
-					if (a.r >= 2 * Math.PI) {
-						a.r -= 2 * Math.PI;
-					}
-				} else {
-					a.r -= ASTEROID_ROTATION;
-					if (a.r < 0) {
-						a.r += 2 * Math.PI;
-					}
-				}
-			}
-		}
+		// Update the asteroid positions and detect collision with the ship
+		updateAsteroids();
 
 		// Detect flying out of bounds
-		if (shipX + SHIP_SIZE / 2 < 0) {
+		if (shipX + SHIP_SIZE_HALF < 0) {
 			endGame(false);
-		} else if (shipY + SHIP_SIZE / 2 < 0) {
+		} else if (shipY + SHIP_SIZE_HALF < 0) {
 			endGame(false);
-		} else if (shipY - SHIP_SIZE / 2 > getHeight()) {
+		} else if (shipY - SHIP_SIZE_HALF > getHeight()) {
 			endGame(false);
-		} else if (shipX - SHIP_SIZE / 2 > getWidth()) {
+		} else if (shipX - SHIP_SIZE_HALF > getWidth()) {
 			endGame(true);
 		}
 
 		repaint();
+	}
+
+	/**
+	 * Update the asteroids' positions and determine collision with the ship.
+	 */
+	private void updateAsteroids() {
+		// Detect collision with asteroids and update their position
+		for (Object o : asteroids) {
+			Asteroid ast = (Asteroid) o;
+			if (Point2D.distance(shipX, shipY, ast.x, ast.y) - ANOTHER_CONSTANT <
+					-TOLERANCE) {
+				endGame(false);
+			} else {
+				ast.x += Math.cos(ast.angle) * ASTEROID_SPEED;
+
+				// Leaving off the sides puts it in the middle, top or bottom
+				if (ast.x + ASTEROID_SIZE_HALF < 0
+						|| ast.x - ASTEROID_SIZE_HALF > getWidth()) {
+
+					ast.x = getWidth() >> 1;
+					if (ast.angle < Math.PI) {
+						ast.y = ASTEROID_SIZE_HALF + getHeight();
+					} else {
+						ast.y = NEGATIVE_ASTEROID_HALF;
+					}
+				}
+				ast.y += Math.sin(ast.angle) * ASTEROID_SPEED;
+
+				// Leaving off the top or bottom wraps the asteroid
+				if (ast.y + ASTEROID_SIZE_HALF < 0) {
+					ast.y += ASTEROID_SIZE + getHeight();
+				} else if (ast.y - ASTEROID_SIZE_HALF > getHeight()) {
+					ast.y -= ASTEROID_SIZE + getHeight();
+				}
+
+				// Rotate the asteroid
+				if (ast.direction) {
+					ast.rotation += ASTEROID_ROTATION;
+					if (ast.rotation >= TWO_PI) {
+						ast.rotation -= TWO_PI;
+					}
+				} else {
+					ast.rotation -= ASTEROID_ROTATION;
+					if (ast.rotation < 0) {
+						ast.rotation += TWO_PI;
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -181,30 +229,30 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 	public void paintComponent(Graphics g) {
 
 		// Draw the background graphics
-		Graphics2D screen = (Graphics2D) g;
+		final Graphics2D screen = (Graphics2D) g;
 		screen.setColor(Color.BLACK);
 		screen.fillRect(0, 0, getWidth(), getHeight());
 		screen.setColor(Color.WHITE);
 		for (Object o : stars) {
-			Point p = (Point) o;
-			screen.drawRect(p.x, p.y, 0, 0);
+			Point point = (Point) o;
+			screen.drawRect(point.x, point.y, 0, 0);
 		}
 
 		// Draw asteroids
 		for (Object o : asteroids) {
-			Asteroid a = (Asteroid) o;
+			Asteroid ast = (Asteroid) o;
 			AffineTransform orig = screen.getTransform();
-			screen.rotate(a.r, (int) a.x, (int) a.y);
-			screen.drawImage(asteroidGFX, (int) (a.x - ASTEROID_SIZE / 2),
-					(int) (a.y - ASTEROID_SIZE / 2), null);
+			screen.rotate(ast.rotation, (int) ast.x, (int) ast.y);
+			screen.drawImage(asteroidGFX, (int) (ast.x - ASTEROID_SIZE_HALF),
+					(int) (ast.y - ASTEROID_SIZE_HALF), null);
 			screen.setTransform(orig);
 		}
 
 		// Draw ship
-		AffineTransform orig = screen.getTransform();
+		final AffineTransform orig = screen.getTransform();
 		screen.rotate(shipAngle, shipX, shipY);
-		screen.drawImage(shipGFX, (int) (shipX - SHIP_SIZE / 2),
-				(int) (shipY - SHIP_SIZE / 2), null);
+		screen.drawImage(shipGFX, (int) (shipX - SHIP_SIZE_HALF),
+				(int) (shipY - SHIP_SIZE_HALF), null);
 		screen.setTransform(orig);
 
 		// Clean up
@@ -219,8 +267,8 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 	public void startGame() {
 
 		// Set up the variables used by the minigame
-		shipX = SHIP_SIZE / 2.0;
-		shipY = getHeight() / 2.0;
+		shipX = SHIP_SIZE_HALF;
+		shipY = getHeight() >> 1;
 		shipAngle = 0;
 		shipSpeed = 0;
 		asteroids = new ArrayList<Asteroid>();
@@ -229,21 +277,22 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 		holdingRight = false;
 
 		// Randomize the initial locations of the Asteroids
-		Random rand = new Random();
-		for (int i = 0; i < ASTEROID_COUNT * getWidth() * getHeight() / 480000; ++i) {
-			Point p = new Point(rand.nextInt(getWidth()),
+		final Random rand = new Random();
+		for (int i = 0; i < ASTEROID_COUNT * getWidth() * getHeight()
+				/ ASTEROID_DENSITY_DIVISOR; ++i) {
+			Point point = new Point(rand.nextInt(getWidth()),
 					rand.nextInt(getHeight()));
-			if (Point2D.distance(shipX, shipY, p.x, p.y) < SAFETY_DIST) {
+			if (Point2D.distance(shipX, shipY, point.x, point.y) < SAFETY_DIST) {
 				--i;
 			} else {
-				asteroids.add(new Asteroid(p.x, p.y, rand.nextDouble() * 2
-						* Math.PI, rand.nextDouble() * 2 * Math.PI, rand
+				asteroids.add(new Asteroid(point.x, point.y, rand.nextDouble()
+						* TWO_PI, rand.nextDouble() * TWO_PI, rand
 						.nextBoolean()));
 			}
 		}
 
 		// Generate stars
-		for (int i = 0; i < getWidth() * getHeight() / 480; ++i) {
+		for (int i = 0; i < getWidth() * getHeight() / STAR_DENSITY_DIVISOR; ++i) {
 			stars.add(new Point(rand.nextInt(getWidth()), rand
 					.nextInt(getHeight())));
 		}
@@ -261,7 +310,7 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 	 */
 	private void endGame(boolean success) {
 		timer.stop();
-		MessageSidePanel messageSidePanel = (MessageSidePanel) Display
+		final MessageSidePanel messageSidePanel = (MessageSidePanel) Display
 				.getSidePanel("Top");
 		String message = "You traveled to Planet "
 				+ Game.getCurrentPlanet().getName() + ".";
@@ -319,7 +368,8 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 	 */
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// stub
+		// There HAS to be something here or CodePro complains.
+		System.out.print("");
 	}
 
 	/**
@@ -328,13 +378,15 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 	 * 
 	 * @author Andrew Wilder
 	 */
-	private class Asteroid {
+	private static class Asteroid {
 
-		// X position, Y position, angle of travel (radians), rotational amount
-		// (radians)
-		public double x, y, a, r;
+		/**
+		 * X position, Y position, angle of travel (radians), rotational amount
+		 * (radians)
+		 */
+		public double x, y, angle, rotation;
 
-		// Direction the Asteroid is spinning
+		/** Direction the Asteroid is spinning */
 		public boolean direction;
 
 		/**
@@ -354,12 +406,12 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 		 * @param direction
 		 *            The direction the Asteroid will spin.
 		 */
-		public Asteroid(double x, double y, double a, double r,
+		protected Asteroid(double x, double y, double a, double r,
 				boolean direction) {
 			this.x = x;
 			this.y = y;
-			this.a = a;
-			this.r = r;
+			this.angle = a;
+			this.rotation = r;
 			this.direction = direction;
 		}
 
@@ -374,6 +426,7 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 	/**
 	 * @return Information about this object as a String.
 	 */
+	@Override
 	public String toString() {
 		return "MiniGameScreen";
 	}
