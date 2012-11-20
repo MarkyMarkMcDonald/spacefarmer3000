@@ -3,8 +3,8 @@ package app.service;
 import app.model.*;
 import app.model.player.Player;
 import app.model.player.SkillType;
-import app.model.tradeGoods.BasicGood;
-import app.model.tradeGoods.TradeGoodType;
+import app.model.tradegoods.BasicGood;
+import app.model.tradegoods.TradeGoodType;
 import app.model.universe.*;
 
 import org.tmatesoft.sqljet.core.SqlJetException;

@@ -3,9 +3,9 @@ package app.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import app.model.tradeGoods.BasicGood;
-import app.model.tradeGoods.Tradable;
-import app.model.tradeGoods.TradeGoodType;
+import app.model.tradegoods.BasicGood;
+import app.model.tradegoods.Tradable;
+import app.model.tradegoods.TradeGoodType;
 import app.model.universe.Planet;
 import app.service.Randomizer;
 
@@ -56,8 +56,7 @@ public class MarketPlace {
 		for (TradeGoodType tradeGoodType : TradeGoodType.values()) {
 			for (Object subName : Randomizer.multiRandElements(
 					tradeGoodType.getSubNames(),
-					MINIMUM_SUBGOODS
-							+ Randomizer.nextInt(RAND_ARGUMENT))) {
+					MINIMUM_SUBGOODS + Randomizer.nextInt(RAND_ARGUMENT))) {
 				BasicGood good = new BasicGood(tradeGoodType, (Enum<?>) subName);
 				int quantity = tradeGoodType.determineQuantity(planet);
 				quantityMap.put(good, quantity);
@@ -75,8 +74,11 @@ public class MarketPlace {
 
 	/**
 	 * Sets a TradeGoodType to a given quantity.
-	 * @param tradable TradeGoodType to be modified.
-	 * @param quantity Quantity to set it to.
+	 * 
+	 * @param tradable
+	 *            TradeGoodType to be modified.
+	 * @param quantity
+	 *            Quantity to set it to.
 	 */
 	public void setQuantity(Tradable tradable, int quantity) {
 		quantityMap.put(tradable, quantity);
@@ -84,8 +86,11 @@ public class MarketPlace {
 
 	/**
 	 * Alters the quantity of a TradeGoodType by a particular amount.
-	 * @param tradable TradeGoodType to be modified.
-	 * @param amount by which to increase the quantity of the TradeGoodType.
+	 * 
+	 * @param tradable
+	 *            TradeGoodType to be modified.
+	 * @param amount
+	 *            by which to increase the quantity of the TradeGoodType.
 	 */
 	public void changeQuantity(Tradable tradable, int amount) {
 		if (quantityMap.containsKey(tradable)) {
@@ -98,7 +103,9 @@ public class MarketPlace {
 	/**
 	 * Varies each of the TradeGoodTypes prices based on the Planet the
 	 * MarketPlace is on.
-	 * @param planet Planet on which to vary the prices.
+	 * 
+	 * @param planet
+	 *            Planet on which to vary the prices.
 	 */
 	public void updatePrices(Planet planet) {
 		// {

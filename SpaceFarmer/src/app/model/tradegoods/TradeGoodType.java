@@ -2,7 +2,7 @@
  * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:31 AM To
  * change this template use File | Settings | File Templates.
  */
-package app.model.tradeGoods;
+package app.model.tradegoods;
 
 import static app.model.Event.BOREDOM;
 import static app.model.Event.COLD;
@@ -40,16 +40,16 @@ import app.model.universe.Planet;
 import app.model.universe.ResourceType;
 import app.model.universe.TechnologyLevel;
 import app.service.Randomizer;
-import conf.tradeGoodNames.Firearms;
-import conf.tradeGoodNames.Food;
-import conf.tradeGoodNames.Furs;
-import conf.tradeGoodNames.Games;
-import conf.tradeGoodNames.Machines;
-import conf.tradeGoodNames.Medicine;
-import conf.tradeGoodNames.Narcotics;
-import conf.tradeGoodNames.Ore;
-import conf.tradeGoodNames.Robots;
-import conf.tradeGoodNames.Water;
+import conf.tradegoodnames.Firearms;
+import conf.tradegoodnames.Food;
+import conf.tradegoodnames.Furs;
+import conf.tradegoodnames.Games;
+import conf.tradegoodnames.Machines;
+import conf.tradegoodnames.Medicine;
+import conf.tradegoodnames.Narcotics;
+import conf.tradegoodnames.Ore;
+import conf.tradegoodnames.Robots;
+import conf.tradegoodnames.Water;
 
 
 

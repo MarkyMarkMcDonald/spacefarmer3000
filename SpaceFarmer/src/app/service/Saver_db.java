@@ -4,7 +4,7 @@ package app.service;
 import app.model.Game;
 import app.model.Settings;
 import app.model.player.Player;
-import app.model.tradeGoods.Tradable;
+import app.model.tradegoods.Tradable;
 import app.model.universe.Planet;
 
 import org.tmatesoft.sqljet.core.SqlJetException;

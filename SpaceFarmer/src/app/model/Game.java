@@ -90,7 +90,7 @@ public class Game {
 	 */
 	public void endTurn() {
 		final int playerIndex = Players.indexOf(CurrentPlayer) + 1;
-		
+
 		if (playerIndex >= Players.size()) {
 			setCurrentPlayer(Players.get(0));
 			for (Planet planet : Planets.values()) {

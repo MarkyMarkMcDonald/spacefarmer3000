@@ -1,12 +1,12 @@
 package app.model;
 
-import app.model.player.Player;
-import app.model.tradeGoods.BasicGood;
-import app.model.tradeGoods.Tradable;
-import app.model.tradeGoods.TradeGoodType;
-import app.service.Randomizer;
-
 import java.util.Set;
+
+import app.model.player.Player;
+import app.model.tradegoods.BasicGood;
+import app.model.tradegoods.Tradable;
+import app.model.tradegoods.TradeGoodType;
+import app.service.Randomizer;
 
 /**
  * This interface requires a method that takes in a Player. The methods acts as
@@ -34,11 +34,11 @@ public interface EventFunction {
 	 * Maximum amount of an item that a player can find/lose.
 	 */
 	int CHANGE_MAX = 10;
-	
+
 	/**
 	 * Array needed for some methods to properly return Integer arrays.
 	 */
-    Tradable[] DUMMY_ARRAY= new Tradable[0];
+	Tradable[] DUMMY_ARRAY = new Tradable[0];
 
 	/**
 	 * EventFunction holding method corresponding to a Player losing an item.

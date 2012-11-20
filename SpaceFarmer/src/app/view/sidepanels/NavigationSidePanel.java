@@ -1,4 +1,4 @@
-package app.view.sidePanels;
+package app.view.sidepanels;
 
 import app.listener.ContinueListener;
 import app.model.Game;

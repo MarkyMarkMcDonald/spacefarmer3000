@@ -8,7 +8,7 @@ import app.service.TransportationService;
 import app.view.CardName;
 import app.view.Display;
 import app.view.PlanetInformationScreen;
-import app.view.sidePanels.TravelSidePanel;
+import app.view.sidepanels.TravelSidePanel;
 
 import java.awt.event.ActionEvent;
 

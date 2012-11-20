@@ -13,7 +13,9 @@ public enum Event {
 
 	/**
 	 * Creates an Event using a String to represent its name.
-	 * @param name Name of the Event.
+	 * 
+	 * @param name
+	 *            Name of the Event.
 	 */
 	private Event(String name) {
 		this.name = name;
@@ -21,6 +23,7 @@ public enum Event {
 
 	/**
 	 * Returns the contents of name.
+	 * 
 	 * @return The name of the Event.
 	 */
 	public String getName() {

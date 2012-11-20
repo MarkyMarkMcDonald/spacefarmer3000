@@ -2,7 +2,7 @@ package app.view.market;
 
 import app.listener.BuyFromMarketListener;
 import app.model.MarketPlace;
-import app.model.tradeGoods.Tradable;
+import app.model.tradegoods.Tradable;
 
 import javax.swing.*;
 import java.awt.*;

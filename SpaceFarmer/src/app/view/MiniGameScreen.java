@@ -1,8 +1,8 @@
 package app.view;
 
 import app.model.Game;
-import app.view.sidePanels.MessageSidePanel;
-import app.view.sidePanels.MessageType;
+import app.view.sidepanels.MessageSidePanel;
+import app.view.sidepanels.MessageType;
 import resources.MiniGameGFX;
 
 import javax.swing.*;

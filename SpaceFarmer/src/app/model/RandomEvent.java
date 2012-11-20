@@ -14,7 +14,9 @@ public enum RandomEvent {
 
 	/**
 	 * Constructs a RandomEvent using an EventFunction.
-	 * @param event EventFunction used to create the RandomEvent.
+	 * 
+	 * @param event
+	 *            EventFunction used to create the RandomEvent.
 	 */
 	private RandomEvent(EventFunction event) {
 		this.event = event;
@@ -22,7 +24,9 @@ public enum RandomEvent {
 
 	/**
 	 * Calls the method in event on player
-	 * @param player Player on which the method is called.
+	 * 
+	 * @param player
+	 *            Player on which the method is called.
 	 */
 	public void giveEvent(Player player) {
 		event.function(player);

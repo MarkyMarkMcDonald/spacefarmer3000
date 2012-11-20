@@ -2,9 +2,9 @@ package app.service;
 
 import app.model.*;
 import app.model.player.Player;
-import app.model.tradeGoods.Tradable;
+import app.model.tradegoods.Tradable;
 import app.view.Display;
-import app.view.sidePanels.MessageType;
+import app.view.sidepanels.MessageType;
 
 import java.util.Set;
 

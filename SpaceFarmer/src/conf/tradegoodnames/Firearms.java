@@ -1,4 +1,4 @@
-package conf.tradeGoodNames;
+package conf.tradegoodnames;
 
 /**
  * User: marky Date: 10/22/12 Time: 2:24 PM

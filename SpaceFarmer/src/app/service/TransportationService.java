@@ -5,7 +5,7 @@ import app.model.player.Player;
 import app.model.universe.Planet;
 import app.model.universe.PlanetarySystem;
 import app.view.Display;
-import app.view.sidePanels.MessageType;
+import app.view.sidepanels.MessageType;
 
 import java.awt.geom.Point2D;
 

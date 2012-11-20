@@ -11,9 +11,9 @@ import org.junit.Test;
 import app.model.EventFunction;
 import app.model.Inventory;
 import app.model.player.Player;
-import app.model.tradeGoods.BasicGood;
-import app.model.tradeGoods.TradeGoodType;
-import conf.tradeGoodNames.Firearms;
+import app.model.tradegoods.BasicGood;
+import app.model.tradegoods.TradeGoodType;
+import conf.tradegoodnames.Firearms;
 
 public class EventFunctionTest {
 

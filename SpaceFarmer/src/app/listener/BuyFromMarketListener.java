@@ -2,7 +2,7 @@ package app.listener;
 
 import app.model.Game;
 import app.model.MarketPlace;
-import app.model.tradeGoods.Tradable;
+import app.model.tradegoods.Tradable;
 import app.service.TransactionService;
 import app.view.Display;
 import app.view.market.BuyingPanel;

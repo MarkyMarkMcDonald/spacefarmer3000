@@ -1,6 +1,6 @@
 package app.model;
 
-import app.model.tradeGoods.Tradable;
+import app.model.tradegoods.Tradable;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,6 +10,7 @@ import java.util.Set;
 /**
  * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:35 AM To
  * change this template use File | Settings | File Templates.
+ * 
  * @author Mark
  * @version 1.0
  */
@@ -29,6 +30,7 @@ public class Inventory {
 
 	/**
 	 * Calculates the amount of space used in this inventory.
+	 * 
 	 * @return The amount of space used.
 	 */
 	public int getSpaceUsed() {
@@ -42,8 +44,11 @@ public class Inventory {
 
 	/**
 	 * Adds an item to this Inventory.
-	 * @param item Item to be added.
-	 * @param quantity Amount of the item to be added.
+	 * 
+	 * @param item
+	 *            Item to be added.
+	 * @param quantity
+	 *            Amount of the item to be added.
 	 */
 	public void addItem(Tradable item, int quantity) {
 		if (!theInventory.containsKey(item)) {
@@ -59,13 +64,15 @@ public class Inventory {
 
 	/**
 	 * Returns the quantity of an item in this Inventory.
-	 * @param item Item quantity to check.
+	 * 
+	 * @param item
+	 *            Item quantity to check.
 	 * @return Amount of the item in this Inventory.
 	 */
 	public int getQuantity(Tradable item) {
 		if (theInventory.containsKey(item)) {
 			return theInventory.get(item);
-		} else{
+		} else {
 			return 0;
 		}
 	}
