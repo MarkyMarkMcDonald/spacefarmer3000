@@ -1,13 +1,13 @@
 package app.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import app.model.TradeGoods.BasicGood;
 import app.model.TradeGoods.Tradable;
 import app.model.TradeGoods.TradeGoodType;
 import app.model.Universe.Planet;
 import app.service.Randomizer;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:33 AM To

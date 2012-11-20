@@ -100,85 +100,86 @@ public enum TradeGoodType {
 	private static final int QUANTITY_INPUT = MAXIMUM_QUANTITY
 			- MINIMUM_QUANTITY + 1;
 
+	/**
+	 * The names of the TradeGoodTypes.
+	 */
+	public static final String[] NAME_CONSTANTS = { "Water","Furs","Food","Ore","Games","Firearms","Medicine","Machines","Narcotics","Robots" };
+
+	/**
+	 * The enumerated subNames of the TradeGoodTypes.
+	 */
+	public static final Enum<?>[][] SUBNAMES_CONSTANTS = { Water.values(), Furs.values(),
+			Food.values(), Ore.values(), Games.values(), Firearms.values(),
+			Medicine.values(), Machines.values(), Narcotics.values(),
+			Robots.values() };
+
+	/**
+	 * The minimum technology levels to produce the TradeGoodTypes.
+	 */
+	public static final TechnologyLevel[] MINIMUM_LEVEL_TO_PRODUCE = { PRE_AGRICULTURE,
+			PRE_AGRICULTURE, AGRICULTURE, MEDIEVAL, RENAISSANCE,
+			RENAISSANCE, EARLY_INDUSTRIAL, EARLY_INDUSTRIAL, INDUSTRIAL,
+			POST_INDUSTRIAL };
+
+	/**
+	 * The minimum TechnologyLevels to sell the TradeGoodTypes to the
+	 * MarketPlace.
+	 */
+	public static final TechnologyLevel[] MINIMUM_LEVEL_TO_SELL = { PRE_AGRICULTURE,
+			PRE_AGRICULTURE, PRE_AGRICULTURE, MEDIEVAL, AGRICULTURE,
+			AGRICULTURE, AGRICULTURE, RENAISSANCE, PRE_AGRICULTURE,
+			EARLY_INDUSTRIAL, };
+
+	/**
+	 * The TechnologyLevels in which most of the TradeGoodTypes are
+	 * produced.
+	 */
+	public static final TechnologyLevel[] MOST_PRODUCED = { MEDIEVAL, PRE_AGRICULTURE,
+			AGRICULTURE, RENAISSANCE, POST_INDUSTRIAL, INDUSTRIAL,
+			POST_INDUSTRIAL, INDUSTRIAL, INDUSTRIAL, HI_TECH };
+
+	/**
+	 * The base price of the TradeGoodTypes.
+	 */
+	public static final int[] BASE_PRICE = { 30, 250, 100, 350, 250, 1250, 650, 900,
+			3500, 5000 };
+
+	/**
+	 * The amount by which the price of a TradeGoodType is increased per
+	 * TechnologyLevel.
+	 */
+	public static final int[] INCREASE_PER_LEVEL = { 3, 10, 5, 20, -10, -75, -20, -30,
+			-125, -150 };
+
+	/**
+	 * The variance of the price of the TradeGoodTypes.
+	 */
+	public static final int[] VARIANCE_CONSTANTS = { 4, 10, 5, 10, 5, 100, 10, 5, 150,
+			100 };
+
+	/**
+	 * The increased price Events of the TradeGoodTypes.
+	 */
+	public static final Event[] INCREASE_EVENT = { DROUGHT, COLD, CROPFAIL, WAR, BOREDOM,
+			WAR, PLAGUE, LACKOFWORKERS, BOREDOM, LACKOFWORKERS };
+
+	/**
+	 * The low quantity ResourceType conditions of the TradeGoodTypes.
+	 */
+	public static final ResourceType[] LOW_CONDITION = { LOTS_OF_WATER, RICH_FAUNA,
+			RICH_SOIL, MINERAL_RICH, ARTISTIC, WARLIKE, LOTS_OF_HERBS,
+			NONE, WEIRD_MUSHROOMS, NONE };
+
+	/**
+	 * The high quantity ResourceType conditions of the TradeGoodTypes.
+	 */
+	public static final ResourceType[] HIGH_CONDITION = { DESERT, LIFELESS, POOR_SOIL,
+			MINERAL_POOR, NONE, NONE, NONE, NONE, NONE, NONE };
+	
 	static {
-		/**
-		 * The names of the TradeGoodTypes.
-		 */
-		final String[] NAME_CONSTANTS = { "Water,Furs,Food,Ore,Games,Firearms,Medicine,Machines,Narcotics,Robots" };
-
-		/**
-		 * The enumerated subNames of the TradeGoodTypes.
-		 */
-		final Enum<?>[][] SUBNAMES_CONSTANTS = { Water.values(), Furs.values(),
-				Food.values(), Ore.values(), Games.values(), Firearms.values(),
-				Medicine.values(), Machines.values(), Narcotics.values(),
-				Robots.values() };
-
-		/**
-		 * The minimum technology levels to produce the TradeGoodTypes.
-		 */
-		final TechnologyLevel[] MINIMUM_LEVEL_TO_PRODUCE = { PRE_AGRICULTURE,
-				PRE_AGRICULTURE, AGRICULTURE, MEDIEVAL, RENAISSANCE,
-				RENAISSANCE, EARLY_INDUSTRIAL, EARLY_INDUSTRIAL, INDUSTRIAL,
-				POST_INDUSTRIAL };
-
-		/**
-		 * The minimum TechnologyLevels to sell the TradeGoodTypes to the
-		 * MarketPlace.
-		 */
-		final TechnologyLevel[] MINIMUM_LEVEL_TO_SELL = { PRE_AGRICULTURE,
-				PRE_AGRICULTURE, PRE_AGRICULTURE, MEDIEVAL, AGRICULTURE,
-				AGRICULTURE, AGRICULTURE, RENAISSANCE, PRE_AGRICULTURE,
-				EARLY_INDUSTRIAL, };
-
-		/**
-		 * The TechnologyLevels in which most of the TradeGoodTypes are
-		 * produced.
-		 */
-		final TechnologyLevel[] MOST_PRODUCED = { MEDIEVAL, PRE_AGRICULTURE,
-				AGRICULTURE, RENAISSANCE, POST_INDUSTRIAL, INDUSTRIAL,
-				POST_INDUSTRIAL, INDUSTRIAL, INDUSTRIAL, HI_TECH };
-
-		/**
-		 * The base price of the TradeGoodTypes.
-		 */
-		final int[] BASE_PRICE = { 30, 250, 100, 350, 250, 1250, 650, 900,
-				3500, 5000 };
-
-		/**
-		 * The amount by which the price of a TradeGoodType is increased per
-		 * TechnologyLevel.
-		 */
-		final int[] INCREASE_PER_LEVEL = { 3, 10, 5, 20, -10, -75, -20, -30,
-				-125, -150 };
-
-		/**
-		 * The variance of the price of the TradeGoodTypes.
-		 */
-		final int[] VARIANCE_CONSTANTS = { 4, 10, 5, 10, 5, 100, 10, 5, 150,
-				100 };
-
-		/**
-		 * The increased price Events of the TradeGoodTypes.
-		 */
-		final Event[] INCREASE_EVENT = { DROUGHT, COLD, CROPFAIL, WAR, BOREDOM,
-				WAR, PLAGUE, LACKOFWORKERS, BOREDOM, LACKOFWORKERS };
-
-		/**
-		 * The low quantity ResourceType conditions of the TradeGoodTypes.
-		 */
-		final ResourceType[] LOW_CONDITION = { LOTS_OF_WATER, RICH_FAUNA,
-				RICH_SOIL, MINERAL_RICH, ARTISTIC, WARLIKE, LOTS_OF_HERBS,
-				NONE, WEIRD_MUSHROOMS, NONE };
-
-		/**
-		 * The high quantity ResourceType conditions of the TradeGoodTypes.
-		 */
-		final ResourceType[] HIGH_CONDITION = { DESERT, LIFELESS, POOR_SOIL,
-				MINERAL_POOR, NONE, NONE, NONE, NONE, NONE, NONE };
+		
 		for (TradeGoodType goods : EnumSet.allOf(TradeGoodType.class)) {
 			int position = goods.ordinal();
-			System.out.println(position + "");
 			goods.name = NAME_CONSTANTS[position];
 			goods.subNames = SUBNAMES_CONSTANTS[position];
 			goods.minToProduce = MINIMUM_LEVEL_TO_PRODUCE[position];
