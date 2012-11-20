@@ -15,10 +15,25 @@ import java.util.Random;
  * This class is used to handle randomizations in universe generation.
  * 
  * @author Bobby Reese, Mark McDonald
+ * @version 1.0
  */
 public class Randomizer {
-	private static Random Rand = new Random();
 
+	/**
+	 * Random object to be used by this class and no other classes.
+	 */
+	private static final Random RAND = new Random();
+
+	/**
+	 * The number of coordinates to be generated in generateDimensions.
+	 */
+	private static final int COORDINATES = 2;
+	
+	/**
+	 * Array needed for some methods to properly return Integer arrays.
+	 */
+    private static final Integer[] DUMMY_ARRAY= new Integer[0];
+	
 	/**
 	 * Generates a random element from the enum class given.
 	 * 
@@ -27,9 +42,9 @@ public class Randomizer {
 	 * @return A random element from that class.
 	 */
 	public static Enum<?> randEnum(Class<? extends Enum<?>> enumClass) {
-		Enum<?> enums[] = enumClass.getEnumConstants();
-		int length = enums.length;
-		return enums[Rand.nextInt(length)];
+		final Enum<?> enums[] = enumClass.getEnumConstants();
+		final int length = enums.length;
+		return enums[RAND.nextInt(length)];
 	}
 
 	/**
@@ -38,46 +53,63 @@ public class Randomizer {
 	 * @param lowerBound
 	 *            lowest value possible.
 	 * @param upperBound
-	 *            highest value possible +1
+	 *            highest value possible +1.
+	 * @param numberOfInts
+	 *            number of elements in the returned array.
+	 * @return An array of unique Integers.
 	 */
 	public static Integer[] uniqueRandomInts(int lowerBound, int upperBound,
 			int numberOfInts) {
-		ArrayList<Integer> returnInts = new ArrayList<Integer>(numberOfInts);
+		final ArrayList<Integer> returnInts = new ArrayList<Integer>(
+				numberOfInts);
 		if (numberOfInts >= upperBound - lowerBound) {
 			for (int i = lowerBound; i < upperBound; i++) {
 				returnInts.add(i);
 			}
-			return returnInts.toArray(new Integer[0]);
+			return returnInts.toArray(DUMMY_ARRAY);
 		}
-		returnInts.add(lowerBound + Rand.nextInt(upperBound - lowerBound));
-		int randInt = lowerBound + Rand.nextInt(upperBound - lowerBound);
+		returnInts.add(lowerBound + RAND.nextInt(upperBound - lowerBound));
+		int randInt = lowerBound + RAND.nextInt(upperBound - lowerBound);
 		int index = 1;
 		while (index < numberOfInts) {
 			if (returnInts.contains(randInt)) {
-				randInt = lowerBound + Rand.nextInt(upperBound - lowerBound);
+				randInt = lowerBound + RAND.nextInt(upperBound - lowerBound);
 			} else {
 				index++;
 				returnInts.add(randInt);
-				randInt = lowerBound + Rand.nextInt(upperBound - lowerBound);
+				randInt = lowerBound + RAND.nextInt(upperBound - lowerBound);
 			}
 		}
-		return returnInts.toArray(new Integer[0]);
+		return returnInts.toArray(DUMMY_ARRAY);
 	}
 
 	/**
 	 * Gives a random number of unique elements from an array.
+	 * 
+	 * @param objects
+	 *            Array from which to choose the elements.
+	 * @param total
+	 *            Number of objects to be chosen.
+	 * @return Array containing unique elements from objects.
 	 */
-	public static Object[] randElements(Object[] objects, int total) {
-		Object[] returnObjects = new Object[total];
-		Integer[] indexes = uniqueRandomInts(0, objects.length, total);
+	public static Object[] multiRandElements(Object[] objects, int total) {
+		final Object[] returnObjects = new Object[total];
+		final Integer[] indexes = uniqueRandomInts(0, objects.length, total);
 		for (int i = 0; i < total; i++) {
-			returnObjects[i] = objects[indexes[i]];
+			returnObjects[i] = objects[(int) indexes[i]];
 		}
 		return returnObjects;
 	}
 
+	/**
+	 * Chooses a random element out of an array.
+	 * 
+	 * @param objects
+	 *            Array from which to choose the element.
+	 * @return The randomly chosen element.
+	 */
 	public static Object randElement(Object[] objects) {
-		return objects[Rand.nextInt(objects.length)];
+		return objects[RAND.nextInt(objects.length)];
 	}
 
 	/**
@@ -90,16 +122,17 @@ public class Randomizer {
 	 *            Upperbound value for the x-coordinate
 	 * @param yDim
 	 *            Upperbound value for the y-coordinate
+	 * @return List of Randomly assigned and unique Integer[2] arrays.
 	 */
 	public static List<Integer[]> generateDimensions(int number, int xDim,
 			int yDim) {
-		List<Integer[]> dimensionList = new ArrayList<Integer[]>();
+		final List<Integer[]> dimensionList = new ArrayList<Integer[]>();
 		boolean isUniqueDimension;
 
 		for (int i = 0; i < number; i++) {
-			Integer[] dimension = new Integer[2];
-			dimension[0] = Rand.nextInt(xDim);
-			dimension[1] = Rand.nextInt(yDim);
+			Integer[] dimension = new Integer[COORDINATES];
+			dimension[0] = RAND.nextInt(xDim);
+			dimension[1] = RAND.nextInt(yDim);
 
 			// We don't know if the dimension is unique, so treat as might not
 			// be unique
@@ -107,8 +140,8 @@ public class Randomizer {
 
 			while (!isUniqueDimension) {
 				if (!isUniqueDimension(dimensionList, dimension)) {
-					dimension[0] = Rand.nextInt(xDim);
-					dimension[1] = Rand.nextInt(yDim);
+					dimension[0] = RAND.nextInt(xDim);
+					dimension[1] = RAND.nextInt(yDim);
 				}
 				isUniqueDimension = isUniqueDimension(dimensionList, dimension);
 
@@ -118,12 +151,20 @@ public class Randomizer {
 		return dimensionList;
 	}
 
+	/**
+	 * Generates unique Integer[2] arrays within a Euclidean distance of each other.
+	 * @param number Number of arrays to be generated.
+	 * @param xDim Maximum value of the x-coordinate.
+	 * @param yDim Maximum value of the y-coordinate.
+	 * @param range Minimum distance between two arrays.
+	 * @return List of unique Integer[2] arrays.
+	 */
 	public static List<Integer[]> generateDimensionsRange(int number, int xDim,
 			int yDim, int range) {
-		List<Integer[]> dimensionList = new ArrayList<Integer[]>();
-		Integer[] point = new Integer[2];
-		point[0] = Rand.nextInt(xDim);
-		point[1] = Rand.nextInt(yDim);
+		final List<Integer[]> dimensionList = new ArrayList<Integer[]>();
+		Integer[] point = new Integer[COORDINATES];
+		point[0] = RAND.nextInt(xDim);
+		point[1] = RAND.nextInt(yDim);
 		boolean outOfRange = true;
 		for (int i = 0; i < number; i++) {
 			while (!outOfRange) {
@@ -131,17 +172,17 @@ public class Randomizer {
 				for (Integer[] p : dimensionList) {
 					if (Point2D.distance(p[0], p[1], point[0], point[1]) < range) {
 						outOfRange = false;
-						point[0] = Rand.nextInt(xDim);
-						point[1] = Rand.nextInt(yDim);
+						point[0] = RAND.nextInt(xDim);
+						point[1] = RAND.nextInt(yDim);
 						break;
 					}
 				}
 			}
 			outOfRange = false;
 			dimensionList.add(point);
-			point = new Integer[2];
-			point[0] = Rand.nextInt(xDim);
-			point[1] = Rand.nextInt(yDim);
+			point = new Integer[COORDINATES];
+			point[0] = RAND.nextInt(xDim);
+			point[1] = RAND.nextInt(yDim);
 		}
 		return dimensionList;
 	}
@@ -175,26 +216,31 @@ public class Randomizer {
 	 * @return true if a randomly-generated number falls within the probability
 	 *         bounds.
 	 */
-	public static boolean determineSuccess(double probability) {
-		return Rand.nextDouble() <= probability;
+	public static boolean isSuccessful(double probability) {
+		return RAND.nextDouble() <= probability;
 	}
 
 	/**
 	 * Serves only to mimic Random.nextInt() when necessary
 	 * 
 	 * @param upperBound
-	 *            Generated value is 0 to this number-1
+	 *            Generated value is 0 to this number-1.
+	 * @return Random integer.
 	 */
 	public static int nextInt(int upperBound) {
-		return Rand.nextInt(upperBound);
+		return RAND.nextInt(upperBound);
 	}
 
+	/**
+	 * Retrieves a random planet from UniverseFactory.
+	 * @return A random planet.
+	 */
 	public static Planet getRandomPlanet() {
-		Collection<Planet> planetCollection = UniverseFactory.getAllPlanets()
+		final Collection<Planet> planetCollection = UniverseFactory.getAllPlanets()
 				.values();
-		List<Planet> planets = new ArrayList<Planet>(planetCollection);
-		int numberOfPlanets = UniverseFactory.getNumberOfPlanets();
-		int chosenPlanetNumber = Randomizer.nextInt(numberOfPlanets);
+		final List<Planet> planets = new ArrayList<Planet>(planetCollection);
+		final int numberOfPlanets = UniverseFactory.getNumberOfPlanets();
+		final int chosenPlanetNumber = Randomizer.nextInt(numberOfPlanets);
 		return planets.get(chosenPlanetNumber);
 	}
 
@@ -211,15 +257,15 @@ public class Randomizer {
 	 *         of the number.
 	 */
 	public static int[] distributeNumber(int numSlots, int number) {
-		int[] returnDistribution = new int[numSlots];
-		int minimum = number / numSlots;
-		Integer[] augmentedIndices = uniqueRandomInts(0, numSlots, number
+		final int[] returnDistribution = new int[numSlots];
+		final int minimum = number / numSlots;
+		final Integer[] augmentedIndices = uniqueRandomInts(0, numSlots, number
 				% numSlots);
 		for (int i = 0; i < numSlots; i++) {
 			returnDistribution[i] = minimum;
 		}
 		for (int i = 0; i < number % numSlots; i++) {
-			returnDistribution[augmentedIndices[i]]++;
+			returnDistribution[ (int) augmentedIndices[i]]++;
 		}
 		return returnDistribution;
 	}
@@ -233,8 +279,8 @@ public class Randomizer {
 	 *            Chance the player will receive the event.
 	 */
 	public static void giveEvent(Player player, double chance) {
-		if (determineSuccess(chance)) {
-			RandomEvent event = (RandomEvent) randEnum(RandomEvent.class);
+		if (isSuccessful(chance)) {
+			final RandomEvent event = (RandomEvent) randEnum(RandomEvent.class);
 			event.giveEvent(player);
 		}
 	}

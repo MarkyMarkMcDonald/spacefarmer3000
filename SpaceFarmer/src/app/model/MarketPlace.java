@@ -26,7 +26,7 @@ public class MarketPlace {
 		priceMap = new HashMap<Tradable, Integer>();
 		quantityMap = new HashMap<Tradable, Integer>();
 		for (TradeGoodType tradeGoodType : TradeGoodType.values()) {
-			for (Object subName : Randomizer.randElements(
+			for (Object subName : Randomizer.multiRandElements(
 					tradeGoodType.getSubNames(),
 					MINIMUM_SUBGOODS
 							+ Randomizer.nextInt(MAXIMUM_SUBGOODS
