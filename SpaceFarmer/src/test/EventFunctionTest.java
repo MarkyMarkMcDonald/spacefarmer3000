@@ -10,10 +10,10 @@ import org.junit.Test;
 
 import app.model.EventFunction;
 import app.model.Inventory;
-import app.model.Player.Player;
-import app.model.TradeGoods.BasicGood;
-import app.model.TradeGoods.TradeGoodType;
-import conf.TradeGoodNames.Firearms;
+import app.model.player.Player;
+import app.model.tradeGoods.BasicGood;
+import app.model.tradeGoods.TradeGoodType;
+import conf.tradeGoodNames.Firearms;
 
 public class EventFunctionTest {
 

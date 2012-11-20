@@ -2,8 +2,8 @@ package app.listener;
 
 import app.model.Inventory;
 import app.model.MarketPlace;
-import app.view.Market.BuyingPanel;
-import app.view.Market.SellingPanel;
+import app.view.market.BuyingPanel;
+import app.view.market.SellingPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

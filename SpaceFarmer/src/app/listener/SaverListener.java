@@ -3,8 +3,8 @@ package app.listener;
 import app.factory.UniverseFactory;
 import app.model.Game;
 import app.model.Settings;
-import app.model.Player.Player;
-import app.model.Universe.Planet;
+import app.model.player.Player;
+import app.model.universe.Planet;
 import app.service.Saver_db;
 
 import javax.swing.*;

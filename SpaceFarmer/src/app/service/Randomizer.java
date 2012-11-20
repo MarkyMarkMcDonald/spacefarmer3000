@@ -1,9 +1,9 @@
 package app.service;
 
 import app.factory.UniverseFactory;
-import app.model.Player.Player;
 import app.model.RandomEvent;
-import app.model.Universe.Planet;
+import app.model.player.Player;
+import app.model.universe.Planet;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;

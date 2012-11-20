@@ -1,7 +1,7 @@
 package app.service;
 
-import app.model.Player.Player;
-import app.model.Player.SkillType;
+import app.model.player.Player;
+import app.model.player.SkillType;
 
 import java.util.Map;
 

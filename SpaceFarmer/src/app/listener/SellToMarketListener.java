@@ -3,11 +3,11 @@ package app.listener;
 import app.model.Game;
 import app.model.Inventory;
 import app.model.MarketPlace;
-import app.model.TradeGoods.Tradable;
+import app.model.tradeGoods.Tradable;
 import app.service.TransactionService;
 import app.view.Display;
-import app.view.Market.SellingPanel;
-import app.view.SidePanels.MessageType;
+import app.view.market.SellingPanel;
+import app.view.sidePanels.MessageType;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

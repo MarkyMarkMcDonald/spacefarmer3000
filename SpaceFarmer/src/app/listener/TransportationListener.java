@@ -2,13 +2,13 @@ package app.listener;
 
 import app.model.EventFunction;
 import app.model.Game;
-import app.model.Universe.Planet;
+import app.model.universe.Planet;
 import app.service.Randomizer;
 import app.service.TransportationService;
 import app.view.CardName;
 import app.view.Display;
 import app.view.PlanetInformationScreen;
-import app.view.SidePanels.TravelSidePanel;
+import app.view.sidePanels.TravelSidePanel;
 
 import java.awt.event.ActionEvent;
 

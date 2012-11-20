@@ -2,10 +2,11 @@
 package app.service;
 
 import app.model.Game;
-import app.model.Player.Player;
 import app.model.Settings;
-import app.model.TradeGoods.Tradable;
-import app.model.Universe.Planet;
+import app.model.player.Player;
+import app.model.tradeGoods.Tradable;
+import app.model.universe.Planet;
+
 import org.tmatesoft.sqljet.core.SqlJetException;
 import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
 import org.tmatesoft.sqljet.core.table.ISqlJetTable;

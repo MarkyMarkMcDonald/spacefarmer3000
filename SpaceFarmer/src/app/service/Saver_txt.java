@@ -1,8 +1,8 @@
 package app.service;
 
-import app.model.Player.Player;
 import app.model.Settings;
-import app.model.Universe.Planet;
+import app.model.player.Player;
+import app.model.universe.Planet;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

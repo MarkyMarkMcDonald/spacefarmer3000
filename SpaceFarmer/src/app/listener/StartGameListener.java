@@ -2,7 +2,7 @@ package app.listener;
 
 import app.logging.Logger;
 import app.model.Game;
-import app.model.Player.Player;
+import app.model.player.Player;
 import app.service.Randomizer;
 import app.view.CardName;
 import app.view.Display;

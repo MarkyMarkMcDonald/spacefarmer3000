@@ -1,11 +1,12 @@
 package app.service;
 
 import app.model.*;
-import app.model.Player.Player;
-import app.model.Player.SkillType;
-import app.model.TradeGoods.BasicGood;
-import app.model.TradeGoods.TradeGoodType;
-import app.model.Universe.*;
+import app.model.player.Player;
+import app.model.player.SkillType;
+import app.model.tradeGoods.BasicGood;
+import app.model.tradeGoods.TradeGoodType;
+import app.model.universe.*;
+
 import org.tmatesoft.sqljet.core.SqlJetException;
 import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
 import org.tmatesoft.sqljet.core.table.ISqlJetCursor;

@@ -2,7 +2,7 @@ package app.listener;
 
 import app.model.Game;
 import app.model.Inventory;
-import app.model.Player.Player;
+import app.model.player.Player;
 import app.service.PlayerValidationService;
 import app.view.CardName;
 import app.view.Display;
