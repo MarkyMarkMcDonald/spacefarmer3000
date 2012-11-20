@@ -1,4 +1,4 @@
-package app.model.Player;
+package app.model.player;
 
 
 /**

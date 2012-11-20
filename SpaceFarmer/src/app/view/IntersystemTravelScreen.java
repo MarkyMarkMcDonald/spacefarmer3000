@@ -2,8 +2,8 @@ package app.view;
 
 import app.factory.UniverseFactory;
 import app.model.Game;
-import app.model.Universe.Planet;
-import app.model.Universe.PlanetarySystem;
+import app.model.universe.Planet;
+import app.model.universe.PlanetarySystem;
 import conf.GameVariables;
 
 import java.awt.*;

@@ -2,7 +2,7 @@ package app.view;
 
 import app.listener.TransportationListener;
 import app.model.Game;
-import app.model.Universe.Planet;
+import app.model.universe.Planet;
 
 import javax.swing.*;
 

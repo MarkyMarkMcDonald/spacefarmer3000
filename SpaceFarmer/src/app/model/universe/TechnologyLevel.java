@@ -1,4 +1,4 @@
-package app.model.Universe;
+package app.model.universe;
 
 /**
  * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:33 AM To

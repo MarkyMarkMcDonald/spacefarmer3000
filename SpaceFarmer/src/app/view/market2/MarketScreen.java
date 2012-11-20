@@ -1,13 +1,13 @@
-package app.view.Market;
+package app.view.market;
 
 import app.listener.ToggleBuyingAndSellingListener;
 import app.model.Game;
 import app.model.Inventory;
 import app.model.MarketPlace;
 import app.view.CardName;
-import app.view.Market.BuyingPanel;
 import app.view.Screen;
-import app.view.Market.SellingPanel;
+import app.view.market.BuyingPanel;
+import app.view.market.SellingPanel;
 
 import javax.swing.*;
 

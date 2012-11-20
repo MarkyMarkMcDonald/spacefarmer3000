@@ -1,4 +1,8 @@
-package app.model.TradeGoods;
+/**
+ * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:31 AM To
+ * change this template use File | Settings | File Templates.
+ */
+package app.model.tradeGoods;
 
 import static app.model.Event.BOREDOM;
 import static app.model.Event.COLD;
@@ -7,50 +11,47 @@ import static app.model.Event.DROUGHT;
 import static app.model.Event.LACKOFWORKERS;
 import static app.model.Event.PLAGUE;
 import static app.model.Event.WAR;
-import static app.model.Universe.ResourceType.ARTISTIC;
-import static app.model.Universe.ResourceType.DESERT;
-import static app.model.Universe.ResourceType.LIFELESS;
-import static app.model.Universe.ResourceType.LOTS_OF_HERBS;
-import static app.model.Universe.ResourceType.LOTS_OF_WATER;
-import static app.model.Universe.ResourceType.MINERAL_POOR;
-import static app.model.Universe.ResourceType.MINERAL_RICH;
-import static app.model.Universe.ResourceType.NONE;
-import static app.model.Universe.ResourceType.POOR_SOIL;
-import static app.model.Universe.ResourceType.RICH_FAUNA;
-import static app.model.Universe.ResourceType.RICH_SOIL;
-import static app.model.Universe.ResourceType.WARLIKE;
-import static app.model.Universe.ResourceType.WEIRD_MUSHROOMS;
-import static app.model.Universe.TechnologyLevel.AGRICULTURE;
-import static app.model.Universe.TechnologyLevel.EARLY_INDUSTRIAL;
-import static app.model.Universe.TechnologyLevel.HI_TECH;
-import static app.model.Universe.TechnologyLevel.INDUSTRIAL;
-import static app.model.Universe.TechnologyLevel.MEDIEVAL;
-import static app.model.Universe.TechnologyLevel.POST_INDUSTRIAL;
-import static app.model.Universe.TechnologyLevel.PRE_AGRICULTURE;
-import static app.model.Universe.TechnologyLevel.RENAISSANCE;
+import static app.model.universe.ResourceType.ARTISTIC;
+import static app.model.universe.ResourceType.DESERT;
+import static app.model.universe.ResourceType.LIFELESS;
+import static app.model.universe.ResourceType.LOTS_OF_HERBS;
+import static app.model.universe.ResourceType.LOTS_OF_WATER;
+import static app.model.universe.ResourceType.MINERAL_POOR;
+import static app.model.universe.ResourceType.MINERAL_RICH;
+import static app.model.universe.ResourceType.NONE;
+import static app.model.universe.ResourceType.POOR_SOIL;
+import static app.model.universe.ResourceType.RICH_FAUNA;
+import static app.model.universe.ResourceType.RICH_SOIL;
+import static app.model.universe.ResourceType.WARLIKE;
+import static app.model.universe.ResourceType.WEIRD_MUSHROOMS;
+import static app.model.universe.TechnologyLevel.AGRICULTURE;
+import static app.model.universe.TechnologyLevel.EARLY_INDUSTRIAL;
+import static app.model.universe.TechnologyLevel.HI_TECH;
+import static app.model.universe.TechnologyLevel.INDUSTRIAL;
+import static app.model.universe.TechnologyLevel.MEDIEVAL;
+import static app.model.universe.TechnologyLevel.POST_INDUSTRIAL;
+import static app.model.universe.TechnologyLevel.PRE_AGRICULTURE;
+import static app.model.universe.TechnologyLevel.RENAISSANCE;
 
 import java.util.EnumSet;
 
 import app.model.Event;
-import app.model.Universe.Planet;
-import app.model.Universe.ResourceType;
-import app.model.Universe.TechnologyLevel;
+import app.model.universe.Planet;
+import app.model.universe.ResourceType;
+import app.model.universe.TechnologyLevel;
 import app.service.Randomizer;
-import conf.TradeGoodNames.Firearms;
-import conf.TradeGoodNames.Food;
-import conf.TradeGoodNames.Furs;
-import conf.TradeGoodNames.Games;
-import conf.TradeGoodNames.Machines;
-import conf.TradeGoodNames.Medicine;
-import conf.TradeGoodNames.Narcotics;
-import conf.TradeGoodNames.Ore;
-import conf.TradeGoodNames.Robots;
-import conf.TradeGoodNames.Water;
+import conf.tradeGoodNames.Firearms;
+import conf.tradeGoodNames.Food;
+import conf.tradeGoodNames.Furs;
+import conf.tradeGoodNames.Games;
+import conf.tradeGoodNames.Machines;
+import conf.tradeGoodNames.Medicine;
+import conf.tradeGoodNames.Narcotics;
+import conf.tradeGoodNames.Ore;
+import conf.tradeGoodNames.Robots;
+import conf.tradeGoodNames.Water;
 
-/**
- * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:31 AM To
- * change this template use File | Settings | File Templates.
- */
+
 
 public enum TradeGoodType {
 

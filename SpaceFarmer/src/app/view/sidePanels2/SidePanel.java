@@ -1,4 +1,4 @@
-package app.view.SidePanels;
+package app.view.sidePanels;
 
 import javax.swing.*;
 

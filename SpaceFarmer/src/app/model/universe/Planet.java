@@ -1,4 +1,4 @@
-package app.model.Universe;
+package app.model.universe;
 
 import app.model.*;
 import app.service.Randomizer;

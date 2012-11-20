@@ -1,4 +1,4 @@
-package app.model.TradeGoods;
+package app.model.tradeGoods;
 
 /**
  * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:31 AM To

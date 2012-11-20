@@ -1,4 +1,4 @@
-package app.model.TradeGoods;
+package app.model.tradeGoods;
 
 public enum Category {
 	FOOD, NATURALRESOURCE, INDUSTRIALGOOD, EQUIPMENT

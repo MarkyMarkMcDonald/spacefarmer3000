@@ -2,9 +2,9 @@ package app.view;
 
 import app.listener.ContinueListener;
 import app.model.Game;
-import app.model.Universe.Planet;
-import app.model.Player.Player;
-import app.view.SidePanels.PlayersInformationSidePanel;
+import app.model.player.Player;
+import app.model.universe.Planet;
+import app.view.sidePanels.PlayersInformationSidePanel;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,6 @@
 package app.model;
 
-import app.model.Player.Player;
+import app.model.player.Player;
 
 import java.util.Collection;
 

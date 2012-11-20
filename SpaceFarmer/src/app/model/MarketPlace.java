@@ -3,10 +3,10 @@ package app.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import app.model.TradeGoods.BasicGood;
-import app.model.TradeGoods.Tradable;
-import app.model.TradeGoods.TradeGoodType;
-import app.model.Universe.Planet;
+import app.model.tradeGoods.BasicGood;
+import app.model.tradeGoods.Tradable;
+import app.model.tradeGoods.TradeGoodType;
+import app.model.universe.Planet;
 import app.service.Randomizer;
 
 /**

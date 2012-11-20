@@ -1,8 +1,8 @@
-package app.view.SidePanels;
+package app.view.sidePanels;
 
 import app.listener.ContinueListener;
 import app.model.Game;
-import app.model.Player.Player;
+import app.model.player.Player;
 import app.view.CardName;
 import app.view.PlayerInformationSidePanel;
 

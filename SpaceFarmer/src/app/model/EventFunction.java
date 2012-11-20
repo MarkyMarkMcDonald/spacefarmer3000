@@ -1,9 +1,9 @@
 package app.model;
 
-import app.model.Player.Player;
-import app.model.TradeGoods.BasicGood;
-import app.model.TradeGoods.Tradable;
-import app.model.TradeGoods.TradeGoodType;
+import app.model.player.Player;
+import app.model.tradeGoods.BasicGood;
+import app.model.tradeGoods.Tradable;
+import app.model.tradeGoods.TradeGoodType;
 import app.service.Randomizer;
 
 import java.util.Set;

@@ -1,8 +1,8 @@
 package app.view;
 
 import app.model.Game;
-import app.model.Universe.Planet;
-import app.view.SidePanels.*;
+import app.model.universe.Planet;
+import app.view.sidePanels.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

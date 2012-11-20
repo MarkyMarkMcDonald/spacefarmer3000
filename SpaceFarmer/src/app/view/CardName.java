@@ -1,6 +1,6 @@
 package app.view;
 
-import app.view.Market.MarketScreen;
+import app.view.market.MarketScreen;
 
 /**
  * This class acts as an enumeration for the JPanels acting as cards for the

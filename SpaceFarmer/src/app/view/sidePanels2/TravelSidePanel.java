@@ -1,8 +1,8 @@
-package app.view.SidePanels;
+package app.view.sidePanels;
 
 import app.listener.TransportationListener;
 import app.model.Game;
-import app.model.Universe.Planet;
+import app.model.universe.Planet;
 import app.view.PlanetInfoLabel;
 
 import javax.swing.*;

@@ -1,8 +1,8 @@
-package app.model.Player;
+package app.model.player;
 
 import app.factory.ShipFactory;
 import app.model.*;
-import app.model.Universe.Planet;
+import app.model.universe.Planet;
 import conf.GameVariables;
 
 import java.util.HashMap;

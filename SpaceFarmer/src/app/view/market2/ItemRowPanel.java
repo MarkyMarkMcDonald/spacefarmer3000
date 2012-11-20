@@ -1,4 +1,4 @@
-package app.view.Market;
+package app.view.market;
 
 import app.listener.TransactionListener;
 
