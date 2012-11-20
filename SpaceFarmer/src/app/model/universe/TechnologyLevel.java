@@ -10,12 +10,24 @@ public enum TechnologyLevel {
 			"Early Industrial"), INDUSTRIAL("Industrial"), POST_INDUSTRIAL(
 			"Post Industrial"), HI_TECH("Hi-Tech");
 
-	private String name;
+	/**
+	 * Name of the TechnologyLevel.
+	 */
+	private final String name;
 
+	/**
+	 * Constructs a TechnologyLevel from its name.
+	 * 
+	 * @param name
+	 *            Name of the TechnologyLevel.
+	 */
 	private TechnologyLevel(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @return The name of the TechnologyLevel.
+	 */
 	public String getName() {
 		return name;
 	}

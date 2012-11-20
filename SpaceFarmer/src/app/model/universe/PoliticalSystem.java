@@ -14,12 +14,24 @@ public enum PoliticalSystem {
 			"Socialist State"), TECHNOCRACY("Technocracy"), THEOCRACY(
 			"Theocracy");
 
+	/**
+	 * Constructs a PoliticalSystem from its name.
+	 * 
+	 * @param name
+	 *            Name to set for the PoliticalSystem.
+	 */
 	private PoliticalSystem(String name) {
 		this.name = name;
 	}
 
-	private String name;
+	/**
+	 * Name of the PoliticalSystem.
+	 */
+	private final String name;
 
+	/**
+	 * @return Name of the PoliticalSystem.
+	 */
 	public String getName() {
 		return name;
 	}

@@ -2,7 +2,7 @@ package app.model.universe;
 
 public enum ResourceType {
 
-	// This field is for TradeGoods with no increased/decreased
+	// NONE is for TradeGoods with no increased/decreased
 	// quantity conditions
 	NONE("None"), NO_SPECIAL_RESOURCES("Normal"), MINERAL_RICH(
 			"Abundant Minerals"), MINERAL_POOR("Scarce Minerals"), DESERT(
@@ -11,12 +11,24 @@ public enum ResourceType {
 			"Weird Mushrooms"), LOTS_OF_HERBS("Lots of Herbs"), ARTISTIC(
 			"Artistic"), WARLIKE("Warlike");
 
-	private String name;
+	/**
+	 * Name of the ResourceType.
+	 */
+	private final String name;
 
+	/**
+	 * Constructs a ResourceType from its name.
+	 * 
+	 * @param name
+	 *            Name of the ResourceType.
+	 */
 	private ResourceType(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @return Name of the ResourceType.
+	 */
 	public String getName() {
 		return name;
 	}
