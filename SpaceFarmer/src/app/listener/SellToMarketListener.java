@@ -1,5 +1,9 @@
 package app.listener;
 
+import java.awt.event.ActionEvent;
+
+import javax.swing.JLabel;
+
 import app.model.Game;
 import app.model.Inventory;
 import app.model.MarketPlace;
@@ -9,17 +13,24 @@ import app.view.Display;
 import app.view.market.SellingPanel;
 import app.view.sidepanels.MessageType;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 10/24/12 Time: 5:36 PM
  * To change this template use File | Settings | File Templates.
+ * 
+ * @author Mark
+ * @version 1.0
  */
 public class SellToMarketListener extends TransactionListener {
-	private SellingPanel sellingPanel;
 
-	private Inventory inventory;
+	/**
+	 * The SellingPanel with which this Listener is associated.
+	 */
+	private final SellingPanel sellingPanel;
+
+	/**
+	 * The Inventory of the current Player.
+	 */
+	private final Inventory inventory;
 
 	/**
 	 * Set up this SellToMarketListener object.
@@ -57,9 +68,9 @@ public class SellToMarketListener extends TransactionListener {
 
 		// Check for format mismatch
 		if (quantityAsInt >= 0) {
-			boolean transactionIsSuccessful = TransactionService.sellToMarket(
-					Game.getCurrentPlayer(), marketPlace, price, quantityAsInt,
-					good);
+			final boolean transactionIsSuccessful = TransactionService
+					.sellToMarket(Game.getCurrentPlayer(), marketPlace, price,
+							quantityAsInt, good);
 
 			// update view if there are no errors
 			if (transactionIsSuccessful) {
@@ -74,6 +85,7 @@ public class SellToMarketListener extends TransactionListener {
 	/**
 	 * @return Information about this object as a String.
 	 */
+	@Override
 	public String toString() {
 		return "SellToMarketListener";
 	}

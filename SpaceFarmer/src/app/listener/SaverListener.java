@@ -1,25 +1,32 @@
 package app.listener;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JTextField;
+
 import app.factory.UniverseFactory;
 import app.model.Game;
 import app.model.Settings;
-import app.model.player.Player;
-import app.model.universe.Planet;
 import app.service.Saver_db;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 11/14/12 Time: 2:16 AM
  * To change this template use File | Settings | File Templates.
+ * @author Mark
+ * @version 1.0
  */
 public class SaverListener implements ActionListener {
 
-	private JTextField jTextField;
+	/**
+	 * The file path to the database file to save the game data in.
+	 */
+	private final JTextField jTextField;
 
-	private FileChooserListener fileChooserListener;
+	/**
+	 * The listener which will handle showing a save file dialog to the player.
+	 */
+	private final FileChooserListener fileChooserListener;
 
 	/**
 	 * Set up this SaverListener object.
@@ -49,7 +56,7 @@ public class SaverListener implements ActionListener {
 		//tempP=(Player[]) Game.getPlayers().toArray();
 		//Planet[] tempPlan=new Planet[UniverseFactory.getPlanets().size()];
 		//tempPlan=(Planet[]) UniverseFactory.getPlanets().values().toArray();
-		Saver_db saver = new Saver_db(fileChooserListener.getDbFile(),
+		final Saver_db saver = new Saver_db(fileChooserListener.getDbFile(),
 				Game.getPlayers(), UniverseFactory.getAllPlanets(),
 				new Settings(), new Game());
 		try {
@@ -62,6 +69,7 @@ public class SaverListener implements ActionListener {
 	/**
 	 * @return Information about this object as a String.
 	 */
+	@Override
 	public String toString() {
 		return "SaverListener";
 	}

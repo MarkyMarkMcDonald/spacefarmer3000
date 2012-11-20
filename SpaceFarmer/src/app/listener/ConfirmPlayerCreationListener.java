@@ -20,11 +20,15 @@ import java.awt.event.ActionListener;
  * player.
  * 
  * @author ?????, Andrew Wilder
+ * @version 1.0
  */
 public class ConfirmPlayerCreationListener implements ActionListener {
 
 	// private Settings settings;
-	private PlayerInformationScreen playerInformationScreen;
+	/**
+	 * PlayerInformationScreen for which this listener listens.
+	 */
+	private final PlayerInformationScreen playerInformationScreen;
 
 	/**
 	 * Set up this ConfirmPlayerCreationListener.
@@ -45,15 +49,16 @@ public class ConfirmPlayerCreationListener implements ActionListener {
 	 *            The instance of actionEvent associated with this CPCL.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		Player player = new Player(
+		final Player player = new Player(
 				playerInformationScreen.getTxtEnterPlayerNameData(),
 				playerInformationScreen.getEnteredPilotSkill(),
 				playerInformationScreen.getEnteredTraderSkill(),
 				playerInformationScreen.getEnteredEngineerSkill(),
 				playerInformationScreen.getEnteredFighterSkill());
 		player.setInventory(new Inventory());
-		Game game = Display.getGame();
-		String message = PlayerValidationService.isValidPlayer(player, 16);
+		final Game game = Display.getGame();
+		final String message = PlayerValidationService.isValidPlayer(player,
+				conf.GameVariables.MaxSkillPoints);
 		if (message.equals("success")) {
 			game.addPlayer(player);
 			Display.changeCard(CardName.PLAYER_CREATED_CARD);

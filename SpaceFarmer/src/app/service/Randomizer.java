@@ -285,10 +285,13 @@ public class Randomizer {
 	 * @param chance
 	 *            Chance the player will receive the event.
 	 */
-	public static void giveEvent(Player player, double chance) {
+	public static String giveEvent(Player player, double chance) {
 		if (isSuccessful(chance)) {
 			final RandomEvent event = (RandomEvent) randEnum(RandomEvent.class);
-			event.giveEvent(player);
+			return event.giveEvent(player);
+		}
+		else{
+		    return null;	
 		}
 	}
 

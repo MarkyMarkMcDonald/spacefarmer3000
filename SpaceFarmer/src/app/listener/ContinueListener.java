@@ -11,9 +11,13 @@ import java.awt.event.ActionListener;
  * listener. This will be used for "continue" buttons that lack complex logic
  * 
  * @author Andrew Wilder
+ * @version 1.0
  */
-abstract public class ContinueListener implements ActionListener {
+public abstract class ContinueListener implements ActionListener {
 
+	/**
+	 * Card that the game will progress to.
+	 */
 	protected CardName cardToMoveTo;
 
 	/**

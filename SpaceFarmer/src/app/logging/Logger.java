@@ -1,18 +1,22 @@
 package app.logging;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import app.factory.UniverseFactory;
-import app.model.*;
+import app.model.Game;
+import app.model.Ship;
 import app.model.player.Player;
 import app.model.player.SkillType;
 import app.model.universe.Planet;
 import app.model.universe.PlanetarySystem;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 /**
  * User: marky Date: 10/18/12 Time: 3:44 PM
+ * 
+ * @author Mark
+ * @version 1.0
  */
 public class Logger {
 
@@ -20,9 +24,10 @@ public class Logger {
 	 * Systematically dumps all game information to the console
 	 */
 	public static void printGameToConsole() {
-		List<Player> players = Game.getPlayers();
-		Collection<Planet> planets = UniverseFactory.getAllPlanets().values();
-		Collection<PlanetarySystem> systems = UniverseFactory
+		final List<Player> players = Game.getPlayers();
+		final Collection<Planet> planets = UniverseFactory.getAllPlanets()
+				.values();
+		final Collection<PlanetarySystem> systems = UniverseFactory
 				.getPlanetarySystems().values();
 
 		System.out.println("########################################");
@@ -59,9 +64,15 @@ public class Logger {
 		}
 
 	}
-
 	/*
 	 * Helper Methods for the console dump
+	 */
+
+	/**
+	 * Prints information about a Player.
+	 * 
+	 * @param player
+	 *            Player whose information is to be printed.
 	 */
 	public static void printPlayerInfo(Player player) {
 		System.out.println("Name: " + player.getName());
@@ -71,6 +82,12 @@ public class Logger {
 		printShipInfo(player.getShip());
 	}
 
+	/**
+	 * Print the values of the Player's skills.
+	 * 
+	 * @param skills
+	 *            Map of the Player's skills to their Integer values.
+	 */
 	public static void printPlayerSkills(Map<SkillType, Integer> skills) {
 		for (SkillType skillType : SkillType.values()) {
 			System.out.println("\t" + skillType.toString() + " = "
@@ -78,14 +95,22 @@ public class Logger {
 		}
 	}
 
+	/**
+	 * Prints information about a Ship.
+	 * 
+	 * @param ship
+	 *            Ship the information is associated with.
+	 */
 	public static void printShipInfo(Ship ship) {
 		System.out.println("Ship: " + ship.getType().toString());
 	}
 
-	public static void printSettingsInfo() {
-		// we'll worry about this later
-	}
-
+	/**
+	 * Print information about a Planet.
+	 * 
+	 * @param planet
+	 *            Planet the information is associated with.
+	 */
 	public static void printPlanetInfo(Planet planet) {
 		System.out.println("Name: " + planet.getName() + "; xDimension: "
 				+ planet.getX() + "; yDimension: " + planet.getY());
@@ -97,6 +122,12 @@ public class Logger {
 		System.out.println();
 	}
 
+	/**
+	 * Prints information about a Planetary System.
+	 * 
+	 * @param system
+	 *            PlanetarySystem the information is associated with.
+	 */
 	public static void printSystemInfo(PlanetarySystem system) {
 		System.out.println("Name: " + system.getName() + "; xDimension: "
 				+ system.getX() + "; yDimension: " + system.getY());

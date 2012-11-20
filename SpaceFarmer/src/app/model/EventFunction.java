@@ -22,8 +22,9 @@ public interface EventFunction {
 	 * 
 	 * @param player
 	 *            Player to give the event to.
+	 * @return String explaining what happened to the Player.
 	 */
-	void function(Player player);
+	String function(Player player);
 
 	/**
 	 * Minimum amount of an item that a player can find/lose.
@@ -61,10 +62,11 @@ public interface EventFunction {
 		 * 
 		 * @param player
 		 *            Player that will find items.
+		 * @return String explaining what happened to the Player.
 		 */
-		public void function(Player player) {
+		public String function(Player player) {
 			if (player.getInventory().getSpaceUsed() == 0) {
-				return;
+				return null;
 			}
 			int loseAmount = CHANGE_MIN
 					+ Randomizer.nextInt(CHANGE_MAX - CHANGE_MIN + 1);
@@ -75,7 +77,13 @@ public interface EventFunction {
 			if (player.getInventory().getQuantity(lostGood) < loseAmount) {
 				loseAmount = player.getInventory().getQuantity(lostGood);
 			}
-			player.getInventory().addItem(lostGood, -loseAmount);
+			if (loseAmount == 0) {
+				return null;
+			} else {
+				player.getInventory().addItem(lostGood, -loseAmount);
+				return " You lost some items to pirates on the journey!";
+			}
+
 		}
 
 		/**
@@ -98,8 +106,9 @@ public interface EventFunction {
 		 * 
 		 * @param player
 		 *            Player that will find items.
+		 * @return String explaining what happened to the Player.
 		 */
-		public void function(Player player) {
+		public String function(Player player) {
 			int addAmount = CHANGE_MIN
 					+ Randomizer.nextInt(CHANGE_MAX - CHANGE_MIN + 1);
 			final TradeGoodType type = (TradeGoodType) Randomizer
@@ -112,7 +121,12 @@ public interface EventFunction {
 			if (player.getInventory().getSpaceUsed() + addAmount > cargoSize) {
 				addAmount = cargoSize - player.getInventory().getSpaceUsed();
 			}
-			player.getInventory().addItem(good, addAmount);
+			if (addAmount == 0) {
+				return null;
+			} else {
+				player.getInventory().addItem(good, addAmount);
+				return " You found some items floating in space!";
+			}
 		}
 
 		/**

@@ -1,30 +1,57 @@
 package app.listener;
 
-import app.model.MarketPlace;
-import app.model.tradegoods.Tradable;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.regex.Pattern;
 
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import app.model.MarketPlace;
+import app.model.tradegoods.Tradable;
+
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 10/31/12 Time: 2:07 AM
  * To change this template use File | Settings | File Templates.
+ * 
+ * @author Mark
+ * @version 1.0
  */
-abstract public class TransactionListener implements ActionListener {
+public abstract class TransactionListener implements ActionListener {
+
+	/**
+	 * The current MarketPlace with which this Listener will interact.
+	 */
 	protected MarketPlace marketPlace;
 
+	/**
+	 * The price of the Transaction.
+	 */
 	protected int price;
 
+	/**
+	 * The good being handled.
+	 */
 	protected Tradable good;
 
+	/**
+	 * The text field containing the amount for the Transaction.
+	 */
 	protected JTextField quantity;
 
+	/**
+	 * The error to display if unsuccessful.
+	 */
 	protected JLabel errorMessage;
 
+	/**
+	 * The parsed Integer of the quantity JTextField.
+	 */
 	protected int quantityAsInt;
 
+	/**
+	 * The label containing the quantity to show.
+	 */
 	protected JLabel shownQuantity;
 
 	/**

@@ -1,20 +1,34 @@
 package app.listener;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.JFileChooser;
+import javax.swing.JTextField;
+
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 11/14/12 Time: 1:52 AM
  * To change this template use File | Settings | File Templates.
+ * 
+ * @author Mark
+ * @version 1.0
  */
 public class FileChooserListener implements ActionListener {
 
-	private JFileChooser fileChooser;
+	/**
+	 * JFileChooser associated with this listener.
+	 */
+	private final JFileChooser fileChooser;
 
-	private JTextField textField;
+	/**
+	 * The text field to which resulting diagnostics will be printed.
+	 */
+	private final JTextField textField;
 
+	/**
+	 * The game save database to be opened by this Listener.
+	 */
 	private File dbFile;
 
 	/**
@@ -37,9 +51,9 @@ public class FileChooserListener implements ActionListener {
 	 * @param actionEvent
 	 *            the instance of ActionEvent associated with this invocation.
 	 */
-	@Override
+
 	public void actionPerformed(ActionEvent actionEvent) {
-		int option = fileChooser.showSaveDialog(null);
+		final int option = fileChooser.showSaveDialog(null);
 		if (option == JFileChooser.APPROVE_OPTION) {
 			textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
 			dbFile = fileChooser.getSelectedFile();

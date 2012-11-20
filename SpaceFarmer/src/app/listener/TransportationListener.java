@@ -1,6 +1,7 @@
 package app.listener;
 
-import app.model.EventFunction;
+import java.awt.event.ActionEvent;
+
 import app.model.Game;
 import app.model.universe.Planet;
 import app.service.Randomizer;
@@ -10,11 +11,18 @@ import app.view.Display;
 import app.view.PlanetInformationScreen;
 import app.view.sidepanels.TravelSidePanel;
 
-import java.awt.event.ActionEvent;
-
+/**
+ * This class listens for a Player moving to another Planet.
+ * 
+ * @author Mark
+ * @version 1.0
+ * 
+ */
 public class TransportationListener extends ContinueListener {
 
-	// The Planet to which this ActionListener is tied
+	/**
+	 * The Planet to which this ActionListener is tied
+	 */
 	private Planet planet;
 
 	/**
@@ -44,32 +52,24 @@ public class TransportationListener extends ContinueListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		boolean successfulFlight = TransportationService.goToPlanet(planet);
+		final String displayString;
+		final boolean successfulFlight = TransportationService
+				.goToPlanet(planet);
 		if (successfulFlight) {
 			// Hide the Planet Travel Pane
-			TravelSidePanel travelPanel = (TravelSidePanel) Display
+			final TravelSidePanel travelPanel = (TravelSidePanel) Display
 					.getSidePanel("Right");
 			travelPanel.setVisible(false);
 
 			// Update what planet the player is now on
-			PlanetInformationScreen planetInfo = (PlanetInformationScreen) Display
+			final PlanetInformationScreen planetInfo = (PlanetInformationScreen) Display
 					.getCard(cardToMoveTo.toString());
 			planetInfo.update(planet);
 
-			int eventRoll = Randomizer.nextInt(5);
-			switch (eventRoll) {
-			case 0:
-			case 1:
-				EventFunction.WinEvent winEvent = new EventFunction.WinEvent();
-				winEvent.function(Game.getCurrentPlayer());
-				Display.addToMessage(" You found some items floating in space!");
-				break;
-			case 2:
-			case 3:
-				EventFunction.LoseEvent loseEvent = new EventFunction.LoseEvent();
-				loseEvent.function(Game.getCurrentPlayer());
-				Display.addToMessage(" You lost some items to pirates on the journey!");
-				break;
+			displayString = Randomizer.giveEvent(Game.getCurrentPlayer(),
+					conf.GameVariables.RandomEventChance);
+			if (displayString != null) {
+				Display.addToMessage(displayString);
 			}
 
 			Display.updatePlayersInfo();
@@ -91,6 +91,7 @@ public class TransportationListener extends ContinueListener {
 	/**
 	 * @return Information about this object as a String.
 	 */
+	@Override
 	public String toString() {
 		return "TransportationListener";
 	}

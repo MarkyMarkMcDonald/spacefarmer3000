@@ -1,6 +1,5 @@
 package app.listener;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import app.view.CardName;
@@ -10,6 +9,7 @@ import app.view.CardName;
  * listener. This will be used for "continue" buttons that lack complex logic
  * 
  * @author Andrew Wilder
+ * @version 1.0
  */
 public class BasicContinueListener extends ContinueListener implements
 		ActionListener {

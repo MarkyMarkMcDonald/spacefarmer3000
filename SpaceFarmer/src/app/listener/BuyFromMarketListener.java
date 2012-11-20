@@ -1,5 +1,9 @@
 package app.listener;
 
+import java.awt.event.ActionEvent;
+
+import javax.swing.JLabel;
+
 import app.model.Game;
 import app.model.MarketPlace;
 import app.model.tradegoods.Tradable;
@@ -7,16 +11,19 @@ import app.service.TransactionService;
 import app.view.Display;
 import app.view.market.BuyingPanel;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 10/24/12 Time: 5:36 PM
  * To change this template use File | Settings | File Templates.
+ * 
+ * @author Mark
+ * @version 1.0
  */
 public class BuyFromMarketListener extends TransactionListener {
 
-	private BuyingPanel buyingPanel;
+	/**
+	 * BuyingPanel for which the BuyFromMarketListener listens.
+	 */
+	private final BuyingPanel buyingPanel;
 
 	/**
 	 * Set up this listener for buying from a market.
@@ -49,9 +56,9 @@ public class BuyFromMarketListener extends TransactionListener {
 
 		// Do not buy something if there's a format mismatch
 		if (quantityAsInt >= 0) {
-			boolean transactionSuccess = TransactionService.buyFromMarket(
-					Game.getCurrentPlayer(), marketPlace, price, quantityAsInt,
-					good);
+			final boolean transactionSuccess = TransactionService
+					.buyFromMarket(Game.getCurrentPlayer(), marketPlace, price,
+							quantityAsInt, good);
 
 			// update views if there weren't errors
 			if (transactionSuccess) {

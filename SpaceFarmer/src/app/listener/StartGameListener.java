@@ -13,6 +13,9 @@ import java.util.List;
 
 /**
  * User: marky Date: 10/13/12 Time: 6:48 PM
+ * 
+ * @author Mark
+ * @version 1.0
  */
 public class StartGameListener extends ContinueListener {
 
@@ -33,8 +36,8 @@ public class StartGameListener extends ContinueListener {
 	public void actionPerformed(ActionEvent e) {
 
 		// Make player1 have the first turn
-		List<Player> players = Game.getPlayers();
-		Player player1 = players.get(0);
+		final List<Player> players = Game.getPlayers();
+		final Player player1 = players.get(0);
 		Game.setCurrentPlayer(player1);
 
 		// Make each player start on a random Planet
@@ -46,7 +49,7 @@ public class StartGameListener extends ContinueListener {
 		Game.setNumberOfTurns(1);
 
 		// update the turn Screen
-		StartOfTurnScreen startOfTurnScreen = (StartOfTurnScreen) Display
+		final StartOfTurnScreen startOfTurnScreen = (StartOfTurnScreen) Display
 				.getCard(CardName.START_OF_TURN_CARD.toString());
 		startOfTurnScreen.updateTurn();
 
@@ -57,6 +60,7 @@ public class StartGameListener extends ContinueListener {
 	/**
 	 * @return Information about this object as a String.
 	 */
+	@Override
 	public String toString() {
 		return "StartGameListener";
 	}

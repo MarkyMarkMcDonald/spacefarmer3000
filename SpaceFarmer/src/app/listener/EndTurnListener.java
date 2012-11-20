@@ -5,9 +5,19 @@ import java.awt.event.ActionListener;
 
 import app.model.Game;
 
+/**
+ * This class listens for the end of a turn.
+ * 
+ * @author Bobbey
+ * @version 1.0
+ * 
+ */
 public class EndTurnListener implements ActionListener {
 
-	private Game game;
+	/**
+	 * Game for which the ActionListener listens.
+	 */
+	private final Game game;
 
 	/**
 	 * Set up this EndTurnListener object.

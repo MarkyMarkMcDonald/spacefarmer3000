@@ -28,7 +28,7 @@ public enum RandomEvent {
 	 * @param player
 	 *            Player on which the method is called.
 	 */
-	public void giveEvent(Player player) {
-		event.function(player);
+	public String giveEvent(Player player) {
+		return event.function(player);
 	}
 }

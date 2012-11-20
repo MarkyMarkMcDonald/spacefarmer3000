@@ -36,7 +36,10 @@ public class GameVariables {
     
     public static final int MinimumSystemDistance = 5;
     
-	public static final double RandomEventChancce = 0.05;
+	public static final double RandomEventChance = 0.5;
+	
+	public static final int MaxSkillPoints = 16;
+	
     
     public static int getUniverseWidth() {
     	return UniverseColumns * QuadrantXDimension;

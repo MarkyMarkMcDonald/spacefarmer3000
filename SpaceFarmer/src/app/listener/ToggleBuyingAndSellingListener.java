@@ -1,27 +1,47 @@
 package app.listener;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
 import app.model.Inventory;
 import app.model.MarketPlace;
 import app.view.market.BuyingPanel;
 import app.view.market.SellingPanel;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 11/7/12 Time: 3:52 AM
  * To change this template use File | Settings | File Templates.
+ * 
+ * @author Mark
+ * @version 1.0
  */
 public class ToggleBuyingAndSellingListener implements ActionListener {
-	private JButton toggleButton;
 
-	private BuyingPanel buyingPanel;
+	/**
+	 * The Button with which this Listener is associated.
+	 */
+	private final JButton toggleButton;
 
-	private SellingPanel sellingPanel;
+	/**
+	 * The buying panel with which this Listener will interact.
+	 */
+	private final BuyingPanel buyingPanel;
 
+	/**
+	 * The selling panel with which this Listener will interact.
+	 */
+	private final SellingPanel sellingPanel;
+
+	/**
+	 * The marketplace with which this Listener will interact.
+	 */
 	private MarketPlace marketPlace;
 
+	/**
+	 * The current Player's inventory.
+	 */
 	private Inventory inventory;
 
 	/**
@@ -95,6 +115,7 @@ public class ToggleBuyingAndSellingListener implements ActionListener {
 	/**
 	 * @return Information about this object as a String.
 	 */
+	@Override
 	public String toString() {
 		return "ToggleBuyingAndSellingListener";
 	}

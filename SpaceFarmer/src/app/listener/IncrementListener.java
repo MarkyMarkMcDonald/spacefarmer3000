@@ -14,14 +14,24 @@ import javax.swing.JFormattedTextField;
  * contains invalid characters. Also, fields can not be incremented past 16.
  * 
  * @author Andrew Wilder
+ * @version 1.0
  */
 
 public class IncrementListener implements ActionListener {
 
-	private JFormattedTextField theField;
+	/**
+	 * The text field to which the modified quantity will be written
+	 */
+	private final JFormattedTextField theField;
 
-	private boolean IncType;
+	/**
+	 * A boolean specifying increment for true, decrement for false.
+	 */
+	private final boolean incType;
 
+	/**
+	 * Booleans representing when to increment or decrement.
+	 */
 	public static boolean INC = true, DEC = false;
 
 	/**
@@ -34,7 +44,7 @@ public class IncrementListener implements ActionListener {
 	 */
 	public IncrementListener(JFormattedTextField theField, boolean incType) {
 		this.theField = theField;
-		this.IncType = incType;
+		this.incType = incType;
 	}
 
 	/**
@@ -46,8 +56,11 @@ public class IncrementListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (Pattern.matches("[0-9]+", theField.getText())) {
 			final int amount = Integer.parseInt(theField.getText());
-			theField.setText((amount + (IncType ? (amount < 16 ? 1 : 0)
-					: (amount > 0 ? -1 : 0))) + "");
+			theField.setText((amount + (incType ? (amount < 
+					conf.GameVariables.MaxSkillPoints ? 1
+					: 0)
+					: (amount > 0 ? -1 : 0)))
+					+ "");
 		} else {
 			theField.setText("0");
 		}

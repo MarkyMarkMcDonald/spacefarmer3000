@@ -1,22 +1,32 @@
 package app.listener;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JTextField;
+
 import app.factory.UniverseFactory;
 import app.model.Game;
 import app.service.Loader_db;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 11/14/12 Time: 2:16 AM
  * To change this template use File | Settings | File Templates.
+ * 
+ * @author Mark
+ * @version 1.0
  */
 public class LoaderListener implements ActionListener {
 
-	private JTextField filePath;
+	/**
+	 * The file path to the database file to load.
+	 */
+	private final JTextField filePath;
 
-	private FileChooserListener fileChooserListener;
+	/**
+	 * The file chooser that will handle displaying the open file dialog.
+	 */
+	private final FileChooserListener fileChooserListener;
 
 	/**
 	 * Set up this LoaderListener object.
@@ -42,7 +52,7 @@ public class LoaderListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		Loader_db loader = new Loader_db();
+		final Loader_db loader = new Loader_db();
 		try {
 			loader.loadGame(fileChooserListener.getDbFile(),
 					UniverseFactory.getPlanetarySystems(),
@@ -55,6 +65,7 @@ public class LoaderListener implements ActionListener {
 	/**
 	 * @return Information about this object as a String.
 	 */
+	@Override
 	public String toString() {
 		return "LoadListener";
 	}
