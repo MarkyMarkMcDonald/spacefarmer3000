@@ -12,16 +12,44 @@ import app.service.Randomizer;
 /**
  * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:33 AM To
  * change this template use File | Settings | File Templates.
+ * 
+ * @author Mark,Bobbey
+ * @version 1.0
  */
 public class MarketPlace {
+	/**
+	 * Minimum subnames of a TradeGood that can appear in the MarketPlace.
+	 */
 	private static final int MINIMUM_SUBGOODS = 1;
 
+	/**
+	 * Maximum subnames of a TradeGood that can appear in the MarketPlace.
+	 */
 	private static final int MAXIMUM_SUBGOODS = 1;
 
-	private Map<Tradable, Integer> priceMap;
+	/**
+	 * Value to be passed in the Randomizer.nextInt to determine how many
+	 * subnames appear.
+	 */
+	private static final int RAND_ARGUMENT = MAXIMUM_SUBGOODS
+			- MINIMUM_SUBGOODS + 1;
 
-	private Map<Tradable, Integer> quantityMap;
+	/**
+	 * Map of the goods in the MarketPlace to their prices.
+	 */
+	private final Map<Tradable, Integer> priceMap;
 
+	/**
+	 * Map of the goods in the MarketPlace to their quantities.
+	 */
+	private final Map<Tradable, Integer> quantityMap;
+
+	/**
+	 * Constructs a MarketPlace using a Planet.
+	 * 
+	 * @param planet
+	 *            Planet from which the MarketPlace is constructed.
+	 */
 	public MarketPlace(Planet planet) {
 		priceMap = new HashMap<Tradable, Integer>();
 		quantityMap = new HashMap<Tradable, Integer>();
@@ -29,8 +57,7 @@ public class MarketPlace {
 			for (Object subName : Randomizer.multiRandElements(
 					tradeGoodType.getSubNames(),
 					MINIMUM_SUBGOODS
-							+ Randomizer.nextInt(MAXIMUM_SUBGOODS
-									- MINIMUM_SUBGOODS + 1))) {
+							+ Randomizer.nextInt(RAND_ARGUMENT))) {
 				BasicGood good = new BasicGood(tradeGoodType, (Enum<?>) subName);
 				int quantity = tradeGoodType.determineQuantity(planet);
 				quantityMap.put(good, quantity);
@@ -46,15 +73,19 @@ public class MarketPlace {
 		}
 	}
 
-	/*
+	/**
 	 * Sets a TradeGoodType to a given quantity.
+	 * @param tradable TradeGoodType to be modified.
+	 * @param quantity Quantity to set it to.
 	 */
 	public void setQuantity(Tradable tradable, int quantity) {
 		quantityMap.put(tradable, quantity);
 	}
 
-	/*
+	/**
 	 * Alters the quantity of a TradeGoodType by a particular amount.
+	 * @param tradable TradeGoodType to be modified.
+	 * @param amount by which to increase the quantity of the TradeGoodType.
 	 */
 	public void changeQuantity(Tradable tradable, int amount) {
 		if (quantityMap.containsKey(tradable)) {
@@ -64,9 +95,10 @@ public class MarketPlace {
 		}
 	}
 
-	/*
+	/**
 	 * Varies each of the TradeGoodTypes prices based on the Planet the
 	 * MarketPlace is on.
+	 * @param planet Planet on which to vary the prices.
 	 */
 	public void updatePrices(Planet planet) {
 		// {
@@ -76,10 +108,16 @@ public class MarketPlace {
 		// TODO: This! (this is bad practice btw, don't make these like this)
 	}
 
+	/**
+	 * @return Map of the goods in the MarketPlace to the prices.
+	 */
 	public Map<Tradable, Integer> getPriceMap() {
 		return priceMap;
 	}
 
+	/**
+	 * @return Map of the goods in the MarketPlace to the quantities.
+	 */
 	public Map<Tradable, Integer> getQuantityMap() {
 		return quantityMap;
 	}
