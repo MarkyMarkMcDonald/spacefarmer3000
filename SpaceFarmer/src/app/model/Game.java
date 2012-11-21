@@ -1,3 +1,7 @@
+// $codepro.audit.disable lossOfPrecisionInCast
+/*This file holds the class Game, which is responsible
+ * for holding all the information about the game.
+ */
 package app.model;
 
 import app.model.player.Player;

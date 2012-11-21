@@ -1,3 +1,6 @@
+/*This file holds the class Player, which represents a Player
+ * playing the game.
+ */
 package app.model.player;
 
 import java.util.HashMap;
@@ -57,7 +60,7 @@ public class Player {
 	/**
 	 * Creates a Player with no initialized characteristics.
 	 */
-	public Player() {
+	public Player() { // $codepro.audit.disable emptyMethod
 	}
 
 	/**
@@ -82,7 +85,7 @@ public class Player {
 		skillLevels.put(SkillType.TRADING, trading);
 		skillLevels.put(SkillType.ENGINEERING, engineering);
 		skillLevels.put(SkillType.FIGHTING, fighting);
-		this.money = GameVariables.PlayerStartingMoney;
+		this.money = GameVariables.PLAYER_STARTING_MONEY;
 		this.ship = ShipFactory.getShip(ShipModel.GNAT);
 		this.fuel = ship.getMaxFuel();
 	}

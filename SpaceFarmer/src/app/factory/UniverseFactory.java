@@ -1,17 +1,27 @@
-package app.factory;
+// $codepro.audit.disable largeNumberOfParameters
+/*This file holds the UniverseFactory, which creates a 
+ * the Universe to play the game in.
+ */
 
-import app.model.*;
-import app.model.universe.*;
-import app.service.Randomizer;
+package app.factory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import app.model.Event;
+import app.model.MarketPlace;
+import app.model.universe.Planet;
+import app.model.universe.PlanetarySystem;
+import app.model.universe.PoliticalSystem;
+import app.model.universe.ResourceType;
+import app.model.universe.TechnologyLevel;
+import app.service.Randomizer;
+
 /**
  * This class creates the universe
- * @author Bobby
+ * @author Bobbey
  * @version 1
  *
  */

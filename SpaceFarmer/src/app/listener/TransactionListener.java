@@ -1,3 +1,4 @@
+/*This file holds the TransactionListener class*/
 package app.listener;
 
 import java.awt.event.ActionEvent;
@@ -104,7 +105,12 @@ public abstract class TransactionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (Pattern.matches("[0-9]+", quantity.getText())) {
-			quantityAsInt = Integer.parseInt(quantity.getText());
+			try {
+				quantityAsInt = Integer.parseInt(quantity.getText());
+			} catch (Exception e) {
+				e.printStackTrace();
+				quantityAsInt = -1;
+			}
 		} else {
 			quantityAsInt = -1;
 		}

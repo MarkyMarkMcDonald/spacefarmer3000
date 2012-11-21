@@ -1,3 +1,6 @@
+/*This file holds the enum ResourceType, which represents
+ * the natural resource situation on a Planet.
+ */
 package app.model.universe;
 
 public enum ResourceType {

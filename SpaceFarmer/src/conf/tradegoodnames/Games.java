@@ -1,3 +1,4 @@
+/*This files holds an enum containing names for Games*/
 package conf.tradegoodnames;
 
 /**
@@ -8,16 +9,29 @@ public enum Games {
 	BOARD_GAMES("Board Games"), VIDEO_GAMES("Video Games"), SIDEWALK_CHALK(
 			"Sidewalk Chalk");
 
-	private String name;
+	/**
+	 * Name of the Game.
+	 */
+	private final String name;
 
+	/**
+	 * @return The name of the enumeration.
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Create a Game using its name.
+	 * @param name The Game's name.
+	 */
 	private Games(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @return Name of the Game.
+	 */
 	public String toString() {
 		return name;
 	}

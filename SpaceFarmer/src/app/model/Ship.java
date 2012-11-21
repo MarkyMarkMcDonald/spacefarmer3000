@@ -1,3 +1,6 @@
+/*This file holds the class Ship, which represents the Spaceship
+ * controlled by the Player.
+ */
 package app.model;
 
 /**

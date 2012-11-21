@@ -1,3 +1,7 @@
+/*This file holds the class PlayerValidationService, which
+ * verifies that a Player has been named and has distributed
+ * points correctly.
+ */
 package app.service;
 
 import app.model.player.Player;

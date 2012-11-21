@@ -1,52 +1,119 @@
+// $codepro.audit.disable lossOfPrecisionInCast
+/*This file contains all of the game variables.*/
 package conf;
 
 /**
  * User: marky
  * Date: 10/14/12
  * Time: 2:24 PM
+ * @author Mark
+ * @version 1.0
  */
 public class GameVariables {
 	
-    public static final int UniverseColumns = 3;
+	/**
+	 * Number of columns in the Universe.
+	 */
+    public static final int UNIVERSE_COLUMNS = 3;
     
-    public static final int UniverseRows = 3;
+    /**
+     * Number of rows in the Universe.
+     */
+    public static final int UNIVERSE_ROWS = 3;
     
-    public static final int SystemRows = 3;
+    /**
+     * Number of rows in a PlanetarySystem.
+     */
+    public static final int SYSTEM_ROWS = 3;
     
-    public static final int SystemColumns = 3;
+    /**
+     * Number of columns in a PlanetarySystem.
+     */
+    public static final int SYSTEM_COLUMNS = 3;
     
-    public static final int QuadrantXDimension = 50;
+    /**
+     * Width of a quadrant.
+     */
+    public static final int QUADRANT_X_DIMENSION = 50;
     
-    public static final int QuadrantYDimension = 50;
+    /**
+     * Height of a quadrant.
+     */
+    public static final int QUADRANT_Y_DIMENSION = 50;
     
-    public static final int MaxDistance = (int) Math.sqrt(Math.pow(QuadrantXDimension *
-    		UniverseColumns, 2) + Math.pow(QuadrantYDimension * UniverseRows, 2));
+    /**
+     * Max distance between two points in the Universe.
+     */
+    public static final int MAX_DISTANCE = (int) Math.sqrt(Math.pow(QUADRANT_X_DIMENSION *
+    		UNIVERSE_COLUMNS, 2) + Math.pow(QUADRANT_Y_DIMENSION * UNIVERSE_ROWS, 2));
 
-    public static final int LargestFuelTank = MaxDistance;
+    /**
+     * Largest fuel tank possible.
+     */
+    public static final int LARGEST_FUEL_TANK = MAX_DISTANCE;
     
-    public static final int NumPlanets = 30;
+    /**
+     * Number of Planets to generate.
+     */
+    public static final int NUM_PLANETS = 30;
     
-    public static final int NumPlanetarySystems = 12;
+    /**
+     * Number of PlanetarySystems to generate.
+     */
+    public static final int NUM_PLANETARY_SYSTEMS = 12;
+   
+    /**
+     * Number of rows in a PlanetarySystem.
+     */
+    public static final int PLANETARY_SYSTEM_ROWS = 3;
+   
+    /**
+     * Number of columns in a PlanetarySystem.
+     */
+    public static final int PLANETARY_SYSTEM_COLUMNS = 3;
     
-    public static final int PlantearySystemRows = 3;
+    /**
+     * Starting money for the Player.
+     */
+    public static final int PLAYER_STARTING_MONEY = 100000;
     
-    public static final int PlanetarySystemColomns = 3;
+    /**
+     * Minimum distance between two PlanetarySystems.
+     */
+    public static final int MINIMUM_SYSTEM_DISTANCE = 5;
     
-    public static final int PlayerStartingMoney = 100000;
-    
-    public static final int MinimumSystemDistance = 5;
-    
-	public static final double RandomEventChance = 0.5;
+    /**
+     * Chance that a random event will happen to a player.
+     */
+	public static final double RANDOM_EVENT_CHANCE = 0.5;
 	
-	public static final int MaxSkillPoints = 16;
-	
+	/**
+	 * Max skill points that can be allocated for a Player.
+	 */
+	public static final int MAX_SKILL_POINTS = 16;
     
+	/**
+	 * Width of the Universe.
+	 */
+	public static final int UNIVERSE_WIDTH = UNIVERSE_COLUMNS * QUADRANT_X_DIMENSION;
+	
+	/**
+	 * Height of the Universe.
+	 */
+	public static final int UNIVERSE_HEIGHT = UNIVERSE_ROWS * QUADRANT_Y_DIMENSION;
+	
+	/**
+	 * @return The width of the Universe.
+	 */
     public static int getUniverseWidth() {
-    	return UniverseColumns * QuadrantXDimension;
+    	return UNIVERSE_WIDTH;
     }
     
+    /**
+     * @return The height of the Universe.
+     */
     public static int getUniverseHeight() {
-    	return UniverseRows * QuadrantYDimension;
+    	return UNIVERSE_HEIGHT;
     }
     
     /**

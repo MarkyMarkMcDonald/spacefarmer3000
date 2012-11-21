@@ -1,3 +1,4 @@
+/*This file holds the ConfirmPlayerCreationListener class*/
 package app.listener;
 
 import app.model.Game;
@@ -58,7 +59,7 @@ public class ConfirmPlayerCreationListener implements ActionListener {
 		player.setInventory(new Inventory());
 		final Game game = Display.getGame();
 		final String message = PlayerValidationService.checkValidPlayer(player,
-				conf.GameVariables.MaxSkillPoints);
+				conf.GameVariables.MAX_SKILL_POINTS);
 		if (message.equals("success")) {
 			game.addPlayer(player);
 			Display.changeCard(CardName.PLAYER_CREATED_CARD);

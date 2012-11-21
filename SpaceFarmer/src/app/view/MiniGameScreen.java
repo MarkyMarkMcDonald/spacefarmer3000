@@ -108,8 +108,7 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 	}
 
 	/**
-	 * Perform the non-final methods required by the constructor. Stupid CodePro
-	 * audit. Fascists.
+	 * Perform the non-final methods required by the constructor.
 	 * 
 	 * @param mgs
 	 *            The instance of MiniGameScreen to complete construction for.

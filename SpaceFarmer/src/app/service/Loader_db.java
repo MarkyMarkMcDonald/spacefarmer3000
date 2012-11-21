@@ -1,11 +1,12 @@
+/*This file holds the class Loader_db, which is repronsible for
+ * loading the Database.
+ */
 package app.service;
 
-import app.model.*;
-import app.model.player.Player;
-import app.model.player.SkillType;
-import app.model.tradegoods.BasicGood;
-import app.model.tradegoods.TradeGoodType;
-import app.model.universe.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
 
 import org.tmatesoft.sqljet.core.SqlJetException;
 import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
@@ -13,10 +14,20 @@ import org.tmatesoft.sqljet.core.table.ISqlJetCursor;
 import org.tmatesoft.sqljet.core.table.ISqlJetTable;
 import org.tmatesoft.sqljet.core.table.SqlJetDb;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+import app.model.Event;
+import app.model.MarketPlace;
+import app.model.Settings;
+import app.model.Ship;
+import app.model.ShipModel;
+import app.model.player.Player;
+import app.model.player.SkillType;
+import app.model.tradegoods.BasicGood;
+import app.model.tradegoods.TradeGoodType;
+import app.model.universe.Planet;
+import app.model.universe.PlanetarySystem;
+import app.model.universe.PoliticalSystem;
+import app.model.universe.ResourceType;
+import app.model.universe.TechnologyLevel;
 
 /*
  import app.model.Universe.Planet;

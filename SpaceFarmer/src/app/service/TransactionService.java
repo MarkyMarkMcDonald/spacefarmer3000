@@ -1,3 +1,6 @@
+/*This file holds the class TransactionService,which is responsible
+ * for handling transactions between a Player and the MarketPlace.
+ */
 package app.service;
 
 import app.model.Inventory;

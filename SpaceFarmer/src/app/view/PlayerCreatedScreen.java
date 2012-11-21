@@ -1,19 +1,33 @@
+/* This file holds the PlayerCreatedScreen class, which
+ * represents a screen where a Player is created.
+ */
 package app.view;
 
-import app.listener.StartGameListener;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+import app.listener.StartGameListener;
 
 /**
  * This screen confirms the creation of a player.
  * 
  * @author Mark McDonald, Andrew Wilder
+ * @version 1.0;
  */
 public class PlayerCreatedScreen extends Screen {
 
+	/**
+	 * Font size.
+	 */
+	private static final int FONT_SIZE = 20;
+	
 	/**
 	 * Prevents "serializable" warning
 	 */
@@ -27,17 +41,17 @@ public class PlayerCreatedScreen extends Screen {
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		JLabel lblYouCreatedA = new JLabel("You created a player!");
-		lblYouCreatedA.setFont(new Font("Tahoma", Font.BOLD, 20));
+		final JLabel lblYouCreatedA = new JLabel("You created a player!");
+		lblYouCreatedA.setFont(new Font("Tahoma", Font.BOLD, FONT_SIZE));
 		lblYouCreatedA.setAlignmentY(Component.CENTER_ALIGNMENT);
 		lblYouCreatedA.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		JButton makeAnotherPlayer = new JButton("Add Another Player");
-		ActionListener continueToPlayerCreationListener = new ActionListener() {
+		final JButton makeAnotherPlayer = new JButton("Add Another Player");
+		final ActionListener continueToPlayerCreationListener = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				PlayerInformationScreen playerInformationScreen = 
+				final PlayerInformationScreen playerInformationScreen = 
 						(PlayerInformationScreen) Display
 						.getCard(CardName.PLAYER_INFORMATION_CARD.toString());
 				playerInformationScreen.resetInputs();
@@ -48,14 +62,14 @@ public class PlayerCreatedScreen extends Screen {
 		makeAnotherPlayer.setAlignmentY(Component.CENTER_ALIGNMENT);
 		makeAnotherPlayer.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		JButton startGame = new JButton("Start Game");
-		StartGameListener startGameListener = new StartGameListener();
+		final JButton startGame = new JButton("Start Game");
+		final StartGameListener startGameListener = new StartGameListener();
 		startGame.addActionListener(startGameListener);
 		startGame.setAlignmentY(Component.CENTER_ALIGNMENT);
 		startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		Component topGlue = Box.createVerticalGlue();
-		Component botGlue = Box.createVerticalGlue();
+		final Component topGlue = Box.createVerticalGlue();
+		final Component botGlue = Box.createVerticalGlue();
 
 		add(topGlue);
 		add(lblYouCreatedA);

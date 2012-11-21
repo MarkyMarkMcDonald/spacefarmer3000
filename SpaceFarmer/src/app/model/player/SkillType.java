@@ -1,3 +1,6 @@
+/*This file holds the enum SkillType, which represent the different
+ * type of Player statistics.
+ */
 package app.model.player;
 
 /**

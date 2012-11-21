@@ -1,3 +1,5 @@
+/*This file holds the Event enum, which holds
+ * enumerations for Random Events on Planets.*/
 package app.model;
 
 public enum Event {

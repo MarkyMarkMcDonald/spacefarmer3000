@@ -1,14 +1,35 @@
+// $codepro.audit.disable assignmentToNonFinalStatic
+
+/* assignmentToNonFinalStatic is disabled for this file because Display acts as a
+ * singleton, so assigning to static members within a non-static context is okay since
+ * instance variables and static members are synonymous.
+ */
+
+/** 
+ * This file holds the class Display, which is the display
+ * for SpaceFarmer3000
+ */
 package app.view;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.Box;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import app.model.Game;
 import app.model.universe.Planet;
-import app.view.sidepanels.*;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
+import app.view.sidepanels.MessageSidePanel;
+import app.view.sidepanels.MessageType;
+import app.view.sidepanels.NavigationSidePanel;
+import app.view.sidepanels.PlayersInformationSidePanel;
+import app.view.sidepanels.TravelSidePanel;
 
 /**
  * This class controls the viewing pane. The different screens are controlled by
@@ -21,6 +42,36 @@ import java.util.Map;
  */
 public class Display extends JFrame {
 
+	/**
+	 * X positions for the bounds of the Display.
+	 */
+	private static final int BOUNDS_X = 100;
+	
+	/**
+	 * Y positions for the bounds of the Display.
+	 */
+	private static final int BOUNDS_Y = 100;
+	
+	/**
+	 * Width of the Display.
+	 */
+	private static final int BOUNDS_WIDTH = 1600;
+	
+	/**
+	 * Height of the Display.
+	 */
+	private static final int BOUNDS_HEIGHT = 900;
+	
+	/**
+	 * Length for the Horizontal Strut
+	 */
+	private static final int HORIZONTAL_STRUT_LENGTH = 100;
+
+	/**
+	 * Color for the Background of the side panels.
+	 */
+	private static final Color BACKGROUND_COLOR = new Color(205, 201, 205);
+	
 	/**
 	 * Prevents "serializable" warning
 	 */
@@ -36,34 +87,34 @@ public class Display extends JFrame {
 	/**
 	 * Panels on the Display.
 	 */
-	private static JPanel CenterPanel, MainContentPanel;
+	private static JPanel CenterPanel = null, MainContentPanel = null;
 
 	/**
 	 * Game associated with the Display.
 	 */
-	private static Game Game;
+	private static Game Game = null;
 
 	/**
 	 * MiniGameScreen associated with the Display.
 	 */
-	private static MiniGameScreen MiniGameView;
+	private static MiniGameScreen MiniGameView = null;
 
 	// We need this to be able to update cards instead of creating new ones
 	// every time
 	/**
 	 * Map from the card names to their Screens.
 	 */
-	private static Map<String, Screen> CardMap;
+	private static Map<String, Screen> CardMap = null;
 
 	/**
 	 * Map from the SidePanel names to their JPanels.
 	 */
-	private static Map<String, JPanel> SidePanelMap;
+	private static Map<String, JPanel> SidePanelMap = null;
 
 	/**
 	 * set up the initial screen
 	 */
-	public final void setup() {
+	public final void setup() { // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.jUnitChecks
 		SidePanelMap = new HashMap<String, JPanel>();
 
 		/**
@@ -72,14 +123,14 @@ public class Display extends JFrame {
 
 		setTitle("SpaceFarmer 3000");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1600, 900);
+		setBounds(BOUNDS_X, BOUNDS_Y, BOUNDS_WIDTH, BOUNDS_HEIGHT);
 		MainContentPanel = new JPanel();
 		MainContentPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
 
 		setContentPane(MainContentPanel);
 		MainContentPanel.setLayout(new CardLayout(0, 0));
 
-		JPanel standardView = new JPanel();
+		final JPanel standardView = new JPanel();
 		MainContentPanel.add(standardView, "Standard");
 		standardView.setLayout(new BorderLayout(0, 0));
 
@@ -91,31 +142,32 @@ public class Display extends JFrame {
 		 * Top Panel
 		 */
 
-		MessageSidePanel topPanel = new MessageSidePanel();
+		final MessageSidePanel topPanel = new MessageSidePanel();
 
 		/**
 		 * Bot Panel
 		 */
 
-		JPanel bottomPanel = new PlayersInformationSidePanel(null);
+		final JPanel bottomPanel = new PlayersInformationSidePanel(null);
 		bottomPanel.setBackground(Color.GRAY);
 
 		/**
 		 * Left Panel
 		 */
 
-		JPanel leftPanel = new NavigationSidePanel();
-		leftPanel.setBackground(new Color(205, 201, 205));
+		final JPanel leftPanel = new NavigationSidePanel();
+		leftPanel.setBackground(BACKGROUND_COLOR);
 
-		Component horizontalStrut = Box.createHorizontalStrut(100);
+		final Component horizontalStrut = Box
+				.createHorizontalStrut(HORIZONTAL_STRUT_LENGTH);
 		leftPanel.add(horizontalStrut);
 
 		/**
 		 * Right Panel
 		 */
 
-		TravelSidePanel rightPanel = new TravelSidePanel();
-		rightPanel.setBackground(new Color(205, 201, 205));
+		final TravelSidePanel rightPanel = new TravelSidePanel();
+		rightPanel.setBackground(BACKGROUND_COLOR);
 
 		/**
 		 * Center Panel
@@ -186,28 +238,55 @@ public class Display extends JFrame {
 		MiniGameView.requestFocus();
 	}
 
+	/**
+	 * Sets the message in the Display.
+	 * 
+	 * @param message
+	 *            Message to set.
+	 * @param messageType
+	 *            Type of the message.
+	 */
 	public static void setMessage(String message, MessageType messageType) {
-		MessageSidePanel sidePanel = (MessageSidePanel) getSidePanel("Top");
+		final MessageSidePanel sidePanel = (MessageSidePanel) getSidePanel("Top");
 		sidePanel.setMessage(message, messageType);
 	}
 
+	/**
+	 * Adds to the message in the Display.
+	 * 
+	 * @param addendum
+	 *            String that is added.
+	 */
 	public static void addToMessage(String addendum) {
-		MessageSidePanel sidePanel = (MessageSidePanel) getSidePanel("Top");
+		final MessageSidePanel sidePanel = (MessageSidePanel) getSidePanel("Top");
 		sidePanel.addToMessage(addendum);
 	}
 
+	/**
+	 * Hides a message in the Display.
+	 */
 	public static void hideMessage() {
-		MessageSidePanel sidePanel = (MessageSidePanel) getSidePanel("Top");
+		final MessageSidePanel sidePanel = (MessageSidePanel) getSidePanel("Top");
 		sidePanel.setVisible(false);
 	}
 
+	/**
+	 * Updates the Planet travel information.
+	 * 
+	 * @param planet
+	 *            Planet with which to update.
+	 */
 	public static void updatePlanetTravelInfo(Planet planet) {
-		TravelSidePanel sidePanel = (TravelSidePanel) getSidePanel("Right");
+		final TravelSidePanel sidePanel = (TravelSidePanel) getSidePanel("Right");
 		sidePanel.updateBasedOnPlanet(planet);
 	}
 
+	/**
+	 * Updates the Display based off the Players.
+	 */
 	public static void updatePlayersInfo() {
-		PlayersInformationSidePanel playersInformationSidePanel = (PlayersInformationSidePanel) getSidePanel("Bot");
+		final PlayersInformationSidePanel playersInformationSidePanel = 
+				(PlayersInformationSidePanel) getSidePanel("Bot");
 		playersInformationSidePanel.updateBasedOnAllPlayers();
 	}
 
@@ -220,26 +299,53 @@ public class Display extends JFrame {
 	}
 
 	// --Accessors and Modifiers
+	/**
+	 * Returns a Screen based off its name.
+	 * 
+	 * @param cardName
+	 *            The Screen's name.
+	 * @return A Screen based off the name.
+	 */
 	public static Screen getCard(String cardName) {
 		return CardMap.get(cardName);
 	}
 
+	/**
+	 * Returns a JPanel corresponding to a position on the Display.
+	 * 
+	 * @param direction
+	 *            String representation of the position.
+	 * @return Panel corresponding to the String.
+	 */
 	public static JPanel getSidePanel(String direction) {
 		return SidePanelMap.get(direction);
 	}
 
+	/**
+	 * @return Game associated with this Display.
+	 */
 	public static Game getGame() {
 		return Game;
 	}
 
+	/**
+	 * @param game
+	 *            Game to set for this Display.
+	 */
 	public static void setGame(Game game) {
 		Display.Game = game;
 	}
 
+	/**
+	 * @return The center panel of this Display.
+	 */
 	public static JPanel getCenterPanel() {
 		return CenterPanel;
 	}
 
+	/**
+	 * @return The main content panel of this Display.
+	 */
 	public static JPanel getMainContentPanel() {
 		return MainContentPanel;
 	}

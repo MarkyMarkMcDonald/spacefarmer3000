@@ -1,3 +1,7 @@
+// $codepro.audit.disable lossOfPrecisionInCast
+/*This file holds the class TransportationService, which is responsible
+ * for moving a Player to another Planet.
+ */
 package app.service;
 
 import app.model.Game;

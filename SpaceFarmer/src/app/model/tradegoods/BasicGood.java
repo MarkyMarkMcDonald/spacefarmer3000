@@ -1,3 +1,6 @@
+/*This file holds the class BasicGood, which represent Tradable
+ * objects that have a type and a sub name.
+ */
 package app.model.tradegoods;
 
 /**

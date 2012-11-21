@@ -1,4 +1,7 @@
-package app.view;
+/*This file holds the class CardName, which holds enumerations
+ * for JPanels acting as cards for the center screen.
+ */
+package app.view; // $codepro.audit.disable packagePrefixNamingConvention
 
 import app.view.market.MarketScreen;
 
@@ -21,11 +24,6 @@ public enum CardName {
 	PLAYER_CREATED_CARD("PlayerCreatedCard") {
 		public Screen getScreen() {
 			return new PlayerCreatedScreen();
-		}
-	},
-	TEMPORARY_SCREEN_CARD("TemporaryCard") {
-		public Screen getScreen() {
-			return new TemporaryScreen();
 		}
 	},
 	PLANET_INFORMATION_CARD("PlanetInformationCard") {
@@ -65,7 +63,7 @@ public enum CardName {
 	 * @param name
 	 *            The CardName's associated name String.
 	 */
-	private CardName(String name) {
+	private CardName(String name) { // $codepro.audit.disable unusedMethod
 		this.name = name;
 	}
 

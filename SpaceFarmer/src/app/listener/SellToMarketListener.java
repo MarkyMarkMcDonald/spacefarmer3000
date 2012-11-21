@@ -1,3 +1,5 @@
+// $codepro.audit.disable largeNumberOfParameters
+/*This file holds the SellToMarketListener class*/
 package app.listener;
 
 import java.awt.event.ActionEvent;
@@ -69,8 +71,8 @@ public class SellToMarketListener extends TransactionListener {
 		// Check for format mismatch
 		if (quantityAsInt >= 0) {
 			final boolean transactionIsSuccessful = TransactionService
-					.hasSoldToMarket(Game.getCurrentPlayer(), marketPlace, price,
-							quantityAsInt, good);
+					.hasSoldToMarket(Game.getCurrentPlayer(), marketPlace,
+							price, quantityAsInt, good);
 
 			// update view if there are no errors
 			if (transactionIsSuccessful) {

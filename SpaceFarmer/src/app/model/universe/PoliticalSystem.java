@@ -1,3 +1,6 @@
+/*This file holds the enum PoliticalSystem which represents
+ * the government on a Planet. 
+ */
 package app.model.universe;
 
 /**

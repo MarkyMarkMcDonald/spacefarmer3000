@@ -1,3 +1,6 @@
+/*This file holds the class PlanetarySystem, which
+ * represents a system holding Planets in the Universe.
+ */
 package app.model.universe;
 
 import java.util.Map;

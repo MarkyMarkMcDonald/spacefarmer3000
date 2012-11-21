@@ -1,3 +1,6 @@
+/*This file holds the class TradeGood, which represents goods in
+ * the MarketPlace that may be bought or sold.
+ */
 package app.model.tradegoods;
 
 /**
@@ -6,7 +9,7 @@ package app.model.tradegoods;
  * @author Mark
  * @version 1.0
  */
-public class TradeGood {
+public class TradeGood implements Tradable {
 
 	/**
 	 * Name of the TradeGood.
@@ -25,6 +28,7 @@ public class TradeGood {
 
 	/**
 	 * Returns the hashcode of a TradeGood based of its name.
+	 * @return The hashcode of the TradeGood's name.
 	 */
 	public int hashCode() {
 		return name.hashCode();
@@ -38,10 +42,15 @@ public class TradeGood {
 	 * @return true if they are equivalent, false otherwise.
 	 */
 	public boolean equals(Object object) {
-		if (object instanceof Tradable) {
-			return ((Tradable) object).getName().equals(name);
-		} else {
+		if (object == this){
+			return true;
+		}
+		if (!(object instanceof Tradable)) {
 			return false;
+			
+		} else {
+			final Tradable actual = (Tradable) object;
+			return actual.getName().equals(name);
 		}
 	}
 
@@ -69,6 +78,13 @@ public class TradeGood {
 	 * @return The name of this TradeGood.
 	 */
 	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * @return The name of this TradeGood.
+	 */
+	public String toString(){
 		return name;
 	}
 }

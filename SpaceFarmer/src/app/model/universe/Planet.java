@@ -1,3 +1,6 @@
+/*This file holds the class Planet, which represents a Planet
+ * in the Universe.
+ */
 package app.model.universe;
 
 import app.model.Event;
@@ -213,4 +216,11 @@ public class Planet {
 		return "Planet";
 	}
 
+	/**
+	 * Hash the Planet based on its name.
+	 * @return A hash for this Planet so it can be used in a HashMap.
+	 */
+	public int hashCode() {
+		return name.hashCode();
+	}
 }
