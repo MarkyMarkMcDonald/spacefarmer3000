@@ -1,9 +1,12 @@
 // made my mykal thomas
 package app.service;
 
+import app.factory.UniverseFactory;
 import app.model.Game;
+import app.model.Inventory;
 import app.model.Settings;
 import app.model.player.Player;
+import app.model.player.SkillType;
 import app.model.tradegoods.Tradable;
 import app.model.universe.Planet;
 
@@ -129,7 +132,7 @@ public class Saver_db {
 	/**
 	 * Planet Table: Name
 	 */
-	private static final String FIELD_PLANET = "name";
+	private static final String FIELD_PLANET = "PlanetName";
 
 	/**
 	 * Planet Table: Tech Level
@@ -184,7 +187,7 @@ public class Saver_db {
 	/**
 	 * Market table: item name
 	 */
-	private static final String FIELD_ITEM = "Item name";
+	private static final String FIELD_ITEM = "ItemName";
 
 	/**
 	 * Market table: Quantity
@@ -194,7 +197,7 @@ public class Saver_db {
 	/**
 	 * Market table: item subname
 	 */
-	private static final String FIELD_SUB = "Item SubName";
+	private static final String FIELD_SUB = "ItemSubName";
 	
 	/**
 	 * Constructor for the saver
@@ -255,7 +258,7 @@ public class Saver_db {
 			db.beginTransaction(SqlJetTransactionMode.WRITE);
 
 			this.savePlayers(db);
-			//this.saveInventory(db);
+			this.saveInventory(db);
 			this.savePlanets(db);
 			//this.SaveSetting(db);
 			this.saveMarkets(db);
@@ -288,16 +291,14 @@ public class Saver_db {
 			final ISqlJetTable table = db.getTable(TABLE_PLAYERS);
 			// Test entry
 			//table.insert("ZOOL", 9999, "Earth", "BFS", 1, 2, 3, 4);
-			// for (Player player : players) {
-			// table.insert(temp[i].getName(),temp[i].getMoney(),temp[i].getFuel(),
-			// temp[i].getCurrentPlanet().getName(),temp[i].getShip().getType().
-			// toString(),
-			// temp[i].getSkillLevels().containsKey(SkillType.PILOTING),temp[i].get
-			// SkillLevels().containsKey(SkillType.ENGINEERING),temp[i].getSkillLevel
-			// s().containsKey(SkillType.FIGHTING),temp[i].getSkillLevels().containsK
-			// ey(SkillType.TRADING));
-			//
-			// }
+			 for (int i=0;i<players.length;i++) {
+				 table.insert(players[i].getName(),players[i].getMoney(),
+					 players[i].getFuel(),players[i].getCurrentPlanet().getName(),
+					 players[i].getShip().getType().toString(),
+					 players[i].getSkillLevels().containsKey(SkillType.PILOTING),
+					 players[i].getSkillLevels().containsKey(SkillType.ENGINEERING),
+					 players[i].getSkillLevels().containsKey(SkillType.FIGHTING),
+					 players[i].getSkillLevels().containsKey(SkillType.TRADING));			 }
 		} finally {
 			db.commit();
 		}
@@ -347,26 +348,39 @@ public class Saver_db {
 	 * @throws SqlJetException
 	 */
 	
-	/*private void SaveSetting(SqlJetDb db) throws SqlJetException {
+	private void saveInventory(SqlJetDb db) throws SqlJetException {
 		
-		 * String createTableQuery = "CREATE TABLE " + TABLE_SETTINGS + " " +
-		 * "(" + FIELD_DIFF + TNN + FIELD_CURRTURN + TNN + FIELD_CURRPLAYER +
-		 * " TEXT NOT NULL )"; //makes the table try
-		 * {db.createTable(createTableQuery);} finally {db.commit();} //fill in
-		 * the Database try { //gameSettings. ISqlJetTable table =
-		 * db.getTable(TABLE_SETTINGS); //Test entry //table.insert("ZOOL",1,2);
-		 * //table.insert(game.getNumberOfTurns(),game.getCurrentPlayer());
-		 * 
-		 * } finally {db.commit();}
+		  String createTableQuery = "CREATE TABLE " + TABLE_INVENTORY + " " +
+		  "(" + FIELD_NAME + TNN + FIELD_ITEM+ TNN+ FIELD_Q+
+		  " TEXT NOT NULL )"; //makes the table try
+		  
+		  try
+		  {db.createTable(createTableQuery);
+		  }finally {db.commit();} 
+		  //fill inthe Database 
+		  try { ISqlJetTable table =db.getTable(TABLE_INVENTORY); //Test entry //table.insert("ZOOL",1,2);
+		  for (int i=0;i<this.players.length;i++)
+		  {
+			  Inventory tempI=players[i].getInventory();
+			  Set tempS=tempI.getInventoryEntries();
+			  Tradable tempTrade= (Tradable) tempS.iterator().next();
+			  
+			  table.insert(players[i].getName(),"bla","bla");
+		  }
+		  
+		  } finally {db.commit();}
 		 
-	}*/
+	}
 
 	private void saveMarkets(SqlJetDb db) throws SqlJetException {
-		final Planet[] tempP =planets;
+		final Planet[] tempP =this.planets;
+		//UniverseFactory.getAllPlanets().values().toArray(tempP);
 		Map<Tradable, Integer> tempM;
-		Tradable[] tempTradeArray;
+		Tradable[] tempTradeArray = null;
+		Tradable thing=null;
+		Set tempS=null;
 		final String createTableQuery = "CREATE TABLE " + TABLE_MARKETS + " " + "("
-				+ FIELD_ITEM + TNN + FIELD_Q + TNN + FIELD_PLANET
+				+ FIELD_ITEM + TNN + /**/"Price"+TNN+ FIELD_Q + TNN + FIELD_PLANET
 				+ " TEXT NOT NULL)";
 
 		// makes the table
@@ -381,17 +395,27 @@ public class Saver_db {
 			// Test entry
 
 			// table.insert("ZOOL",1,2);
-			/*
+			
 			for (int i = 0; i < tempP.length; i++) {
 				tempM = tempP[i].getMarket().getQuantityMap();
-				tempTradeArray = (Tradable[]) tempM.keySet().toArray();
-				for (int j = 0; j < tempTradeArray.length; j++) {
-					table.insert(tempTradeArray[j],
-							tempM.get(tempTradeArray[j]), tempP[i].getName());
+				//tempTradeArray=tempM.keySet().toArray(tempTradeArray);
+				tempS=tempM.keySet();
+				tempTradeArray=new Tradable[tempS.size()];
+				//for(int j=0;j<tempS.size();j++){
+					thing=(Tradable) tempS.iterator().next();
+					//tempTradeArray[j]=thing;
+			//	}
+				//System.out.println(tempS.iterator().toString());
+				//tempTradeArray=(Tradable[]) tempO;
+				//for (int j = 0; j < tempTradeArray.length; j++) {
+					table.insert(thing.getName(),
+							thing.getBasePrice(),
+							tempM.get(thing),
+							tempP[i].getName());
 
-				}
+				//}
 				
-			}*/
+			}
 		} finally {
 			db.commit();
 		}

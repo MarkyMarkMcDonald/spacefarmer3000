@@ -15,7 +15,7 @@ import conf.SystemNames;
  * @author Mark McDonald, Andrew Wilder
  * @version 1.0
  */
-public class Driver {
+public class driver {
 
 	/**
 	 * Launch the application.
