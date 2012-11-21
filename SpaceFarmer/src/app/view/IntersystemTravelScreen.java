@@ -4,18 +4,20 @@
 
 package app.view;
 
-import app.factory.UniverseFactory;
-import app.model.Game;
-import app.model.universe.Planet;
-import app.model.universe.PlanetarySystem;
-import conf.GameVariables;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import app.factory.UniverseFactory;
+import app.model.Game;
+import app.model.universe.Planet;
+import app.model.universe.PlanetarySystem;
+import conf.GameVariables;
 
 /**
  * This class acts as the screen handling travel between planets and systems.
@@ -114,8 +116,8 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 					// Draw the planets
 					double thetaS = Math.PI / 4;
 					for (Planet p : ps.getPlanets().values()) {
-						int planX = (int) (sysX + Math.cos(thetaS) * (sysD / 2));
-						int planY = (int) (sysY + Math.sin(thetaS) * (sysD / 2));
+						final int planX = (int) (sysX + Math.cos(thetaS) * (sysD / 2));
+						final int planY = (int) (sysY + Math.sin(thetaS) * (sysD / 2));
 						g.setColor(PLANET_COLORS[Math
 								.abs(p.getName().hashCode())
 								% PLANET_COLORS.length]);
@@ -146,10 +148,11 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 				} else {
 
 					// Locate the center of this quadrant
-					int qX = (int) ((0.5 + j) * getWidth() / 
+					final int qX = (int) ((ROUND_HALF + j) * getWidth() / 
 							GameVariables.UNIVERSE_COLUMNS);
-					int qY = (int) ((0.5 + i) * getHeight() / GameVariables.UNIVERSE_ROWS);
-					int qD = (int) (0.7 * Math.min(getWidth()
+					final int qY = (int) ((ROUND_HALF + i) * getHeight() /
+							GameVariables.UNIVERSE_ROWS);
+					final int qD = (int) (0.7 * Math.min(getWidth()
 							/ GameVariables.UNIVERSE_COLUMNS, getHeight()
 							/ GameVariables.UNIVERSE_ROWS));
 
@@ -160,9 +163,9 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 						PlanetarySystem ps = (PlanetarySystem) o;
 
 						// Get dimensions of the system to draw
-						int sysX = (int) (qX + Math.cos(thetaQ) * (qD / 2));
-						int sysY = (int) (qY + Math.sin(thetaQ) * (qD / 2));
-						int sysD = qD * 3 / 5;
+						final int sysX = (int) (qX + Math.cos(thetaQ) * (qD / 2));
+						final int sysY = (int) (qY + Math.sin(thetaQ) * (qD / 2));
+						final int sysD = qD * 3 / 5;
 						g.drawOval(sysX - sysD / 2, sysY - sysD / 2, sysD, sysD);
 						g.drawString(ps.getName(), sysX - ps.getName().length()
 								* 3, sysY);
@@ -171,9 +174,9 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 						double thetaS = Math.PI / 4;
 						for (Planet p : ps.getPlanets().values()) {
 							int planX = (int) (sysX + Math.cos(thetaS)
-									* (sysD / 2));
+									* (sysD >> 1));
 							int planY = (int) (sysY + Math.sin(thetaS)
-									* (sysD / 2));
+									* (sysD >> 1));
 							g.setColor(PLANET_COLORS[Math.abs(p.getName()
 									.hashCode()) % PLANET_COLORS.length]);
 							g.fillOval(planX - PLANET_SIZE_HALF, planY
@@ -191,7 +194,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 							// If this is the planet the ship is on, draw the
 							// ship
 							if (Game.getCurrentPlanet().equals(p)) {
-								int[] polyX = { planX, planX + 10, planX,
+								final int[] polyX = { planX, planX + 10, planX,
 										planX - 10 }, polyY = { planY - 10,
 										planY + 10, planY, planY + 10 };
 								g.setColor(Color.BLACK);
