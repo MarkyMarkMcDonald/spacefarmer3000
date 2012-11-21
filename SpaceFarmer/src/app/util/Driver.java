@@ -3,14 +3,14 @@
  */
 package app.util;
 
-import java.awt.EventQueue;
-
 import app.factory.UniverseFactory;
 import app.model.Game;
 import app.view.Display;
 import conf.GameVariables;
 import conf.PlanetNames;
 import conf.SystemNames;
+
+import java.awt.*;
 
 /**
  * This class starts the SpaceFarmer game; it has the program's main method.
@@ -47,7 +47,6 @@ public class driver {
 							GameVariables.QUADRANT_X_DIMENSION,
 							GameVariables.QUADRANT_Y_DIMENSION,
 							GameVariables.MINIMUM_SYSTEM_DISTANCE);
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
