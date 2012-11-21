@@ -26,11 +26,6 @@ public enum CardName {
 			return new PlayerCreatedScreen();
 		}
 	},
-	TEMPORARY_SCREEN_CARD("TemporaryCard") {
-		public Screen getScreen() {
-			return new TemporaryScreen();
-		}
-	},
 	PLANET_INFORMATION_CARD("PlanetInformationCard") {
 		public Screen getScreen() {
 			return new PlanetInformationScreen();

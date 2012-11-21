@@ -1,43 +1,60 @@
+/* This file holds the SaveAndLoad class, which represents
+ * the saving and loading screen.
+ */
 package app.view;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import app.listener.FileChooserListener;
 import app.listener.LoaderListener;
 import app.listener.SaverListener;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 11/14/12 Time: 1:05 AM
  * To change this template use File | Settings | File Templates.
+ * @author Mark
+ * @version 1.0
  */
 public class SaveAndLoad extends Screen {
 
+	/**
+	 * Columns in the file path.
+	 */
+	private static final int FILE_PATH_COLUMNS = 24;
+	
+	/**
+	 * Constructs a new SaveAndLoad by adding the
+	 * appropriate buttons, filechoosers, listeners, etc.
+	 */
 	public SaveAndLoad() {
 
 		name = CardName.SAVING_AND_LOADING_CARD;
 
-		JTextField filePath = new JTextField();
-		filePath.setColumns(24);
+		final JTextField filePath = new JTextField();
+		filePath.setColumns(FILE_PATH_COLUMNS);
 		add(filePath);
 
-		JFileChooser fileChooser = new JFileChooser();
-		FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter(
+		final JFileChooser fileChooser = new JFileChooser();
+		final FileNameExtensionFilter fileNameExtensionFilter = 
+				new FileNameExtensionFilter(
 				"sql lite", "sql");
 		fileChooser.setFileFilter(fileNameExtensionFilter);
 
-		FileChooserListener fileChooserListener = new FileChooserListener(
+		final FileChooserListener fileChooserListener = new FileChooserListener(
 				fileChooser, filePath);
-		LoaderListener loaderListener = new LoaderListener(filePath,
+		final LoaderListener loaderListener = new LoaderListener(filePath,
 				fileChooserListener);
-		SaverListener saverListener = new SaverListener(filePath,
+		final SaverListener saverListener = new SaverListener(filePath,
 				fileChooserListener);
 
-		JButton choose = new JButton("Choose File");
+		final JButton choose = new JButton("Choose File");
 		choose.addActionListener(fileChooserListener);
-		JButton load = new JButton("Load");
+		final JButton load = new JButton("Load");
 		load.addActionListener(loaderListener);
-		JButton save = new JButton("Save");
+		final JButton save = new JButton("Save");
 		save.addActionListener(saverListener);
 
 		add(choose);
