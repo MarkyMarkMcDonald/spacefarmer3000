@@ -3,22 +3,11 @@
  */
 package app.view;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import app.listener.ConfirmPlayerCreationListener;
 import app.listener.IncrementListener;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * This screen shows the Player his information. (WIP)
@@ -71,27 +60,27 @@ public class PlayerInformationScreen extends Screen {
 	/**
 	 * Text field for the Player's name.
 	 */
-	private final JTextField enteredPlayerName;
+	private JTextField enteredPlayerName;
 
 	/**
 	 * Text field for the Pilot SkillType.
 	 */
-	private final JFormattedTextField enteredPilotSkill;
+	private JFormattedTextField enteredPilotSkill;
 
 	/**
 	 * Text field for the Fighter SkillType.
 	 */
-	private final JFormattedTextField enteredFighterSkill;
+	private JFormattedTextField enteredFighterSkill;
 
 	/**
 	 * Text field for the Trader SkillType.
 	 */
-	private final JFormattedTextField enteredTraderSkill;
+	private JFormattedTextField enteredTraderSkill;
 
 	/**
 	 * Text field for the Engineer SkillType.
 	 */
-	private final JFormattedTextField enteredEngineerSkill;
+	private JFormattedTextField enteredEngineerSkill;
 
 	/**
 	 * JLabel for when a Player enters information incorrectly.
@@ -314,4 +303,24 @@ public class PlayerInformationScreen extends Screen {
 			return 0;
 		}
 	}
+
+    public void setEnteredPlayerName(String name) {
+        enteredPlayerName.setText(name);
+    }
+
+    public void setEnteredPilotSkill(String enteredPilotSkill) {
+        this.enteredPilotSkill.setText(enteredPilotSkill);
+    }
+
+    public void setEnteredFighterSkill(String enteredFighterSkill) {
+        this.enteredFighterSkill.setText(enteredFighterSkill);
+    }
+
+    public void setEnteredTraderSkill(String enteredTraderSkill) {
+        this.enteredTraderSkill.setText(enteredTraderSkill);
+    }
+
+    public void setEnteredEngineerSkill(String enteredEngineerSkill) {
+        this.enteredEngineerSkill.setText(enteredEngineerSkill);
+    }
 }
