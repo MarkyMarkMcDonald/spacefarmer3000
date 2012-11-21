@@ -1,7 +1,8 @@
+// $codepro.audit.disable incorrectArgumentType, emptyFinallyClause, nullPointerDereference, com.instantiations.assist.eclipse.analysis.unusedReturnValue, spaceAfterCommas
 // made my mykal thomas
 package app.service;
 
-import app.factory.UniverseFactory;
+
 import app.model.Game;
 import app.model.Inventory;
 import app.model.Settings;
@@ -17,7 +18,7 @@ import org.tmatesoft.sqljet.core.table.SqlJetDb;
 
 import java.io.File;
 //import java.util.Collection;
-import java.util.Collection;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -193,12 +194,7 @@ public class Saver_db {
 	 * Market table: Quantity
 	 */
 	private static final String FIELD_Q = "Quantity";
-	
-	/**
-	 * Market table: item subname
-	 */
-	private static final String FIELD_SUB = "ItemSubName";
-	
+
 	/**
 	 * Constructor for the saver
 	 * 
@@ -217,15 +213,17 @@ public class Saver_db {
 			Map<String,Planet> universe, Settings settings, Game game) {
 		this.dbFile = dbFile;
 		this.players = new Player[people.size()];
-		for(int i=0;i<people.size();i++)
+		for(int i=0;i < people.size();i++) {
 			players[i]=people.get(i);
+		}
 			
-		Set temp=universe.keySet();
+		final Set temp=universe.keySet();
 		
-		Object[] tempO=temp.toArray();
-		Planet[] tempP=new Planet[tempO.length];
-		for(int i=0;i<tempO.length;i++)
+		final Object[] tempO=temp.toArray();
+		final Planet[] tempP=new Planet[tempO.length];
+		for(int i=0;i < tempO.length;i++){
 			tempP[i]=universe.get(tempO[i]);
+		}
 		
 		this.planets =tempP;
 		this.gameSettings = settings;
@@ -291,14 +289,20 @@ public class Saver_db {
 			final ISqlJetTable table = db.getTable(TABLE_PLAYERS);
 			// Test entry
 			//table.insert("ZOOL", 9999, "Earth", "BFS", 1, 2, 3, 4);
-			 for (int i=0;i<this.players.length;i++) {
-				 table.insert(this.players[i].getName(),this.players[i].getMoney(),
-						 this.players[i].getFuel(),this.players[i].getCurrentPlanet().getName(),
-						 this.players[i].getShip().getType().toString(),
-						 this.players[i].getSkillLevels().containsKey(SkillType.PILOTING),
-						 this.players[i].getSkillLevels().containsKey(SkillType.ENGINEERING),
-						 this.players[i].getSkillLevels().containsKey(SkillType.FIGHTING),
-						 this.players[i].getSkillLevels().containsKey(SkillType.TRADING));			 }
+			 for (int i=0;i < this.players.length;i++)
+				table.insert(this.players[i].getName(), this.players[i].getMoney(),
+						 this.players[i].getFuel(),this.players[i]
+								 .getCurrentPlanet().getName(),
+						 this.players[i].getShip().getType()
+						 .toString(),
+						 this.players[i].getSkillLevels()
+						 .containsKey(SkillType.PILOTING),
+						 this.players[i].getSkillLevels()
+						 .containsKey(SkillType.ENGINEERING),
+						 this.players[i].getSkillLevels()
+						 .containsKey(SkillType.FIGHTING),
+						 this.players[i].getSkillLevels()
+						 .containsKey(SkillType.TRADING));
 		} finally {
 			db.commit();
 		}
@@ -356,22 +360,30 @@ public class Saver_db {
 		  
 		  try
 		  {db.createTable(createTableQuery);
-		  }finally {db.commit();} 
+		  }finally {
+		  db.commit();} 
 		  //fill inthe Database 
-		  try { ISqlJetTable table =db.getTable(TABLE_INVENTORY); //Test entry //table.insert("ZOOL",1,2);
-		  for (int i=0;i<this.players.length;i++)
+		  try {
+		  ISqlJetTable table =db.getTable(TABLE_INVENTORY); //Test entry //table.insert("ZOOL",1,2);
+		  for (int i=0;i < this.players.length;i++)
 		  {
 			  Inventory tempI=players[i].getInventory();
 			  Set tempS=tempI.getInventoryEntries();
 			  Tradable tempTrade= (Tradable) tempS.iterator().next();
 			  
-			  table.insert(players[i].getName(),"bla","bla");
+			  table.insert(players[i].getName(), "bla","bla");
 		  }
 		  
-		  } finally {db.commit();}
+		  } finally {
+		  db.commit();}
 		 
 	}
 
+	/**
+	 * this saves the markets
+	 * @param db
+	 * @throws SqlJetException
+	 */
 	private void saveMarkets(SqlJetDb db) throws SqlJetException {
 		final Planet[] tempP =this.planets;
 		//UniverseFactory.getAllPlanets().values().toArray(tempP);

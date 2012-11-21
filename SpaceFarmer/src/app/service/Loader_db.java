@@ -1,3 +1,4 @@
+// $codepro.audit.disable questionableAssignment, handleNumericParsingErrors, nullPointerDereference
 /*This file holds the class Loader_db, which is repronsible for
  * loading the Database.
  */
@@ -48,17 +49,12 @@ public class Loader_db {
 	/**
 	 * name of the saved game
 	 */
-	private String saveName;
+	//private String saveName;
 
 	/**
 	 * location of the saved game
 	 */
-	private String saveLocation;
-
-	/**
-	 * game settings
-	 */
-	private Settings gameSettings;
+//	private String saveLocation;
 
 	/**
 	 * the game database
@@ -69,12 +65,7 @@ public class Loader_db {
 	 *  table:players
 	 */
 	private static final String TABLE_PLAYERS = "Players";
-	
-	/**
-	 *  table:Inventory
-	 */
-	private static final String TABLE_INVENTORY = "Inventory";
-	
+
 	/**
 	 *  table:Planets
 	 */
@@ -121,11 +112,6 @@ public class Loader_db {
 		private static final String FIELD_MONEY = "Money";
 
 		/** 
-		 * Player field: Ship
-		 */
-		private static final String FIELD_SHIP = "Ship";
-
-		/** 
 		 * Player field: Current Planet
 		 */
 		private static final String FIELD_CURRPLANET = "Current_Planet";
@@ -148,16 +134,6 @@ public class Loader_db {
 	 * Planet Table: Tech Level
 	 */
 	private static final String FIELD_TECH = "Tech_LV";
-
-	/**
-	 * Planet Table: Political system
-	 */
-	private static final String FIELD_POLSYS = "Political_sys";
-
-	/**
-	 * Planet Table: Resource type
-	 */
-	private static final String FIELD_RESOURCE = "Resource_Type";
 
 	/**
 	 * Planet Table: X coordinate
@@ -188,21 +164,6 @@ public class Loader_db {
 	 * table:market
 	 */
 	private static final String TABLE_MARKETS = "Market";
-
-	/**
-	 * Market table: item name
-	 */
-	private static final String FIELD_ITEM = "ItemName";
-
-	/**
-	* Market table: Quantity
-	*/
-	private static final String FIELD_Q = "Quantity";
-		
-	/**
-	 * Market table: item subname
-	 */
-	private static final String FIELD_SUB = "Item SubName";
 
 	/**
 	 * map of the PlanetarySystems pulled from the tables
@@ -240,13 +201,13 @@ public class Loader_db {
 		ps = loadSystems(db.getTable(TABLE_PLANSYS));
 		UniverseFactory.setPlanetarySystems(ps);
 		// make the planets
-		planets = loadPlanets(db.getTable(TABLE_PLANETS),ps);
+		planets = loadPlanets(db.getTable(TABLE_PLANETS), ps);
 		UniverseFactory.setAllPlanets(planets);
 		// make the players
-		players = loadPlayers(db.getTable(TABLE_PLAYERS),planets);
+		players = loadPlayers(db.getTable(TABLE_PLAYERS), planets);
 		Game.setCurrentPlayer(players.iterator().next());
 		// markets
-		loadMarkets(db.getTable(TABLE_MARKETS),planets);
+		loadMarkets(db.getTable(TABLE_MARKETS), planets);
 
 		// LoadInventory(db.getTable(TABLE_INVENTORY));
 		// LoadSettings(db.getTable(TABLE_SETTINGS));
