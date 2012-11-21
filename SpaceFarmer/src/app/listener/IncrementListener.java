@@ -57,7 +57,7 @@ public class IncrementListener implements ActionListener {
 		if (Pattern.matches("[0-9]+", theField.getText())) {
 			final int amount = Integer.parseInt(theField.getText());
 			theField.setText((amount + (incType ? (amount < 
-					conf.GameVariables.MaxSkillPoints ? 1
+					conf.GameVariables.MAX_SKILL_POINTS ? 1
 					: 0)
 					: (amount > 0 ? -1 : 0)))
 					+ "");

@@ -82,7 +82,7 @@ public class Player {
 		skillLevels.put(SkillType.TRADING, trading);
 		skillLevels.put(SkillType.ENGINEERING, engineering);
 		skillLevels.put(SkillType.FIGHTING, fighting);
-		this.money = GameVariables.PlayerStartingMoney;
+		this.money = GameVariables.PLAYER_STARTING_MONEY;
 		this.ship = ShipFactory.getShip(ShipModel.GNAT);
 		this.fuel = ship.getMaxFuel();
 	}

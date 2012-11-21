@@ -35,15 +35,15 @@ public class Driver {
 					UniverseFactory.createUniverse(
 							PlanetNames.getPlanetNamesAsList(),
 							SystemNames.getSystemNamesAsList(),
-							GameVariables.NumPlanets,
-							GameVariables.NumPlanetarySystems,
-							GameVariables.SystemRows,
-							GameVariables.SystemColumns,
-							GameVariables.UniverseRows,
-							GameVariables.UniverseColumns,
-							GameVariables.QuadrantXDimension,
-							GameVariables.QuadrantYDimension,
-							GameVariables.MinimumSystemDistance);
+							GameVariables.NUM_PLANETS,
+							GameVariables.NUM_PLANETARY_SYSTEMS,
+							GameVariables.SYSTEM_ROWS,
+							GameVariables.SYSTEM_COLUMNS,
+							GameVariables.UNIVERSE_ROWS,
+							GameVariables.UNIVERSE_COLUMNS,
+							GameVariables.QUADRANT_X_DIMENSION,
+							GameVariables.QUADRANT_Y_DIMENSION,
+							GameVariables.MINIMUM_SYSTEM_DISTANCE);
 
 				} catch (Exception e) {
 					e.printStackTrace();

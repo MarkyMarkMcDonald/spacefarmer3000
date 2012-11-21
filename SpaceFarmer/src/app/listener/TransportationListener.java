@@ -67,7 +67,7 @@ public class TransportationListener extends ContinueListener {
 			planetInfo.update(planet);
 
 			displayString = Randomizer.giveEvent(Game.getCurrentPlayer(),
-					conf.GameVariables.RandomEventChance);
+					conf.GameVariables.RANDOM_EVENT_CHANCE);
 			if (displayString != null) {
 				Display.addToMessage(displayString);
 			}

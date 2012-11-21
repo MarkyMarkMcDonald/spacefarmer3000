@@ -51,20 +51,20 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 
 		// Draw the planetary systems
 		ArrayList[][] systemList = 
-				new ArrayList[GameVariables.UniverseRows][GameVariables.UniverseColumns];
+				new ArrayList[GameVariables.UNIVERSE_ROWS][GameVariables.UNIVERSE_COLUMNS];
 		PlanetLocations = new HashMap<Point, Planet>();
-		for (int i = 0; i < GameVariables.UniverseRows; ++i) {
-			for (int j = 0; j < GameVariables.UniverseColumns; ++j) {
+		for (int i = 0; i < GameVariables.UNIVERSE_ROWS; ++i) {
+			for (int j = 0; j < GameVariables.UNIVERSE_COLUMNS; ++j) {
 				systemList[i][j] = new ArrayList<PlanetarySystem>();
 			}
 		}
 		for (PlanetarySystem ps : UniverseFactory.getPlanetarySystems()
 				.values()) {
-			systemList[ps.getY() / GameVariables.QuadrantYDimension][ps.getX()
-					/ GameVariables.QuadrantXDimension].add(ps);
+			systemList[ps.getY() / GameVariables.QUADRANT_Y_DIMENSION][ps.getX()
+					/ GameVariables.QUADRANT_X_DIMENSION].add(ps);
 		}
-		for (int i = 0; i < GameVariables.UniverseRows; ++i) {
-			for (int j = 0; j < GameVariables.UniverseColumns; ++j) {
+		for (int i = 0; i < GameVariables.UNIVERSE_ROWS; ++i) {
+			for (int j = 0; j < GameVariables.UNIVERSE_COLUMNS; ++j) {
 				if (systemList[i][j].size() == 1) {
 					g.setColor(Color.WHITE);
 
@@ -72,12 +72,12 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 					PlanetarySystem ps = (PlanetarySystem) systemList[i][j]
 							.get(0);
 					int sysX = (int) ((0.5 + j) * getWidth() / 
-							GameVariables.UniverseColumns);
+							GameVariables.UNIVERSE_COLUMNS);
 					int sysY = (int) ((0.5 + i) * getHeight() / 
-							GameVariables.UniverseRows);
+							GameVariables.UNIVERSE_ROWS);
 					int sysD = (int) (0.75 * Math.min(getWidth()
-							/ GameVariables.UniverseColumns, getHeight()
-							/ GameVariables.UniverseRows));
+							/ GameVariables.UNIVERSE_COLUMNS, getHeight()
+							/ GameVariables.UNIVERSE_ROWS));
 					g.drawOval(sysX - sysD / 2, sysY - sysD / 2, sysD, sysD);
 					g.drawString(ps.getName(),
 							sysX - ps.getName().length() * 3, sysY);
@@ -121,11 +121,11 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 
 					// Locate the center of this quadrant
 					int qX = (int) ((0.5 + j) * getWidth() / 
-							GameVariables.UniverseColumns);
-					int qY = (int) ((0.5 + i) * getHeight() / GameVariables.UniverseRows);
+							GameVariables.UNIVERSE_COLUMNS);
+					int qY = (int) ((0.5 + i) * getHeight() / GameVariables.UNIVERSE_ROWS);
 					int qD = (int) (0.7 * Math.min(getWidth()
-							/ GameVariables.UniverseColumns, getHeight()
-							/ GameVariables.UniverseRows));
+							/ GameVariables.UNIVERSE_COLUMNS, getHeight()
+							/ GameVariables.UNIVERSE_ROWS));
 
 					// For each system...
 					double thetaQ = Math.PI / 4;

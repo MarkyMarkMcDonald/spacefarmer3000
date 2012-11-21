@@ -41,7 +41,7 @@ public class ShipFactory {
 				ship.setPower(1);
 				ship.setDefense(0);
 				ship.setSpeed(14);
-				ship.setMaxFuel((int) (GameVariables.LargestFuelTank * .6));
+				ship.setMaxFuel((int) (GameVariables.LARGEST_FUEL_TANK * .6));
 				break;
 			case FIREFLY:
 				ship.setType(ShipModel.FIREFLY);
@@ -50,7 +50,7 @@ public class ShipFactory {
 				ship.setPower(1);
 				ship.setDefense(1);
 				ship.setSpeed(17);
-				ship.setMaxFuel((int) (GameVariables.LargestFuelTank * .75));
+				ship.setMaxFuel((int) (GameVariables.LARGEST_FUEL_TANK * .75));
 				break;
 			case MOSQUITO:
 				ship.setType(ShipModel.MOSQUITO);
@@ -59,7 +59,7 @@ public class ShipFactory {
 				ship.setPower(2);
 				ship.setDefense(1);
 				ship.setSpeed(13);
-				ship.setMaxFuel(GameVariables.LargestFuelTank);
+				ship.setMaxFuel(GameVariables.LARGEST_FUEL_TANK);
 				break;
 			case BUMBLEBEE:
 				ship.setType(ShipModel.BUMBLEBEE);
@@ -68,7 +68,7 @@ public class ShipFactory {
 				ship.setPower(1);
 				ship.setDefense(2);
 				ship.setSpeed(15);
-				ship.setMaxFuel((int) (GameVariables.LargestFuelTank * 1.5));
+				ship.setMaxFuel((int) (GameVariables.LARGEST_FUEL_TANK * 1.5));
 				break;
 			}
 			Ships.put(ship.getType(), ship);
