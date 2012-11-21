@@ -1,17 +1,8 @@
-// $codepro.audit.disable lossOfPrecisionInCast
-/* This file holds the class IntersystemTravelScreen, which
- * is a Screen displayed for traveling between systems.
+/**
+ * File comment here, bro
  */
-package app.view;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+package app.view;
 
 import app.factory.UniverseFactory;
 import app.model.Game;
@@ -19,48 +10,68 @@ import app.model.universe.Planet;
 import app.model.universe.PlanetarySystem;
 import conf.GameVariables;
 
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This class acts as the screen handling travel between planets and systems.
- * (WIP)
  * 
  * @author Andrew Wilder
+ * @version 1.0
  */
 public class IntersystemTravelScreen extends Screen implements MouseListener {
+
+	/**
+	 * Prevent serializable warning.
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Create the panel.
 	 */
 	public IntersystemTravelScreen() {
 		name = CardName.INTERSYSTEM_TRAVEL_CARD;
-		addMouseListener(this);
+		doNonFinalMethods(this);
+	}
+	
+	/**
+	 * Perform non-final methods for the constructor.
+	 * @param its The IntersystemTravelScreen to construct.
+	 */
+	private final static void doNonFinalMethods(IntersystemTravelScreen its) {
+		its.addMouseListener(its);
 	}
 
 	/**
 	 * Draw a grid with the quadrants for the universe, and each system in the
 	 * quadrants.
 	 */
-	private static final int PLANET_SIZE = 30;
+	private static final int PLANET_SIZE = 30, PLANET_SIZE_HALF = PLANET_SIZE >> 1,
+			THREE = 3;
+	
+	/** Static final double values */
+	private static final double ROUND_HALF = 0.5, DIAMETER1 = 0.75;
 
-	/**
-	 * Possible colors for the Planets.
-	 */
+	/** Colors used when drawing the planets */
 	private static final Color[] PLANET_COLORS = { Color.BLUE, Color.GRAY,
 			Color.GREEN, Color.ORANGE, Color.RED, Color.CYAN, Color.DARK_GRAY,
 			Color.LIGHT_GRAY };
 
-	/**
-	 * Map of the Point a Planets resides at to the Planet.
-	 */
-	private static Map<Point, Planet> PlanetLocations = null;
+	/** A mapping of Points onto Planets at their location used for capturing clicks */
+	private static Map<Point, Planet> PlanetLocations;
+
+	/** The currently selected planet (by clicking) */
+	private static Planet SelectedPlanet;
 
 	/**
-	 * The current Planet being drawn.
+	 * Draw the universe.
+	 * @param g The Graphics context onto which the universe will be drawn.
 	 */
-	private static Planet SelectedPlanet = null;
-
-	/**
-	 * Action to take for drawing the Planets.
-	 */
+	@Override
 	public void paintComponent(Graphics g) {
 
 		// Draw black over the background
@@ -69,8 +80,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 
 		// Draw the planetary systems
 		ArrayList[][] systemList = 
-				new ArrayList[GameVariables.UNIVERSE_ROWS]
-						[GameVariables.UNIVERSE_COLUMNS];
+			new ArrayList[GameVariables.UNIVERSE_ROWS][GameVariables.UNIVERSE_COLUMNS];
 		PlanetLocations = new HashMap<Point, Planet>();
 		for (int i = 0; i < GameVariables.UNIVERSE_ROWS; ++i) {
 			for (int j = 0; j < GameVariables.UNIVERSE_COLUMNS; ++j) {
@@ -90,16 +100,16 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 					// Get dimensions of the system to draw
 					PlanetarySystem ps = (PlanetarySystem) systemList[i][j]
 							.get(0);
-					int sysX = (int) ((0.5 + j) * getWidth() / 
+					int sysX = (int) ((ROUND_HALF + j) * getWidth() / 
 							GameVariables.UNIVERSE_COLUMNS);
-					int sysY = (int) ((0.5 + i) * getHeight() / 
+					int sysY = (int) ((ROUND_HALF + i) * getHeight() / 
 							GameVariables.UNIVERSE_ROWS);
-					int sysD = (int) (0.75 * Math.min(getWidth()
+					int sysD = (int) (DIAMETER1 * Math.min(getWidth()
 							/ GameVariables.UNIVERSE_COLUMNS, getHeight()
 							/ GameVariables.UNIVERSE_ROWS));
-					g.drawOval(sysX - sysD / 2, sysY - sysD / 2, sysD, sysD);
+					g.drawOval(sysX - (sysD >> 1), sysY - (sysD >> 1), sysD, sysD);
 					g.drawString(ps.getName(),
-							sysX - ps.getName().length() * 3, sysY);
+							sysX - ps.getName().length() * THREE, sysY);
 
 					// Draw the planets
 					double thetaS = Math.PI / 4;
@@ -109,10 +119,10 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 						g.setColor(PLANET_COLORS[Math
 								.abs(p.getName().hashCode())
 								% PLANET_COLORS.length]);
-						g.fillOval(planX - PLANET_SIZE / 2, planY - PLANET_SIZE
+						g.fillOval(planX - PLANET_SIZE_HALF, planY - PLANET_SIZE
 								/ 2, PLANET_SIZE, PLANET_SIZE);
 						g.setColor(Color.WHITE);
-						g.drawString(p.getName(), planX + PLANET_SIZE / 2 + 5,
+						g.drawString(p.getName(), planX + PLANET_SIZE_HALF + 5,
 								planY);
 						thetaS += Math.PI * 2 / ps.getPlanets().values().size();
 
@@ -128,13 +138,10 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 							g.setColor(Color.BLACK);
 							g.fillPolygon(polyX, polyY, 4);
 							g.setColor(Color.CYAN);
-							g.drawOval(planX - PLANET_SIZE / 2 - 5, planY
-									- PLANET_SIZE / 2 - 5, PLANET_SIZE + 10,
+							g.drawOval(planX - PLANET_SIZE_HALF - 5, planY
+									- PLANET_SIZE_HALF - 5, PLANET_SIZE + 10,
 									PLANET_SIZE + 10);
 						}
-
-						// If this is the currently selected planet, draw info
-						// TODO draw planet info
 					}
 				} else {
 
@@ -169,10 +176,10 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 									* (sysD / 2));
 							g.setColor(PLANET_COLORS[Math.abs(p.getName()
 									.hashCode()) % PLANET_COLORS.length]);
-							g.fillOval(planX - PLANET_SIZE / 2, planY
-									- PLANET_SIZE / 2, PLANET_SIZE, PLANET_SIZE);
+							g.fillOval(planX - PLANET_SIZE_HALF, planY
+									- PLANET_SIZE_HALF, PLANET_SIZE, PLANET_SIZE);
 							g.setColor(Color.WHITE);
-							g.drawString(p.getName(), planX + PLANET_SIZE / 2
+							g.drawString(p.getName(), planX + PLANET_SIZE_HALF
 									+ 5, planY);
 							thetaS += Math.PI * 2
 									/ ps.getPlanets().values().size();
@@ -190,14 +197,10 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 								g.setColor(Color.BLACK);
 								g.fillPolygon(polyX, polyY, 4);
 								g.setColor(Color.CYAN);
-								g.drawOval(planX - PLANET_SIZE / 2 - 5, planY
-										- PLANET_SIZE / 2 - 5,
+								g.drawOval(planX - PLANET_SIZE_HALF - 5, planY
+										- PLANET_SIZE_HALF - 5,
 										PLANET_SIZE + 10, PLANET_SIZE + 10);
 							}
-
-							// If this is the currently selected planet, draw
-							// info
-							// TODO draw planet info
 						}
 						thetaQ += Math.PI * 2 / systemList[i][j].size();
 					}
@@ -217,7 +220,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 
 		// Iterate over each point
 		for (Point p : PlanetLocations.keySet()) {
-			if (p.distance(e.getX(), e.getY()) < PLANET_SIZE / 2) {
+			if (p.distance(e.getX(), e.getY()) < PLANET_SIZE_HALF) {
 				clickedPlanet = true;
 
 				SelectedPlanet = PlanetLocations.get(p);
@@ -233,19 +236,35 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 		}
 	}
 
+	/**
+	 * Unused.
+	 */
+	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// LOL NOTHING HERE
+		System.out.print("");
 	}
 
+	/**
+	 * Unused.
+	 */
+	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// LOL CODEPRO AUDIT
+		System.out.print("");
 	}
 
+	/**
+	 * Unused.
+	 */
+	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// LOL I HATE CS2340
+		System.out.print("");
 	}
 
+	/**
+	 * Unused.
+	 */
+	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// LOL STUBBY STUBBY STUB STUB
+		System.out.print("");
 	}
 }

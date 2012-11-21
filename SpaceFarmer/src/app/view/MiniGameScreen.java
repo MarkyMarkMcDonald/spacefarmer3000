@@ -1,4 +1,5 @@
 // $codepro.audit.disable lossOfPrecisionInCast, com.instantiations.assist.eclipse.analysis.unusedReturnValue
+
 /* lossOfPrecisionInCast is disabled because the ship's coordinates, speed and direction
  * are stored as doubles, but they must be used as integers in calculations for drawing
  * to the screen. The most convenient way to do this is through casting, and the precision
@@ -8,9 +9,9 @@
  * all returned boolean values must be used.
  */
 
-
-/* This file holds the class MiniGameScreen, which drives the minigame
- * sequence when traveling between Planets.
+/**
+ * This file contains the class code responsible for driving the minigame sequence when
+ * traveling between different PlanetarySystems.
  */
 
 package app.view;
@@ -107,8 +108,7 @@ public class MiniGameScreen extends JPanel implements KeyListener,
 	}
 
 	/**
-	 * Perform the non-final methods required by the constructor. Stupid CodePro
-	 * audit. Fascists.
+	 * Perform the non-final methods required by the constructor.
 	 * 
 	 * @param mgs
 	 *            The instance of MiniGameScreen to complete construction for.
