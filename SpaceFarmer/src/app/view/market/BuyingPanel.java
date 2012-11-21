@@ -1,33 +1,68 @@
+/* This file holds the BuyingPanel class, which
+ * represents the panel present when buying items.
+ */
 package app.view.market;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.util.Map;
+
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import app.listener.BuyFromMarketListener;
 import app.model.MarketPlace;
 import app.model.tradegoods.Tradable;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.Map;
-
 /**
  * This Panel represents the purchasing view when on a planet.
  * 
  * @author Mark McDonald
+ * @version 1.0
  */
 public class BuyingPanel extends JPanel {
-	private JPanel items;
+	
+	/**
+	 * Width of the items panel.
+	 */
+	private static final int ITEMS_WIDTH = 500;
+	
+	/**
+	 * Height of the items panel.
+	 */
+	private static final int ITEMS_HEIGHT = 2000;
+	
+	/**
+	 * Threshold for red.
+	 */
+	private static final int RED_THRESHOLD = 150;
+	
+	/**
+	 * Threshold for green.
+	 */
+	private static final int GREEN_THRESHOLD = 50;
+	
+	/**
+	 * JPanel which holds the items.
+	 */
+	private final JPanel items;
 
+	/**
+	 * JLabel which displays any error messages.
+	 */
 	private JLabel errorMessage;
-
-	private SellingPanel sellingPanel;
 
 	/**
 	 * Create the panel.
+	 * @param errorMessage Error message label to assign to the panel.
 	 */
 	public BuyingPanel(JLabel errorMessage) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setAlignmentY(Component.TOP_ALIGNMENT);
 		this.errorMessage = errorMessage;
-		JPanel headings = new HeadingPanel("Item", "# Available",
+		final JPanel headings = new HeadingPanel("Item", "# Available",
 				"Buying Price", "# to Buy");
 		add(headings);
 
@@ -45,7 +80,7 @@ public class BuyingPanel extends JPanel {
 	public void setMarket(MarketPlace marketPlace) {
 		items.removeAll();
 		items.setLayout(new BoxLayout(items, BoxLayout.Y_AXIS));
-		items.setPreferredSize(new Dimension(500, 2000));
+		items.setPreferredSize(new Dimension(ITEMS_WIDTH, ITEMS_HEIGHT));
 
 		for (Map.Entry<Tradable, Integer> item : marketPlace.getQuantityMap()
 				.entrySet()) {
@@ -61,10 +96,10 @@ public class BuyingPanel extends JPanel {
 
 			// Set item's bg color based on comparison of market price and base
 			// price
-			int ratio = itemPrice / itemInfo.getBasePrice() * 100;
-			if (ratio < 50) {
+			int ratio = itemPrice / itemInfo.getBasePrice() * 100; // $codepro.audit.disable numericLiterals
+			if (ratio < GREEN_THRESHOLD) {
 				row.setBackground(Color.green);
-			} else if (ratio >= 50 && ratio <= 150) {
+			} else if (ratio >= GREEN_THRESHOLD && ratio <= RED_THRESHOLD) {
 				row.setBackground(Color.yellow);
 			} else {
 				row.setBackground(Color.red);
@@ -78,11 +113,12 @@ public class BuyingPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Sets the errorMessage.
+	 * @param errorMessage JLabel to set the error message to.
+	 */
 	public void setErrorMessage(JLabel errorMessage) {
 		this.errorMessage = errorMessage;
 	}
-
-	public void setSellingPanel(SellingPanel sellingPanel) {
-		this.sellingPanel = sellingPanel;
-	}
+	
 }

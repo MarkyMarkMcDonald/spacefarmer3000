@@ -43,7 +43,7 @@ public class WelcomeScreen extends Screen {
 	/**
 	 * Height of buttons.
 	 */
-	private static final int BUTTON_HEIGHT = 120;
+	private static final int BUTTON_HEIGHT = 30;
 
 	/**
 	 * Font size.
