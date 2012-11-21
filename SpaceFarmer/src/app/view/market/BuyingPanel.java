@@ -1,7 +1,7 @@
 /* This file holds the BuyingPanel class, which
  * represents the panel present when buying items.
  */
-package app.view.market;
+package app.view.market; // $codepro.audit.disable packagePrefixNamingConvention
 
 import java.awt.Color;
 import java.awt.Component;

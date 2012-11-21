@@ -1,3 +1,8 @@
+// $codepro.audit.disable
+
+/* This is a JUnit test case file and is thus not subject to an audit.
+ */
+
 package test;
 
 import app.model.Game;
@@ -46,7 +51,6 @@ public class PlanetaryTravelTest {
         PlanetarySystem system2 = new PlanetarySystem();
         planet3 = new Planet();
         planet3.setPlanetarySystem(system2);
-
 
         Map<String, Planet> system1Planets = new HashMap<String, Planet>();
         Map<String, Planet> system2Planets = new HashMap<String, Planet>();

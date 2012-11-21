@@ -1,4 +1,11 @@
-/* This file holds the StartOfTurnScreen class, which
+// $codepro.audit.disable staticMemberAccess
+
+/* staticMemberAccess is disabled for this file because each instance of this violation
+ * is a natural use of static constant access used in constructing swing containers.
+ */
+
+/**
+ *  This file holds the StartOfTurnScreen class, which
  * represents the displayed Screen when a Player begins
  * his turn.
  */

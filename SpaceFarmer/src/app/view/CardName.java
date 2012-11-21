@@ -1,7 +1,7 @@
 /*This file holds the class CardName, which holds enumerations
  * for JPanels acting as cards for the center screen.
  */
-package app.view;
+package app.view; // $codepro.audit.disable packagePrefixNamingConvention
 
 import app.view.market.MarketScreen;
 

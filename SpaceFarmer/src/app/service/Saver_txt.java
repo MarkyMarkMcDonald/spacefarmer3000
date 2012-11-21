@@ -29,7 +29,7 @@ public class Saver_txt {
 	private Settings gameSettings;
 
 	/**
-	 * Constructer for the saver
+	 * Constructor for the saver
 	 * 
 	 * @param loctaions
 	 *            the array of save locations
@@ -40,9 +40,12 @@ public class Saver_txt {
 	 * @param settings
 	 *            the settings for the game.
 	 */
-	public Saver_txt(String loctaions[], Collection<Player> people,
+	public Saver_txt(String locations[], Collection<Player> people,
 			Collection<Planet> universe, Settings settings) {
-		saveLocations = loctaions;
+		saveLocations = new String[locations.length];
+		for(int i = 0; i < locations.length; ++i) {
+			saveLocations[i] = locations[i];
+		}
 		players = people;
 		fWriter = null;
 		writer = null;
@@ -55,8 +58,9 @@ public class Saver_txt {
 	 * 
 	 * @param players
 	 *            a collection of players in the game
+	 * @throws IOException 
 	 */
-	private void savePlayer(String location, Collection<Player> players) {
+	private void savePlayer(String location, Collection<Player> players) throws IOException {
 		try {
 			fWriter = new FileWriter(location + "/players");
 			writer = new BufferedWriter(fWriter);
@@ -64,6 +68,8 @@ public class Saver_txt {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			fWriter.close();
 		}
 		for (Player player : players) {
 			try {
@@ -73,9 +79,10 @@ public class Saver_txt {
 				writer.write("\n" + player.getInventory().toString());
 				writer.write("\n" + player.getShip().getType().toString());
 
-				writer.close();
 			} catch (IOException e) {
 				e.printStackTrace();
+			} finally {
+				writer.close();
 			}
 		}
 	}
@@ -84,7 +91,11 @@ public class Saver_txt {
 	 * Save the Player information to a Save file object.
 	 */
 	private void savePlayer() {
-		savePlayer(saveLocations[0], players);
+		try {
+			savePlayer(saveLocations[0], players);
+		} catch(IOException e) {
+			System.out.println("An IO Exception was thrown!");
+		}
 	}
 
 	/**
@@ -93,8 +104,9 @@ public class Saver_txt {
 	 * @param location
 	 *            the array of save locations
 	 * @param planets
+	 * @throws IOException 
 	 */
-	private void savePlanet(String location, Collection<Planet> planets) {
+	private void savePlanet(String location, Collection<Planet> planets) throws IOException {
 		try {
 			fWriter = new FileWriter(location + "/planets");
 			writer = new BufferedWriter(fWriter);
@@ -102,6 +114,9 @@ public class Saver_txt {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			fWriter.close();
+			writer.close();
 		}
 		for (Planet planet : planets) {
 			try {
@@ -121,7 +136,11 @@ public class Saver_txt {
 	 * Save Planet information to a Save file object.
 	 */
 	private void savePlanet() {
-		savePlanet(saveLocations[0], planets);
+		try {
+			savePlanet(saveLocations[0], planets);
+		} catch(IOException e) {
+			System.out.println("An IOExceptino was thrown!");
+		}
 	}
 
 	/**
@@ -130,8 +149,9 @@ public class Saver_txt {
 	 * @param location
 	 *            the array of save locations
 	 * @param gameSettigns
+	 * @throws IOException 
 	 */
-	private void saveSettings(String location, Settings gameSettigns) {
+	private void saveSettings(String location, Settings gameSettigns) throws IOException {
 		try {
 			fWriter = new FileWriter(location + "/settings");
 			writer = new BufferedWriter(fWriter);
@@ -139,6 +159,9 @@ public class Saver_txt {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			fWriter.close();
+			writer.close();
 		}
 
 		try {
@@ -155,7 +178,11 @@ public class Saver_txt {
 	 * Why are there two saveSettings methods?
 	 */
 	private void saveSettings() {
-		saveSettings(saveLocations[0], gameSettings);
+		try {
+			saveSettings(saveLocations[0], gameSettings);
+		} catch(IOException e) {
+			System.out.println("An IOException was thrown!");
+		}
 	}
 
 	/**

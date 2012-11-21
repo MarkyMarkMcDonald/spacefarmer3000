@@ -2,7 +2,7 @@
 /*This file holds the MessageSidePanel class, which represents
  * SidePanels holding messages.
  */
-package app.view.sidepanels;
+package app.view.sidepanels; // $codepro.audit.disable packagePrefixNamingConvention
 
 import java.awt.Color;
 

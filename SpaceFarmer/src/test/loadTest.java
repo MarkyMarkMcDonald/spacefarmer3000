@@ -1,3 +1,8 @@
+// $codepro.audit.disable
+
+/* This is a JUnit test case file and is thus not subject to an audit.
+ */
+
 package test;
 
 import static org.junit.Assert.*;
@@ -20,4 +25,5 @@ public class loadTest {
 		fail("Not yet implemented");
 	}
 
+	
 }

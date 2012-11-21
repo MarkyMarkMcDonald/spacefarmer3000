@@ -1,4 +1,11 @@
-/*This file holds the class ItemRowPanel, which
+// $codepro.audit.disable staticMemberAccess
+
+/* staticMemberAccess is disabled for this file because each instance of this violation
+ * is a natural use of static constant access used in constructing swing containers.
+ */
+
+/**
+ * This file holds the class ItemRowPanel, which
  * represents an item row in the market view.
  */
 package app.view.market;

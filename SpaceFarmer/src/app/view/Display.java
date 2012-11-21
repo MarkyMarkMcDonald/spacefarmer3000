@@ -1,4 +1,12 @@
-/*This file holds the class Display, which is the display
+// $codepro.audit.disable assignmentToNonFinalStatic
+
+/* assignmentToNonFinalStatic is disabled for this file because Display acts as a
+ * singleton, so assigning to static members within a non-static context is okay since
+ * instance variables and static members are synonymous.
+ */
+
+/** 
+ * This file holds the class Display, which is the display
  * for SpaceFarmer3000
  */
 package app.view;

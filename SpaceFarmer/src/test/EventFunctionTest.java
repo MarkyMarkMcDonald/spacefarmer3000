@@ -1,3 +1,8 @@
+// $codepro.audit.disable
+
+/* This is a JUnit test case file and is thus not subject to an audit.
+ */
+
 /*
  * This class tests the functionality of the random events.
  * Author: Bobbey Reese

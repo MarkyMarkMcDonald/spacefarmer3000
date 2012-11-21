@@ -1,3 +1,10 @@
+// $codepro.audit.disable
+
+/* This file contains graphics to be used temporarily by MiniGameScreen until a setup is
+ * figured out where we can load graphics properly. Since this file is only meant to hold
+ * a data array, it should not be subject to an audit.
+ */
+
 package resources;
 
 public class MiniGameGFX {

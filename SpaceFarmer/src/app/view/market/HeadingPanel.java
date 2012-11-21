@@ -1,3 +1,9 @@
+// $codepro.audit.disable staticMemberAccess
+
+/* staticMemberAccess is disabled for this file because each instance of this violation
+ * is a natural use of static constant access used in constructing swing containers.
+ */
+
 /*This files holds the class HeadingPanel, which heads
  * the market views.
  */

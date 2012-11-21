@@ -1,3 +1,12 @@
+// $codepro.audit.disable unhashableClassInHashedCollection, lossOfPrecisionInCast
+
+/* unhashableClassInHashedCollection is disabled because Point must be used as a Key
+ * for Planets, but Point can't be hashed. It works fine.
+ * lossOfPrecisionInCast is disabled because the coordinates for the systems and planets
+ * are calculated using doubles, but they must be converted back into ints through casting
+ * to be used for drawing to the screen. Negligible precision lost in the casts.
+ */
+
 /**
  * File comment here, bro
  */
@@ -53,10 +62,11 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 	 * quadrants.
 	 */
 	private static final int PLANET_SIZE = 30, PLANET_SIZE_HALF = PLANET_SIZE >> 1,
-			THREE = 3;
+			THREE = 3, CIRCLE_DIAMETER = PLANET_SIZE + 10, TEN = 10;
 	
 	/** Static final double values */
-	private static final double ROUND_HALF = 0.5, DIAMETER1 = 0.75;
+	private static final double ROUND_HALF = 0.5, DIAMETER_ONE = 0.75,
+			START_THETA = Math.PI / 4;
 
 	/** Colors used when drawing the planets */
 	private static final Color[] PLANET_COLORS = { Color.BLUE, Color.GRAY,
@@ -64,10 +74,10 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 			Color.LIGHT_GRAY };
 
 	/** A mapping of Points onto Planets at their location used for capturing clicks */
-	private static Map<Point, Planet> PlanetLocations;
+	private static Map<Point, Planet> PlanetLocations = new HashMap<Point, Planet>();
 
 	/** The currently selected planet (by clicking) */
-	private static Planet SelectedPlanet;
+	private static Planet SelectedPlanet = new Planet();
 
 	/**
 	 * Draw the universe.
@@ -81,7 +91,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 		g.fillRect(0, 0, getWidth(), getHeight());
 
 		// Draw the planetary systems
-		ArrayList[][] systemList = 
+		final ArrayList[][] systemList = 
 			new ArrayList[GameVariables.UNIVERSE_ROWS][GameVariables.UNIVERSE_COLUMNS];
 		PlanetLocations = new HashMap<Point, Planet>();
 		for (int i = 0; i < GameVariables.UNIVERSE_ROWS; ++i) {
@@ -106,7 +116,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 							GameVariables.UNIVERSE_COLUMNS);
 					int sysY = (int) ((ROUND_HALF + i) * getHeight() / 
 							GameVariables.UNIVERSE_ROWS);
-					int sysD = (int) (DIAMETER1 * Math.min(getWidth()
+					int sysD = (int) (DIAMETER_ONE * Math.min(getWidth()
 							/ GameVariables.UNIVERSE_COLUMNS, getHeight()
 							/ GameVariables.UNIVERSE_ROWS));
 					g.drawOval(sysX - (sysD >> 1), sysY - (sysD >> 1), sysD, sysD);
@@ -114,7 +124,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 							sysX - ps.getName().length() * THREE, sysY);
 
 					// Draw the planets
-					double thetaS = Math.PI / 4;
+					double thetaS = START_THETA;
 					for (Planet p : ps.getPlanets().values()) {
 						final int planX = (int) (sysX + Math.cos(thetaS) * (sysD / 2));
 						final int planY = (int) (sysY + Math.sin(thetaS) * (sysD / 2));
@@ -135,14 +145,14 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 						// If this is the planet the ship is on, draw the ship
 						if (Game.getCurrentPlanet().equals(p)) {
 							int[] polyX = { planX, planX + 10, planX,
-									planX - 10 }, polyY = { planY - 10,
-									planY + 10, planY, planY + 10 };
+									planX - TEN }, polyY = { planY - TEN,
+									planY + TEN, planY, planY + TEN };
 							g.setColor(Color.BLACK);
-							g.fillPolygon(polyX, polyY, 4);
+							g.fillPolygon(polyX, polyY, polyX.length);
 							g.setColor(Color.CYAN);
 							g.drawOval(planX - PLANET_SIZE_HALF - 5, planY
-									- PLANET_SIZE_HALF - 5, PLANET_SIZE + 10,
-									PLANET_SIZE + 10);
+									- PLANET_SIZE_HALF - 5, CIRCLE_DIAMETER,
+									CIRCLE_DIAMETER);
 						}
 					}
 				} else {
@@ -202,10 +212,10 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 								g.setColor(Color.CYAN);
 								g.drawOval(planX - PLANET_SIZE_HALF - 5, planY
 										- PLANET_SIZE_HALF - 5,
-										PLANET_SIZE + 10, PLANET_SIZE + 10);
+										CIRCLE_DIAMETER, CIRCLE_DIAMETER);
 							}
 						}
-						thetaQ += Math.PI * 2 / systemList[i][j].size();
+						thetaQ += 2 * Math.PI / systemList[i][j].size();
 					}
 				}
 			}
@@ -218,6 +228,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 	 * @param e
 	 *            The data associated with this mouse click.
 	 */
+	@Override
 	public void mousePressed(MouseEvent e) {
 		boolean clickedPlanet = false;
 
@@ -226,7 +237,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 			if (p.distance(e.getX(), e.getY()) < PLANET_SIZE_HALF) {
 				clickedPlanet = true;
 
-				SelectedPlanet = PlanetLocations.get(p);
+				setSelectedPlanet(PlanetLocations.get(p));
 
 				Display.updatePlanetTravelInfo(SelectedPlanet);
 			}
@@ -234,9 +245,18 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 
 		// If a planet wasn't clicked, deselect planet
 		if (!clickedPlanet) {
-			SelectedPlanet = null;
+			setSelectedPlanet(null);
 			repaint();
 		}
+	}
+	
+	/**
+	 * Set the selected planet.
+	 * 
+	 * @param plan The Planet to select.
+	 */
+	private static void setSelectedPlanet(Planet plan) {
+		SelectedPlanet = plan;
 	}
 
 	/**

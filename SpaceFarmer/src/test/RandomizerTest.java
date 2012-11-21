@@ -1,5 +1,6 @@
-/**
- * The purpose of this file is to test the Randomizer class used in universe creation.
+// $codepro.audit.disable
+
+/* This is a JUnit test case file and is thus not subject to an audit.
  */
 
 package test;
@@ -47,7 +48,7 @@ public class RandomizerTest {
 			for(int i = 0; numcol.size() < 4; ++i) {
 				numcol.add((NUMS)Randomizer.randEnum(NUMS.class));
 				
-				// If an arbitrarily large number of iterations don't yield all results, fail
+				// If an arbitrarily large number of iterations doesn't yield all results, fail
 				if(i >= 1000) {
 					fail("Not all enums possible returned by randEnum()");
 				}

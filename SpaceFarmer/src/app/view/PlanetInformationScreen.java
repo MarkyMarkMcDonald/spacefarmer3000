@@ -1,4 +1,5 @@
-/* This file holds the class PlanetInformationScreen, which
+/**
+ *  This file holds the class PlanetInformationScreen, which
  * represents the Screen holding Planet information.
  */
 package app.view;
