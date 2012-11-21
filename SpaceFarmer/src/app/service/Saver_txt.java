@@ -1,3 +1,4 @@
+// $codepro.audit.disable lossOfPrecisionInCast
 package app.service;
 
 import app.model.Settings;

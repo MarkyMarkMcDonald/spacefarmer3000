@@ -71,4 +71,11 @@ public class TradeGood {
 	public String getName() {
 		return name;
 	}
+	
+	/**
+	 * @return The name of this TradeGood.
+	 */
+	public String toString(){
+		return name;
+	}
 }

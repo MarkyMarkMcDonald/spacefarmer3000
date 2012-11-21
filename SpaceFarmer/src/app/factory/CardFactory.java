@@ -1,3 +1,5 @@
+// $codepro.audit.disable packagePrefixNamingConvention
+/*This file holds the CardFactory class.*/
 package app.factory;
 
 import app.view.CardName;
@@ -8,9 +10,15 @@ import java.util.Map;
 
 /**
  * User: marky Date: 10/11/12 Time: 5:08 PM
+ * @author Mark
+ * @version 1.0
  */
 public class CardFactory {
-	private static Map<CardName, Screen> Cards;
+	
+	/**
+	 * Map of the CardNames to their corresponding screens.
+	 */
+	private static Map<CardName, Screen> Cards = null;
 
 	/**
 	 * Get a Screen associated with a card name.
@@ -24,13 +32,13 @@ public class CardFactory {
 			Cards = new EnumMap<CardName, Screen>(CardName.class);
 		}
 
-		boolean cardIsAlreadyCreated = !Cards.containsKey(cardName);
+		final boolean cardIsAlreadyCreated = !Cards.containsKey(cardName);
 
 		if (cardIsAlreadyCreated) {
 			return Cards.get(cardName);
 		} else {
 			// need to create a screen here
-			Screen screen = cardName.getScreen();
+			final Screen screen = cardName.getScreen();
 			Cards.put(cardName, screen);
 			return screen;
 		}

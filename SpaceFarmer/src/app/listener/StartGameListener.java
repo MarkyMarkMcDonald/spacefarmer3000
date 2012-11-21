@@ -1,3 +1,4 @@
+/*This file holds the StartGameListener class*/
 package app.listener;
 
 import app.logging.Logger;

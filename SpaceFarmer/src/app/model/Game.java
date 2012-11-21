@@ -1,3 +1,4 @@
+// $codepro.audit.disable lossOfPrecisionInCast
 package app.model;
 
 import app.model.player.Player;

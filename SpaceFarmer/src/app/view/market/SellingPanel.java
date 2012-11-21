@@ -1,3 +1,4 @@
+// $codepro.audit.disable lossOfPrecisionInCast
 package app.view.market;
 
 import app.listener.SellToMarketListener;

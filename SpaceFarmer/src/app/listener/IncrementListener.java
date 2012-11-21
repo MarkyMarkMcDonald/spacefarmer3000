@@ -1,3 +1,4 @@
+/*This file holds the IncrementListener class*/
 package app.listener;
 
 import java.awt.event.ActionEvent;
@@ -55,13 +56,20 @@ public class IncrementListener implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if (Pattern.matches("[0-9]+", theField.getText())) {
-			final int amount = Integer.parseInt(theField.getText());
-			theField.setText((amount + (incType ? (amount < 
-					conf.GameVariables.MAX_SKILL_POINTS ? 1
-					: 0)
-					: (amount > 0 ? -1 : 0)))
-					+ "");
-		} else {
+			try{
+			    final int amount = Integer.parseInt(theField.getText());
+			    theField.setText((amount + (incType ? (amount < 
+					    conf.GameVariables.MAX_SKILL_POINTS ? 1
+					    : 0)
+					    : (amount > 0 ? -1 : 0)))
+					    + "");
+		    }
+			catch (Exception ex){
+				ex.printStackTrace();
+				theField.setText("0");
+			}
+		}
+			else {
 			theField.setText("0");
 		}
 	}
