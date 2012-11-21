@@ -1,6 +1,6 @@
+/*This file holds the possible names for Planets.*/
 package conf;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,9 +8,15 @@ import java.util.List;
  * User: marky
  * Date: 10/14/12
  * Time: 2:25 PM
+ * @author Mark
+ * @version 1.0
  */
 public class PlanetNames {
-    public static final String[] PlanetNamesArray = new String[]{
+	
+	/**
+	 * Names available to name Planets.
+	 */
+    public static final String[] PLANET_NAMES_ARRAY = new String[]{
             "Acamar",
             "Adahn",		// The alternate personality for The Nameless One in "Planescape: Torment"
             "Aldea",
@@ -133,8 +139,11 @@ public class PlanetNames {
             "Zuul"			// From the first Ghostbusters movie
     };
 
+    /**
+     * @return The planet names as a List.
+     */
     public static List<String> getPlanetNamesAsList(){
-        return Arrays.asList(PlanetNames.PlanetNamesArray);
+        return Arrays.asList(PlanetNames.PLANET_NAMES_ARRAY);
     }
     
     /**
