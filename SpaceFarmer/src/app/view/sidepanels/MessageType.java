@@ -1,3 +1,6 @@
+/*This file holds the enum MessageType, which 
+ * represents the different qualities of messages.
+ */
 package app.view.sidepanels;
 
 /**
