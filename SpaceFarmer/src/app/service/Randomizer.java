@@ -1,3 +1,6 @@
+/*This file holds the class Randomizer, which is responsible
+ * for holding all methods dealing with randomization.
+ */
 package app.service;
 
 import app.factory.UniverseFactory;
@@ -290,9 +293,8 @@ public class Randomizer {
 		if (isSuccessful(chance)) {
 			final RandomEvent event = (RandomEvent) randEnum(RandomEvent.class);
 			return event.giveEvent(player);
-		}
-		else{
-			return null;	
+		} else {
+			return null;
 		}
 	}
 

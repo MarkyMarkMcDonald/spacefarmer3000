@@ -1,18 +1,23 @@
 // $codepro.audit.disable lossOfPrecisionInCast
+/* This file holds the class IntersystemTravelScreen, which
+ * is a Screen displayed for traveling between systems.
+ */
 package app.view;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import app.factory.UniverseFactory;
 import app.model.Game;
 import app.model.universe.Planet;
 import app.model.universe.PlanetarySystem;
 import conf.GameVariables;
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class acts as the screen handling travel between planets and systems.
@@ -36,14 +41,26 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 	 */
 	private static final int PLANET_SIZE = 30;
 
-	private static final Color[] PlanetColors = { Color.BLUE, Color.GRAY,
+	/**
+	 * Possible colors for the Planets.
+	 */
+	private static final Color[] PLANET_COLORS = { Color.BLUE, Color.GRAY,
 			Color.GREEN, Color.ORANGE, Color.RED, Color.CYAN, Color.DARK_GRAY,
 			Color.LIGHT_GRAY };
 
-	private static Map<Point, Planet> PlanetLocations;
+	/**
+	 * Map of the Point a Planets resides at to the Planet.
+	 */
+	private static Map<Point, Planet> PlanetLocations = null;
 
-	private static Planet SelectedPlanet;
+	/**
+	 * The current Planet being drawn.
+	 */
+	private static Planet SelectedPlanet = null;
 
+	/**
+	 * Action to take for drawing the Planets.
+	 */
 	public void paintComponent(Graphics g) {
 
 		// Draw black over the background
@@ -52,7 +69,8 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 
 		// Draw the planetary systems
 		ArrayList[][] systemList = 
-				new ArrayList[GameVariables.UNIVERSE_ROWS][GameVariables.UNIVERSE_COLUMNS];
+				new ArrayList[GameVariables.UNIVERSE_ROWS]
+						[GameVariables.UNIVERSE_COLUMNS];
 		PlanetLocations = new HashMap<Point, Planet>();
 		for (int i = 0; i < GameVariables.UNIVERSE_ROWS; ++i) {
 			for (int j = 0; j < GameVariables.UNIVERSE_COLUMNS; ++j) {
@@ -88,9 +106,9 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 					for (Planet p : ps.getPlanets().values()) {
 						int planX = (int) (sysX + Math.cos(thetaS) * (sysD / 2));
 						int planY = (int) (sysY + Math.sin(thetaS) * (sysD / 2));
-						g.setColor(PlanetColors[Math
+						g.setColor(PLANET_COLORS[Math
 								.abs(p.getName().hashCode())
-								% PlanetColors.length]);
+								% PLANET_COLORS.length]);
 						g.fillOval(planX - PLANET_SIZE / 2, planY - PLANET_SIZE
 								/ 2, PLANET_SIZE, PLANET_SIZE);
 						g.setColor(Color.WHITE);
@@ -149,8 +167,8 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 									* (sysD / 2));
 							int planY = (int) (sysY + Math.sin(thetaS)
 									* (sysD / 2));
-							g.setColor(PlanetColors[Math.abs(p.getName()
-									.hashCode()) % PlanetColors.length]);
+							g.setColor(PLANET_COLORS[Math.abs(p.getName()
+									.hashCode()) % PLANET_COLORS.length]);
 							g.fillOval(planX - PLANET_SIZE / 2, planY
 									- PLANET_SIZE / 2, PLANET_SIZE, PLANET_SIZE);
 							g.setColor(Color.WHITE);

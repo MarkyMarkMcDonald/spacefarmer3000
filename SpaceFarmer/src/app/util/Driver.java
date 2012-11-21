@@ -1,3 +1,6 @@
+/*This file holds the class Driver, which holds the main method
+ * for SpaceFarmer3000
+ */
 package app.util;
 
 import java.awt.EventQueue;

@@ -1,3 +1,6 @@
+/*This file holds the class TurnService, which is responsible for 
+ * advancing the turn.
+ */
 package app.service;
 
 import app.model.Game;

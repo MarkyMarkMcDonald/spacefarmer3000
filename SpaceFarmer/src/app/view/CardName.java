@@ -1,3 +1,6 @@
+/*This file holds the class CardName, which holds enumerations
+ * for JPanels acting as cards for the center screen.
+ */
 package app.view;
 
 import app.view.market.MarketScreen;
@@ -65,7 +68,7 @@ public enum CardName {
 	 * @param name
 	 *            The CardName's associated name String.
 	 */
-	private CardName(String name) {
+	private CardName(String name) { // $codepro.audit.disable unusedMethod
 		this.name = name;
 	}
 

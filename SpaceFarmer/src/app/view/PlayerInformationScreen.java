@@ -1,3 +1,6 @@
+/* This file holds the class PlayerInformationScreen, which 
+ * represents the Screen where PlayerInformation is displayed.
+ */
 package app.view;
 
 import app.listener.ConfirmPlayerCreationListener;
@@ -10,6 +13,7 @@ import java.awt.*;
  * This screen shows the Player his information. (WIP)
  * 
  * @author Mark McDonald
+ * @version 1.0
  */
 public class PlayerInformationScreen extends Screen {
 
