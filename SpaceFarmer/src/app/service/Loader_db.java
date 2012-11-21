@@ -6,6 +6,7 @@ package app.service;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.tmatesoft.sqljet.core.SqlJetException;
@@ -14,7 +15,9 @@ import org.tmatesoft.sqljet.core.table.ISqlJetCursor;
 import org.tmatesoft.sqljet.core.table.ISqlJetTable;
 import org.tmatesoft.sqljet.core.table.SqlJetDb;
 
+import app.factory.UniverseFactory;
 import app.model.Event;
+import app.model.Game;
 import app.model.MarketPlace;
 import app.model.Settings;
 import app.model.Ship;
@@ -139,7 +142,7 @@ public class Loader_db {
 	/**
 	 * Planet Table: Name
 	 */
-	private static final String FIELD_PLANET = "name";
+		private static final String FIELD_PLANET = "PlanetName";
 
 	/**
 	 * Planet Table: Tech Level
@@ -189,7 +192,7 @@ public class Loader_db {
 	/**
 	 * Market table: item name
 	 */
-	private static final String FIELD_ITEM = "Item name";
+	private static final String FIELD_ITEM = "ItemName";
 
 	/**
 	* Market table: Quantity
@@ -204,17 +207,17 @@ public class Loader_db {
 	/**
 	 * map of the PlanetarySystems pulled from the tables
 	 */
-	private static Map<String, PlanetarySystem> Ps=null;
+	private static Map<String, PlanetarySystem> Ps=new HashMap<String, PlanetarySystem>();
 
 	/**
 	 * map of the planets pulled from the tables
 	 */
-	private static Map<String, Planet> Planets=null;
+	private static Map<String, Planet> Planets=new HashMap<String, Planet>();
 
 	/**
 	 * array of players pulled from the tables.
 	 */
-	private static Player[] Players=null;
+	private static Player[] Players=new Player[10];
 
 	/**
 	 * loads the file and recreates the game
@@ -235,12 +238,15 @@ public class Loader_db {
 		db.beginTransaction(SqlJetTransactionMode.READ_ONLY);
 		// make the systems
 		ps = loadSystems(db.getTable(TABLE_PLANSYS));
+		UniverseFactory.setPlanetarySystems(ps);
 		// make the planets
-		planets = loadPlanets(db.getTable(TABLE_PLANETS));
+		planets = loadPlanets(db.getTable(TABLE_PLANETS),ps);
+		UniverseFactory.setAllPlanets(planets);
 		// make the players
-		players = loadPlayers(db.getTable(TABLE_PLAYERS));
+		players = loadPlayers(db.getTable(TABLE_PLAYERS),planets);
+		Game.setCurrentPlayer(players.iterator().next());
 		// markets
-		loadMarkets(db.getTable(TABLE_MARKETS));
+		loadMarkets(db.getTable(TABLE_MARKETS),planets);
 
 		// LoadInventory(db.getTable(TABLE_INVENTORY));
 		// LoadSettings(db.getTable(TABLE_SETTINGS));
@@ -253,15 +259,15 @@ public class Loader_db {
 	 * @return a collection of players
 	 * @throws SqlJetException
 	 */
-	private Collection<Player> loadPlayers(ISqlJetTable tbl)
+	private Collection<Player> loadPlayers(ISqlJetTable tbl,Map<String, Planet> pl)
 			throws SqlJetException {
 		final ISqlJetCursor cursor = tbl.open();
-		final Collection<Player> ret = null;
-		final Player tempP = null;
-		final Ship tempShip = null;
+		final Collection<Player> ret = new ArrayList<Player>();
+		final Player tempP = new Player();
+		final Ship tempShip = new Ship();
 		ShipModel tempMod = null;
 		// Planet tempPlanet;
-		final Map<SkillType, Integer> tempSkill = null;
+		final Map<SkillType, Integer> tempSkill = new HashMap<SkillType, Integer>();
 		try {
 			if (!cursor.eof()) {
 				do {
@@ -273,11 +279,11 @@ public class Loader_db {
 					// fule
 					tempP.setFuel(Integer.parseInt(cursor.getString(FIELD_FULE)));
 					// ship
-					tempMod = tempMod.valueOf((cursor.getString(FIELD_SHIP)));
-					tempShip.setType(tempMod);
-					tempP.setShip(tempShip);
+					//tempMod = ShipModel.valueOf((cursor.getString(FIELD_SHIP)));
+					//tempShip.setType(tempMod);
+					//tempP.setShip(tempShip);
 					// curr planet
-					// tempP.setCurrentPlanet(cursor.getString(FIELD_CURRPLANET))
+					 tempP.setCurrentPlanet(pl.get(cursor.getString(FIELD_CURRPLANET)));
 					// inventory
 					// tempP.setInventory)
 					// skills
@@ -316,17 +322,18 @@ public class Loader_db {
 	 * reads the planets table and creates the planets from them
 	 * @param tbl
 	 * 	planets table
+	 * @param ps 
 	 * @return
 	 *  a map of the created planets
 	 * @throws SqlJetException
 	 */
-	private Map<String, Planet> loadPlanets(ISqlJetTable tbl)
+	private Map<String, Planet> loadPlanets(ISqlJetTable tbl, Map<String, PlanetarySystem> ps)
 			throws SqlJetException {
 		final ISqlJetCursor cursor = tbl.open();
-		final Map<String, Planet> ret = null;
-		final Planet tempPlanet = null;
+		final Map<String, Planet> ret = new HashMap<String, Planet>();
+		final Planet tempPlanet = new Planet();
 		TechnologyLevel tempTech = null;
-		PlanetarySystem tempSys = null;
+		PlanetarySystem tempSys = new PlanetarySystem() ;
 		ResourceType tempRes = null;
 		// PlanetarySystem tempPs = null;
 		PoliticalSystem tempPol = null;
@@ -337,7 +344,7 @@ public class Loader_db {
 					// planet name
 					tempPlanet.setName(cursor.getString(FIELD_PLANET));
 					// planet tech level
-					tempTech = tempTech.valueOf(cursor.getString(FIELD_TECH));
+					tempTech = TechnologyLevel.valueOf(cursor.getString(FIELD_TECH));
 					tempPlanet.setTechnologyLevel(tempTech);
 					// planet x & y
 					tempPlanet
@@ -345,22 +352,21 @@ public class Loader_db {
 					tempPlanet
 							.setX(Integer.parseInt(cursor.getString(FIELD_Y)));
 					// resource type
-					tempRes = tempRes.valueOf(cursor.getString(FIELD_RESOURCE));
-					tempPlanet.setResourceType(tempRes);
+					//tempRes = ResourceType.valueOf(cursor.getString(FIELD_RESOURCE));
+					//tempPlanet.setResourceType(tempRes);
 					// Political system
-					tempPol = tempPol.valueOf(cursor.getString(FIELD_POLSYS));
-					tempPlanet.setPoliticalSystem(tempPol);
+					//tempPol = PoliticalSystem.valueOf(cursor.getString(FIELD_POLSYS));
+					//tempPlanet.setPoliticalSystem(tempPol);
 					// Planetary system
-					tempSys = Ps.get(cursor.getString(FIELD_SYS));
+					tempSys = ps.get(cursor.getString(FIELD_SYS));
 					tempPlanet.setPlanetarySystem(tempSys);
 					// market
 					// tempPlanet.setMarket(market)
 					// event
-					tempE = tempE.valueOf(cursor.getString(FIELD_EVENT));
+					tempE = Event.valueOf(cursor.getString(FIELD_EVENT));
 					tempPlanet.setEvent(tempE);
 
-					Ps.get(cursor.getString(FIELD_SYS)).getPlanets()
-							.put(tempPlanet.getName(), tempPlanet);
+					//ps.get(cursor.getString(FIELD_SYS)).getPlanets().put(tempPlanet.getName(), tempPlanet);
 
 					ret.put(tempPlanet.getName(), tempPlanet);
 					/*
@@ -391,8 +397,8 @@ public class Loader_db {
 	 */
 	private Map<String, PlanetarySystem> loadSystems(ISqlJetTable tbl)
 			throws SqlJetException {
-		final Map<String, PlanetarySystem> psMap = null;
-		final PlanetarySystem tempPS = null;
+		final Map<String, PlanetarySystem> psMap = new HashMap<String, PlanetarySystem>();
+		final PlanetarySystem tempPS = new PlanetarySystem();
 		final ISqlJetCursor cursor = tbl.open();
 		// Makes a map of systems
 		try {
@@ -415,26 +421,33 @@ public class Loader_db {
 	/**
 	 * loads the markets based on the markets table
 	 * @param tbl
+	 * @param planets 
 	 * @throws SqlJetException
 	 */
-	private void loadMarkets(ISqlJetTable tbl) throws SqlJetException {
-		final MarketPlace tempM = null;
+	private void loadMarkets(ISqlJetTable tbl, Map<String, Planet> planets) throws SqlJetException {
+		MarketPlace tempM = null;
 		BasicGood tempTrade;
 		TradeGoodType tempType = null;
-		ArrayList ret = null;
+		ArrayList ret = new ArrayList();
 		final ISqlJetCursor cursor = tbl.open();
 		try {
 			if (!cursor.eof()) {
 				do {
-					tempType = tempType.valueOf(cursor.getString(FIELD_ITEM));
+					/*
+					if(planets.get(cursor.getString(FIELD_PLANET)).getMarket()==null)
+						planets.get(cursor.getString(FIELD_PLANET)).setMarket(new MarketPlace(planets.get(cursor.getString(FIELD_PLANET))));
+					
+					tempM=planets.get(cursor.getString(FIELD_PLANET)).getMarket();
+					
+					tempType = TradeGoodType.valueOf(cursor.getString(FIELD_ITEM));
 					tempTrade = new BasicGood(tempType, tempType);
-					Planets.get(cursor.getString(FIELD_PLANET))
-							.setMarket(tempM);
-					Planets.get(cursor.getString(FIELD_PLANET))
-							.getMarket()
+					tempM.setQuantity(tempTrade, cursor.getString(FIELD_Q));
+					
+					planets.get(cursor.getString(FIELD_PLANET)).setMarket(tempM);
+					planets.get(cursor.getString(FIELD_PLANET)).getMarket()
 							.changeQuantity(tempTrade,
 									Integer.parseInt(cursor.getString(FIELD_Q)));
-					ret.add(tempM);
+									*/
 				} while (cursor.next());
 			}
 		} finally {
