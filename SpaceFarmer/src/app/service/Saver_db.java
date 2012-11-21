@@ -258,7 +258,7 @@ public class Saver_db {
 			db.beginTransaction(SqlJetTransactionMode.WRITE);
 
 			this.savePlayers(db);
-			this.saveInventory(db);
+			//this.saveInventory(db);
 			this.savePlanets(db);
 			//this.SaveSetting(db);
 			this.saveMarkets(db);
@@ -291,14 +291,14 @@ public class Saver_db {
 			final ISqlJetTable table = db.getTable(TABLE_PLAYERS);
 			// Test entry
 			//table.insert("ZOOL", 9999, "Earth", "BFS", 1, 2, 3, 4);
-			 for (int i=0;i<players.length;i++) {
-				 table.insert(players[i].getName(),players[i].getMoney(),
-					 players[i].getFuel(),players[i].getCurrentPlanet().getName(),
-					 players[i].getShip().getType().toString(),
-					 players[i].getSkillLevels().containsKey(SkillType.PILOTING),
-					 players[i].getSkillLevels().containsKey(SkillType.ENGINEERING),
-					 players[i].getSkillLevels().containsKey(SkillType.FIGHTING),
-					 players[i].getSkillLevels().containsKey(SkillType.TRADING));			 }
+			 for (int i=0;i<this.players.length;i++) {
+				 table.insert(this.players[i].getName(),this.players[i].getMoney(),
+						 this.players[i].getFuel(),this.players[i].getCurrentPlanet().getName(),
+						 this.players[i].getShip().getType().toString(),
+						 this.players[i].getSkillLevels().containsKey(SkillType.PILOTING),
+						 this.players[i].getSkillLevels().containsKey(SkillType.ENGINEERING),
+						 this.players[i].getSkillLevels().containsKey(SkillType.FIGHTING),
+						 this.players[i].getSkillLevels().containsKey(SkillType.TRADING));			 }
 		} finally {
 			db.commit();
 		}

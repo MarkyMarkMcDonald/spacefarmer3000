@@ -68,6 +68,14 @@ public class UniverseFactory {
 	public static Map<String, Planet> getAllPlanets() {
 		return Planets;
 	}
+	
+	/**
+	 * sets the universes planets
+	 * @param pl
+	 */
+	public static  void setAllPlanets(Map<String, Planet>pl) {
+		 Planets=pl;
+	}
 
 	/**
 	 * Getter for this singleton's String-PlanetarySystem mapping.
@@ -77,6 +85,14 @@ public class UniverseFactory {
 	 */
 	public static Map<String, PlanetarySystem> getPlanetarySystems() {
 		return Systems;
+	}
+	
+	/**
+	 * sets the planets systems
+	 * @param ps
+	 */
+	public static  void setPlanetarySystems(Map<String, PlanetarySystem> ps) {
+		 Systems=ps;
 	}
 
 	/**

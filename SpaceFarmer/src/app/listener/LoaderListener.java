@@ -58,9 +58,11 @@ public class LoaderListener implements ActionListener {
 			loader.loadGame(fileChooserListener.getDbFile(),
 					UniverseFactory.getPlanetarySystems(),
 					UniverseFactory.getAllPlanets(), Game.getPlayers());
+			//IntersystemTravelScreen.
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	/**
