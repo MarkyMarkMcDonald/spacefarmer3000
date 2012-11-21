@@ -1,3 +1,4 @@
+/*This files holds an enum containing names for Water.*/
 package conf.tradegoodnames;
 
 /**
