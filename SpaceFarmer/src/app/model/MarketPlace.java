@@ -1,3 +1,6 @@
+/*This file holds the class MarketPlace, which represents
+ * the area on the Planet where goods are traded.
+ */
 package app.model;
 
 import java.util.HashMap;
@@ -98,21 +101,6 @@ public class MarketPlace {
 		} else {
 			quantityMap.put(tradable, amount);
 		}
-	}
-
-	/**
-	 * Varies each of the TradeGoodTypes prices based on the Planet the
-	 * MarketPlace is on.
-	 * 
-	 * @param planet
-	 *            Planet on which to vary the prices.
-	 */
-	public void updatePrices(Planet planet) {
-		// {
-		// for (Tradable t: priceMap.keySet().toArray(new Tradable[0]))
-		// priceMap.put(t, t.calculatePrice(planet));
-		// Required calculatePrice in Tradable inferface.
-		// TODO: This! (this is bad practice btw, don't make these like this)
 	}
 
 	/**

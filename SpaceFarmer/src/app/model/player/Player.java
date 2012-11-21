@@ -1,3 +1,6 @@
+/*This file holds the class Player, which represents a Player
+ * playing the game.
+ */
 package app.model.player;
 
 import java.util.HashMap;
@@ -57,7 +60,7 @@ public class Player {
 	/**
 	 * Creates a Player with no initialized characteristics.
 	 */
-	public Player() {
+	public Player() { // $codepro.audit.disable emptyMethod
 	}
 
 	/**

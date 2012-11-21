@@ -1,3 +1,6 @@
+/*This file holds the enum ShipModel, which represent the different
+ * type of ships.
+ */
 package app.model;
 
 public enum ShipModel {

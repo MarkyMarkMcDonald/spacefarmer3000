@@ -1,3 +1,6 @@
+/*This file holds the interface Tradable, which requires
+ * certain methods for objects that may be bought or sold.
+ */
 package app.model.tradegoods;
 
 /**

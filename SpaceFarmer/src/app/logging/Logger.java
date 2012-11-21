@@ -1,3 +1,5 @@
+/*This file holds the Logger class, responsible
+ * for printing game information onto the console.*/
 package app.logging;
 
 import java.util.Collection;

@@ -1,3 +1,6 @@
+/*This file holds the class Planet, which represents a Planet
+ * in the Universe.
+ */
 package app.model.universe;
 
 import app.model.Event;

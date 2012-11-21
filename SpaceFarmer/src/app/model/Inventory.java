@@ -1,3 +1,6 @@
+/*This file holds the class Inventory, which represents the Player's
+ * inventory.
+ */
 package app.model;
 
 import app.model.tradegoods.Tradable;
@@ -54,7 +57,7 @@ public class Inventory {
 		if (!theInventory.containsKey(item)) {
 			theInventory.put(item, quantity);
 		} else {
-			final Integer currentQuantity = theInventory.get(item);
+			final Integer currentQuantity = theInventory.get(item); // $codepro.audit.disable com.instantiations.eclipse.analysis.audit.security.incompatibleTypesStoredInACollection
 			theInventory.put(item, currentQuantity + quantity);
 		}
 		if (theInventory.get(item) == 0) {

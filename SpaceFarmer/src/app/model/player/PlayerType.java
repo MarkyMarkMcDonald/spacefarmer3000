@@ -1,3 +1,6 @@
+/*This file holds the enum PlayerType, which represents the
+ * two types of Players: Computer, and Human.
+ */
 package app.model.player;
 
 /**

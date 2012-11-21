@@ -1,3 +1,6 @@
+/*This file holds the enum TechnologyLevel, which represents the
+ * current state of technology on the Planet.
+ */
 package app.model.universe;
 
 /**

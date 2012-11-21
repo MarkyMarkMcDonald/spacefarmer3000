@@ -1,5 +1,7 @@
 // $codepro.audit.disable lossOfPrecisionInCast
 /**
+ * This file holds the enum TradeGoodType, which represents a Type
+ * of a good that can be traded in the MarketPlace.
  * Created with IntelliJ IDEA. User: Marky Date: 9/22/12 Time: 12:31 AM To
  * change this template use File | Settings | File Templates.
  */
@@ -51,8 +53,6 @@ import conf.tradegoodnames.Narcotics;
 import conf.tradegoodnames.Ore;
 import conf.tradegoodnames.Robots;
 import conf.tradegoodnames.Water;
-
-
 
 public enum TradeGoodType {
 
