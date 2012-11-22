@@ -18,7 +18,7 @@ import java.awt.*;
  * @author Mark McDonald, Andrew Wilder
  * @version 1.0
  */
-public class driver {
+public class Driver {
 
 	/**
 	 * Launch the application.
