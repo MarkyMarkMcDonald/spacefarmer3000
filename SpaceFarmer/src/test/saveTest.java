@@ -7,6 +7,11 @@ package test;
 
 import static org.junit.Assert.*;
 
+import org.tmatesoft.sqljet.core.SqlJetException;
+import org.tmatesoft.sqljet.core.SqlJetTransactionMode;
+import org.tmatesoft.sqljet.core.table.ISqlJetTable;
+import org.tmatesoft.sqljet.core.table.SqlJetDb;
+
 import org.junit.Test;
 
 /**
@@ -14,6 +19,7 @@ import org.junit.Test;
  *
  */
 public class saveTest {
+	
 
 	/**
 	 * Test method for {@link app.service.Saver_db#Saver_db(java.io.File, java.util.Collection, java.util.Map, app.model.Settings, app.model.Game)}.
