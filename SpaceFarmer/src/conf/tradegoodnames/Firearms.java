@@ -1,3 +1,4 @@
+// $codepro.audit.disable packagePrefixNamingConvention
 /*This files holds an enum containing names for Firearms.*/
 package conf.tradegoodnames;
 

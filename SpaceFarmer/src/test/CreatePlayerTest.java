@@ -1,3 +1,4 @@
+// $codepro.audit.disable packagePrefixNamingConvention
 package test;
 
 import app.factory.UniverseFactory;

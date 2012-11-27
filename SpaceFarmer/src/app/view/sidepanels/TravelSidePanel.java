@@ -7,6 +7,7 @@ import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 import app.listener.TransportationListener;
 import app.model.Game;
@@ -20,7 +21,7 @@ import app.view.PlanetInfoLabel;
  * @author Mark
  * @version 1.0
  */
-public class TravelSidePanel extends SidePanel {
+public class TravelSidePanel extends JPanel {
 
 	/**
 	 * Values for the width and height of the panel.

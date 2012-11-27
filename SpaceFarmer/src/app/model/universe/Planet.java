@@ -1,3 +1,4 @@
+// $codepro.audit.disable packagePrefixNamingConvention
 /*This file holds the class Planet, which represents a Planet
  * in the Universe.
  */
@@ -218,9 +219,27 @@ public class Planet {
 
 	/**
 	 * Hash the Planet based on its name.
+	 * 
 	 * @return A hash for this Planet so it can be used in a HashMap.
 	 */
 	public int hashCode() {
 		return name.hashCode();
+	}
+
+	/**
+	 * Checks to see if an object equals this Planet.
+	 * @param object Object for which to check equality.
+	 * @return true if they are equal, false otherwise.
+	 */
+	public boolean equals(Object object) {
+		if (this == object){
+			return true;
+		}
+		if (!(object instanceof Planet)) {
+			return false;
+		} else {
+			final Planet truth = (Planet) object;
+			return (name.equals(truth.getName()));
+		}
 	}
 }

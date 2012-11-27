@@ -1,14 +1,15 @@
 /*This file holds the ViewPlanetListener class*/
 package app.listener;
 
+import java.awt.event.ActionEvent;
+
+import javax.swing.JComboBox;
+
 import app.factory.UniverseFactory;
 import app.model.universe.Planet;
 import app.view.CardName;
 import app.view.Display;
 import app.view.PlanetInformationScreen;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 11/7/12 Time: 1:05 AM
@@ -49,7 +50,7 @@ public class ViewPlanetListener extends ContinueListener {
 				.getSelectedItem();
 		final Planet selectedPlanet = UniverseFactory
 				.getPlanet(selectedPlanetName);
-		planetInfoScreen.update(selectedPlanet);
+		planetInfoScreen.updateFromPlanet(selectedPlanet);
 
 		progressDisplay();
 	}

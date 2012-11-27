@@ -1,4 +1,4 @@
-// $codepro.audit.disable unhashableClassInHashedCollection, lossOfPrecisionInCast
+// $codepro.audit.disable unhashableClassInHashedCollection, lossOfPrecisionInCast, packagePrefixNamingConvention
 
 /* unhashableClassInHashedCollection is disabled because Point must be used as a Key
  * for Planets, but Point can't be hashed. It works fine.
@@ -20,6 +20,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import app.factory.UniverseFactory;
@@ -53,7 +54,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 	 * Perform non-final methods for the constructor.
 	 * @param its The IntersystemTravelScreen to construct.
 	 */
-	private final static void doNonFinalMethods(IntersystemTravelScreen its) {
+	private static final void doNonFinalMethods(IntersystemTravelScreen its) {
 		its.addMouseListener(its);
 	}
 
@@ -62,11 +63,14 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 	 * quadrants.
 	 */
 	private static final int PLANET_SIZE = 30, PLANET_SIZE_HALF = PLANET_SIZE >> 1,
-			THREE = 3, CIRCLE_DIAMETER = PLANET_SIZE + 10, TEN = 10;
+			THREE = 3, CIRCLE_DIAMETER = PLANET_SIZE + 10, TEN = 10, FIVE = 5,
+			POLYGON_POINTS = 4, HALF_SIZE = PLANET_SIZE
+					>> 1;
 	
 	/** Static final double values */
 	private static final double ROUND_HALF = 0.5, DIAMETER_ONE = 0.75,
-			START_THETA = Math.PI / 4;
+			START_THETA = Math.PI / 4.0, QD_CONST = 0.7,
+			DOUBLE_THETA = Math.PI * 2.0;
 
 	/** Colors used when drawing the planets */
 	private static final Color[] PLANET_COLORS = { Color.BLUE, Color.GRAY,
@@ -91,9 +95,9 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 		g.fillRect(0, 0, getWidth(), getHeight());
 
 		// Draw the planetary systems
-		final ArrayList[][] systemList = 
-			new ArrayList[GameVariables.UNIVERSE_ROWS][GameVariables.UNIVERSE_COLUMNS];
-		PlanetLocations = new HashMap<Point, Planet>();
+		final List[][] systemList = 
+			new List[GameVariables.UNIVERSE_ROWS][GameVariables.UNIVERSE_COLUMNS];
+		PlanetLocations = new HashMap<Point, Planet>(); // $codepro.audit.disable assignmentToNonFinalStatic
 		for (int i = 0; i < GameVariables.UNIVERSE_ROWS; ++i) {
 			for (int j = 0; j < GameVariables.UNIVERSE_COLUMNS; ++j) {
 				systemList[i][j] = new ArrayList<PlanetarySystem>();
@@ -126,17 +130,17 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 					// Draw the planets
 					double thetaS = START_THETA;
 					for (Planet p : ps.getPlanets().values()) {
-						final int planX = (int) (sysX + Math.cos(thetaS) * (sysD / 2));
-						final int planY = (int) (sysY + Math.sin(thetaS) * (sysD / 2));
+						final int planX = (int) (sysX + Math.cos(thetaS) * (sysD >> 1));
+						final int planY = (int) (sysY + Math.sin(thetaS) * (sysD >> 1));
 						g.setColor(PLANET_COLORS[Math
 								.abs(p.getName().hashCode())
 								% PLANET_COLORS.length]);
-						g.fillOval(planX - PLANET_SIZE_HALF, planY - PLANET_SIZE
-								/ 2, PLANET_SIZE, PLANET_SIZE);
+						g.fillOval(planX - PLANET_SIZE_HALF, planY - (HALF_SIZE), 
+								PLANET_SIZE, PLANET_SIZE);
 						g.setColor(Color.WHITE);
-						g.drawString(p.getName(), planX + PLANET_SIZE_HALF + 5,
+						g.drawString(p.getName(), planX + PLANET_SIZE_HALF + FIVE,
 								planY);
-						thetaS += Math.PI * 2 / ps.getPlanets().values().size();
+						thetaS += DOUBLE_THETA / ps.getPlanets().values().size();
 
 						// Add planet location to ArrayList for capturing mouse
 						// clicks on it
@@ -144,14 +148,14 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 
 						// If this is the planet the ship is on, draw the ship
 						if (Game.getCurrentPlanet().equals(p)) {
-							int[] polyX = { planX, planX + 10, planX,
+							int[] polyX = { planX, planX + TEN, planX,
 									planX - TEN }, polyY = { planY - TEN,
 									planY + TEN, planY, planY + TEN };
 							g.setColor(Color.BLACK);
 							g.fillPolygon(polyX, polyY, polyX.length);
 							g.setColor(Color.CYAN);
-							g.drawOval(planX - PLANET_SIZE_HALF - 5, planY
-									- PLANET_SIZE_HALF - 5, CIRCLE_DIAMETER,
+							g.drawOval(planX - PLANET_SIZE_HALF - FIVE, planY
+									- PLANET_SIZE_HALF - FIVE, CIRCLE_DIAMETER,
 									CIRCLE_DIAMETER);
 						}
 					}
@@ -162,26 +166,26 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 							GameVariables.UNIVERSE_COLUMNS);
 					final int qY = (int) ((ROUND_HALF + i) * getHeight() /
 							GameVariables.UNIVERSE_ROWS);
-					final int qD = (int) (0.7 * Math.min(getWidth()
+					final int qD = (int) (QD_CONST * Math.min(getWidth()
 							/ GameVariables.UNIVERSE_COLUMNS, getHeight()
 							/ GameVariables.UNIVERSE_ROWS));
 
 					// For each system...
-					double thetaQ = Math.PI / 4;
+					double thetaQ = START_THETA;
 					for (Object o : systemList[i][j]) {
 						g.setColor(Color.WHITE);
 						PlanetarySystem ps = (PlanetarySystem) o;
 
 						// Get dimensions of the system to draw
-						final int sysX = (int) (qX + Math.cos(thetaQ) * (qD / 2));
-						final int sysY = (int) (qY + Math.sin(thetaQ) * (qD / 2));
-						final int sysD = qD * 3 / 5;
-						g.drawOval(sysX - sysD / 2, sysY - sysD / 2, sysD, sysD);
+						final int sysX = (int) (qX + Math.cos(thetaQ) * (qD >> 1));
+						final int sysY = (int) (qY + Math.sin(thetaQ) * (qD >> 1));
+						final int sysD = qD * THREE / FIVE;
+						g.drawOval(sysX - (sysD >> 1), sysY - (sysD >> 1), sysD, sysD);
 						g.drawString(ps.getName(), sysX - ps.getName().length()
-								* 3, sysY);
+								* THREE, sysY);
 
 						// Draw the planets
-						double thetaS = Math.PI / 4;
+						double thetaS = START_THETA;
 						for (Planet p : ps.getPlanets().values()) {
 							int planX = (int) (sysX + Math.cos(thetaS)
 									* (sysD >> 1));
@@ -193,8 +197,8 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 									- PLANET_SIZE_HALF, PLANET_SIZE, PLANET_SIZE);
 							g.setColor(Color.WHITE);
 							g.drawString(p.getName(), planX + PLANET_SIZE_HALF
-									+ 5, planY);
-							thetaS += Math.PI * 2
+									+ FIVE, planY);
+							thetaS += DOUBLE_THETA
 									/ ps.getPlanets().values().size();
 
 							// Add planet location to ArrayList for capturing
@@ -204,18 +208,18 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 							// If this is the planet the ship is on, draw the
 							// ship
 							if (Game.getCurrentPlanet().equals(p)) {
-								final int[] polyX = { planX, planX + 10, planX,
-										planX - 10 }, polyY = { planY - 10,
-										planY + 10, planY, planY + 10 };
+								final int[] polyX = { planX, planX + TEN, planX,
+										planX - TEN }, polyY = { planY - TEN,
+										planY + TEN, planY, planY + TEN };
 								g.setColor(Color.BLACK);
-								g.fillPolygon(polyX, polyY, 4);
+								g.fillPolygon(polyX, polyY, POLYGON_POINTS);
 								g.setColor(Color.CYAN);
-								g.drawOval(planX - PLANET_SIZE_HALF - 5, planY
-										- PLANET_SIZE_HALF - 5,
+								g.drawOval(planX - PLANET_SIZE_HALF - FIVE, planY
+										- PLANET_SIZE_HALF - FIVE,
 										CIRCLE_DIAMETER, CIRCLE_DIAMETER);
 							}
 						}
-						thetaQ += 2 * Math.PI / systemList[i][j].size();
+						thetaQ += DOUBLE_THETA / systemList[i][j].size();
 					}
 				}
 			}
@@ -261,6 +265,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 
 	/**
 	 * Unused.
+	 * @param arg0 Unused.
 	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
@@ -269,6 +274,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 
 	/**
 	 * Unused.
+	 * @param arg0 Unused.
 	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
@@ -277,6 +283,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 
 	/**
 	 * Unused.
+	 * @param arg0 Unused.
 	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
@@ -285,6 +292,7 @@ public class IntersystemTravelScreen extends Screen implements MouseListener {
 
 	/**
 	 * Unused.
+	 * @param arg0 Unused.
 	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {

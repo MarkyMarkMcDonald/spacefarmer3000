@@ -3,11 +3,22 @@
  */
 package app.view;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import app.listener.ConfirmPlayerCreationListener;
 import app.listener.IncrementListener;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * This screen shows the Player his information. (WIP)
@@ -60,27 +71,27 @@ public class PlayerInformationScreen extends Screen {
 	/**
 	 * Text field for the Player's name.
 	 */
-	private JTextField enteredPlayerName;
+	private final JTextField enteredPlayerName;
 
 	/**
 	 * Text field for the Pilot SkillType.
 	 */
-	private JFormattedTextField enteredPilotSkill;
+	private final JFormattedTextField enteredPilotSkill;
 
 	/**
 	 * Text field for the Fighter SkillType.
 	 */
-	private JFormattedTextField enteredFighterSkill;
+	private final JFormattedTextField enteredFighterSkill;
 
 	/**
 	 * Text field for the Trader SkillType.
 	 */
-	private JFormattedTextField enteredTraderSkill;
+	private final JFormattedTextField enteredTraderSkill;
 
 	/**
 	 * Text field for the Engineer SkillType.
 	 */
-	private JFormattedTextField enteredEngineerSkill;
+	private final JFormattedTextField enteredEngineerSkill;
 
 	/**
 	 * JLabel for when a Player enters information incorrectly.
@@ -304,22 +315,37 @@ public class PlayerInformationScreen extends Screen {
 		}
 	}
 
+	/**
+	 * @param name String to set for the text on enteredPlayerName.
+	 */
     public void setEnteredPlayerName(String name) {
         enteredPlayerName.setText(name);
     }
 
+    /**
+     * @param enteredPilotSkill String to set for the text on enteredPilotSkill.
+     */
     public void setEnteredPilotSkill(String enteredPilotSkill) {
         this.enteredPilotSkill.setText(enteredPilotSkill);
     }
 
+    /**
+     * @param enteredFighterSkill String to set for the text on enteredFighterSkill.
+     */
     public void setEnteredFighterSkill(String enteredFighterSkill) {
         this.enteredFighterSkill.setText(enteredFighterSkill);
     }
 
+    /**
+     * @param enteredTraderSkill String to set for the text on enteredTraderSkill.
+     */
     public void setEnteredTraderSkill(String enteredTraderSkill) {
         this.enteredTraderSkill.setText(enteredTraderSkill);
     }
 
+    /**
+     * @param enteredEngineerSkill String to set for the text on enteredEngineerSkill.
+     */
     public void setEnteredEngineerSkill(String enteredEngineerSkill) {
         this.enteredEngineerSkill.setText(enteredEngineerSkill);
     }

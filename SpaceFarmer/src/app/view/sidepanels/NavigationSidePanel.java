@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 import app.listener.ContinueListener;
 import app.model.Game;
@@ -21,7 +22,7 @@ import app.view.market.MarketScreen;
  * @author Mark
  * @version 1.0
  */
-public class NavigationSidePanel extends SidePanel {
+public class NavigationSidePanel extends JPanel {
 
 	/**
 	 * Creates a NavigationSidePanel using default values.
@@ -41,7 +42,7 @@ public class NavigationSidePanel extends SidePanel {
 				final PlanetInformationScreen planetScreen = 
 						(PlanetInformationScreen) Display
 						.getCard(CardName.PLANET_INFORMATION_CARD.toString());
-				planetScreen.update(Game.getCurrentPlanet());
+				planetScreen.updateFromPlanet(Game.getCurrentPlanet());
 
 				// Hide the Planet Travel Pane
 				final TravelSidePanel travelPanel = (TravelSidePanel) Display
