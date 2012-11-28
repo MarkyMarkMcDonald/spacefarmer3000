@@ -33,11 +33,11 @@ public class saveTest {
 	 * Test method for {@link app.service.Saver_db#Saver_db(java.io.File, java.util.Collection, java.util.Map, app.model.Settings, app.model.Game)}.
 	 * @throws SqlJetException 
 	 */
+	File dbFile = new File("test2.sql");
 	@Test
 	public void testSaver_db() throws SqlJetException {
 		
 
-		File dbFile = new File("test.sql");
 
 		Saver_db saveTest=new Saver_db();
 		try{
@@ -63,6 +63,17 @@ public class saveTest {
 				fail("Did not sucessfully make tables");
 				e.printStackTrace();
 			}
+			final ISqlJetTable table = db.getTable("players");
+			db.beginTransaction(SqlJetTransactionMode.WRITE);
+
+			// Test entry		
+				try {
+					table.insert("zuul", "9999","999","earth",	"flea", 1, 4, 7, 5);
+					db.commit();
+				}finally{
+					
+				}
+				
 			}
 		db.close();
 		
@@ -74,15 +85,18 @@ public class saveTest {
 	 */
 	@Test
 	public void testSaveGame() throws SqlJetException {
-		File dbFile = new File("test.sql");
+		//File dbFile = new File("test.sql");
 
 	//	testSaver_db();
 		final SqlJetDb db = SqlJetDb.open(dbFile, true);
 
 		
-		final ISqlJetTable table = db.getTable("Players");
+		final ISqlJetTable table = db.getTable("players");
+
 		// Test entry		
 			try {
+				db.beginTransaction(SqlJetTransactionMode.WRITE);
+
 				table.insert("zuul", "9999","999","earth",	"flea", 1, 4, 7, 5);
 				db.commit();
 

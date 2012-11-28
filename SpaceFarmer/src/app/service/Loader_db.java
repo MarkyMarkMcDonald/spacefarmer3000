@@ -19,7 +19,7 @@ import org.tmatesoft.sqljet.core.table.SqlJetDb;
 import app.factory.UniverseFactory;
 import app.model.Event;
 import app.model.Game;
-//import app.model.MarketPlace;
+import app.model.MarketPlace;
 //import app.model.Settings;
 //import app.model.Ship;
 //import app.model.ShipModel;
@@ -382,12 +382,11 @@ public class Loader_db {
 		try {
 			if (!cursor.eof()) {
 				do { // $codepro.audit.disable emptyDoStatement
-					/*
+					
 					if(planets.get(cursor.getString(FIELD_PLANET)).getMarket()==null)
 						planets.get(cursor.getString(FIELD_PLANET))
-						.setMarket(new MarketPlace
-						(planets.get(cursor.getString(FIELD_PLANET))));
-					
+						.setMarket(new MarketPlace(planets.get(cursor.getString(FIELD_PLANET))));
+					/*
 					tempM=planets.get(cursor.getString(FIELD_PLANET)).getMarket();
 					
 					tempType = TradeGoodType.valueOf(cursor.getString(FIELD_ITEM));
