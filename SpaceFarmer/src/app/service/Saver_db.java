@@ -1,4 +1,4 @@
-// $codepro.audit.disable incorrectArgumentType, emptyFinallyClause, nullPointerDereference, com.instantiations.assist.eclipse.analysis.unusedReturnValue, spaceAfterCommas
+// $codepro.audit.disable
 // made my mykal thomas
 package app.service;
 
@@ -261,7 +261,7 @@ public class Saver_db {
 			db.commit();
 
 			db.beginTransaction(SqlJetTransactionMode.WRITE);
-
+			this.createTables(db);
 			this.savePlayers(db);
 			//this.saveInventory(db);
 			this.savePlanets(db);
@@ -280,17 +280,6 @@ public class Saver_db {
 	 * @throws SqlJetException
 	 */
 	private void savePlayers(SqlJetDb db) throws SqlJetException {
-		final String createTableQuery = "CREATE TABLE " + TABLE_PLAYERS + " " + "("
-				+ FIELD_NAME + TNN + FIELD_MONEY + TNN + FIELD_FULE + TNN
-				+ FIELD_CURRPLANET + TNN + FIELD_SHIP + TNN + FIELD_PILOTING
-				+ TNN + FIELD_TRADING + TNN + FIELD_ENGINEERING + TNN
-				+ FIELD_FIGHTING + " TEXT NOT NULL)";
-		// makes the table
-		try {
-			db.createTable(createTableQuery);
-		} finally {
-			db.commit();
-		}
 		// fill in the Database
 		try {
 			final ISqlJetTable table = db.getTable(TABLE_PLAYERS);
@@ -323,17 +312,6 @@ public class Saver_db {
 	 */
 	private void savePlanets(SqlJetDb db) throws SqlJetException {
 		final Planet[] temp =planets;
-		final String createTableQuery = "CREATE TABLE " + TABLE_PLANETS + " " + "("
-				+ FIELD_PLANET + " TEXT NOT NULL PRIMARY KEY, " + FIELD_SYS
-				+ TNN + FIELD_TECH + TNN + FIELD_POLSYS + TNN + FIELD_RESOURCE
-				+ TNN + FIELD_X + TNN + FIELD_Y + TNN + FIELD_EVENT
-				+ " TEXT NOT NULL)";
-		// makes the table
-		try {
-			db.createTable(createTableQuery);
-		} finally {
-			db.commit();
-		}
 		// fill in the Database
 		try {
 			final ISqlJetTable table = db.getTable(TABLE_PLANETS);
@@ -360,15 +338,7 @@ public class Saver_db {
 	 */	
 	private void saveInventory(SqlJetDb db) throws SqlJetException {
 		
-		  String createTableQuery = "CREATE TABLE " + TABLE_INVENTORY + " " +
-		  "(" + FIELD_NAME + TNN + FIELD_ITEM+ TNN+ FIELD_Q+
-		  " TEXT NOT NULL )"; //makes the table try
-		  
-		  try
-		  {db.createTable(createTableQuery);
-		  }finally {
-		  db.commit();} 
-		  //fill inthe Database 
+		  //fill in the Database 
 		  try {
 		  ISqlJetTable table =db.getTable(TABLE_INVENTORY); //Test entry //table.insert("ZOOL",1,2);
 		  for (int i=0;i < this.players.length;i++)
@@ -397,16 +367,6 @@ public class Saver_db {
 		Tradable[] tempTradeArray = null;
 		Tradable thing=null;
 		Set tempS=null;
-		final String createTableQuery = "CREATE TABLE " + TABLE_MARKETS + " " + "("
-				+ FIELD_ITEM + TNN + /**/"Price"+TNN+ FIELD_Q + TNN + FIELD_PLANET
-				+ " TEXT NOT NULL)";
-
-		// makes the table
-		try {
-			db.createTable(createTableQuery);
-		} finally {
-			db.commit();
-		}
 		// fill in the Database
 		try {
 			final ISqlJetTable table = db.getTable(TABLE_MARKETS);
@@ -447,16 +407,7 @@ public class Saver_db {
  */
 	private void saveSystems(SqlJetDb db) throws SqlJetException {
 		final Planet[] tempPlan =planets;
-		final String createTableQuery = "CREATE TABLE " + TABLE_PLANSYS + " " + "("
-				+ FIELD_SYS + TNN + FIELD_X + TNN + FIELD_Y + TNN
-				+ FIELD_PLANET + " TEXT NOT NULL)";
-
-		// makes the table
-		try {
-			db.createTable(createTableQuery);
-		} finally {
-			db.commit();
-		}
+		
 		// fill in the Database
 		try {
 			final ISqlJetTable table = db.getTable(TABLE_PLANSYS);
@@ -477,6 +428,7 @@ public class Saver_db {
 	public String toString() {
 		return "Saver_db";
 	}
+
 	/**
 	 * creates the tables in the database
 	 * @param db
@@ -509,24 +461,24 @@ public class Saver_db {
 		}
 		//INVENTORY
 		createTableQuery = "CREATE TABLE " + TABLE_INVENTORY + " " +
-				  "(" + FIELD_NAME + TNN + FIELD_ITEM+ TNN+ FIELD_Q+
+				  "(" + FIELD_NAME + TNN + FIELD_ITEM + TNN + FIELD_Q +
 				  " TEXT NOT NULL )"; //makes the table try  
 		try
 		{
 			db.createTable(createTableQuery); 
 		}finally {
-			db.commit();	 
+		db.commit();	 
 		} 
 		//MARKETS
-		createTableQuery = "CREATE TABLE " + TABLE_MARKETS + " " + "("
-							+ FIELD_ITEM + TNN + /**/"Price"+TNN+ FIELD_Q + TNN + FIELD_PLANET
-							+ " TEXT NOT NULL)";
+		createTableQuery = "CREATE TABLE " + TABLE_MARKETS + " " 
+		+ "(" + FIELD_ITEM + TNN + /**/"Price" + TNN + FIELD_Q 
+		+ TNN + FIELD_PLANET + " TEXT NOT NULL)";
 		// makes the table
 		try {
 			db.createTable(createTableQuery);
 		} finally {
-			db.commit();	
-		}
+			db.commit();
+			}
 		//SYSTEMS
 		createTableQuery = "CREATE TABLE " + TABLE_PLANSYS + " " + "("
 				+ FIELD_SYS + TNN + FIELD_X + TNN + FIELD_Y + TNN
@@ -538,9 +490,5 @@ public class Saver_db {
 		} finally {
 			db.commit();
 		}
-		
-		
-		
-		
 	}
 }

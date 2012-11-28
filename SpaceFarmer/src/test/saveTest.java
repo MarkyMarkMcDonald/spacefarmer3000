@@ -20,6 +20,7 @@ import app.factory.UniverseFactory;
 import app.listener.FileChooserListener;
 import app.model.Game;
 import app.model.Settings;
+import app.model.player.SkillType;
 import app.service.Saver_db;
 
 /**
@@ -27,7 +28,6 @@ import app.service.Saver_db;
  *
  */
 public class saveTest {
-	
 
 	/**
 	 * Test method for {@link app.service.Saver_db#Saver_db(java.io.File, java.util.Collection, java.util.Map, app.model.Settings, app.model.Game)}.
@@ -38,6 +38,7 @@ public class saveTest {
 		
 
 		File dbFile = new File("test.sql");
+
 		Saver_db saveTest=new Saver_db();
 		try{
 			dbFile.delete();
@@ -63,15 +64,34 @@ public class saveTest {
 				e.printStackTrace();
 			}
 			}
+		db.close();
 		
 	}
 
 	/**
 	 * Test method for {@link app.service.Saver_db#saveGame()}.
+	 * @throws SqlJetException 
 	 */
 	@Test
-	public void testSaveGame() {
-		fail("Not yet implemented");
+	public void testSaveGame() throws SqlJetException {
+		File dbFile = new File("test.sql");
+
+	//	testSaver_db();
+		final SqlJetDb db = SqlJetDb.open(dbFile, true);
+
+		
+		final ISqlJetTable table = db.getTable("Players");
+		// Test entry		
+			try {
+				table.insert("zuul", "9999","999","earth",	"flea", 1, 4, 7, 5);
+				db.commit();
+
+			} catch (Exception e) {
+				fail("Did not sucessfully insert to");
+				e.printStackTrace();
+			}
+			db.close();
+
 	}
 	
 	
