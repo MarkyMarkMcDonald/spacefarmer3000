@@ -53,7 +53,7 @@ public class PlanetInformationScreen extends Screen {
 	 * Creates a PlanetInformationScreen from a Planet.
 	 * @param planet Planet with which to create the PlanetInformationScreen.
 	 */
-	public void update(Planet planet) {
+	public void updateFromPlanet(Planet planet) {
 		nameLabel.updateBasedOnPlanet(planet);
 		transportationListener.setPlanet(planet);
 		// If the player isn't on this planet, create and reveal the components

@@ -201,10 +201,10 @@ public class Display extends JFrame {
 		// side panels visible or not visible
 		turnOffSidePanels();
 
-		standardView.add(SidePanelMap.get("Top"), BorderLayout.NORTH);
-		standardView.add(SidePanelMap.get("Bot"), BorderLayout.SOUTH);
-		standardView.add(SidePanelMap.get("Left"), BorderLayout.WEST);
-		standardView.add(SidePanelMap.get("Right"), BorderLayout.EAST);
+		standardView.add(SidePanelMap.get("Top"), BorderLayout.NORTH); // $codepro.audit.disable com.instantiations.eclipse.analysis.audit.security.incompatibleTypesStoredInACollection
+		standardView.add(SidePanelMap.get("Bot"), BorderLayout.SOUTH);  // $codepro.audit.disable com.instantiations.eclipse.analysis.audit.security.incompatibleTypesStoredInACollection
+		standardView.add(SidePanelMap.get("Left"), BorderLayout.WEST);  // $codepro.audit.disable com.instantiations.eclipse.analysis.audit.security.incompatibleTypesStoredInACollection
+		standardView.add(SidePanelMap.get("Right"), BorderLayout.EAST); // $codepro.audit.disable com.instantiations.eclipse.analysis.audit.security.incompatibleTypesStoredInACollection
 
 	}
 

@@ -1,3 +1,4 @@
+// $codepro.audit.disable packagePrefixNamingConvention
 /*This file holds the class Player, which represents a Player
  * playing the game.
  */

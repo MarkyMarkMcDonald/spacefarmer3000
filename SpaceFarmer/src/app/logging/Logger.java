@@ -1,3 +1,4 @@
+// $codepro.audit.disable packagePrefixNamingConvention
 /*This file holds the Logger class, responsible
  * for printing game information onto the console.*/
 package app.logging;

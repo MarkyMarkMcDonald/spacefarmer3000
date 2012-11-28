@@ -7,6 +7,7 @@ package app.view.sidepanels; // $codepro.audit.disable packagePrefixNamingConven
 import java.awt.Color;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 11/9/12 Time: 1:19 PM
@@ -14,7 +15,7 @@ import javax.swing.JLabel;
  * @author Mark
  * @version 1.0
  */
-public class MessageSidePanel extends SidePanel {
+public class MessageSidePanel extends JPanel {
 
 	/**
 	 * JLabel holding the message for the panel.

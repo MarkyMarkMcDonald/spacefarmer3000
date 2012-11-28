@@ -15,11 +15,6 @@
  */
 
 package app.view;
-import resources.MiniGameGFX;
-import app.model.Game;
-import app.view.sidepanels.MessageSidePanel;
-import app.view.sidepanels.MessageType;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -38,6 +33,11 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import resources.MiniGameGFX;
+import app.model.Game;
+import app.view.sidepanels.MessageSidePanel;
+import app.view.sidepanels.MessageType;
 
 /**
  * This class drives the minigame sequence when traveling between planets.

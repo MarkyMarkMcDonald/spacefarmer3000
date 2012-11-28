@@ -92,7 +92,7 @@ public class StartOfTurnScreen extends Screen {
 				final Planet currentPlanet = currentPlayerPlayer.getCurrentPlanet();
 				final PlanetInformationScreen planetInformationScreen = 
 					(PlanetInformationScreen) Display.getCard(cardToMoveTo.toString());
-				planetInformationScreen.update(currentPlanet);
+				planetInformationScreen.updateFromPlanet(currentPlanet);
 
 				progressDisplay();
 

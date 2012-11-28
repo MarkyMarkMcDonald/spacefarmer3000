@@ -65,7 +65,7 @@ public class TransportationListener extends ContinueListener {
 			// Update what planet the player is now on
 			final PlanetInformationScreen planetInfo = (PlanetInformationScreen) Display
 					.getCard(cardToMoveTo.toString());
-			planetInfo.update(planet);
+			planetInfo.updateFromPlanet(planet);
 
 			displayString = Randomizer.giveEvent(Game.getCurrentPlayer(),
 					conf.GameVariables.RANDOM_EVENT_CHANCE);

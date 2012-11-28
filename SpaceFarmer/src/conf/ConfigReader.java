@@ -1,3 +1,4 @@
+// $codepro.audit.disable packagePrefixNamingConvention
 /*This file holds the ConfigReader class, which is
  * for reading game configuration.
  */
