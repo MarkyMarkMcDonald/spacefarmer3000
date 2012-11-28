@@ -40,15 +40,20 @@ public class PlanetaryTravelTest {
         Display display = new Display();
 
         player1 = new Player();
-		Game.setCurrentPlayer(player1);
+		player1.setFuel(1000);
+        Game.setCurrentPlayer(player1);
 
         PlanetarySystem system1 = new PlanetarySystem();
+        system1.setX(2);
+        system1.setY(2);
         planet1 = new Planet();
         planet2 = new Planet();
         planet1.setPlanetarySystem(system1);
         planet2.setPlanetarySystem(system1);
 
         PlanetarySystem system2 = new PlanetarySystem();
+        system2.setX(3);
+        system2.setY(3);
         planet3 = new Planet();
         planet3.setPlanetarySystem(system2);
 
