@@ -4,6 +4,8 @@ package app.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import app.factory.UniverseFactory;
@@ -54,6 +56,7 @@ public class LoaderListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		final Loader_db loader = new Loader_db();
+		JFrame temp=new JFrame();
 		try {
 			loader.loadGame(fileChooserListener.getDbFile(),
 					UniverseFactory.getPlanetarySystems(),
@@ -61,6 +64,9 @@ public class LoaderListener implements ActionListener {
 			//IntersystemTravelScreen.
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally{
+			JOptionPane.showMessageDialog(temp, "Game Loaded");
 		}
 
 	}

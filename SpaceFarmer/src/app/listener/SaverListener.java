@@ -4,6 +4,8 @@ package app.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import app.factory.UniverseFactory;
@@ -60,10 +62,14 @@ public class SaverListener implements ActionListener {
 		final Saver_db saver = new Saver_db(fileChooserListener.getDbFile(),
 				Game.getPlayers(), UniverseFactory.getAllPlanets(),
 				new Settings(), new Game());
+		JFrame temp=new JFrame();
 		try {
 			saver.saveGame();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally{
+			JOptionPane.showMessageDialog(temp, "Game Saved");
 		}
 	}
 
