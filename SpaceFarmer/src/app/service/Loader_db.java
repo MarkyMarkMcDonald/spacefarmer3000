@@ -19,18 +19,18 @@ import org.tmatesoft.sqljet.core.table.SqlJetDb;
 import app.factory.UniverseFactory;
 import app.model.Event;
 import app.model.Game;
-import app.model.MarketPlace;
-import app.model.Settings;
-import app.model.Ship;
-import app.model.ShipModel;
+//import app.model.MarketPlace;
+//import app.model.Settings;
+//import app.model.Ship;
+//import app.model.ShipModel;
 import app.model.player.Player;
 import app.model.player.SkillType;
-import app.model.tradegoods.BasicGood;
-import app.model.tradegoods.TradeGoodType;
+//import app.model.tradegoods.BasicGood;
+//import app.model.tradegoods.TradeGoodType;
 import app.model.universe.Planet;
 import app.model.universe.PlanetarySystem;
-import app.model.universe.PoliticalSystem;
-import app.model.universe.ResourceType;
+//import app.model.universe.PoliticalSystem;
+//import app.model.universe.ResourceType;
 import app.model.universe.TechnologyLevel;
 
 /*
@@ -166,21 +166,6 @@ public class Loader_db {
 	private static final String TABLE_MARKETS = "Market";
 
 	/**
-	 * map of the PlanetarySystems pulled from the tables
-	 */
-	private static Map<String, PlanetarySystem> Ps=new HashMap<String, PlanetarySystem>();
-
-	/**
-	 * map of the planets pulled from the tables
-	 */
-	private static Map<String, Planet> Planets=new HashMap<String, Planet>();
-
-	/**
-	 * array of players pulled from the tables.
-	 */
-	private static Player[] Players=new Player[10];
-
-	/**
 	 * loads the file and recreates the game
 	 * @param dbFile
 	 * 	the game file
@@ -217,16 +202,17 @@ public class Loader_db {
 	 * CREATES A COLLECTION OF PLAYERS AND RETURNS THEM
 	 * 
 	 * @param tbl
+	 * @param pl
 	 * @return a collection of players
 	 * @throws SqlJetException
 	 */
-	private Collection<Player> loadPlayers(ISqlJetTable tbl,Map<String, Planet> pl)
+	private Collection<Player> loadPlayers(ISqlJetTable tbl, Map<String, Planet> pl)
 			throws SqlJetException {
 		final ISqlJetCursor cursor = tbl.open();
 		final Collection<Player> ret = new ArrayList<Player>();
 		final Player tempP = new Player();
-		final Ship tempShip = new Ship();
-		ShipModel tempMod = null;
+		//final Ship tempShip = new Ship();
+		//ShipModel tempMod = null;
 		// Planet tempPlanet;
 		final Map<SkillType, Integer> tempSkill = new HashMap<SkillType, Integer>();
 		try {
@@ -288,16 +274,17 @@ public class Loader_db {
 	 *  a map of the created planets
 	 * @throws SqlJetException
 	 */
-	private Map<String, Planet> loadPlanets(ISqlJetTable tbl, Map<String, PlanetarySystem> ps)
+	private Map<String, Planet> loadPlanets
+	(ISqlJetTable tbl, Map<String, PlanetarySystem> ps)
 			throws SqlJetException {
 		final ISqlJetCursor cursor = tbl.open();
 		final Map<String, Planet> ret = new HashMap<String, Planet>();
 		final Planet tempPlanet = new Planet();
 		TechnologyLevel tempTech = null;
 		PlanetarySystem tempSys = new PlanetarySystem() ;
-		ResourceType tempRes = null;
+		//ResourceType tempRes = null;
 		// PlanetarySystem tempPs = null;
-		PoliticalSystem tempPol = null;
+		//PoliticalSystem tempPol = null;
 		Event tempE = null;
 		try {
 			if (!cursor.eof()) {
@@ -385,18 +372,21 @@ public class Loader_db {
 	 * @param planets 
 	 * @throws SqlJetException
 	 */
-	private void loadMarkets(ISqlJetTable tbl, Map<String, Planet> planets) throws SqlJetException {
-		MarketPlace tempM = null;
-		BasicGood tempTrade;
-		TradeGoodType tempType = null;
-		ArrayList ret = new ArrayList();
+	private void loadMarkets
+	(ISqlJetTable tbl, Map<String, Planet> planets) throws SqlJetException {
+		//MarketPlace tempM = null;
+		//BasicGood tempTrade;
+		//TradeGoodType tempType = null;
+		//ArrayList ret = new ArrayList();
 		final ISqlJetCursor cursor = tbl.open();
 		try {
 			if (!cursor.eof()) {
-				do {
+				do { // $codepro.audit.disable emptyDoStatement
 					/*
 					if(planets.get(cursor.getString(FIELD_PLANET)).getMarket()==null)
-						planets.get(cursor.getString(FIELD_PLANET)).setMarket(new MarketPlace(planets.get(cursor.getString(FIELD_PLANET))));
+						planets.get(cursor.getString(FIELD_PLANET))
+						.setMarket(new MarketPlace
+						(planets.get(cursor.getString(FIELD_PLANET))));
 					
 					tempM=planets.get(cursor.getString(FIELD_PLANET)).getMarket();
 					

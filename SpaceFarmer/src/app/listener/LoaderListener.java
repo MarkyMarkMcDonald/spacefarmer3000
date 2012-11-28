@@ -56,7 +56,7 @@ public class LoaderListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		final Loader_db loader = new Loader_db();
-		JFrame temp=new JFrame();
+		final JFrame temp=new JFrame();
 		try {
 			loader.loadGame(fileChooserListener.getDbFile(),
 					UniverseFactory.getPlanetarySystems(),

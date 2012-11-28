@@ -62,7 +62,7 @@ public class SaverListener implements ActionListener {
 		final Saver_db saver = new Saver_db(fileChooserListener.getDbFile(),
 				Game.getPlayers(), UniverseFactory.getAllPlanets(),
 				new Settings(), new Game());
-		JFrame temp=new JFrame();
+		final JFrame temp=new JFrame();
 		try {
 			saver.saveGame();
 		} catch (Exception e) {

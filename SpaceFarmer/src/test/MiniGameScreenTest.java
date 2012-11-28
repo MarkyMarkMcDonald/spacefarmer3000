@@ -1,6 +1,6 @@
 package test;
 
-import app.view.MiniGameScreen;
+//import app.view.MiniGameScreen;
 import junit.framework.TestCase;
 
 /**
