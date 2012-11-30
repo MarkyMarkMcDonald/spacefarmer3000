@@ -4,6 +4,7 @@
  */
 package app.model;
 
+import app.factory.UniverseFactory;
 import app.model.player.Player;
 import app.model.universe.Planet;
 
@@ -66,7 +67,7 @@ public class Game {
 	 * @return The length of one round.
 	 */
 	public static int getRoundLength() {
-		return Game.getPlayers().size() + 1;
+		return Game.getPlayers().size();
 	}
 
 	/**
@@ -76,7 +77,7 @@ public class Game {
 	 * @return The current round.
 	 */
 	public static int getRoundNumber() {
-		return getTurnNumber() % Players.size() + 1;
+		return (Math.abs(getTurnNumber() - 1) / getRoundLength()) + 1;
 	}
 
 	/**
@@ -85,25 +86,36 @@ public class Game {
 	 * @return Turn in round.
 	 */
 	public static int getTurnInRound() {
-		return (int) Math.floor(Game.getTurnNumber() % Game.getRoundLength());
+		return (Game.getTurnNumber() + 1) % (Game.getRoundLength());
 	}
 
 	/**
 	 * Gives the turn to the next player. If the player was the last player,
-	 * then assign a new event to each planet.
+	 * then assign a new event to each planet, and refuel all the players
 	 */
-	public void endTurn() {
+	public static void endTurn() {
 		final int playerIndex = Players.indexOf(CurrentPlayer) + 1;
 
 		if (playerIndex >= Players.size()) {
 			setCurrentPlayer(Players.get(0));
-			for (Planet planet : Planets.values()) {
+			List<Planet> planets = new ArrayList<Planet>(UniverseFactory.getAllPlanets().values());
+            for (Planet planet : planets) {
 				planet.determineEvent();
+                reFuelAllPlayers();
 			}
 		} else {
 			setCurrentPlayer(Players.get(playerIndex));
 		}
+
+        NumberOfTurns++;
 	}
+
+    public static void reFuelAllPlayers(){
+        List<Player> players = Game.getPlayers();
+        for (Player player: players){
+            player.setFuel(player.getShip().getMaxFuel());
+        }
+    }
 
 	/**
 	 * @return The Planet the current Player is on.

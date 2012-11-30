@@ -11,20 +11,15 @@
  */
 package app.view;
 
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import app.listener.ContinueListener;
 import app.model.Game;
 import app.model.player.Player;
 import app.model.universe.Planet;
 import app.view.sidepanels.PlayersInformationSidePanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 10/31/12 Time: 11:18 AM
@@ -48,7 +43,7 @@ public class StartOfTurnScreen extends Screen {
 	 * Array containing parts of the turn info label's text that do not change.
 	 */
 	private final String[] turnInfoStaticText = new String[] { "Turn ",
-			" of Round " };
+			" of ", " in Round "};
 
 	/**
 	 * Array containing parts of the title label's text that do not change.
@@ -117,8 +112,8 @@ public class StartOfTurnScreen extends Screen {
 	 * Updates the text on the labels.
 	 */
 	public void updateTurn() {
-		turnInfo.setText(turnInfoStaticText[0] + Game.getTurnInRound()
-				+ turnInfoStaticText[1] + Game.getRoundNumber());
+		turnInfo.setText(turnInfoStaticText[0] + (Game.getTurnInRound() + 1)
+				+ turnInfoStaticText[1] + Game.getRoundLength() + turnInfoStaticText[2] + Game.getRoundNumber());
 		final Player player = Game.getCurrentPlayer();
 		final String currentPlayerName = player.getName();
 		title.setText(titleStaticText[0] + currentPlayerName

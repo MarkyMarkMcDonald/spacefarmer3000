@@ -52,6 +52,7 @@ public class CreatePlayerTest {
                 GameVariables.QUADRANT_Y_DIMENSION,
                 GameVariables.MINIMUM_SYSTEM_DISTANCE);
 
+        //information screen to create an actual player
         PlayerInformationScreen infoScreen = new PlayerInformationScreen(); //create player information screen
         infoScreen.setEnteredPlayerName("Ivory"); //set player name
         infoScreen.setEnteredPilotSkill("3"); //set player pilot skills
@@ -61,8 +62,6 @@ public class CreatePlayerTest {
         ConfirmPlayerCreationListener creationListener = new ConfirmPlayerCreationListener(infoScreen);
         //create the listener and take in the player information screen
         creationListener.actionPerformed(null); //when an action is performed, use the information inputed on the player
-        //information screen to create an actual player
-        System.out.println("hello world"); //make sure the code properly runs
 
         List<Player> players = Game.getPlayers(); //get the list of players created
         Player player = players.get(0); //specifically get the player that has just been created

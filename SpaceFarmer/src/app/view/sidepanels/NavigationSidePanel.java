@@ -3,18 +3,16 @@
  */
 package app.view.sidepanels;
 
-import java.awt.event.ActionEvent;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
 import app.listener.ContinueListener;
+import app.listener.EndTurnListener;
 import app.model.Game;
 import app.view.CardName;
 import app.view.Display;
 import app.view.PlanetInformationScreen;
 import app.view.market.MarketScreen;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 /**
  * Created with IntelliJ IDEA. User: mark.mcdonald Date: 10/31/12 Time: 11:12 AM
@@ -88,8 +86,10 @@ public class NavigationSidePanel extends JPanel {
 		 * Go to current ship's information and peruse upgrade options
 		 */
 
-		final JButton btnShip = new JButton("Ship");
-		add(btnShip);
+		final JButton endTurnButton = new JButton("End Turn");
+        EndTurnListener endTurnListener = new EndTurnListener();
+        endTurnButton.addActionListener(endTurnListener);
+        add(endTurnButton);
 
 		/**
 		 * Travel to a new planet and end the turn

@@ -242,4 +242,5 @@ public class Planet {
 			return (name.equals(truth.getName()));
 		}
 	}
+
 }

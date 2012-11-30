@@ -4,15 +4,15 @@
  */
 package app.model.player;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import app.factory.ShipFactory;
 import app.model.Inventory;
 import app.model.Ship;
 import app.model.ShipModel;
 import app.model.universe.Planet;
 import conf.GameVariables;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents a Player. Information Holder
